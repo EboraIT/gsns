@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
-public class PantallaGestionSistemaRegionalSalud extends JFrame {
+public class PantallaGestionSistemSaludNacional extends JFrame {
 
 	private JPanel contentPane;
 
@@ -19,7 +19,7 @@ public class PantallaGestionSistemaRegionalSalud extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PantallaGestionSistemaRegionalSalud frame = new PantallaGestionSistemaRegionalSalud();
+					PantallaGestionSistemSaludNacional frame = new PantallaGestionSistemSaludNacional();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,8 +31,8 @@ public class PantallaGestionSistemaRegionalSalud extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaGestionSistemaRegionalSalud() {
-		setTitle("Gesti\u00F3n Sistema Regional de Salud");
+	public PantallaGestionSistemSaludNacional() {
+		setTitle("Gesti\u00F3n Sistema de Salud Nacional");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 678, 360);
 		contentPane = new JPanel();
@@ -40,17 +40,16 @@ public class PantallaGestionSistemaRegionalSalud extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnAtras = new JButton("Atras");
+		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
+		btnAltaNuevoLote.setBounds(60, 104, 175, 45);
+		contentPane.add(btnAltaNuevoLote);
+		
+		JButton btnCalculoEntrega = new JButton("Calculo Entrega");
+		btnCalculoEntrega.setBounds(427, 104, 175, 45);
+		contentPane.add(btnCalculoEntrega);
+		
+		JButton btnAtras = new JButton("Atr\u00E1s");
 		btnAtras.setBounds(563, 287, 89, 23);
 		contentPane.add(btnAtras);
-		
-		JButton btnAltaEntregas = new JButton("Alta Entrega Vacunas");
-		btnAltaEntregas.setBounds(92, 130, 153, 42);
-		contentPane.add(btnAltaEntregas);
-		
-		JButton btnRegistrarVacunacion = new JButton("RegistrarVacunacion");
-		btnRegistrarVacunacion.setBounds(411, 130, 153, 42);
-		contentPane.add(btnRegistrarVacunacion);
 	}
-
 }
