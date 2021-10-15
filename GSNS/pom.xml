@@ -6,7 +6,8 @@
 
   <groupId>com.eborait</groupId>
   <artifactId>gsns</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.4.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <name>gsns</name>
   <!-- FIXME change it to the project's website -->
