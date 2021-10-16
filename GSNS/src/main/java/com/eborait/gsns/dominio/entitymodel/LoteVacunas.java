@@ -20,6 +20,12 @@ public class LoteVacunas {
 	public LoteVacunas(Date fecha2, String tipo2, int cantidad2) {
 		// TODO Auto-generated constructor stub
 	}
+
+	public int insertar() {
+		
+		LoteVacunas LoteVacunas = null;
+		return LoteVacunasDAO.insertarLoteVacunas(LoteVacunas);
+	}
 	
 
 }
