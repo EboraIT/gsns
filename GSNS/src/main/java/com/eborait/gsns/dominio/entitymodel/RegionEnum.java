@@ -2,14 +2,10 @@ package com.eborait.gsns.dominio.entitymodel;
 
 import java.util.*;
 
-public class RegionEnum{
-
+public enum RegionEnum{
+	GALICIA,ASTURIAS,CANTABRIA,EUSKADI,NAVARRA,LARIOJA, ARAGON, CATALUÑA,CASTILLAYLEON,CMADRID,CASTILLALAMANCHA,CVALENCIANA
+	,EXTREMADURA,ANDAUCIA,RMURCIA,IBALEARES,ICANARIAS,CEUTA,MELILLA;
 	Collection<EntregaVacunas> entregas;
-
-	public RegionEnum(Collection<EntregaVacunas> entregas) {
-		super();
-		this.entregas = entregas;
-	}
 
 	public Collection<EntregaVacunas> getEntregas() {
 		return entregas;
@@ -19,10 +15,5 @@ public class RegionEnum{
 		this.entregas = entregas;
 	}
 
-	@Override
-	public String toString() {
-		return "RegionEnum [entregas=" + entregas + "]";
-	}
 	
-
 }
