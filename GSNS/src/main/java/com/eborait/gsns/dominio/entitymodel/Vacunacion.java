@@ -11,15 +11,19 @@ public class Vacunacion {
 	VacunacionDAO vacunacionDao;
 	private Date fecha;
 	private boolean isSegundaDosis;
-	
-	public Vacunacion(TipoVacuna vacuna, Paciente paciente, VacunacionDAO vacunacionDao, Date fecha,
+
+	public Vacunacion(TipoVacuna vacuna, Paciente paciente, Date fecha,
 			boolean isSegundaDosis) {
 		super();
 		this.vacuna = vacuna;
 		this.paciente = paciente;
-		this.vacunacionDao = vacunacionDao;
+		this.vacunacionDao = new VacunacionDAO();
 		this.fecha = fecha;
 		this.isSegundaDosis = isSegundaDosis;
+	}
+
+	public void insertar() {
+		vacunacionDao.insert(this);
 	}
 
 	public TipoVacuna getVacuna() {
@@ -67,6 +71,5 @@ public class Vacunacion {
 		return "Vacunacion [vacuna=" + vacuna + ", paciente=" + paciente + ", vacunacionDao=" + vacunacionDao
 				+ ", fecha=" + fecha + ", isSegundaDosis=" + isSegundaDosis + "]";
 	}
-	
 
 }

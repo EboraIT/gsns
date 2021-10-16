@@ -13,6 +13,20 @@ public class EntregaVacunas {
 	private EntregaDAO entregaDao;
 	private Date fecha;
 	private int cantidad;
+	
+	public EntregaVacunas(String lote, Date fecha, int cantidad, int prioridad) {
+		this.lote = new LoteVacunas(fecha, lote, cantidad);
+		this.fecha = fecha;
+		this.cantidad = cantidad;
+		this.entregaDao = new EntregaDAO();
+		//TODO grupoPrioridad
+		//TODO tipo
+		//TODO region
+	}
+
+	public void insertar() {
+		entregaDao.insertarEntrega(this);
+	}
 
 	public TipoVacuna getTipo() {
 		return tipo;

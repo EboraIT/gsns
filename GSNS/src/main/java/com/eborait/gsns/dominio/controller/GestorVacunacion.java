@@ -2,7 +2,10 @@ package com.eborait.gsns.dominio.controller;
 
 import java.util.Date;
 
+import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
+import com.eborait.gsns.dominio.entitymodel.Paciente;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
+import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 
 public class GestorVacunacion {
 
@@ -14,8 +17,8 @@ public class GestorVacunacion {
 	 * @param prioridad
 	 */
 	public void altaEntregaVacunas(String lote, Date fecha, int cantidad, int prioridad) {
-		// TODO - implement GestorVacunacion.altaEntregaVacunas
-		throw new UnsupportedOperationException();
+		EntregaVacunas entregaVac = new EntregaVacunas(lote, fecha, cantidad, prioridad);
+		entregaVac.insertar();
 	}
 
 	/**
@@ -27,8 +30,9 @@ public class GestorVacunacion {
 	 * @param tipo
 	 */
 	public void registrarVacunacion(Date fecha, String nombre, String apellidos, String nif, TipoVacuna tipo) {
-		// TODO - implement GestorVacunacion.registrarVacunacion
-		throw new UnsupportedOperationException();
+		Paciente p = new Paciente(null, null, nif, nombre, apellidos);
+		Vacunacion v = new Vacunacion(tipo, p, fecha, false);
+		v.insertar();
 	}
 
 }
