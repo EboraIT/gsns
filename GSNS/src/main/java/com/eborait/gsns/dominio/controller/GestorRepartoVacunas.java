@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
+import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 
 public class GestorRepartoVacunas {
 
@@ -13,9 +14,13 @@ public class GestorRepartoVacunas {
 	 * @param tipo
 	 * @param cantidad
 	 */
-	public void altaNuevoLoteVacunas(Date fecha, String tipo, int cantidad) {
-		// TODO - implement GestorRepartoVacunas.altaNuevoLoteVacunas
-		throw new UnsupportedOperationException();
+	public static boolean altaNuevoLoteVacunas(Date fecha, String tipo, int cantidad) throws Exception{
+		boolean altaLote=false;
+		LoteVacunas v= new LoteVacunas(fecha,tipo,cantidad);
+		if (v.insert() == 1)
+			altaLote=true;
+		return altaLote;
+		
 	}
 
 	public List<EntregaVacunas> calcularEntregasRegion() {
