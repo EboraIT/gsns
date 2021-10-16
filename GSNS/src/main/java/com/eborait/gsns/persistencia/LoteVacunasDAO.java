@@ -7,8 +7,9 @@ public class LoteVacunasDAO extends AbstractEntityDAO {
 	/**
 	 * 
 	 * @param lote
+	 * @return 
 	 */
-	public void insertarLoteVacunas(LoteVacunas lote) {
+	public static int insertarLoteVacunas(LoteVacunas lote) {
 		// TODO - implement LoteVacunasDAO.insertarLoteVacunas
 		throw new UnsupportedOperationException();
 	}
