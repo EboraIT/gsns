@@ -3,7 +3,7 @@ package com.eborait.gsns.dominio.entitymodel;
 import java.util.*;
 
 public enum GrupoPrioridad {
-	;
+	RESIDENTE_ANCIANO, SANITARIO, TRABAJADOR_ESENCIAL, ANCIANO, ADULTO, JOVEN, NINO;
 
 	Collection<Paciente> pacientes;
 	Collection<EntregaVacunas> entregas;
