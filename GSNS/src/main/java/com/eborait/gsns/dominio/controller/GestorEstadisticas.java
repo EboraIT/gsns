@@ -32,18 +32,25 @@ public class GestorEstadisticas {
 		return totalVacunadosRegion;
 	}
 
-	public void consultarPorcentajeVacunadosSobreRecibidas() {
-		// TODO - implement GestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidas
-		throw new UnsupportedOperationException();
+	public int consultarPorcentajeVacunadosSobreRecibidas() throws Exception {
+		int totalVacunados= consultarTotalVacunados();
+		/*Añadir metodo que devuelva el total vacunas recibidas**/
+		int vacunas_recibidas = 999999;
+		
+		return (totalVacunados/vacunas_recibidas) *100;
 	}
 
 	/**
 	 * 
 	 * @param region
+	 * @return 
 	 */
-	public void consultarPorcentajeVacunadosSobreRecibidasEnRegion(RegionEnum region) {
-		// TODO - implement GestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion
-		throw new UnsupportedOperationException();
+	public int consultarPorcentajeVacunadosSobreRecibidasEnRegion(RegionEnum region) {
+		int totalVacunadosPorRegion= consultarTotalVacunadosPorRegion(region);
+		/*Añadir metodo que devuelva el total vacunas recibidas**/
+		int vacunas_recibidas = 999999;
+		
+		return (totalVacunadosPorRegion/vacunas_recibidas) *100;
 	}
 
 }
