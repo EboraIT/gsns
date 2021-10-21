@@ -9,6 +9,7 @@ import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 
 public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	private static final String INSERT = "INSERT INTO entrega_vacunas VALUES(%s, %s, %s, %s, %s, %s, %s)";
+	private static final String DELETE = "DELETE FROM entrega_vacunas WHERE id = %s";
 
 	@Override
 	public EntregaVacunas get(String id) {
@@ -42,8 +43,13 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	}
 
 	@Override
-	public int delete(EntregaVacunas entregaVacunas) {
-		return -1;
+	public int delete(EntregaVacunas entregaVacunas) throws SQLException {
+		try {
+			return AgenteBD.getAgente().delete(String.format(DELETE, entregaVacunas.getId()));
+		} catch (SQLException sqle) {
+			System.out.println("Excepción actualizando entrega:\n\n" + sqle.getStackTrace());
+			throw sqle;
+		}
 	}
 
 }
