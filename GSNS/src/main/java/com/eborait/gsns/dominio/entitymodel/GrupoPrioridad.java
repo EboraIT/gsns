@@ -3,12 +3,19 @@ package com.eborait.gsns.dominio.entitymodel;
 import java.util.*;
 
 public enum GrupoPrioridad {
-	RESIDENTE_ANCIANO, SANITARIO, TRABAJADOR_ESENCIAL, ANCIANO, ADULTO, JOVEN, NINO;
+	RESIDENTE_ANCIANO(1, "Ancianos en residencias"), SANITARIO(2, "Personal sanitario"),
+	TRABAJADOR_ESENCIAL(3, "Trabajadores esenciales"), ANCIANO(4, "Ancianos"), ADULTO(5, "Adultos"),
+	JOVEN(6, "Jóvenes"), NINO(7, "Niños");
 
 	Collection<Paciente> pacientes;
 	Collection<EntregaVacunas> entregas;
-	private String nombre;
 	private int prioridad;
+	private String nombre;
+
+	private GrupoPrioridad(int prioridad, String nombre) {
+		this.prioridad = prioridad;
+		this.nombre = nombre;
+	}
 
 	public Collection<Paciente> getPacientes() {
 		return pacientes;
