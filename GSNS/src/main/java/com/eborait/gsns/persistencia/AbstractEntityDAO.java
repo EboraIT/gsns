@@ -1,6 +1,7 @@
 package com.eborait.gsns.persistencia;
 
 import java.sql.Date;
+import java.util.Collection;
 
 public abstract class AbstractEntityDAO<E> {
 
@@ -12,36 +13,30 @@ public abstract class AbstractEntityDAO<E> {
 	 * 
 	 * @param id
 	 */
-	public E get(String id) {
-		// TODO - implement AbstractEntityDAO.get
-		throw new UnsupportedOperationException();
-	}
+	abstract E get(String id);
+
+	/**
+	 * 
+	 * @param id
+	 */
+	abstract Collection<E> getAll(String criteria, String value);
 
 	/**
 	 * 
 	 * @param entity
 	 */
-	public int insert(E entity) {
-		// TODO - implement AbstractEntityDAO.insert
-		throw new UnsupportedOperationException();
-	}
+	abstract int insert(E entity);
 
 	/**
 	 * 
 	 * @param entity
 	 */
-	public E update(E entity) {
-		// TODO - implement AbstractEntityDAO.update
-		throw new UnsupportedOperationException();
-	}
+	abstract int update(E entity);
 
 	/**
 	 * 
 	 * @param entity
 	 */
-	public int delete(E entity) {
-		// TODO - implement AbstractEntityDAO.delete
-		throw new UnsupportedOperationException();
-	}
+	abstract int delete(E entity);
 
 }
