@@ -9,8 +9,8 @@ public enum GrupoPrioridad {
 
 	Collection<Paciente> pacientes;
 	Collection<EntregaVacunas> entregas;
-	private int prioridad;
-	private String nombre;
+	private final int prioridad;
+	private final String nombre;
 
 	private GrupoPrioridad(int prioridad, String nombre) {
 		this.prioridad = prioridad;
@@ -37,16 +37,17 @@ public enum GrupoPrioridad {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public int getPrioridad() {
 		return prioridad;
 	}
 
-	public void setPrioridad(int prioridad) {
-		this.prioridad = prioridad;
+	public static GrupoPrioridad valueOf(int prioridad) {
+		for (GrupoPrioridad gp : values()) {
+			if (gp.getPrioridad() == prioridad) {
+				return gp;
+			}
+		}
+		return null;
 	}
 
 }
