@@ -2,8 +2,6 @@ package com.eborait.gsns.dominio.entitymodel;
 
 import java.util.Date;
 
-import com.eborait.gsns.persistencia.EntregaDAO;
-
 public class EntregaVacunas {
 
 	private String id;
