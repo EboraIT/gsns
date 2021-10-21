@@ -6,26 +6,31 @@ import com.eborait.gsns.persistencia.EntregaDAO;
 
 public class EntregaVacunas {
 
+	private String id;
 	private TipoVacuna tipo;
 	private RegionEnum region;
 	private GrupoPrioridad grupoPrioridad;
 	private LoteVacunas lote;
-	private EntregaDAO entregaDao;
 	private Date fecha;
 	private int cantidad;
-	
-	public EntregaVacunas(String lote, Date fecha, int cantidad, int prioridad) {
+
+	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, TipoVacuna tipo,
+			RegionEnum region) {
+		this.id = id;
 		this.lote = new LoteVacunas(fecha, lote, cantidad);
 		this.fecha = fecha;
 		this.cantidad = cantidad;
-		this.entregaDao = new EntregaDAO();
-		//TODO grupoPrioridad
-		//TODO tipo
-		//TODO region
+		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
+		this.tipo = tipo;
+		this.region = region;
 	}
 
-	public void insertar() {
-		entregaDao.insertarEntrega(this);
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public TipoVacuna getTipo() {
@@ -60,14 +65,6 @@ public class EntregaVacunas {
 		this.lote = lote;
 	}
 
-	public EntregaDAO getEntregaDao() {
-		return entregaDao;
-	}
-
-	public void setEntregaDao(EntregaDAO entregaDao) {
-		this.entregaDao = entregaDao;
-	}
-
 	public Date getFecha() {
 		return fecha;
 	}
@@ -82,12 +79,6 @@ public class EntregaVacunas {
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
-	}
-
-	@Override
-	public String toString() {
-		return "EntregaVacunas [tipo=" + tipo + ", region=" + region + ", grupoPrioridad=" + grupoPrioridad + ", lote="
-				+ lote + ", entregaDao=" + entregaDao + ", fecha=" + fecha + ", cantidad=" + cantidad + "]";
 	}
 
 }
