@@ -32,8 +32,7 @@ public class TipoVacuna {
 	}
 	@Override
 	public String toString() {
-		return "TipoVacuna [nombre=" + nombre + ", farmaceutica=" + farmaceutica + ", fechaAprobacion="
-				+ fechaAprobacion + "]";
+		return nombre + "-" + farmaceutica + "-"+ fechaAprobacion;
 	}
 
 }
