@@ -26,4 +26,21 @@ public enum RegionEnum {
 		this.entregas = entregas;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public static <string> RegionEnum valueOf(string nombre) {
+		for (RegionEnum re : values()) {
+			if (re.getNombre().equals(nombre)) {
+				return re;
+			}
+		}
+		return null;
+	}
+	
 }
