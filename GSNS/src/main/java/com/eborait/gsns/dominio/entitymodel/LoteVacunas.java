@@ -1,5 +1,6 @@
 package com.eborait.gsns.dominio.entitymodel;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
 
@@ -10,16 +11,16 @@ public class LoteVacunas {
 	Collection<EntregaVacunas> entregas;
 	TipoVacuna tipo;
 	LoteVacunasDAO loteVacunasDao;
-	private String id;
-	private Date fecha;
-	private int cantidad;
-	private String farmaceutica;
+	private static String id;
+	private static Date fecha;
+	private static int cantidad;
+	private static String farmaceutica;
 
 	public LoteVacunas(Date fecha, String tipo, int cantidad) {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int insertar() {
+	public int insertar() throws SQLException {
 		LoteVacunas LoteVacunas = null;
 		return LoteVacunasDAO.insertarLoteVacunas(LoteVacunas);
 	}
@@ -48,7 +49,7 @@ public class LoteVacunas {
 		this.loteVacunasDao = loteVacunasDao;
 	}
 
-	public String getId() {
+	public static String getId() {
 		return id;
 	}
 
@@ -56,7 +57,7 @@ public class LoteVacunas {
 		this.id = id;
 	}
 
-	public Date getFecha() {
+	public static Date getFecha() {
 		return fecha;
 	}
 
@@ -64,7 +65,7 @@ public class LoteVacunas {
 		this.fecha = fecha;
 	}
 
-	public int getCantidad() {
+	public static int getCantidad() {
 		return cantidad;
 	}
 
@@ -72,7 +73,7 @@ public class LoteVacunas {
 		this.cantidad = cantidad;
 	}
 
-	public String getFarmaceutica() {
+	public static String getFarmaceutica() {
 		return farmaceutica;
 	}
 

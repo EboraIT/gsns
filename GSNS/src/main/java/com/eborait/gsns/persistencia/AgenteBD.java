@@ -50,4 +50,9 @@ public class AgenteBD {
 		throw new UnsupportedOperationException();
 	}
 
+	public static LoteVacunasDAO getAgente() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
