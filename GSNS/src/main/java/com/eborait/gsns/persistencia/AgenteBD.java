@@ -15,7 +15,7 @@ import java.util.Vector;
  * @author Jorge Fernández Escolano
  * @author Roberto Esteban Olivares
  * @since 1.0
- * @version 1.2
+ * @version 1.3
  *
  */
 public class AgenteBD {
@@ -76,7 +76,12 @@ public class AgenteBD {
 	 *                      datos.
 	 */
 	public void desconectarBD() throws SQLException {
-		conexion.close();
+		try {
+			conexion.close();
+		} catch (SQLException sqle) {
+			System.out.println("Error cerrando la conexión con la base de datos:\n\n" + sqle.getStackTrace());
+			throw sqle;
+		}
 	}
 
 	/**
@@ -125,23 +130,46 @@ public class AgenteBD {
 	}
 
 	/**
+	 * Realiza la actualización en la base de datos.
 	 * 
-	 * @param sql
-	 * @return
+	 * @param sql Sentencia de actualización a ejecutar
+	 * @return El número de filas afectadas al ejecutar la sentencia.
+	 * @throws SQLException Si se produce algún error al actualizar en la base de
+	 *                      datos.
 	 */
-	public int update(String sql) {
-		// TODO - implement AgenteBD.update
-		throw new UnsupportedOperationException();
+	public int update(String sql) throws SQLException {
+		try {
+			conectarBD();
+			PreparedStatement stmt = conexion.prepareStatement(sql);
+			int res = stmt.executeUpdate();
+			stmt.close();
+			desconectarBD();
+			return res;
+		} catch (SQLException sqle) {
+			System.out.println("Error actualizando en la base de datos:\n\n" + sqle.getStackTrace());
+			throw sqle;
+		}
 	}
 
 	/**
+	 * Realiza el borrado en la base de datos.
 	 * 
-	 * @param sql
-	 * @return
+	 * @param sql Sentencia de borrado a ejecutar
+	 * @return El número de filas afectadas al ejecutar la sentencia.
+	 * @throws SQLException Si se produce algún error al borrar en la base de datos.
 	 */
-	public int delete(String sql) {
-		// TODO - implement AgenteBD.delete
-		throw new UnsupportedOperationException();
+	public int delete(String sql) throws SQLException {
+		try {
+			conectarBD();
+			PreparedStatement stmt = conexion.prepareStatement(sql);
+			int res = stmt.executeUpdate();
+			stmt.close();
+			desconectarBD();
+			return res;
+		} catch (SQLException sqle) {
+			System.out.println("Error borrando en la base de datos:\n\n" + sqle.getStackTrace());
+			throw sqle;
+		}
 	}
 
 }
