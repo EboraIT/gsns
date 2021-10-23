@@ -1,28 +1,19 @@
 package com.eborait.gsns.dominio.entitymodel;
 
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Date;
 
-import com.eborait.gsns.persistencia.LoteVacunasDAO;
-
 public class LoteVacunas {
 
-	Collection<EntregaVacunas> entregas;
-	TipoVacuna tipo;
-	LoteVacunasDAO loteVacunasDao;
-	private static String id;
-	private static Date fecha;
-	private static int cantidad;
-	private static String farmaceutica;
+	private Collection<EntregaVacunas> entregas;
+	private TipoVacuna tipo;
+	private String id;
+	private Date fecha;
+	private int cantidad;
+	private String farmaceutica;
 
 	public LoteVacunas(Date fecha, String tipo, int cantidad) {
 		// TODO Auto-generated constructor stub
-	}
-
-	public int insertar() throws SQLException {
-		LoteVacunas LoteVacunas = null;
-		return LoteVacunasDAO.insertarLoteVacunas(LoteVacunas);
 	}
 
 	public Collection<EntregaVacunas> getEntregas() {
@@ -41,15 +32,7 @@ public class LoteVacunas {
 		this.tipo = tipo;
 	}
 
-	public LoteVacunasDAO getLoteVacunasDao() {
-		return loteVacunasDao;
-	}
-
-	public void setLoteVacunasDao(LoteVacunasDAO loteVacunasDao) {
-		this.loteVacunasDao = loteVacunasDao;
-	}
-
-	public static String getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -57,7 +40,7 @@ public class LoteVacunas {
 		this.id = id;
 	}
 
-	public static Date getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
@@ -65,7 +48,7 @@ public class LoteVacunas {
 		this.fecha = fecha;
 	}
 
-	public static int getCantidad() {
+	public int getCantidad() {
 		return cantidad;
 	}
 
@@ -73,7 +56,7 @@ public class LoteVacunas {
 		this.cantidad = cantidad;
 	}
 
-	public static String getFarmaceutica() {
+	public String getFarmaceutica() {
 		return farmaceutica;
 	}
 
@@ -83,7 +66,7 @@ public class LoteVacunas {
 
 	@Override
 	public String toString() {
-		return "LoteVacunas [entregas=" + entregas + ", tipo=" + tipo + ", loteVacunasDao=" + loteVacunasDao + ", id="
+		return "LoteVacunas [entregas=" + entregas + ", tipo=" + tipo + ", id="
 				+ id + ", fecha=" + fecha + ", cantidad=" + cantidad + ", farmaceutica=" + farmaceutica + "]";
 	}
 
