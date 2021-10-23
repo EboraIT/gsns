@@ -22,7 +22,7 @@ public abstract class AbstractEntityDAO<E> {
 	private Date fechaActualizacion;
 
 	/**
-	 * Realiza una consulta en la base de datos.
+	 * Realiza una consulta a la base de datos.
 	 * 
 	 * @param id Identificador de la entidad que se busca.
 	 * @return Una única entidad.
