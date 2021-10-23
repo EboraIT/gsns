@@ -1,6 +1,6 @@
 package com.eborait.gsns.dominio.entitymodel;
 
-import java.util.*;
+import java.util.Collection;
 
 public enum GrupoPrioridad {
 	RESIDENTE_ANCIANO(1, "Ancianos en residencias"), SANITARIO(2, "Personal sanitario"),
@@ -47,7 +47,8 @@ public enum GrupoPrioridad {
 				return gp;
 			}
 		}
-		return null;
+		// TODO cambiar excepcion por una registrada o propia
+		throw new IllegalArgumentException("El grupo de prioridad no existe.");
 	}
 
 }
