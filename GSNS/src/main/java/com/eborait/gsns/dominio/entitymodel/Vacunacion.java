@@ -2,28 +2,18 @@ package com.eborait.gsns.dominio.entitymodel;
 
 import java.util.Date;
 
-import com.eborait.gsns.persistencia.VacunacionDAO;
-
 public class Vacunacion {
 
-	TipoVacuna vacuna;
-	Paciente paciente;
-	VacunacionDAO vacunacionDao;
+	private TipoVacuna vacuna;
+	private Paciente paciente;
 	private Date fecha;
-	private boolean isSegundaDosis;
+	private boolean segundaDosis;
 
-	public Vacunacion(TipoVacuna vacuna, Paciente paciente, Date fecha,
-			boolean isSegundaDosis) {
-		super();
+	public Vacunacion(TipoVacuna vacuna, Paciente paciente, Date fecha, boolean segundaDosis) {
 		this.vacuna = vacuna;
 		this.paciente = paciente;
-		this.vacunacionDao = new VacunacionDAO();
 		this.fecha = fecha;
-		this.isSegundaDosis = isSegundaDosis;
-	}
-
-	public void insertar() {
-		vacunacionDao.insert(this);
+		this.segundaDosis = segundaDosis;
 	}
 
 	public TipoVacuna getVacuna() {
@@ -42,14 +32,6 @@ public class Vacunacion {
 		this.paciente = paciente;
 	}
 
-	public VacunacionDAO getVacunacionDao() {
-		return vacunacionDao;
-	}
-
-	public void setVacunacionDao(VacunacionDAO vacunacionDao) {
-		this.vacunacionDao = vacunacionDao;
-	}
-
 	public Date getFecha() {
 		return fecha;
 	}
@@ -59,17 +41,17 @@ public class Vacunacion {
 	}
 
 	public boolean isSegundaDosis() {
-		return isSegundaDosis;
+		return segundaDosis;
 	}
 
-	public void setSegundaDosis(boolean isSegundaDosis) {
-		this.isSegundaDosis = isSegundaDosis;
+	public void setSegundaDosis(boolean segundaDosis) {
+		this.segundaDosis = segundaDosis;
 	}
 
 	@Override
 	public String toString() {
-		return "Vacunacion [vacuna=" + vacuna + ", paciente=" + paciente + ", vacunacionDao=" + vacunacionDao
-				+ ", fecha=" + fecha + ", isSegundaDosis=" + isSegundaDosis + "]";
+		return "Vacunacion [vacuna=" + vacuna + ", paciente=" + paciente + ", fecha=" + fecha + ", isSegundaDosis="
+				+ segundaDosis + "]";
 	}
 
 }
