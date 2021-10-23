@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Vector;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 
@@ -14,7 +13,7 @@ import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
  * @author Jorge Fernández Escolano
  * @author Roberto Esteban Olivares
  * @since 1.0
- * @version 1.1
+ * @version 1.0
  * 
  * @see EntregaVacunas
  *
@@ -25,13 +24,17 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	 */
 	private static final String SELECT = "SELECT FROM entrega_vacunas WHERE id = %s";
 	/**
+	 * Formato sentencia select.
+	 */
+	private static final String SELECT_CRITERIA = "SELECT FROM entrega_vacunas WHERE %d = %s";
+	/**
 	 * Formato sentencia insert.
 	 */
 	private static final String INSERT = "INSERT INTO entrega_vacunas VALUES(%s, %s, %s, %d, %d, %s, %d)";
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE entrega_vacunas SET id = %s, lote = %s, fecha = %s, cantidad = %d, prioridad = %d, tipo_vacuna = %s, region = %d";
+	private static final String UPDATE = "UPDATE entrega_vacunas SET id = %s, lote = %s, fecha = %s, cantidad = %d, prioridad = %d, tipo_vacuna = %s, region = %d WHERE id = %s";
 	/**
 	 * Formato sentencia delete.
 	 */
@@ -49,8 +52,8 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	public EntregaVacunas get(String id) throws SQLException {
 		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT, id));
 		rs.next();
-		EntregaVacunas ev = new EntregaVacunas(id, rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5),
-				rs.getString(6), rs.getInt(7));
+		EntregaVacunas ev = new EntregaVacunas(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getInt(4),
+				rs.getInt(5), rs.getString(6), rs.getInt(7));
 		return ev;
 	}
 
@@ -64,8 +67,15 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	 * @see EntregaVacunas
 	 */
 	@Override
-	public Collection<EntregaVacunas> getAll(String criteria, String value) {
-		return null;
+	public Collection<EntregaVacunas> getAll(String criteria, String value) throws SQLException {
+		Collection<EntregaVacunas> list = new ArrayList<>();
+		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT_CRITERIA, criteria, value));
+		while (rs.next()) {
+			EntregaVacunas ev = new EntregaVacunas(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getInt(4),
+					rs.getInt(5), rs.getString(6), rs.getInt(7));
+			list.add(ev);
+		}
+		return list;
 	}
 
 	/**
@@ -94,8 +104,12 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	 * @see EntregaVacunas
 	 */
 	@Override
-	public int update(EntregaVacunas entregaVacunas) {
-		return -1;
+	public int update(EntregaVacunas entregaVacunas) throws SQLException {
+		return AgenteBD.getAgente()
+				.update(String.format(UPDATE, entregaVacunas.getId(), entregaVacunas.getLote().getId(),
+						entregaVacunas.getFecha(), entregaVacunas.getCantidad(),
+						entregaVacunas.getGrupoPrioridad().getPrioridad(), entregaVacunas.getTipo().toString(),
+						entregaVacunas.getRegion().getId(), entregaVacunas.getId()));
 	}
 
 	/**
