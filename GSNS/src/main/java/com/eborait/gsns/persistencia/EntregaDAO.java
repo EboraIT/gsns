@@ -45,7 +45,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	 * 
 	 * @param id Identificador de EntregaVacunas que se busca.
 	 * @return Un objeto EntregaVacunas.
-	 * @throws SQLException Si se produce una excepción en la consulta SQL.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
 	 * @see EntregaVacunas
 	 */
 	@Override
@@ -63,7 +63,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	 * @param criteria Columna por la que se filtra
 	 * @param value    Valor por el que se filtra.
 	 * @return Una colección con los objetos EntregaVacunas encontrados.
-	 * @throws SQLException Si se produce una excepción en la consulta SQL.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
 	 * @see EntregaVacunas
 	 */
 	@Override
@@ -83,7 +83,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	 * 
 	 * @param entregaVacunas objeto EntregaVacunas a insertar.
 	 * @return El número de filas insertadas.
-	 * @throws SQLException Si se produce una excepción en la consulta SQL.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
 	 * @see EntregaVacunas
 	 */
 	@Override
@@ -100,7 +100,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	 * 
 	 * @param entregaVacunas objeto EntregaVacunas a actualizar.
 	 * @return El número de filas actualizadas.
-	 * @throws SQLException Si se produce una excepción en la consulta SQL.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
 	 * @see EntregaVacunas
 	 */
 	@Override
@@ -117,7 +117,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	 * 
 	 * @param entregaVacunas objeto EntregaVacunas a eliminar.
 	 * @return El número de filas eliminadas.
-	 * @throws SQLException Si se produce una excepción en la consulta SQL.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
 	 * @see EntregaVacunas
 	 */
 	@Override
