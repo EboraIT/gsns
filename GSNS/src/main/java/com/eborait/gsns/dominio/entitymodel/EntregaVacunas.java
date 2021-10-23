@@ -12,10 +12,14 @@ public class EntregaVacunas {
 	private Date fecha;
 	private int cantidad;
 
+	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, String tipo, int region) {
+		this(id, lote, fecha, cantidad, prioridad, new TipoVacuna(tipo), region);
+	}
+
 	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, TipoVacuna tipo,
 			int region) {
 		this.id = id;
-		this.lote = new LoteVacunas(fecha, lote, cantidad);
+		this.lote = new LoteVacunas(lote, fecha, tipo, cantidad);
 		this.fecha = fecha;
 		this.cantidad = cantidad;
 		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
