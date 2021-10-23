@@ -12,8 +12,15 @@ public class LoteVacunas {
 	private int cantidad;
 	private String farmaceutica;
 
-	public LoteVacunas(Date fecha, String tipo, int cantidad) {
-		// TODO Auto-generated constructor stub
+	public LoteVacunas(String id, Date fecha, String tipo, int cantidad) {
+		this(id, fecha, new TipoVacuna(tipo), cantidad);
+	}
+
+	public LoteVacunas(String id, Date fecha, TipoVacuna tipo, int cantidad) {
+		this.id = id;
+		this.fecha = fecha;
+		this.tipo = tipo;
+		this.cantidad = cantidad;
 	}
 
 	public Collection<EntregaVacunas> getEntregas() {
@@ -66,8 +73,8 @@ public class LoteVacunas {
 
 	@Override
 	public String toString() {
-		return "LoteVacunas [entregas=" + entregas + ", tipo=" + tipo + ", id="
-				+ id + ", fecha=" + fecha + ", cantidad=" + cantidad + ", farmaceutica=" + farmaceutica + "]";
+		return "LoteVacunas [entregas=" + entregas + ", tipo=" + tipo + ", id=" + id + ", fecha=" + fecha
+				+ ", cantidad=" + cantidad + ", farmaceutica=" + farmaceutica + "]";
 	}
 
 }
