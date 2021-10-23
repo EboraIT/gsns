@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Vector;
 
 /**
  * La clase AgenteBD realiza las operaciones contra la base de datos.
@@ -57,9 +59,14 @@ public class AgenteBD {
 	 *                      datos.
 	 */
 	public void conectarBD() throws SQLException {
-		Driver derbyEmbeddedDriver = new EmbeddedDriver();
-		DriverManager.registerDriver(derbyEmbeddedDriver);
-		conexion = DriverManager.getConnection(URL, BDConstantes.DBUSER, BDConstantes.DBPASS);
+		try {
+			Driver derbyEmbeddedDriver = new EmbeddedDriver();
+			DriverManager.registerDriver(derbyEmbeddedDriver);
+			conexion = DriverManager.getConnection(URL, BDConstantes.DBUSER, BDConstantes.DBPASS);
+		} catch (SQLException sqle) {
+			System.out.println("Error conectando con la base de datos:\n\n" + sqle.getStackTrace());
+			throw sqle;
+		}
 	}
 
 	/**
@@ -73,13 +80,26 @@ public class AgenteBD {
 	}
 
 	/**
+	 * Realiza una consulta a la base de datos.
 	 * 
-	 * @param sql
-	 * @return
+	 * @param sql Sentencia de consulta a ejecutar.
+	 * @return Los resultados de la consulta en un ResultSet
+	 * @throws SQLException Si se produce algún error al consultar en la base de
+	 *                      datos.
+	 * @see ResultSet
 	 */
-	public ResultSet select(String sql) {
-		// TODO - implement AgenteBD.select
-		throw new UnsupportedOperationException();
+	public ResultSet select(String sql) throws SQLException {
+		try {
+			conectarBD();
+			Statement stmt = conexion.createStatement();
+			ResultSet res = stmt.executeQuery(sql);
+			stmt.close();
+			desconectarBD();
+			return res;
+		} catch (SQLException sqle) {
+			System.out.println("Error consultando a la base de datos:\n\n" + sqle.getStackTrace());
+			throw sqle;
+		}
 	}
 
 	/**
