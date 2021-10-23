@@ -4,16 +4,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Vector;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 
 public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
-	private static final String INSERT = "INSERT INTO entrega_vacunas VALUES(%s, %s, %s, %s, %s, %s, %s)";
+	private static final String SELECT = "SELECT FROM entrega_vacunas WHERE id = %s";
+	private static final String INSERT = "INSERT INTO entrega_vacunas VALUES(%s, %s, %s, %d, %d, %s, %d)";
+	private static final String UPDATE = "UPDATE entrega_vacunas SET id = %s, lote = %s, fecha = %s, cantidad = %d, prioridad = %d, tipo_vacuna = %s, region = %d";
 	private static final String DELETE = "DELETE FROM entrega_vacunas WHERE id = %s";
 
 	@Override
-	public EntregaVacunas get(String id) {
-		return null;
+	public EntregaVacunas get(String id) throws SQLException {
+		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT, id));
+		rs.next();
+		EntregaVacunas ev = new EntregaVacunas(id, rs.getString(2), rs.getDate(3), rs.getInt(4), rs.getInt(5),
+				rs.getString(6), rs.getInt(7));
+		return ev;
 	}
 
 	@Override
@@ -23,18 +30,11 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 
 	@Override
 	public int insert(EntregaVacunas entregaVacunas) throws SQLException {
-		try {
-			// TODO cambiar TODO por el nombre del método del tipovacuna de sus atributos
-			// combinados
-			return AgenteBD.getAgente()
-					.insert(String.format(INSERT, entregaVacunas.getId(), entregaVacunas.getFecha(),
-							entregaVacunas.getCantidad(), entregaVacunas.getLote().getId(),
-							entregaVacunas.getGrupoPrioridad().getPrioridad(), entregaVacunas.getTipo().TODO(),
-							entregaVacunas.getRegion().getId()));
-		} catch (SQLException sqle) {
-			System.out.println("Excepción insertando entrega:\n\n" + sqle.getStackTrace());
-			throw sqle;
-		}
+		return AgenteBD.getAgente()
+				.insert(String.format(INSERT, entregaVacunas.getId(), entregaVacunas.getLote().getId(),
+						entregaVacunas.getFecha(), entregaVacunas.getCantidad(),
+						entregaVacunas.getGrupoPrioridad().getPrioridad(), entregaVacunas.getTipo().toString(),
+						entregaVacunas.getRegion().getId()));
 	}
 
 	@Override
@@ -44,12 +44,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 
 	@Override
 	public int delete(EntregaVacunas entregaVacunas) throws SQLException {
-		try {
-			return AgenteBD.getAgente().delete(String.format(DELETE, entregaVacunas.getId()));
-		} catch (SQLException sqle) {
-			System.out.println("Excepción actualizando entrega:\n\n" + sqle.getStackTrace());
-			throw sqle;
-		}
+		return AgenteBD.getAgente().delete(String.format(DELETE, entregaVacunas.getId()));
 	}
 
 }
