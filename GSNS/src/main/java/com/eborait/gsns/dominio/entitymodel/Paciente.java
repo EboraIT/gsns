@@ -16,6 +16,19 @@ public class Paciente {
 		this.region = RegionEnum.valueOf(region);
 	}
 
+	public Paciente(String fromDatabase) {
+		String[] aux = fromDatabase.split(";");
+		this.dni = aux[0];
+		this.nombre = aux[1];
+		this.apellidos = aux[2];
+		this.grupo = GrupoPrioridad.valueOf(Integer.parseInt(aux[3]));
+		this.region = RegionEnum.valueOf(Integer.parseInt(aux[4]));
+	}
+
+	public String toDatabase() {
+		return dni + ";" + nombre + ";" + apellidos + ";" + grupo.getPrioridad() + ";" + region.getId();
+	}
+
 	public RegionEnum getRegion() {
 		return region;
 	}
