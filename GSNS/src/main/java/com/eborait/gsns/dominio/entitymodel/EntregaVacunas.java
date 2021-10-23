@@ -13,14 +13,14 @@ public class EntregaVacunas {
 	private int cantidad;
 
 	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, TipoVacuna tipo,
-			RegionEnum region) {
+			int region) {
 		this.id = id;
 		this.lote = new LoteVacunas(fecha, lote, cantidad);
 		this.fecha = fecha;
 		this.cantidad = cantidad;
 		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
 		this.tipo = tipo;
-		this.region = region;
+		this.region = RegionEnum.valueOf(region);
 	}
 
 	public String getId() {
