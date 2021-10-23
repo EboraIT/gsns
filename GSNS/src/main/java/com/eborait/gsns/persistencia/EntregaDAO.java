@@ -26,7 +26,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT_CRITERIA = "SELECT FROM entrega_vacunas WHERE %d = %s";
+	private static final String SELECT_CRITERIA = "SELECT FROM entrega_vacunas WHERE %s = %s";
 	/**
 	 * Formato sentencia insert.
 	 */
