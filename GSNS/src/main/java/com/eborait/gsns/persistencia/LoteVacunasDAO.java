@@ -27,25 +27,25 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	}
 
 	@Override
-	LoteVacunas get(String id) throws SQLException {
+	public LoteVacunas get(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	Collection<LoteVacunas> getAll(String criteria, String value) throws SQLException {
+	public Collection<LoteVacunas> getAll(String criteria, String value) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	int insert(LoteVacunas entity) throws SQLException {
+	public int insert(LoteVacunas entity) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	int update(LoteVacunas entity) throws SQLException {
+	public int update(LoteVacunas entity) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
