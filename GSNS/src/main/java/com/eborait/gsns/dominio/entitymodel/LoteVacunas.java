@@ -23,6 +23,8 @@ public class LoteVacunas {
 		this.cantidad = cantidad;
 	}
 
+	
+
 	public Collection<EntregaVacunas> getEntregas() {
 		return entregas;
 	}

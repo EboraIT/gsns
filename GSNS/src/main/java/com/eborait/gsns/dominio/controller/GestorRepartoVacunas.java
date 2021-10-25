@@ -1,5 +1,6 @@
 package com.eborait.gsns.dominio.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.Scanner;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
+import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
+import com.eborait.gsns.persistencia.DAOFactory;
 import com.eborait.gsns.persistencia.LoteVacunasDAO;
 
 public class GestorRepartoVacunas {
@@ -19,12 +22,17 @@ public class GestorRepartoVacunas {
 	 * @param tipo
 	 * @param cantidad
 	 */
-	public static boolean altaNuevoLoteVacunas(Date fecha, String tipo, int cantidad) throws Exception{
+	public  boolean altaNuevoLoteVacunas(String id,Date fecha, String tipo, int cantidad,String nombreVacuna,String farmaceutica,String fechaAprobacion) throws Exception{
 		boolean altaLote=false;
-		LoteVacunas v= new LoteVacunas(fecha,tipo,cantidad);
-		if (v.insertar() == 1)
-			altaLote=true;
-		return altaLote;
+		TipoVacuna tipoVacuna = new TipoVacuna(nombreVacuna, farmaceutica, fechaAprobacion);
+		LoteVacunas v= new LoteVacunas(id,fecha,tipo,cantidad);
+		
+		try {
+			return DAOFactory.getLoteVacunasDAO().insert(v) == 1;
+		} catch (SQLException sqle) {
+			System.out.println("Excepción insertando entrega:\n\n" + sqle.getStackTrace());
+			throw new Exception("Se ha producido un error al dar de alta la entrega de vacunas.");
+		}
 		
 	}
 
