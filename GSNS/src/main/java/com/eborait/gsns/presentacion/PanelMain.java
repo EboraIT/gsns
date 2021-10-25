@@ -18,25 +18,25 @@ public class PanelMain extends JPanel {
 	public PanelMain(final Main frame) {
 		setLayout(null);
 
-		JLabel lblMensajeBienvenida = new JLabel("隆Bienvenido!");
+		JLabel lblMensajeBienvenida = new JLabel("ienvenido!");
 		lblMensajeBienvenida.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMensajeBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensajeBienvenida.setBounds(229, 23, 470, 30);
 		add(lblMensajeBienvenida);
 
-		JLabel lblMensajeDescripcion = new JLabel("Este es el programa de gesti贸n del Sistema Nacional de Salud.");
+		JLabel lblMensajeDescripcion = new JLabel("Este es el programa de gesti髇 del Sistema Nacional de Salud.");
 		lblMensajeDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMensajeDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensajeDescripcion.setBounds(229, 60, 470, 30);
 		add(lblMensajeDescripcion);
 
-		JLabel lblMensajeMenu = new JLabel("Selecciona una opci贸n:");
+		JLabel lblMensajeMenu = new JLabel("Selecciona una opci髇:");
 		lblMensajeMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMensajeMenu.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensajeMenu.setBounds(229, 115, 470, 30);
 		add(lblMensajeMenu);
 
-		JButton btnConsultarEstadisticas = new JButton("Consultar estad铆sticas");
+		JButton btnConsultarEstadisticas = new JButton("Consultar estadadisticas");
 		btnConsultarEstadisticas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaConsultaEstadisticas(frame));
@@ -46,7 +46,7 @@ public class PanelMain extends JPanel {
 		btnConsultarEstadisticas.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnConsultarEstadisticas);
 
-		JButton btnGestionSNS = new JButton("Gesti贸n Sistema Nacional de Salud");
+		JButton btnGestionSNS = new JButton("Gestion Sistema Nacional de Salud");
 		btnGestionSNS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaGestionSistemaNacionalSalud(frame));
@@ -56,7 +56,7 @@ public class PanelMain extends JPanel {
 		btnGestionSNS.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnGestionSNS);
 
-		JButton btnGestionSRS = new JButton("Gesti贸n Sistema Regional de Salud");
+		JButton btnGestionSRS = new JButton("Gesti髇 Sistema Regional de Salud");
 		btnGestionSRS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaGestionSistemaRegionalSalud(frame));

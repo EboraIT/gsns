@@ -31,8 +31,9 @@ public class PantallaConsultaEstadisticas extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param frame 
 	 */
-	public PantallaConsultaEstadisticas() {
+	public PantallaConsultaEstadisticas(final Main frame) {
 		setTitle("Consulta de Estadisticas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 678, 360);

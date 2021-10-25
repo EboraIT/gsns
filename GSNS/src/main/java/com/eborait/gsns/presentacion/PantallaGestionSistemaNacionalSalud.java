@@ -31,8 +31,8 @@ public class PantallaGestionSistemaNacionalSalud extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaGestionSistemaNacionalSalud() {
-		setTitle("Gesti\u00F3n Sistema de Salud Nacional");
+	public PantallaGestionSistemaNacionalSalud(final Main frame) {
+		setTitle("Gestion Sistema de Salud Nacional");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 678, 360);
 		contentPane = new JPanel();
@@ -48,7 +48,7 @@ public class PantallaGestionSistemaNacionalSalud extends JFrame {
 		btnCalculoEntrega.setBounds(427, 104, 175, 45);
 		contentPane.add(btnCalculoEntrega);
 		
-		JButton btnAtras = new JButton("Atr\u00E1s");
+		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(563, 287, 89, 23);
 		contentPane.add(btnAtras);
 	}

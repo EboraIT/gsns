@@ -45,7 +45,7 @@ public class Main extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(0, 0, 900, 500);
-		setTitle("Gestión Sistema Nacional de Salud");
+		setTitle("Gestion Sistema Nacional de Salud");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -59,9 +59,11 @@ public class Main extends JFrame {
 		gestorVacunacion = new GestorVacunacion();
 	}
 
-	public void cambiarPanel(JPanel nuevoPanel) {
+	
+	
+	public void cambiarPanel(JPanel nuevopanel) {
 		contentPane.remove(panelActual);
-		panelActual = nuevoPanel;
+		panelActual = nuevopanel;
 		contentPane.add(panelActual, BorderLayout.CENTER);
 		setContentPane(contentPane);
 	}
@@ -81,5 +83,9 @@ public class Main extends JFrame {
 	public GestorVacunacion getGestorVacunacion() {
 		return gestorVacunacion;
 	}
+
+	
+
+	
 
 }
