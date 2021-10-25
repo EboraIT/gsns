@@ -2,6 +2,8 @@ package com.eborait.gsns.presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +22,7 @@ public class PantallaGestionSistemSaludNacional extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaGestionSistemSaludNacional() {
+	public PantallaGestionSistemSaludNacional(final Main frame) {
 		setTitle("Gesti\u00F3n Sistema de Salud Nacional");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 678, 360);
@@ -29,15 +31,27 @@ public class PantallaGestionSistemSaludNacional extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
+		
 		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
+		btnAltaNuevoLote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(new PantallaAltaNuevoLote(frame));
+			}
+		});
 		btnAltaNuevoLote.setBounds(60, 104, 175, 45);
 		contentPane.add(btnAltaNuevoLote);
 		
 		JButton btnCalculoEntrega = new JButton("Calculo Entrega");
+		btnCalculoEntrega.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(new PantallaCalculoEntrega(frame));
+			}
+		});
 		btnCalculoEntrega.setBounds(427, 104, 175, 45);
 		contentPane.add(btnCalculoEntrega);
 		
-		JButton btnAtras = new JButton("Atr\u00E1s");
+		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(563, 287, 89, 23);
 		contentPane.add(btnAtras);
 	}
