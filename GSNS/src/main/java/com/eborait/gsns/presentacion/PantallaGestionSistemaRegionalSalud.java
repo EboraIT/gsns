@@ -50,6 +50,7 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 		JButton btnRegistrarVacunacion = new JButton("Registrar Vacunación");
 		btnRegistrarVacunacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(new PantallaRegistrarVacunacion(frame));
 			}
 		});
 		btnRegistrarVacunacion.setBounds(531, 153, 187, 54);
