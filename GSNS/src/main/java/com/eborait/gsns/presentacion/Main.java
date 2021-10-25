@@ -54,6 +54,9 @@ public class Main extends JFrame {
 		contentPane.add(panelActual, BorderLayout.CENTER);
 		setContentPane(contentPane);
 
+		gestorEstadisticas = new GestorEstadisticas();
+		gestorRepartoVacunas = new GestorRepartoVacunas();
+		gestorVacunacion = new GestorVacunacion();
 	}
 
 	public void cambiarPanel(JPanel nuevoPanel) {
