@@ -3,26 +3,27 @@ package com.eborait.gsns.dominio.entitymodel;
 import java.util.Collection;
 import java.util.Date;
 
-import com.eborait.gsns.persistencia.LoteVacunasDAO;
-
 public class LoteVacunas {
 
-	Collection<EntregaVacunas> entregas;
-	TipoVacuna tipo;
-	LoteVacunasDAO loteVacunasDao;
+	private Collection<EntregaVacunas> entregas;
+	private TipoVacuna tipo;
 	private String id;
 	private Date fecha;
 	private int cantidad;
 	private String farmaceutica;
 
-	public LoteVacunas(Date fecha, String tipo, int cantidad) {
-		// TODO Auto-generated constructor stub
+	public LoteVacunas(String id, Date fecha, String tipo, int cantidad) {
+		this(id, fecha, new TipoVacuna(tipo), cantidad);
 	}
 
-	public int insertar() {
-		LoteVacunas LoteVacunas = null;
-		return LoteVacunasDAO.insertarLoteVacunas(LoteVacunas);
+	public LoteVacunas(String id, Date fecha, TipoVacuna tipo, int cantidad) {
+		this.id = id;
+		this.fecha = fecha;
+		this.tipo = tipo;
+		this.cantidad = cantidad;
 	}
+
+	
 
 	public Collection<EntregaVacunas> getEntregas() {
 		return entregas;
@@ -38,14 +39,6 @@ public class LoteVacunas {
 
 	public void setTipo(TipoVacuna tipo) {
 		this.tipo = tipo;
-	}
-
-	public LoteVacunasDAO getLoteVacunasDao() {
-		return loteVacunasDao;
-	}
-
-	public void setLoteVacunasDao(LoteVacunasDAO loteVacunasDao) {
-		this.loteVacunasDao = loteVacunasDao;
 	}
 
 	public String getId() {
@@ -82,8 +75,8 @@ public class LoteVacunas {
 
 	@Override
 	public String toString() {
-		return "LoteVacunas [entregas=" + entregas + ", tipo=" + tipo + ", loteVacunasDao=" + loteVacunasDao + ", id="
-				+ id + ", fecha=" + fecha + ", cantidad=" + cantidad + ", farmaceutica=" + farmaceutica + "]";
+		return "LoteVacunas [entregas=" + entregas + ", tipo=" + tipo + ", id=" + id + ", fecha=" + fecha
+				+ ", cantidad=" + cantidad + ", farmaceutica=" + farmaceutica + "]";
 	}
 
 }
