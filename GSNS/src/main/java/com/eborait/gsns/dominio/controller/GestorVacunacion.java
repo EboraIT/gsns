@@ -55,6 +55,7 @@ public class GestorVacunacion {
 	/**
 	 * Registra la vacunación de un paciente.
 	 * 
+	 * @param id           Id de vacunación.
 	 * @param fecha        Fecha de vacunación.
 	 * @param nombre       Nombre de la persona vacunada.
 	 * @param apellidos    Apellidos de la persona vacunada.
@@ -65,10 +66,10 @@ public class GestorVacunacion {
 	 * @param segundaDosis Si es primera o segunda dósis.
 	 * @throws Exception Si se produce una excepción al insertar.
 	 */
-	public void registrarVacunacion(Date fecha, String nombre, String apellidos, String nif, TipoVacuna tipo,
+	public void registrarVacunacion(int id, Date fecha, String nombre, String apellidos, String nif, TipoVacuna tipo,
 			int prioridad, int region, boolean segundaDosis) throws Exception {
 		Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region);
-		Vacunacion vacunacion = new Vacunacion(tipo, paciente, fecha, segundaDosis);
+		Vacunacion vacunacion = new Vacunacion(id, tipo, paciente, fecha, segundaDosis);
 		try {
 			DAOFactory.getVacunacionDAO().insert(vacunacion);
 		} catch (SQLException sqle) {
