@@ -25,6 +25,9 @@ public class EntregaVacunas {
 		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
 		this.tipo = tipo;
 		this.region = RegionEnum.valueOf(region);
+		
+		this.region.getEntregas().add(this);
+		this.grupoPrioridad.getEntregas().add(this);
 	}
 
 	public String getId() {
