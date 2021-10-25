@@ -10,7 +10,7 @@ import java.util.Collection;
  * @author Jorge Fernández Escolano
  * @author Roberto Esteban Olivares
  * @since 1.0
- * @version 1.2
+ * @version 1.0
  * 
  * @param <E> Entidad de la base de datos.
  *
