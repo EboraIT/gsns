@@ -14,11 +14,6 @@ public class EntregaVacunas {
 	private Date fecha;
 	private int cantidad;
 
-	public EntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad, String tipo, int region)
-			throws Exception {
-		this(id, lote, fecha, cantidad, prioridad, new TipoVacuna(tipo), region);
-	}
-
 	public EntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad, TipoVacuna tipo,
 			int region) throws ParseException {
 		this.id = id;
@@ -27,6 +22,19 @@ public class EntregaVacunas {
 		this.cantidad = cantidad;
 		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
 		this.tipo = tipo;
+		this.region = RegionEnum.valueOf(region);
+
+		this.region.getEntregas().add(this);
+		this.grupoPrioridad.getEntregas().add(this);
+	}
+
+	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, String tipo, int region) {
+		this.id = id;
+		this.fecha = fecha;
+		this.lote = new LoteVacunas(lote, fecha, tipo, cantidad);
+		this.cantidad = cantidad;
+		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
+		this.tipo = new TipoVacuna(tipo);
 		this.region = RegionEnum.valueOf(region);
 
 		this.region.getEntregas().add(this);
