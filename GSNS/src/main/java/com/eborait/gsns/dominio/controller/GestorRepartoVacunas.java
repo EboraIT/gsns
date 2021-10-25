@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
+import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.persistencia.DAOFactory;
 import com.eborait.gsns.persistencia.LoteVacunasDAO;
@@ -36,7 +37,7 @@ public class GestorRepartoVacunas {
 		
 	}
 
-	public List<EntregaVacunas> calcularEntregasRegion() throws Exception {
+	public List<EntregaVacunas> calcularEntregasRegion(RegionEnum region) throws Exception {
 		ArrayList<EntregaVacunas> entregaVacunas = null;
 		//entregaVacunas.SeleccionarEntregas(RegionEnum)
 		return entregaVacunas;
