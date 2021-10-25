@@ -21,7 +21,8 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 					.insert(String.format(INSERT, LoteVacunas.getId(), LoteVacunas.getFecha(),
 							LoteVacunas.getCantidad(), LoteVacunas.getFarmaceutica()));
 		} catch (SQLException sqle) {
-			System.out.println("Excepcionn insertando el lote vacunas:\n\n" + sqle.getStackTrace());
+			System.out.println("Excepcionn insertando el lote vacunas:\n\n" + sqle.getMessage());
+			sqle.printStackTrace();
 			throw sqle;
 		}
 	}
@@ -55,7 +56,8 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 		try {
 			return AgenteBD.getAgente().delete(String.format(DELETE, LoteVacunas.getId()));
 		} catch (SQLException sqle) {
-			System.out.println("Excepcion borrado lote vacunas:\n\n" + sqle.getStackTrace());
+			System.out.println("Excepcion borrado lote vacunas:\n\n" + sqle.getMessage());
+			sqle.printStackTrace();
 			throw sqle;
 		}
 	}
