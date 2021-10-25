@@ -1,6 +1,7 @@
 package com.eborait.gsns.dominio.controller;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
@@ -34,14 +35,19 @@ public class GestorVacunacion {
 	 * @param region          Región de la entrega.
 	 * @throws Exception Si se produce una excepción al insertar.
 	 */
-	public void altaEntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, String nombreVacuna,
-			String farmaceutica, String fechaAprobacion, int region) throws Exception {
+	public void altaEntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad,
+			String nombreVacuna, String farmaceutica, String fechaAprobacion, int region) throws Exception {
 		TipoVacuna tipoVacuna = new TipoVacuna(nombreVacuna, farmaceutica, fechaAprobacion);
-		EntregaVacunas entregaVac = new EntregaVacunas(id, lote, fecha, cantidad, prioridad, tipoVacuna, region);
 		try {
+			EntregaVacunas entregaVac = new EntregaVacunas(id, lote, fecha, cantidad, prioridad, tipoVacuna, region);
 			DAOFactory.getEntregaDAO().insert(entregaVac);
+		} catch (ParseException pe) {
+			System.out.println("Excepción insertando entrega:\n\n" + pe.getMessage());
+			pe.printStackTrace();
+			throw new Exception("El formato de la fecha no es correcto. El formato adecuado es dd/mm/yyyy.");
 		} catch (SQLException sqle) {
-			System.out.println("Excepción insertando entrega:\n\n" + sqle.getStackTrace());
+			System.out.println("Excepción insertando entrega:\n\n" + sqle.getMessage());
+			sqle.printStackTrace();
 			throw new Exception("Se ha producido un error al dar de alta la entrega de vacunas.");
 		}
 	}
@@ -66,7 +72,8 @@ public class GestorVacunacion {
 		try {
 			DAOFactory.getVacunacionDAO().insert(vacunacion);
 		} catch (SQLException sqle) {
-			System.out.println("Excepción insertando vacunación:\n\n" + sqle.getStackTrace());
+			System.out.println("Excepción insertando vacunación:\n\n" + sqle.getMessage());
+			sqle.printStackTrace();
 			throw new Exception("Se ha producido un error registrar la vacunación.");
 		}
 	}
