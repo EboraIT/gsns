@@ -1,56 +1,60 @@
 package com.eborait.gsns.presentacion;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
 
-import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class PantallaGestionSistemaRegionalSalud extends JFrame {
-
-	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PantallaGestionSistemaRegionalSalud frame = new PantallaGestionSistemaRegionalSalud();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+public class PantallaGestionSistemaRegionalSalud extends JPanel {
 
 	/**
 	 * Create the frame.
 	 */
-	public PantallaGestionSistemaRegionalSalud() {
-		setTitle("Gesti\u00F3n Sistema Regional de Salud");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 678, 360);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JButton btnAtras = new JButton("Atras");
-		btnAtras.setBounds(563, 287, 89, 23);
-		contentPane.add(btnAtras);
-		
+	public PantallaGestionSistemaRegionalSalud(final Main frame) {
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(new BorderLayout(0, 0));
+
+		JPanel topPanel = new JPanel();
+		add(topPanel, BorderLayout.NORTH);
+		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
+
+		JPanel midPanel = new JPanel();
+		add(midPanel, BorderLayout.CENTER);
+
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(frame.getPanelMain());
+			}
+		});
+		topPanel.add(btnVolver);
+
+		JLabel lblMensajeMenu = new JLabel("Selecciona una opción:");
+		lblMensajeMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		topPanel.add(lblMensajeMenu);
+
 		JButton btnAltaEntregas = new JButton("Alta Entrega Vacunas");
-		btnAltaEntregas.setBounds(92, 130, 153, 42);
-		contentPane.add(btnAltaEntregas);
-		
+		btnAltaEntregas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAltaEntregas.setBounds(172, 153, 187, 54);
+
 		JButton btnRegistrarVacunacion = new JButton("RegistrarVacunacion");
-		btnRegistrarVacunacion.setBounds(411, 130, 153, 42);
-		contentPane.add(btnRegistrarVacunacion);
+		btnRegistrarVacunacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnRegistrarVacunacion.setBounds(531, 153, 187, 54);
+		midPanel.setLayout(null);
+		midPanel.add(btnAltaEntregas);
+		midPanel.add(btnRegistrarVacunacion);
 	}
 
 }
