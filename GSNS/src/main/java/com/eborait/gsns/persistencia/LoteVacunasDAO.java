@@ -18,8 +18,8 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 			// TODO cambiar TODO por el nombre del método del tipovacuna de sus atributos
 			// combinados
 			return AgenteBD.getAgente()
-					.insert(String.format(INSERT, LoteVacunas.getId(), LoteVacunas.getFecha(),
-							LoteVacunas.getCantidad(), LoteVacunas.getFarmaceutica()));
+					.insert(String.format(INSERT, lote.getId(), lote.getFecha(),
+							lote.getCantidad(), lote.getFarmaceutica()));
 		} catch (SQLException sqle) {
 			System.out.println("Excepcionn insertando el lote vacunas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -52,9 +52,9 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	}
 
 	@Override
-	public int delete(LoteVacunas entity) throws SQLException {
+	public int delete(LoteVacunas lote) throws SQLException {
 		try {
-			return AgenteBD.getAgente().delete(String.format(DELETE, LoteVacunas.getId()));
+			return AgenteBD.getAgente().delete(String.format(DELETE, lote.getId()));
 		} catch (SQLException sqle) {
 			System.out.println("Excepcion borrado lote vacunas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
