@@ -2,15 +2,18 @@ package com.eborait.gsns.presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
-public class PantallaGestionSistemSaludNacional extends JFrame {
+public class PantallaGestionSistemSaludNacional extends JPanel {
 
 	private JPanel contentPane;
 
@@ -23,15 +26,28 @@ public class PantallaGestionSistemSaludNacional extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaGestionSistemSaludNacional(final Main frame) {
-		setTitle("Gesti\u00F3n Sistema de Salud Nacional");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 678, 360);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(new BorderLayout(0, 0));
 		
+		JPanel topPanel = new JPanel();
+		add(topPanel, BorderLayout.NORTH);
+		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
+		
+		JPanel midPanel = new JPanel();
+		add(midPanel, BorderLayout.CENTER);
+
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(frame.getPanelMain());
+			}
+		});
+		topPanel.add(btnVolver);
+		
+		JLabel lblTitulo = new JLabel("Gestión Sistema Regional de Salud");
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		topPanel.add(lblTitulo);
 		
 		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
 		btnAltaNuevoLote.addActionListener(new ActionListener() {
