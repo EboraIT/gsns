@@ -1,5 +1,7 @@
 package com.eborait.gsns.dominio.entitymodel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EntregaVacunas {
@@ -12,19 +14,23 @@ public class EntregaVacunas {
 	private Date fecha;
 	private int cantidad;
 
-	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, String tipo, int region) {
+	public EntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad, String tipo, int region)
+			throws Exception {
 		this(id, lote, fecha, cantidad, prioridad, new TipoVacuna(tipo), region);
 	}
 
-	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, TipoVacuna tipo,
-			int region) {
+	public EntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad, TipoVacuna tipo,
+			int region) throws ParseException {
 		this.id = id;
-		this.lote = new LoteVacunas(lote, fecha, tipo, cantidad);
-		this.fecha = fecha;
+		this.fecha = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
+		this.lote = new LoteVacunas(lote, this.fecha, tipo, cantidad);
 		this.cantidad = cantidad;
 		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
 		this.tipo = tipo;
 		this.region = RegionEnum.valueOf(region);
+
+		this.region.getEntregas().add(this);
+		this.grupoPrioridad.getEntregas().add(this);
 	}
 
 	public String getId() {
