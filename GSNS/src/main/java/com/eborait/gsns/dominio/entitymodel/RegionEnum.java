@@ -44,4 +44,12 @@ public enum RegionEnum {
 		throw new IllegalArgumentException("La región no existe.");
 	}
 
+	public static String[] getNombres() {
+		String[] nombres = new String[values().length];
+		for (int i = 0; i < nombres.length; i++) {
+			nombres[i] = values()[i].getNombre();
+		}
+		return nombres;
+	}
+
 }

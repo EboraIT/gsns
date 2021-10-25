@@ -50,5 +50,13 @@ public enum GrupoPrioridad {
 		// TODO cambiar excepcion por una registrada o propia
 		throw new IllegalArgumentException("El grupo de prioridad no existe.");
 	}
+	
+	public static String[] getNombres() {
+		String[] nombres = new String[values().length];
+		for (int i = 0; i < nombres.length; i++) {
+			nombres[i] = values()[i].getNombre();
+		}
+		return nombres;
+	}
 
 }
