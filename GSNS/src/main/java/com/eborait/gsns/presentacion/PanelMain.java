@@ -49,7 +49,7 @@ public class PanelMain extends JPanel {
 		JButton btnGestionSNS = new JButton("Gestion Sistema Nacional de Salud");
 		btnGestionSNS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(new PantallaGestionSistemaNacionalSalud(frame));
+				frame.cambiarPanel(new PantallaGestionSistemSaludNacional(frame));
 			}
 		});
 		btnGestionSNS.setBounds(337, 211, 209, 38);
