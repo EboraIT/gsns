@@ -8,11 +8,18 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import com.eborait.gsns.dominio.controller.GestorEstadisticas;
+import com.eborait.gsns.dominio.controller.GestorRepartoVacunas;
+import com.eborait.gsns.dominio.controller.GestorVacunacion;
+
 public class Main extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panelActual;
 	private PanelMain panelMain;
+	private GestorEstadisticas gestorEstadisticas;
+	private GestorRepartoVacunas gestorRepartoVacunas;
+	private GestorVacunacion gestorVacunacion;
 
 	/**
 	 * Launch the application.
@@ -58,6 +65,18 @@ public class Main extends JFrame {
 
 	public PanelMain getPanelMain() {
 		return panelMain;
+	}
+
+	public GestorEstadisticas getGestorEstadisticas() {
+		return gestorEstadisticas;
+	}
+
+	public GestorRepartoVacunas getGestorRepartoVacunas() {
+		return gestorRepartoVacunas;
+	}
+
+	public GestorVacunacion getGestorVacunacion() {
+		return gestorVacunacion;
 	}
 
 }
