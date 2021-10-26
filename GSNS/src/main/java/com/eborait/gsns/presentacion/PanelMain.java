@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class PanelMain extends JPanel {
-
+	private JPanel contentPane;
 	/**
 	 * Create the panel.
 	 */
