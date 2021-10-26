@@ -6,8 +6,26 @@ import java.util.Collection;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 
 public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
+	/*
+	 * Formato sentencia insert.
+	 */
 	private static final String INSERT = "INSERT INTO lotes_vacunas VALUES(%s, %s, %s, %s)";
+	/*
+	 * Formato sentencia delete.
+	 */
 	private static final String DELETE = "DELETE FROM lotes_vacunas WHERE id = %s";
+	/*
+	 * Formato sentencia select.
+	 */
+	private static final String SELECT = "SELECT FROM lotes_vacunas WHERE id = %s";
+	/*
+	 * Formato sentencia select criterio.
+	 */
+	private static final String SELECT_CRITERIA = "SELECT FROM lotes_vacunas WHERE %s = %s";
+	/*
+	 * Formato sentencia update.
+	 */
+	private static final String UPDATE = "UPDATE lote_vacunas SET fecha = %s, cantidad =%d,farmaceutica =%s where id=%s";
 	/**
 	 * 
 	 * @param lote
