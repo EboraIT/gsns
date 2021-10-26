@@ -58,7 +58,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	public LoteVacunas get(String id) throws SQLException {
 		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT, id));
 		rs.next();
-		LoteVacunas lv = new LoteVacunas(rs.getString(1),rs.getDate(2),rs.getInt(3),rs.getString(4));
+		LoteVacunas lv = new LoteVacunas(rs.getString(1),rs.getDate(2),rs.getString(4),rs.getInt(3));
 		return lv;
 	}
 
