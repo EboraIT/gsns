@@ -1,5 +1,6 @@
 package com.eborait.gsns.persistencia;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -44,11 +45,21 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 			throw sqle;
 		}
 	}
+	/*
+	 * Realiza consulta a la base de datos.
+	 * 
+	 * @param id identificador de lote vacunas que se va a buscar
+	 * @return Un objeto LoteVacunas
+	 * @throws SQLException Si se produce una excepción en la setencia SQL
+	 * @see LoteVacunas
+	 */
 
 	@Override
 	public LoteVacunas get(String id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT, id));
+		rs.next();
+		LoteVacunas lv = new LoteVacunas(rs.getString(1),rs.getDate(2),rs.getInt(3),rs.getString(4));
+		return lv;
 	}
 
 	@Override
