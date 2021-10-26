@@ -3,6 +3,8 @@ package com.eborait.gsns.dominio.controller;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
+import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 import com.eborait.gsns.persistencia.DAOFactory;
@@ -46,25 +48,39 @@ public class GestorEstadisticas {
 		return contador;
 	}
 
+	/**
+	 * Calcula el porcentaje de vacunaciones sobre vacunas recibidas.
+	 * 
+	 * @return El porcentaje de vacunaciones sobre vacunas recibidas.
+	 * @throws Exception Si se produce una excepción al consultar.
+	 */
 	public int consultarPorcentajeVacunadosSobreRecibidas() throws Exception {
 		int totalVacunados = consultarTotalVacunados();
-		/* Añadir metodo que devuelva el total vacunas recibidas **/
-		int vacunas_recibidas = 999999;
-
-		return (totalVacunados / vacunas_recibidas) * 100;
+		int vacunasRecibidas = 0;
+		Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(" ", " ");
+		for (LoteVacunas loteVacunas : lotes) {
+			vacunasRecibidas += loteVacunas.getCantidad();
+		}
+		return (totalVacunados / vacunasRecibidas) * 100;
 	}
 
 	/**
+	 * Calcula el porcentaje de vacunaciones sobre vacunas recibidas de una región.
 	 * 
-	 * @param region
-	 * @return
+	 * @param region La región por la que se filtra la consulta.
+	 * @return El porcentaje de vacunaciones sobre vacunas recibidas de la región.
+	 * @throws SQLException Si se produce una excepción al consultar.
 	 */
-	public int consultarPorcentajeVacunadosSobreRecibidasEnRegion(RegionEnum region) {
-		int totalVacunadosPorRegion = consultarTotalVacunadosPorRegion(region);
-		/* A�adir metodo que devuelva el total vacunas recibidas **/
-		int vacunas_recibidas = 999999;
-
-		return (totalVacunadosPorRegion / vacunas_recibidas) * 100;
+	public int consultarPorcentajeVacunadosSobreRecibidasEnRegion(RegionEnum region) throws Exception {
+		int totalVacunados = consultarTotalVacunadosPorRegion(region);
+		int vacunasRecibidas = 0;
+		Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll(" ", " ");
+		for (EntregaVacunas entrega : entregas) {
+			if (entrega.getRegion() == region) {
+				vacunasRecibidas += entrega.getLote().getCantidad();
+			}
+		}
+		return (totalVacunados / vacunasRecibidas) * 100;
 	}
 
 }
