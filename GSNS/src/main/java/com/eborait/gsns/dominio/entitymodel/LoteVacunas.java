@@ -12,15 +12,16 @@ public class LoteVacunas {
 	private int cantidad;
 	private String farmaceutica;
 
-	public LoteVacunas(String id, Date fecha, String tipo, int cantidad) {
-		this(id, fecha, new TipoVacuna(tipo), cantidad);
+	public LoteVacunas(String id, Date fecha, String tipo, int cantidad, String farmaceutica) {
+		this(id, fecha, new TipoVacuna(tipo), cantidad, farmaceutica);
 	}
 
-	public LoteVacunas(String id, Date fecha, TipoVacuna tipo, int cantidad) {
+	public LoteVacunas(String id, Date fecha, TipoVacuna tipo, int cantidad, String farmaceutica) {
 		this.id = id;
 		this.fecha = fecha;
 		this.tipo = tipo;
 		this.cantidad = cantidad;
+		this.farmaceutica = farmaceutica;
 	}
 
 	

@@ -18,7 +18,7 @@ public class EntregaVacunas {
 			int region) throws ParseException {
 		this.id = id;
 		this.fecha = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
-		this.lote = new LoteVacunas(lote, this.fecha, tipo, cantidad);
+		this.lote = new LoteVacunas(lote, this.fecha, tipo, cantidad, tipo.getFarmaceutica());
 		this.cantidad = cantidad;
 		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
 		this.tipo = tipo;
@@ -31,10 +31,10 @@ public class EntregaVacunas {
 	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, String tipo, int region) {
 		this.id = id;
 		this.fecha = fecha;
-		this.lote = new LoteVacunas(lote, fecha, tipo, cantidad);
 		this.cantidad = cantidad;
 		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
 		this.tipo = new TipoVacuna(tipo);
+		this.lote = new LoteVacunas(lote, fecha, tipo, cantidad, this.tipo.getFarmaceutica());
 		this.region = RegionEnum.valueOf(region);
 
 		this.region.getEntregas().add(this);

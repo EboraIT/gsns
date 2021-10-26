@@ -81,7 +81,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	/**
 	 * Realiza una inserción en la base de datos.
 	 * 
-	 * @param entregaVacunas objeto EntregaVacunas a insertar.
+	 * @param entregaVacunas Objeto EntregaVacunas a insertar.
 	 * @return El número de filas insertadas.
 	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
 	 * @see EntregaVacunas
@@ -98,7 +98,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	/**
 	 * Realiza una actualización en la base de datos.
 	 * 
-	 * @param entregaVacunas objeto EntregaVacunas a actualizar.
+	 * @param entregaVacunas Objeto EntregaVacunas a actualizar.
 	 * @return El número de filas actualizadas.
 	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
 	 * @see EntregaVacunas
@@ -115,7 +115,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	/**
 	 * Realiza un borrado en la base de datos.
 	 * 
-	 * @param entregaVacunas objeto EntregaVacunas a eliminar.
+	 * @param entregaVacunas Objeto EntregaVacunas a eliminar.
 	 * @return El número de filas eliminadas.
 	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
 	 * @see EntregaVacunas

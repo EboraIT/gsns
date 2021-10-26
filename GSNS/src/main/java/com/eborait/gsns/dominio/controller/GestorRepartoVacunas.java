@@ -26,12 +26,12 @@ public class GestorRepartoVacunas {
 	public  boolean altaNuevoLoteVacunas(String id,Date fecha, String tipo, int cantidad,String nombreVacuna,String farmaceutica,String fechaAprobacion) throws Exception{
 		boolean altaLote=false;
 		TipoVacuna tipoVacuna = new TipoVacuna(nombreVacuna, farmaceutica, fechaAprobacion);
-		LoteVacunas v= new LoteVacunas(id,fecha,tipo,cantidad);
+		LoteVacunas v= new LoteVacunas(id,fecha,tipo,cantidad, farmaceutica);
 		
 		try {
 			return DAOFactory.getLoteVacunasDAO().insert(v) == 1;
 		} catch (SQLException sqle) {
-			System.out.println("Excepción insertando entrega:\n\n" + sqle.getStackTrace());
+			System.out.println("Excepciï¿½n insertando entrega:\n\n" + sqle.getStackTrace());
 			throw new Exception("Se ha producido un error al dar de alta la entrega de vacunas.");
 		}
 		
