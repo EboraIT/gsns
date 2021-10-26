@@ -84,11 +84,17 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 		return list;
 	}
 
-	@Override
+	/*
+	 * Realiza inserción a la base de datos.
+	 * 
+	 * @param entity objeto de la clase LoteVacunas
+	 * @return El numero de filas insertadas
+	 * @throws SQLException Si se produce una excepción en la setencia SQL
+	 * @see LoteVacunas
+	 */
 	public int insert(LoteVacunas entity) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		return AgenteBD.getAgente().insert(String.format(INSERT,entity.getId(),entity.getFecha(),entity.getCantidad(),entity.getFarmaceutica()));
+		}
 
 	@Override
 	public int update(LoteVacunas entity) throws SQLException {
