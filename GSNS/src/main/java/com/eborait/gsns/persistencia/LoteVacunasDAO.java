@@ -109,7 +109,14 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 				.insert(String.format(UPDATE, entity.getFecha(),entity.getCantidad(),entity.getFarmaceutica()));
 	}
 
-	@Override
+	/*
+	 * Realiza una eliminacion a la base de datos.
+	 * 
+	 * @param entity objeto de la clase LoteVacunas
+	 * @return El numero de filas eliminadas
+	 * @throws SQLException Si se produce una excepción en la setencia SQL
+	 * @see LoteVacunas
+	 */
 	public int delete(LoteVacunas lote) throws SQLException {
 		try {
 			return AgenteBD.getAgente().delete(String.format(DELETE, lote.getId()));
