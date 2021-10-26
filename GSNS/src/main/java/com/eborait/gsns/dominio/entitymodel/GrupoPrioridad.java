@@ -1,5 +1,6 @@
 package com.eborait.gsns.dominio.entitymodel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public enum GrupoPrioridad {
@@ -7,14 +8,16 @@ public enum GrupoPrioridad {
 	TRABAJADOR_ESENCIAL(3, "Trabajadores esenciales"), ANCIANO(4, "Ancianos"), ADULTO(5, "Adultos"),
 	JOVEN(6, "Jóvenes"), NINO(7, "Niños");
 
-	Collection<Paciente> pacientes;
-	Collection<EntregaVacunas> entregas;
+	private Collection<Paciente> pacientes;
+	private Collection<EntregaVacunas> entregas;
 	private final int prioridad;
 	private final String nombre;
 
 	private GrupoPrioridad(int prioridad, String nombre) {
 		this.prioridad = prioridad;
 		this.nombre = nombre;
+		this.entregas = new ArrayList<>();
+		this.pacientes = new ArrayList<>();
 	}
 
 	public Collection<Paciente> getPacientes() {

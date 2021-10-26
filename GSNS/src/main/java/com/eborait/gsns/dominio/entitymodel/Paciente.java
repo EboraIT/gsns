@@ -14,6 +14,8 @@ public class Paciente {
 		this.apellidos = apellidos;
 		this.grupo = GrupoPrioridad.valueOf(grupo);
 		this.region = RegionEnum.valueOf(region);
+
+		this.grupo.getPacientes().add(this);
 	}
 
 	public Paciente(String fromDatabase) {
@@ -23,6 +25,8 @@ public class Paciente {
 		this.apellidos = aux[2];
 		this.grupo = GrupoPrioridad.valueOf(Integer.parseInt(aux[3]));
 		this.region = RegionEnum.valueOf(Integer.parseInt(aux[4]));
+		
+		this.grupo.getPacientes().add(this);
 	}
 
 	public String toDatabase() {

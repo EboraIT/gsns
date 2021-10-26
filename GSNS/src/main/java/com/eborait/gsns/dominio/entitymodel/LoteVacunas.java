@@ -1,5 +1,6 @@
 package com.eborait.gsns.dominio.entitymodel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -22,9 +23,8 @@ public class LoteVacunas {
 		this.tipo = tipo;
 		this.cantidad = cantidad;
 		this.farmaceutica = farmaceutica;
+		this.entregas = new ArrayList<>();
 	}
-
-	
 
 	public Collection<EntregaVacunas> getEntregas() {
 		return entregas;

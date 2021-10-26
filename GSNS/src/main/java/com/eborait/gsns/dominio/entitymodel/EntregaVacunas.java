@@ -26,6 +26,7 @@ public class EntregaVacunas {
 
 		this.region.getEntregas().add(this);
 		this.grupoPrioridad.getEntregas().add(this);
+		this.lote.getEntregas().add(this);
 	}
 
 	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, String tipo, int region) {
@@ -39,6 +40,7 @@ public class EntregaVacunas {
 
 		this.region.getEntregas().add(this);
 		this.grupoPrioridad.getEntregas().add(this);
+		this.lote.getEntregas().add(this);
 	}
 
 	public String getId() {

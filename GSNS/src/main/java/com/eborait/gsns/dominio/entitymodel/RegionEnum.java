@@ -9,13 +9,14 @@ public enum RegionEnum {
 	BAL(12, "Islas Baleares"), ICA(13, "Islas Canarias"), RIO(14, "La Rioja"), MEL(15, "Melilla"), NAV(16, "Navarra"),
 	MUR(17, "Región de Murcia");
 
-	Collection<EntregaVacunas> entregas;
+	private Collection<EntregaVacunas> entregas;
 	private final int id;
 	private final String nombre;
 
 	private RegionEnum(int id, String nombre) {
 		this.id = id;
 		this.nombre = nombre;
+		this.entregas = new ArrayList<>();
 	}
 
 	public Collection<EntregaVacunas> getEntregas() {
