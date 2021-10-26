@@ -2,8 +2,13 @@ package com.eborait.gsns.presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -23,19 +28,34 @@ public class PantallaConsultaEstadisticas extends JPanel {
 	 * @param frame 
 	 */
 	public PantallaConsultaEstadisticas(final Main frame) {
-		setTitle("Consulta de Estadisticas");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 678, 360);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(new BorderLayout(0, 0));
+
+		JPanel topPanel = new JPanel();
+		add(topPanel, BorderLayout.NORTH);
+		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
+		
+		JLabel lblTitulo = new JLabel("Consultar Estadisticas");
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		topPanel.add(lblTitulo);
+		
+		JPanel midPanel = new JPanel();
+		add(midPanel, BorderLayout.CENTER);
+
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(frame.getPanelMain());
+			}
+		});
+		topPanel.add(btnVolver);
+		
 		
 		JButton btnTotalVacunados = new JButton("Total Vacunados");
 		btnTotalVacunados.setBounds(10, 45, 227, 58);
 		contentPane.add(btnTotalVacunados);
 		
-		JButton btnTotalVacunadosRegion = new JButton("Total Vacunados por Regi\u00F3n");
+		JButton btnTotalVacunadosRegion = new JButton("Total Vacunados por Regionn");
 		btnTotalVacunadosRegion.setBounds(422, 45, 227, 58);
 		contentPane.add(btnTotalVacunadosRegion);
 		
