@@ -60,14 +60,27 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		btnTotalVacunados.setBounds(10, 45, 227, 58);
 		midPanel.add(btnTotalVacunados);
 		
-		
-		JButton btnTotalVacunadosRegion = new JButton("Total Vacunados por Regionn");
+		JButton btnTotalVacunadosRegion = new JButton("Total Vacunados por Region");
+		btnTotalVacunados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//frame.cambiarPanel(new TotalVacunados(frame));
+			}
+		});
 		btnTotalVacunadosRegion.setBounds(422, 45, 227, 58);
-		contentPane.add(btnTotalVacunadosRegion);
+		midPanel.add(btnTotalVacunadosRegion);
 		
+
 		JButton btnPorcentajeVacunados = new JButton("Porcentaje Vacunados");
+		btnTotalVacunados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//frame.cambiarPanel(new TotalVacunados(frame));
+			}
+		});
 		btnPorcentajeVacunados.setBounds(10, 167, 227, 58);
-		contentPane.add(btnPorcentajeVacunados);
+		midPanel.add(btnPorcentajeVacunados);
+		
+		
+		
 		
 		JButton btnPorcentajeVacunadosRegion = new JButton("Porcentaje Vacunados por Region");
 		btnPorcentajeVacunadosRegion.setBounds(422, 167, 227, 58);
