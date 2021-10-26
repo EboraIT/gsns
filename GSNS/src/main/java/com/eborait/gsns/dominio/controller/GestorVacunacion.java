@@ -33,14 +33,15 @@ public class GestorVacunacion {
 	 * @param farmaceutica    Farmacéutica que ha desarrollado la vacuna.
 	 * @param fechaAprobacion Fecha de aprobación de la vacuna.
 	 * @param region          Región de la entrega.
+	 * @return Devuelve 1 si se ha registrado correctamente, 0 de lo contrario.
 	 * @throws Exception Si se produce una excepción al insertar.
 	 */
-	public void altaEntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad,
+	public boolean altaEntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad,
 			String nombreVacuna, String farmaceutica, String fechaAprobacion, int region) throws Exception {
 		TipoVacuna tipoVacuna = new TipoVacuna(nombreVacuna, farmaceutica, fechaAprobacion);
 		try {
 			EntregaVacunas entregaVac = new EntregaVacunas(id, lote, fecha, cantidad, prioridad, tipoVacuna, region);
-			DAOFactory.getEntregaDAO().insert(entregaVac);
+			return DAOFactory.getEntregaDAO().insert(entregaVac) == 1;
 		} catch (ParseException pe) {
 			System.out.println("Excepción insertando entrega:\n\n" + pe.getMessage());
 			pe.printStackTrace();
@@ -64,14 +65,15 @@ public class GestorVacunacion {
 	 * @param prioridad    Grupo de prioridad de la persona vacunada.
 	 * @param region       Región a la que pertenece la persona vacunada.
 	 * @param segundaDosis Si es primera o segunda dósis.
+	 * @return Devuelve 1 si se ha registrado correctamente, 0 de lo contrario.
 	 * @throws Exception Si se produce una excepción al insertar.
 	 */
-	public void registrarVacunacion(int id, Date fecha, String nombre, String apellidos, String nif, TipoVacuna tipo,
+	public boolean registrarVacunacion(int id, Date fecha, String nombre, String apellidos, String nif, TipoVacuna tipo,
 			int prioridad, int region, boolean segundaDosis) throws Exception {
 		Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region);
 		Vacunacion vacunacion = new Vacunacion(id, tipo, paciente, fecha, segundaDosis);
 		try {
-			DAOFactory.getVacunacionDAO().insert(vacunacion);
+			return DAOFactory.getVacunacionDAO().insert(vacunacion) == 1;
 		} catch (SQLException sqle) {
 			System.out.println("Excepción insertando vacunación:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
