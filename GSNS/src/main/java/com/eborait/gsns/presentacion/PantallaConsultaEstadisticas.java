@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-public class PantallaConsultaEstadisticas extends JFrame {
+public class PantallaConsultaEstadisticas extends JPanel {
 
 	private JPanel contentPane;
 
