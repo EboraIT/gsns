@@ -2,6 +2,7 @@ package com.eborait.gsns.persistencia;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
@@ -62,10 +63,25 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 		return lv;
 	}
 
+	/*
+	 * Realiza consulta a la base de datos.
+	 * 
+	 * @param criteria Columna para filtrar
+	 * @param value valor por el que se filtra
+	 * @return Una coleccion con los objetos de LoteVacunas encontrados
+	 * @throws SQLException Si se produce una excepción en la setencia SQL
+	 * @see LoteVacunas
+	 */
+	
 	@Override
 	public Collection<LoteVacunas> getAll(String criteria, String value) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<LoteVacunas> list = new ArrayList<>();
+		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT_CRITERIA, criteria,value));
+		while(rs.next()) {
+			LoteVacunas lv = new LoteVacunas (rs.getString(1),rs.getDate(2),rs.getString(4),rs.getInt(3));
+			list.add(lv);
+		}
+		return list;
 	}
 
 	@Override
