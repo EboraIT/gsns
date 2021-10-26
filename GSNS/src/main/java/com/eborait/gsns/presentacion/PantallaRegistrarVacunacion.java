@@ -83,5 +83,9 @@ public class PantallaRegistrarVacunacion extends JPanel {
 		midPanel.add(textFecha);
 		textFecha.setColumns(10);
 		
+		JButton btnRegistrarVacunacion = new JButton("Registrar Vacunacion");
+		btnRegistrarVacunacion.setBounds(3, 223, 427, 23);
+		midPanel.add(btnRegistrarVacunacion);
+		
 	}
 }
