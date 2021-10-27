@@ -58,7 +58,7 @@ public class GestorRepartoVacunas {
 
 	public Collection<String> getTipoVacunas() throws GSNSException {
 		try {
-			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(" ", " ");
+			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null, null);
 			Collection<String> tipos = new ArrayList<>();
 			for (LoteVacunas loteVacunas : lotes) {
 				tipos.add(loteVacunas.getTipo().toString());

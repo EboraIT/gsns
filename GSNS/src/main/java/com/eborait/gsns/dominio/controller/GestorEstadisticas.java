@@ -29,7 +29,7 @@ public class GestorEstadisticas {
 	 */
 	public int consultarTotalVacunados() throws GSNSException {
 		try {
-			return DAOFactory.getVacunacionDAO().getAll(" ", " ").size();
+			return DAOFactory.getVacunacionDAO().getAll(null,null).size();
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -47,7 +47,7 @@ public class GestorEstadisticas {
 	public int consultarTotalVacunadosPorRegion(RegionEnum region) throws GSNSException {
 		try {
 			int contador = 0;
-			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll(" ", " ");
+			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll(null,null);
 			for (Vacunacion vacunacion : vacunaciones) {
 				if (vacunacion.getPaciente().getRegion() == region) {
 					contador++;
@@ -71,7 +71,7 @@ public class GestorEstadisticas {
 		try {
 			int totalVacunados = consultarTotalVacunados();
 			int vacunasRecibidas = 0;
-			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(" ", " ");
+			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null,null);
 			for (LoteVacunas loteVacunas : lotes) {
 				vacunasRecibidas += loteVacunas.getCantidad();
 			}
@@ -94,7 +94,7 @@ public class GestorEstadisticas {
 		try {
 			int totalVacunados = consultarTotalVacunadosPorRegion(region);
 			int vacunasRecibidas = 0;
-			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll(" ", " ");
+			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll(null,null);
 			for (EntregaVacunas entrega : entregas) {
 				if (entrega.getRegion() == region) {
 					vacunasRecibidas += entrega.getLote().getCantidad();
