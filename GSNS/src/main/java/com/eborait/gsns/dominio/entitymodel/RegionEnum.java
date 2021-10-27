@@ -40,6 +40,10 @@ public enum RegionEnum {
 		return nombre;
 	}
 
+	public int getPoblacion() {
+		return poblacion;
+	}
+
 	public static RegionEnum valueOf(int id) throws GSNSException {
 		for (RegionEnum re : values()) {
 			if (re.getId() == id) {
