@@ -34,7 +34,7 @@ public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE vacunacion SET id = %s, tipo = %s, paciente = %s, fecha = %s, segundaDosis = %s WHERE id = %s";
+	private static final String UPDATE = "UPDATE vacunacion SET id = %s, tipo = %s, paciente = %s, fecha = %s, segunda_dosis = %s WHERE id = %s";
 	/**
 	 * Formato sentencia delete.
 	 */
