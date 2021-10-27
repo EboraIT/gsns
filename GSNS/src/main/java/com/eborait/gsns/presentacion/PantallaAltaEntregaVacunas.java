@@ -148,7 +148,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 						comboRegion.getSelectedIndex() + 1);
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
-						"Se ha producido un error al registrar el alta: NumberFormatException.", "Error",
+						"Se ha producido un error al registrar el alta: La cantidad no es correcta.", "Error",
 						JOptionPane.ERROR_MESSAGE);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
