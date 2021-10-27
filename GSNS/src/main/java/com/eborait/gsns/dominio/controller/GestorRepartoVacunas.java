@@ -49,7 +49,14 @@ public class GestorRepartoVacunas {
 		}
 	}
 
-	public List<EntregaVacunas> calcularEntregasRegion(RegionEnum region) throws GSNSException {
+	/*
+	 * Consulta que devuelve la entrega a cada región
+	 * 
+	 * @param region		La cual cogeremos el nombre de la region y la población.
+	 * @param IA			Tendremos también como parametro la Incidencia Acumulada que pasará el cliente por parametro
+	 * @return cantidad		Devuelve un entero con la cantidad de vacunas repartidas.
+	 */
+	public List<EntregaVacunas> calcularEntregasRegion(RegionEnum region, int IA) throws GSNSException {
 		ArrayList<EntregaVacunas> entregaVacunas = null;
 		// entregaVacunas.SeleccionarEntregas(RegionEnum)
 		return entregaVacunas;
