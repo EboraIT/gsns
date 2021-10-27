@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -42,7 +45,11 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 		JButton btnAltaEntregas = new JButton("Alta Entrega Vacunas");
 		btnAltaEntregas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(new PantallaAltaEntregaVacunas(frame));
+				try {
+					frame.cambiarPanel(new PantallaAltaEntregaVacunas(frame));
+				} catch (GSNSException gsnse) {
+					frame.cambiarPanel(frame.getPanelMain());
+				}
 			}
 		});
 		btnAltaEntregas.setBounds(238, 114, 158, 47);

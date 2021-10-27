@@ -11,13 +11,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
 import javax.swing.JButton;
 
 public class PantallaGestionSistemaNacionalSalud extends JPanel {
 
 	private JPanel contentPane;
-
-	
 
 	/**
 	 * Create the frame.
@@ -25,14 +26,14 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 	public PantallaGestionSistemaNacionalSalud(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel topPanel = new JPanel();
 		add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
-		
+
 		JPanel midPanel = new JPanel();
 		add(midPanel, BorderLayout.CENTER);
-		
+
 		JButton btnCalculoEntrega = new JButton("Calculo de Entrega");
 		btnCalculoEntrega.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -40,7 +41,7 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 			}
 		});
 		midPanel.add(btnCalculoEntrega);
-		
+
 		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
 		btnAltaNuevoLote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -56,11 +57,11 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 			}
 		});
 		topPanel.add(btnVolver);
-		
+
 		JLabel lblTitulo = new JLabel("Gestion Sistema Nacional de Salud");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
-		
+
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(563, 287, 89, 23);
 		contentPane.add(btnAtras);

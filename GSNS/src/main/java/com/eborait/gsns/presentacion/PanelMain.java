@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 
 public class PanelMain extends JPanel {
 	private JPanel contentPane;
+
 	/**
 	 * Create the panel.
 	 */
@@ -49,7 +50,7 @@ public class PanelMain extends JPanel {
 		JButton btnGestionSNS = new JButton("Gestion Sistema Nacional de Salud");
 		btnGestionSNS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(new PantallaGestionSistemSaludNacional(frame));
+				frame.cambiarPanel(new PantallaGestionSistemaNacionalSalud(frame));
 			}
 		});
 		btnGestionSNS.setBounds(337, 211, 209, 38);
