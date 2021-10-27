@@ -61,4 +61,24 @@ public enum RegionEnum {
 		return nombres;
 	}
 
+	/*
+	 * Metodo obtener poblacion mediante el nombre
+	 */
+	public static int getPoblacion(String nombre) {
+		int cantidad = 0;
+		String[] nombres = new String[values().length];
+		for (int i = 0; i < nombres.length; i++) {
+			nombres[i] = values()[i].getNombre();
+				if(nombres[i] == nombre){
+					cantidad=values()[i].getPoblacion();
+				
+			}
+		}
+		return cantidad;
+		
+		
+		
+	}
+
+
 }
