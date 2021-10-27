@@ -66,7 +66,6 @@ public class AgenteBD {
 			conexion = DriverManager.getConnection(URL, BDConstantes.DBUSER, BDConstantes.DBPASS);
 		} catch (SQLException sqle) {
 			System.out.println("Error conectando con la base de datos:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
 			throw sqle;
 		}
 	}
@@ -82,7 +81,6 @@ public class AgenteBD {
 			conexion.close();
 		} catch (SQLException sqle) {
 			System.out.println("Error cerrando la conexión con la base de datos:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
 			throw sqle;
 		}
 	}
@@ -106,7 +104,6 @@ public class AgenteBD {
 			return res;
 		} catch (SQLException sqle) {
 			System.out.println("Error consultando a la base de datos:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
 			throw sqle;
 		}
 	}
@@ -129,7 +126,6 @@ public class AgenteBD {
 			return res;
 		} catch (SQLException sqle) {
 			System.out.println("Error insertando en la base de datos:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
 			throw sqle;
 		}
 	}
@@ -152,7 +148,6 @@ public class AgenteBD {
 			return res;
 		} catch (SQLException sqle) {
 			System.out.println("Error actualizando en la base de datos:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
 			throw sqle;
 		}
 	}
@@ -174,7 +169,6 @@ public class AgenteBD {
 			return res;
 		} catch (SQLException sqle) {
 			System.out.println("Error borrando en la base de datos:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
 			throw sqle;
 		}
 	}
