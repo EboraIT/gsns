@@ -40,6 +40,14 @@ public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
 	 */
 	private static final String DELETE = "DELETE FROM vacunacion WHERE id = %s";
 
+	/**
+	 * Realiza una consulta a la base de datos.
+	 * 
+	 * @param id Identificador de Vacunacion que se busca.
+	 * @return Un objeto Vacunacion.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
+	 * @see Vacunacion
+	 */
 	@Override
 	public Vacunacion get(String id) throws SQLException {
 		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT, id));
@@ -48,6 +56,16 @@ public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
 		return v;
 	}
 
+	/**
+	 * Realiza una consulta a la base de datos. Si el argumento criteria es null
+	 * devuelve todos los registros.
+	 * 
+	 * @param criteria Columna por la que se filtra
+	 * @param value    Valor por el que se filtra.
+	 * @return Una colección con los objetos Vacunacion encontrados.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
+	 * @see Vacunacion
+	 */
 	@Override
 	public Collection<Vacunacion> getAll(String criteria, String value) throws SQLException {
 		Collection<Vacunacion> list = new ArrayList<>();

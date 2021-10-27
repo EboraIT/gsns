@@ -48,7 +48,6 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 * @throws SQLException Si se produce una excepción en la setencia SQL.
 	 * @see LoteVacunas
 	 */
-
 	@Override
 	public LoteVacunas get(String id) throws SQLException {
 		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT, id));
@@ -59,7 +58,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	}
 
 	/**
-	 * Realiza consulta a la base de datos.
+	 * Realiza una consulta a la base de datos. Si el argumento criteria es null devuelve todos los registros.
 	 * 
 	 * @param criteria Columna para filtrar.
 	 * @param value    Valor por el que se filtra.
@@ -67,7 +66,6 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 * @throws SQLException Si se produce una excepción en la setencia SQL.
 	 * @see LoteVacunas
 	 */
-
 	@Override
 	public Collection<LoteVacunas> getAll(String criteria, String value) throws SQLException {
 		Collection<LoteVacunas> list = new ArrayList<>();
@@ -90,6 +88,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 * @throws SQLException Si se produce una excepción en la setencia SQL.
 	 * @see LoteVacunas
 	 */
+	@Override
 	public int insert(LoteVacunas lote) throws SQLException {
 		return AgenteBD.getAgente().insert(
 				String.format(INSERT, lote.getId(), lote.getFecha(), lote.getCantidad(), lote.getFarmaceutica()));
@@ -103,6 +102,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 * @throws SQLException Si se produce una excepción en la setencia SQL.
 	 * @see LoteVacunas
 	 */
+	@Override
 	public int update(LoteVacunas lote) throws SQLException {
 		return AgenteBD.getAgente().insert(String.format(UPDATE, lote.getId(), lote.getFecha(), lote.getCantidad(),
 				lote.getTipo(), lote.getFarmaceutica(), lote.getId()));
@@ -116,6 +116,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 * @throws SQLException Si se produce una excepción en la setencia SQL.
 	 * @see LoteVacunas
 	 */
+	@Override
 	public int delete(LoteVacunas lote) throws SQLException {
 		return AgenteBD.getAgente().delete(String.format(DELETE, lote.getId()));
 	}
