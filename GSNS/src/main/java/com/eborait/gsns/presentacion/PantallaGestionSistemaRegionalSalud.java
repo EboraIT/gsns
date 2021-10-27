@@ -35,7 +35,7 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 		});
 		topPanel.add(btnVolver);
 
-		JLabel lblTitulo = new JLabel("GestiÃ³n Sistema Regional de Salud");
+		JLabel lblTitulo = new JLabel("Gestión Sistema Regional de Salud");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 
@@ -45,14 +45,15 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 				frame.cambiarPanel(new PantallaAltaEntregaVacunas(frame));
 			}
 		});
-		btnAltaEntregas.setBounds(172, 153, 187, 54);
+		btnAltaEntregas.setBounds(238, 114, 158, 47);
 
-		JButton btnRegistrarVacunacion = new JButton("Registrar VacunaciÃ³n");
+		JButton btnRegistrarVacunacion = new JButton("Registrar Vacunación");
 		btnRegistrarVacunacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(new PantallaRegistrarVacunacion(frame));
 			}
 		});
-		btnRegistrarVacunacion.setBounds(531, 153, 187, 54);
+		btnRegistrarVacunacion.setBounds(21, 114, 176, 47);
 		midPanel.setLayout(null);
 		midPanel.add(btnAltaEntregas);
 		midPanel.add(btnRegistrarVacunacion);
