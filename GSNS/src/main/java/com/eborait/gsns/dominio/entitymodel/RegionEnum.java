@@ -1,6 +1,9 @@
 package com.eborait.gsns.dominio.entitymodel;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 public enum RegionEnum {
 	AND(1, "Andalucia"), AR(2, "Aragón"), AST(3, "Asturias"), CEU(4, "Ceuta"), CAN(5, "Cantabria"),
@@ -35,14 +38,13 @@ public enum RegionEnum {
 		return nombre;
 	}
 
-	public static RegionEnum valueOf(int id) {
+	public static RegionEnum valueOf(int id) throws GSNSException {
 		for (RegionEnum re : values()) {
 			if (re.getId() == id) {
 				return re;
 			}
 		}
-		// TODO cambiar excepcion por una registrada o propia
-		throw new IllegalArgumentException("La región no existe.");
+		throw new GSNSException("La región no existe.");
 	}
 
 	public static String[] getNombres() {

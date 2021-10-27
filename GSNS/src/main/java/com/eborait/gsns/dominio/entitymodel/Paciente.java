@@ -1,5 +1,7 @@
 package com.eborait.gsns.dominio.entitymodel;
 
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
 public class Paciente {
 
 	private RegionEnum region;
@@ -8,7 +10,7 @@ public class Paciente {
 	private String nombre;
 	private String apellidos;
 
-	public Paciente(String dni, String nombre, String apellidos, int grupo, int region) {
+	public Paciente(String dni, String nombre, String apellidos, int grupo, int region) throws GSNSException {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -23,10 +25,15 @@ public class Paciente {
 		this.dni = aux[0];
 		this.nombre = aux[1];
 		this.apellidos = aux[2];
-		this.grupo = GrupoPrioridad.valueOf(Integer.parseInt(aux[3]));
-		this.region = RegionEnum.valueOf(Integer.parseInt(aux[4]));
-		
-		this.grupo.getPacientes().add(this);
+		try {
+			this.grupo = GrupoPrioridad.valueOf(Integer.parseInt(aux[3]));
+			this.region = RegionEnum.valueOf(Integer.parseInt(aux[4]));
+
+			this.grupo.getPacientes().add(this);
+		} catch (GSNSException gsnse) {
+			System.out.println(gsnse.getMessage());
+			gsnse.printStackTrace();
+		}
 	}
 
 	public String toDatabase() {
