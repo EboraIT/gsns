@@ -77,14 +77,14 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		add(lblNewLabel_1);
 		
 		JButton btnPorcentaje = new JButton("Porcentaje Vacunados");
-		springLayout.putConstraint(SpringLayout.NORTH, btnPorcentaje, 40, SpringLayout.SOUTH, btnVacunadosPorRegion);
 		springLayout.putConstraint(SpringLayout.WEST, btnPorcentaje, 0, SpringLayout.WEST, topPanel);
 		add(btnPorcentaje);
 		
 		JButton btnPorcentajeRegion = new JButton("Porcentaje Vacunados por región");
-		btnPorcentajeRegion.setHorizontalAlignment(SwingConstants.RIGHT);
+		springLayout.putConstraint(SpringLayout.NORTH, btnPorcentajeRegion, 237, SpringLayout.NORTH, this);
+		springLayout.putConstraint(SpringLayout.SOUTH, btnPorcentaje, -18, SpringLayout.NORTH, btnPorcentajeRegion);
 		springLayout.putConstraint(SpringLayout.WEST, btnPorcentajeRegion, 0, SpringLayout.WEST, topPanel);
-		springLayout.putConstraint(SpringLayout.SOUTH, btnPorcentajeRegion, -10, SpringLayout.SOUTH, this);
+		btnPorcentajeRegion.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(btnPorcentajeRegion);
 		
 		JLabel lblVacuVacunados = new JLabel("% Vacunados 1 Dosis:");
@@ -93,8 +93,8 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		add(lblVacuVacunados);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("% Vacunados Pauta Completa:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_1_1, 0, SpringLayout.NORTH, btnPorcentajeRegion);
-		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_1_1, 0, SpringLayout.WEST, lblNewLabel);
+		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_1_1, 4, SpringLayout.NORTH, btnPorcentajeRegion);
+		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_1_1, 46, SpringLayout.EAST, btnPorcentajeRegion);
 		add(lblNewLabel_1_1);
 
 	}
