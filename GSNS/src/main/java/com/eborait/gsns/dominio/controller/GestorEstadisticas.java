@@ -61,7 +61,7 @@ public class GestorEstadisticas {
 	 */
 	public int consultarPorcentajeVacunadosSobreRecibidasEnRegion(RegionEnum region) {
 		int totalVacunadosPorRegion = consultarTotalVacunadosPorRegion(region);
-		/* A�adir metodo que devuelva el total vacunas recibidas **/
+		/* Añadir metodo que devuelva el total vacunas recibidas **/
 		int vacunas_recibidas = 999999;
 
 		return (totalVacunadosPorRegion / vacunas_recibidas) * 100;

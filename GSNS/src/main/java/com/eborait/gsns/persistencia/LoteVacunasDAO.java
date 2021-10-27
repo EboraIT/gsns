@@ -51,7 +51,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 * 
 	 * @param id identificador de lote vacunas que se va a buscar
 	 * @return Un objeto LoteVacunas
-	 * @throws SQLException Si se produce una excepci髇 en la setencia SQL
+	 * @throws SQLException Si se produce una excepci贸n en la setencia SQL
 	 * @see LoteVacunas
 	 */
 
@@ -69,7 +69,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 * @param criteria Columna para filtrar
 	 * @param value valor por el que se filtra
 	 * @return Una coleccion con los objetos de LoteVacunas encontrados
-	 * @throws SQLException Si se produce una excepci髇 en la setencia SQL
+	 * @throws SQLException Si se produce una excepci贸n en la setencia SQL
 	 * @see LoteVacunas
 	 */
 	
@@ -85,11 +85,11 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	}
 
 	/*
-	 * Realiza inserci髇 a la base de datos.
+	 * Realiza inserci贸n a la base de datos.
 	 * 
 	 * @param entity objeto de la clase LoteVacunas
 	 * @return El numero de filas insertadas
-	 * @throws SQLException Si se produce una excepci髇 en la setencia SQL
+	 * @throws SQLException Si se produce una excepci贸n en la setencia SQL
 	 * @see LoteVacunas
 	 */
 	public int insert(LoteVacunas entity) throws SQLException {
@@ -101,7 +101,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 * 
 	 * @param entity objeto de la clase LoteVacunas
 	 * @return El numero de filas actualizadas
-	 * @throws SQLException Si se produce una excepci髇 en la setencia SQL
+	 * @throws SQLException Si se produce una excepci贸n en la setencia SQL
 	 * @see LoteVacunas
 	 */
 	public int update(LoteVacunas entity) throws SQLException {
@@ -114,7 +114,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 * 
 	 * @param entity objeto de la clase LoteVacunas
 	 * @return El numero de filas eliminadas
-	 * @throws SQLException Si se produce una excepci髇 en la setencia SQL
+	 * @throws SQLException Si se produce una excepci贸n en la setencia SQL
 	 * @see LoteVacunas
 	 */
 	public int delete(LoteVacunas lote) throws SQLException {

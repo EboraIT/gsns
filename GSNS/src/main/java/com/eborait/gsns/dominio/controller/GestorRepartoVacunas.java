@@ -31,7 +31,7 @@ public class GestorRepartoVacunas {
 		try {
 			return DAOFactory.getLoteVacunasDAO().insert(v) == 1;
 		} catch (SQLException sqle) {
-			System.out.println("Excepción insertando entrega:\n\n" + sqle.getStackTrace());
+			System.out.println("ExcepciÃ³n insertando entrega:\n\n" + sqle.getStackTrace());
 			throw new Exception("Se ha producido un error al dar de alta la entrega de vacunas.");
 		}
 		
