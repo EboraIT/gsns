@@ -1,6 +1,5 @@
 package com.eborait.gsns.persistencia;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -16,10 +15,6 @@ import java.util.Collection;
  *
  */
 public abstract class AbstractEntityDAO<E> {
-
-	private String id;
-	private Date fechaInserccion;
-	private Date fechaActualizacion;
 
 	/**
 	 * Realiza una consulta a la base de datos.

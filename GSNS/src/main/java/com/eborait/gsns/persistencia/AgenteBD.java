@@ -7,7 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
+
+import org.apache.derby.jdbc.EmbeddedDriver;
 
 /**
  * La clase AgenteBD realiza las operaciones contra la base de datos.
