@@ -60,7 +60,8 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		btnTotalVacunados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					totalVacunados(frame);
+					int total2=totalVacunados(frame);
+					JLabel lblVacunadosTotales = new JLabel(String.valueOf(total2));
 				} catch (GSNSException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
