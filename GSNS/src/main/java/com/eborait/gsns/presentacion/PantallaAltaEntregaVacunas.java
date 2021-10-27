@@ -14,24 +14,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import com.eborait.gsns.dominio.entitymodel.GrupoPrioridad;
-import com.eborait.gsns.dominio.entitymodel.RegionEnum;
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 public class PantallaAltaEntregaVacunas extends JPanel {
 	private JTextField txtIdEntrega;
 	private JTextField txtLote;
 	private JTextField txtFecha;
 	private JTextField txtCantidad;
-	private JTextField txtNombreVacuna;
-	private JTextField txtFarmaceutica;
-	private JTextField txtFechaAprobacion;
 	private JComboBox<String> comboPrioridad;
 	private JComboBox<String> comboRegion;
+	private JComboBox<String> comboTipoVacuna;
 
 	/**
 	 * Create the frame.
+	 * 
+	 * @throws GSNSException
 	 */
-	public PantallaAltaEntregaVacunas(final Main frame) {
+	public PantallaAltaEntregaVacunas(final Main frame) throws GSNSException {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 
@@ -42,7 +41,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		JPanel midPanel = new JPanel();
 		add(midPanel, BorderLayout.CENTER);
 
-		JButton btnVolver = new JButton("Volver al menú principal");
+		JButton btnVolver = new JButton("Volver al menÃº principal");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(frame.getPanelMain());
@@ -50,7 +49,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		});
 		topPanel.add(btnVolver);
 
-		JLabel lblTitulo = new JLabel("Gestión Sistema Regional de Salud/Alta entrega de vacunas");
+		JLabel lblTitulo = new JLabel("GestiÃ³n Sistema Regional de Salud/Alta entrega de vacunas");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
@@ -64,7 +63,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		midPanel.add(txtIdEntrega);
 		txtIdEntrega.setColumns(10);
 
-		JLabel lblLote = new JLabel("Lote de vacunación:");
+		JLabel lblLote = new JLabel("Lote de vacunaciÃ³n:");
 		lblLote.setBounds(10, 64, 201, 14);
 		midPanel.add(lblLote);
 
@@ -95,34 +94,11 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		lblPrioridad.setBounds(10, 148, 201, 14);
 		midPanel.add(lblPrioridad);
 
-		JLabel lblNombreVacuna = new JLabel("Nombre de la vacuna");
-		lblNombreVacuna.setBounds(444, 36, 201, 14);
-		midPanel.add(lblNombreVacuna);
+		JLabel lblTipoVacuna = new JLabel("Tipo de vacuna:");
+		lblTipoVacuna.setBounds(444, 36, 201, 14);
+		midPanel.add(lblTipoVacuna);
 
-		txtNombreVacuna = new JTextField();
-		txtNombreVacuna.setColumns(10);
-		txtNombreVacuna.setBounds(676, 36, 181, 20);
-		midPanel.add(txtNombreVacuna);
-
-		JLabel lblFarmaceutica = new JLabel("Farmacéutica:");
-		lblFarmaceutica.setBounds(444, 64, 201, 14);
-		midPanel.add(lblFarmaceutica);
-
-		txtFarmaceutica = new JTextField();
-		txtFarmaceutica.setColumns(10);
-		txtFarmaceutica.setBounds(676, 64, 181, 20);
-		midPanel.add(txtFarmaceutica);
-
-		JLabel lblFechaAprobacion = new JLabel("Fecha de aprobación:");
-		lblFechaAprobacion.setBounds(444, 92, 201, 14);
-		midPanel.add(lblFechaAprobacion);
-
-		txtFechaAprobacion = new JTextField();
-		txtFechaAprobacion.setColumns(10);
-		txtFechaAprobacion.setBounds(676, 92, 181, 20);
-		midPanel.add(txtFechaAprobacion);
-
-		JLabel lblRegion = new JLabel("Región de la entrega:");
+		JLabel lblRegion = new JLabel("RegiÃ³n de la entrega:");
 		lblRegion.setBounds(10, 176, 201, 14);
 		midPanel.add(lblRegion);
 
@@ -142,16 +118,25 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 				registrarAlta(frame);
 			}
 		});
-		btnNewButton.setBounds(10, 215, 870, 23);
+		btnNewButton.setBounds(10, 215, 847, 23);
 		midPanel.add(btnNewButton);
 
-		comboPrioridad = new JComboBox<String>(GrupoPrioridad.getNombres());
+		comboPrioridad = new JComboBox<String>();
 		comboPrioridad.setBounds(242, 148, 181, 20);
 		midPanel.add(comboPrioridad);
 
-		comboRegion = new JComboBox<String>(RegionEnum.getNombres());
+		comboRegion = new JComboBox<String>();
 		comboRegion.setBounds(242, 176, 181, 20);
 		midPanel.add(comboRegion);
+
+		try {
+			comboTipoVacuna = new JComboBox<>((String[]) frame.getGestorRepartoVacunas().getTipoVacunas().toArray());
+			comboTipoVacuna.setBounds(676, 36, 181, 20);
+			midPanel.add(comboTipoVacuna);
+		} catch (GSNSException gsnse) {
+			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			throw gsnse;
+		}
 	}
 
 	private void registrarAlta(Main frame) {
@@ -159,15 +144,13 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 			try {
 				frame.getGestorVacunacion().altaEntregaVacunas(txtIdEntrega.getText(), txtLote.getText(),
 						txtFecha.getText(), Integer.parseInt(txtCantidad.getText()),
-						comboPrioridad.getSelectedIndex() + 1, txtNombreVacuna.getText(), txtFarmaceutica.getText(),
-						txtFechaAprobacion.getText(), comboRegion.getSelectedIndex() + 1);
+						comboPrioridad.getSelectedIndex() + 1, comboTipoVacuna.getSelectedItem().toString(),
+						comboRegion.getSelectedIndex() + 1);
 			} catch (NumberFormatException nfe) {
-				System.out.println(nfe.getStackTrace());
 				JOptionPane.showMessageDialog(frame,
 						"Se ha producido un error al registrar el alta: NumberFormatException.", "Error",
 						JOptionPane.ERROR_MESSAGE);
 			} catch (Exception e) {
-				System.out.println(e.getStackTrace());
 				JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
@@ -177,8 +160,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 	}
 
 	private boolean validar() {
-		JTextField[] textFields = { txtIdEntrega, txtLote, txtFecha, txtCantidad, txtNombreVacuna, txtFarmaceutica,
-				txtFechaAprobacion };
+		JTextField[] textFields = { txtIdEntrega, txtLote, txtFecha, txtCantidad };
 		for (JTextField jTextField : textFields) {
 			if (jTextField.getText().length() == 0)
 				return false;

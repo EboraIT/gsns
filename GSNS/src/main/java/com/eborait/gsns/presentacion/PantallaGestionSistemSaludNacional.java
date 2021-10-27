@@ -61,7 +61,7 @@ public class PantallaGestionSistemSaludNacional extends JPanel {
 		});
 		topPanel.add(btnVolver);
 		
-		JLabel lblTitulo = new JLabel("Gestión Sistema Regional de Salud");
+		JLabel lblTitulo = new JLabel("GestiÃ³n Sistema Regional de Salud");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		

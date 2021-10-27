@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -27,7 +30,7 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 		JPanel midPanel = new JPanel();
 		add(midPanel, BorderLayout.CENTER);
 
-		JButton btnVolver = new JButton("Volver");
+		JButton btnVolver = new JButton("Volver al men√∫ principal");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(frame.getPanelMain());
@@ -35,25 +38,33 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 		});
 		topPanel.add(btnVolver);
 
-		JLabel lblTitulo = new JLabel("GestiÛn Sistema Regional de Salud");
+		JLabel lblTitulo = new JLabel("Gesti√≥n Sistema Regional de Salud");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 
 		JButton btnAltaEntregas = new JButton("Alta Entrega Vacunas");
 		btnAltaEntregas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(new PantallaAltaEntregaVacunas(frame));
+				try {
+					frame.cambiarPanel(new PantallaAltaEntregaVacunas(frame));
+				} catch (GSNSException gsnse) {
+					frame.cambiarPanel(frame.getPanelMain());
+				}
 			}
 		});
-		btnAltaEntregas.setBounds(238, 114, 158, 47);
+		btnAltaEntregas.setBounds(546, 179, 158, 47);
 
-		JButton btnRegistrarVacunacion = new JButton("Registrar VacunaciÛn");
+		JButton btnRegistrarVacunacion = new JButton("Registrar Vacunaci√≥n");
 		btnRegistrarVacunacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(new PantallaRegistrarVacunacion(frame));
+				try {
+					frame.cambiarPanel(new PantallaRegistrarVacunacion(frame));
+				} catch (GSNSException gsnse) {
+					frame.cambiarPanel(frame.getPanelMain());
+				}
 			}
 		});
-		btnRegistrarVacunacion.setBounds(21, 114, 176, 47);
+		btnRegistrarVacunacion.setBounds(185, 179, 176, 47);
 		midPanel.setLayout(null);
 		midPanel.add(btnAltaEntregas);
 		midPanel.add(btnRegistrarVacunacion);

@@ -12,25 +12,26 @@ import javax.swing.SwingConstants;
 
 public class PanelMain extends JPanel {
 	private JPanel contentPane;
+
 	/**
 	 * Create the panel.
 	 */
 	public PanelMain(final Main frame) {
 		setLayout(null);
 
-		JLabel lblMensajeBienvenida = new JLabel("¡Bienvenido!");
+		JLabel lblMensajeBienvenida = new JLabel("Â¡Bienvenido!");
 		lblMensajeBienvenida.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMensajeBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensajeBienvenida.setBounds(229, 23, 470, 30);
 		add(lblMensajeBienvenida);
 
-		JLabel lblMensajeDescripcion = new JLabel("Este es el programa de gestión del Sistema Nacional de Salud.");
+		JLabel lblMensajeDescripcion = new JLabel("Este es el programa de gestiÃ³n del Sistema Nacional de Salud.");
 		lblMensajeDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMensajeDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensajeDescripcion.setBounds(229, 60, 470, 30);
 		add(lblMensajeDescripcion);
 
-		JLabel lblMensajeMenu = new JLabel("Selecciona una opción:");
+		JLabel lblMensajeMenu = new JLabel("Selecciona una opciÃ³n:");
 		lblMensajeMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMensajeMenu.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensajeMenu.setBounds(229, 115, 470, 30);
@@ -49,14 +50,14 @@ public class PanelMain extends JPanel {
 		JButton btnGestionSNS = new JButton("Gestion Sistema Nacional de Salud");
 		btnGestionSNS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(new PantallaGestionSistemSaludNacional(frame));
+				frame.cambiarPanel(new PantallaGestionSistemaNacionalSalud(frame));
 			}
 		});
 		btnGestionSNS.setBounds(337, 211, 209, 38);
 		btnGestionSNS.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnGestionSNS);
 
-		JButton btnGestionSRS = new JButton("Gestión Sistema Regional de Salud");
+		JButton btnGestionSRS = new JButton("GestiÃ³n Sistema Regional de Salud");
 		btnGestionSRS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaGestionSistemaRegionalSalud(frame));

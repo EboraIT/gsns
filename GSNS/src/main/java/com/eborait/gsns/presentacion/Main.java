@@ -46,6 +46,7 @@ public class Main extends JFrame {
 		setResizable(false);
 		setBounds(0, 0, 900, 500);
 		setTitle("Gestion Sistema Nacional de Salud");
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
