@@ -25,6 +25,7 @@ import com.eborait.gsns.persistencia.DAOFactory;
 public class GestorRepartoVacunas {
 
 	/**
+	 * Da de alta un nuevo lote de vacunas.
 	 * 
 	 * @param id              Identificador del lote.
 	 * @param fecha           Fecha de alta del lote.
@@ -46,7 +47,6 @@ public class GestorRepartoVacunas {
 			sqle.printStackTrace();
 			throw new GSNSException("Se ha producido un error al dar de alta el lote de vacunas.");
 		}
-
 	}
 
 	public List<EntregaVacunas> calcularEntregasRegion(RegionEnum region) throws GSNSException {
@@ -56,6 +56,12 @@ public class GestorRepartoVacunas {
 
 	}
 
+	/**
+	 * Consulta los tipos de vacuna.
+	 * 
+	 * @return Una colección de String con los tipos de vacuna.
+	 * @throws GSNSException Si se produce una excepción al consultar.
+	 */
 	public Collection<String> getTipoVacunas() throws GSNSException {
 		try {
 			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null, null);
