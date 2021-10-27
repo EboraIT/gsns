@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -56,6 +57,11 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		topPanel.add(btnVolver);
 		
 		JButton btnTotalVacunados = new JButton("Total Vacunados");
+		btnTotalVacunados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				totalVacunados(frame);
+			}
+		});
 		springLayout.putConstraint(SpringLayout.NORTH, btnTotalVacunados, 37, SpringLayout.SOUTH, topPanel);
 		springLayout.putConstraint(SpringLayout.WEST, btnTotalVacunados, 0, SpringLayout.WEST, topPanel);
 		add(btnTotalVacunados);
@@ -97,6 +103,16 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_1_1, 46, SpringLayout.EAST, btnPorcentajeRegion);
 		add(lblNewLabel_1_1);
 
+	}
+
+	private void totalVacunados(Main frame) {
+		
+			try {
+				frame.getGestorEstadisticas().consultarTotalVacunados();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		
 	}
 
 }
