@@ -56,10 +56,10 @@ public class GestorRepartoVacunas {
 	 * @param IA			Tendremos también como parametro la Incidencia Acumulada que pasará el cliente por parametro
 	 * @return cantidad		Devuelve un entero con la cantidad de vacunas repartidas.
 	 */
-	public List<EntregaVacunas> calcularEntregasRegion(RegionEnum region, int IA) throws GSNSException {
-		ArrayList<EntregaVacunas> entregaVacunas = null;
+	public int calcularEntregasRegion(RegionEnum region, int IA) throws GSNSException {
+		int cantidad=0;
 		// entregaVacunas.SeleccionarEntregas(RegionEnum)
-		return entregaVacunas;
+		return cantidad;
 
 	}
 
