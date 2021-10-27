@@ -58,7 +58,8 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	}
 
 	/**
-	 * Realiza una consulta a la base de datos.
+	 * Realiza una consulta a la base de datos. Si el argumento criteria es null
+	 * devuelve todos los registros.
 	 * 
 	 * @param criteria Columna por la que se filtra
 	 * @param value    Valor por el que se filtra.
