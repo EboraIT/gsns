@@ -59,7 +59,12 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		JButton btnTotalVacunados = new JButton("Total Vacunados");
 		btnTotalVacunados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				totalVacunados(frame);
+				try {
+					totalVacunados(frame);
+				} catch (GSNSException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		springLayout.putConstraint(SpringLayout.NORTH, btnTotalVacunados, 37, SpringLayout.SOUTH, topPanel);
@@ -71,11 +76,11 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.WEST, btnVacunadosPorRegion, 0, SpringLayout.WEST, topPanel);
 		add(btnVacunadosPorRegion);
 		
-		JLabel lblNewLabel = new JLabel("Vacunados 1 Dosis:");
+		JLabel lblNewLabel = new JLabel("Total Vacunados:");
 		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 4, SpringLayout.NORTH, btnTotalVacunados);
 		add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Vacunados Pauta Completa:");
+		JLabel lblNewLabel_1 = new JLabel("Total Vacunados Region:");
 		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, lblNewLabel_1);
 		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel, -5, SpringLayout.EAST, lblNewLabel_1);
 		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_1, 116, SpringLayout.NORTH, this);
@@ -93,26 +98,27 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		btnPorcentajeRegion.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(btnPorcentajeRegion);
 		
-		JLabel lblVacuVacunados = new JLabel("% Vacunados 1 Dosis:");
+		JLabel lblVacuVacunados = new JLabel("% Vacunados:");
 		springLayout.putConstraint(SpringLayout.WEST, lblVacuVacunados, 0, SpringLayout.WEST, lblNewLabel);
 		springLayout.putConstraint(SpringLayout.SOUTH, lblVacuVacunados, -64, SpringLayout.SOUTH, this);
 		add(lblVacuVacunados);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("% Vacunados Pauta Completa:");
+		JLabel lblNewLabel_1_1 = new JLabel("% Vacunados  region:");
 		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_1_1, 4, SpringLayout.NORTH, btnPorcentajeRegion);
 		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_1_1, 46, SpringLayout.EAST, btnPorcentajeRegion);
 		add(lblNewLabel_1_1);
 
 	}
 
-	private void totalVacunados(Main frame) {
-		
-			try {
-				frame.getGestorEstadisticas().consultarTotalVacunados();
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			}
-		
+	/*
+	 * Metodo que invoca a consultar total vacunados
+	 * 
+	 * @param el Main frame
+	 * @return Devuelve un entero con el total.
+	 */
+	private int totalVacunados(Main frame) throws GSNSException {
+		return  frame.getGestorEstadisticas().consultarTotalVacunados();
+
 	}
 
 }
