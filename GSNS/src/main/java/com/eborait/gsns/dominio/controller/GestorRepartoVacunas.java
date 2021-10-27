@@ -54,12 +54,17 @@ public class GestorRepartoVacunas {
 	 * 
 	 * @param region		La cual cogeremos el nombre de la region y la población.
 	 * @param IA			Tendremos también como parametro la Incidencia Acumulada que pasará el cliente por parametro
-	 * @return cantidad		Devuelve un entero con la cantidad de vacunas repartidas.
+	 * @return cantidad		Devuelve un entero con la cantidad de vacunas repartidas. Para resolver la cantidad será dependiendo del 
+	 * 						60% de la poblacion y 40% de la IA.
 	 */
-	public int calcularEntregasRegion(RegionEnum region, int IA) throws GSNSException {
-		int cantidad=0;
-		// entregaVacunas.SeleccionarEntregas(RegionEnum)
-		return cantidad;
+	public int calcularEntregasRegion(RegionEnum region,String regionP, int IA) throws GSNSException {
+		
+		LoteVacunas lv;
+		int ia=IA;
+		int cantidadPoblacion= region.getPoblacion(regionP);
+		double total;
+		return total= lv.getCantidad() / ia*0.40+ cantidadPoblacion *0.60;
+		
 
 	}
 
