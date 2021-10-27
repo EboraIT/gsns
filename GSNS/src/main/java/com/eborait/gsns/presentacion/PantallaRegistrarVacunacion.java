@@ -30,7 +30,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 		JPanel midPanel = new JPanel();
 		add(midPanel, BorderLayout.CENTER);
 
-		JButton btnVolver = new JButton("Volver al menú principal");
+		JButton btnVolver = new JButton("Volver al menÃº principal");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(frame.getPanelMain());
@@ -38,7 +38,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 		});
 		topPanel.add(btnVolver);
 
-		JLabel lblTitulo = new JLabel("Gestión Sistema Regional de Salud/Registro de Vacunacion");
+		JLabel lblTitulo = new JLabel("GestiÃ³n Sistema Regional de Salud/Registro de Vacunacion");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);

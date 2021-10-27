@@ -42,7 +42,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		JPanel midPanel = new JPanel();
 		add(midPanel, BorderLayout.CENTER);
 
-		JButton btnVolver = new JButton("Volver al menú principal");
+		JButton btnVolver = new JButton("Volver al menÃº principal");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(frame.getPanelMain());
@@ -50,7 +50,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		});
 		topPanel.add(btnVolver);
 
-		JLabel lblTitulo = new JLabel("Gestión Sistema Regional de Salud/Alta entrega de vacunas");
+		JLabel lblTitulo = new JLabel("GestiÃ³n Sistema Regional de Salud/Alta entrega de vacunas");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
@@ -64,7 +64,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		midPanel.add(txtIdEntrega);
 		txtIdEntrega.setColumns(10);
 
-		JLabel lblLote = new JLabel("Lote de vacunación:");
+		JLabel lblLote = new JLabel("Lote de vacunaciÃ³n:");
 		lblLote.setBounds(10, 64, 201, 14);
 		midPanel.add(lblLote);
 
@@ -104,7 +104,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		txtNombreVacuna.setBounds(676, 36, 181, 20);
 		midPanel.add(txtNombreVacuna);
 
-		JLabel lblFarmaceutica = new JLabel("Farmacéutica:");
+		JLabel lblFarmaceutica = new JLabel("FarmacÃ©utica:");
 		lblFarmaceutica.setBounds(444, 64, 201, 14);
 		midPanel.add(lblFarmaceutica);
 
@@ -113,7 +113,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		txtFarmaceutica.setBounds(676, 64, 181, 20);
 		midPanel.add(txtFarmaceutica);
 
-		JLabel lblFechaAprobacion = new JLabel("Fecha de aprobación:");
+		JLabel lblFechaAprobacion = new JLabel("Fecha de aprobaciÃ³n:");
 		lblFechaAprobacion.setBounds(444, 92, 201, 14);
 		midPanel.add(lblFechaAprobacion);
 
@@ -122,7 +122,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		txtFechaAprobacion.setBounds(676, 92, 181, 20);
 		midPanel.add(txtFechaAprobacion);
 
-		JLabel lblRegion = new JLabel("Región de la entrega:");
+		JLabel lblRegion = new JLabel("RegiÃ³n de la entrega:");
 		lblRegion.setBounds(10, 176, 201, 14);
 		midPanel.add(lblRegion);
 
