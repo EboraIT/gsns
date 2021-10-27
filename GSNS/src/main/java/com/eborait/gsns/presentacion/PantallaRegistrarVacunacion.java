@@ -7,19 +7,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
-import javax.swing.JList;
+import javax.swing.border.EmptyBorder;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 public class PantallaRegistrarVacunacion extends JPanel {
 	private JTextField textNombre;
 	private JTextField textApellidos;
 	private JTextField textDNI;
 	private JTextField textFecha;
+	private JComboBox<String> comboTipoVacuna;
 
-	public PantallaRegistrarVacunacion(final Main frame) {
+	public PantallaRegistrarVacunacion(final Main frame) throws GSNSException {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 
@@ -38,54 +42,62 @@ public class PantallaRegistrarVacunacion extends JPanel {
 		});
 		topPanel.add(btnVolver);
 
-		JLabel lblTitulo = new JLabel("Gestión Sistema Regional de Salud/Registro de Vacunacion");
+		JLabel lblTitulo = new JLabel("Gestión Sistema Regional de Salud/Registro de vacunación");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
-		
+
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setBounds(10, 36, 201, 14);
+		midPanel.add(lblNombre);
+
 		textNombre = new JTextField();
-		textNombre.setBounds(59, 36, 86, 20);
+		textNombre.setBounds(242, 36, 181, 20);
 		midPanel.add(textNombre);
 		textNombre.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Nombre:");
-		lblNewLabel.setBounds(3, 39, 46, 14);
-		midPanel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Apellidos:");
-		lblNewLabel_1.setBounds(3, 83, 46, 14);
-		midPanel.add(lblNewLabel_1);
-		
+
+		JLabel lblApellidos = new JLabel("Apellidos:");
+		lblApellidos.setBounds(444, 36, 201, 14);
+		midPanel.add(lblApellidos);
+
 		textApellidos = new JTextField();
-		textApellidos.setBounds(59, 80, 86, 20);
+		textApellidos.setBounds(676, 36, 181, 20);
 		midPanel.add(textApellidos);
 		textApellidos.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("DNI:");
-		lblNewLabel_2.setBounds(3, 129, 46, 14);
-		midPanel.add(lblNewLabel_2);
-		
+
+		JLabel lblDni = new JLabel("DNI:");
+		lblDni.setBounds(10, 61, 201, 14);
+		midPanel.add(lblDni);
+
 		textDNI = new JTextField();
-		textDNI.setBounds(59, 126, 86, 20);
+		textDNI.setBounds(242, 61, 181, 20);
 		midPanel.add(textDNI);
 		textDNI.setColumns(10);
-		
-		JLabel lblNewLabel_3 = new JLabel("Tipo Vacuna:");
-		lblNewLabel_3.setBounds(217, 39, 69, 14);
-		midPanel.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("Fecha:");
-		lblNewLabel_4.setBounds(3, 176, 46, 14);
-		midPanel.add(lblNewLabel_4);
-		
+
+		JLabel lblVacuna = new JLabel("Tipo Vacuna:");
+		lblVacuna.setBounds(10, 86, 201, 14);
+		midPanel.add(lblVacuna);
+
+		JLabel lblFecha = new JLabel("Fecha:");
+		lblFecha.setBounds(444, 61, 201, 14);
+		midPanel.add(lblFecha);
+
 		textFecha = new JTextField();
-		textFecha.setBounds(59, 173, 86, 20);
+		textFecha.setBounds(676, 61, 181, 20);
 		midPanel.add(textFecha);
 		textFecha.setColumns(10);
-		
+
 		JButton btnRegistrarVacunacion = new JButton("Registrar Vacunacion");
-		btnRegistrarVacunacion.setBounds(3, 223, 427, 23);
+		btnRegistrarVacunacion.setBounds(10, 117, 847, 23);
 		midPanel.add(btnRegistrarVacunacion);
-		
+		try {
+			comboTipoVacuna = new JComboBox<>((String[]) frame.getGestorRepartoVacunas().getTipoVacunas().toArray());
+			comboTipoVacuna.setBounds(242, 86, 181, 20);
+			midPanel.add(comboTipoVacuna);
+		} catch (GSNSException gsnse) {
+			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			throw gsnse;
+		}
+
 	}
 }

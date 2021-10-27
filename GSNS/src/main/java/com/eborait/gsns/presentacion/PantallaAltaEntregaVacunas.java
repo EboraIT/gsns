@@ -130,8 +130,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		midPanel.add(comboRegion);
 
 		try {
-			comboTipoVacuna = new JComboBox<String>(
-					(String[]) frame.getGestorRepartoVacunas().getTipoVacunas().toArray());
+			comboTipoVacuna = new JComboBox<>((String[]) frame.getGestorRepartoVacunas().getTipoVacunas().toArray());
 			comboTipoVacuna.setBounds(676, 36, 181, 20);
 			midPanel.add(comboTipoVacuna);
 		} catch (GSNSException gsnse) {

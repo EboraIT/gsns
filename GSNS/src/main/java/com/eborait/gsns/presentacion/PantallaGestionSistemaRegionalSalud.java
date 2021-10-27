@@ -30,7 +30,7 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 		JPanel midPanel = new JPanel();
 		add(midPanel, BorderLayout.CENTER);
 
-		JButton btnVolver = new JButton("Volver");
+		JButton btnVolver = new JButton("Volver al menú principal");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(frame.getPanelMain());
@@ -52,15 +52,19 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 				}
 			}
 		});
-		btnAltaEntregas.setBounds(238, 114, 158, 47);
+		btnAltaEntregas.setBounds(546, 179, 158, 47);
 
 		JButton btnRegistrarVacunacion = new JButton("Registrar Vacunación");
 		btnRegistrarVacunacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(new PantallaRegistrarVacunacion(frame));
+				try {
+					frame.cambiarPanel(new PantallaRegistrarVacunacion(frame));
+				} catch (GSNSException gsnse) {
+					frame.cambiarPanel(frame.getPanelMain());
+				}
 			}
 		});
-		btnRegistrarVacunacion.setBounds(21, 114, 176, 47);
+		btnRegistrarVacunacion.setBounds(185, 179, 176, 47);
 		midPanel.setLayout(null);
 		midPanel.add(btnAltaEntregas);
 		midPanel.add(btnRegistrarVacunacion);
