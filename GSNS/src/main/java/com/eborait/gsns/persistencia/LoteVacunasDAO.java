@@ -34,7 +34,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE lote_vacunas SET id = %s, fecha = %s, cantidad = %d, tipo = %s, farmaceutica = %s WHERE id = %s";
+	private static final String UPDATE = "UPDATE lote_vacunas SET id = %s, fecha = %s, tipo = %s, cantidad = %d, farmaceutica = %s WHERE id = %s";
 	/**
 	 * Formato sentencia delete.
 	 */
@@ -58,7 +58,8 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	}
 
 	/**
-	 * Realiza una consulta a la base de datos. Si el argumento criteria es null devuelve todos los registros.
+	 * Realiza una consulta a la base de datos. Si el argumento criteria es null
+	 * devuelve todos los registros.
 	 * 
 	 * @param criteria Columna para filtrar.
 	 * @param value    Valor por el que se filtra.
@@ -90,8 +91,8 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 */
 	@Override
 	public int insert(LoteVacunas lote) throws SQLException {
-		return AgenteBD.getAgente().insert(
-				String.format(INSERT, lote.getId(), lote.getFecha(), lote.getCantidad(), lote.getFarmaceutica()));
+		return AgenteBD.getAgente().insert(String.format(INSERT, lote.getId(), lote.getFecha(), lote.getTipo(),
+				lote.getCantidad(), lote.getFarmaceutica()));
 	}
 
 	/**
@@ -104,8 +105,8 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 */
 	@Override
 	public int update(LoteVacunas lote) throws SQLException {
-		return AgenteBD.getAgente().insert(String.format(UPDATE, lote.getId(), lote.getFecha(), lote.getCantidad(),
-				lote.getTipo(), lote.getFarmaceutica(), lote.getId()));
+		return AgenteBD.getAgente().insert(String.format(UPDATE, lote.getId(), lote.getFecha(), lote.getTipo(),
+				lote.getCantidad(), lote.getFarmaceutica(), lote.getId()));
 	}
 
 	/**
