@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.SpringLayout;
 
@@ -23,6 +24,7 @@ public class PantallaConsultaEstadisticas extends JPanel {
 
 	private JPanel contentPane;
 
+	private JComboBox<String> comboRegion;
 	/**
 	 * Launch the application.
 	 */
@@ -109,6 +111,18 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_1_1, 46, SpringLayout.EAST, btnPorcentajeRegion);
 		add(lblNewLabel_1_1);
 
+		comboRegion = new JComboBox<String>();
+		comboRegion.setBounds(242, 176, 181, 20);
+		add(comboRegion);
+		
+		try {
+			comboRegion = new JComboBox<>((String[]) );
+			comboRegion.setBounds(676, 36, 181, 20);
+			add(comboRegion);
+		} catch (GSNSException gsnse) {
+			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			throw gsnse;
+		}
 	}
 
 	/*
