@@ -22,11 +22,11 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT = "SELECT FROM entrega_vacunas WHERE id = %s";
+	private static final String SELECT = "SELECT * FROM entrega_vacunas WHERE id = %s";
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT_CRITERIA = "SELECT FROM entrega_vacunas WHERE %s = %s";
+	private static final String SELECT_CRITERIA = "SELECT * FROM entrega_vacunas";
 	/**
 	 * Formato sentencia insert.
 	 */
@@ -69,7 +69,9 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	@Override
 	public Collection<EntregaVacunas> getAll(String criteria, String value) throws SQLException {
 		Collection<EntregaVacunas> list = new ArrayList<>();
-		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT_CRITERIA, criteria, value));
+		String sql = criteria == null ? SELECT_CRITERIA
+				: String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
+		ResultSet rs = AgenteBD.getAgente().select(sql);
 		while (rs.next()) {
 			EntregaVacunas ev = new EntregaVacunas(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getInt(4),
 					rs.getInt(5), rs.getString(6), rs.getInt(7));

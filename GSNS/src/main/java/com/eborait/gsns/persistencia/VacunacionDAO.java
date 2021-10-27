@@ -22,11 +22,11 @@ public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT = "SELECT FROM vacunacion WHERE id = %s";
+	private static final String SELECT = "SELECT * FROM vacunacion WHERE id = %s";
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT_CRITERIA = "SELECT FROM vacunacion WHERE %s = %s";
+	private static final String SELECT_CRITERIA = "SELECT * FROM vacunacion";
 	/**
 	 * Formato sentencia insert.
 	 */
@@ -51,7 +51,9 @@ public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
 	@Override
 	public Collection<Vacunacion> getAll(String criteria, String value) throws SQLException {
 		Collection<Vacunacion> list = new ArrayList<>();
-		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT_CRITERIA, criteria, value));
+		String sql = criteria == null ? SELECT_CRITERIA
+				: String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
+		ResultSet rs = AgenteBD.getAgente().select(sql);
 		while (rs.next()) {
 			Vacunacion v = new Vacunacion(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4),
 					rs.getBoolean(5));

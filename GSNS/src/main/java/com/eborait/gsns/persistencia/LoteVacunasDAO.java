@@ -22,11 +22,11 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT = "SELECT FROM lotes_vacunas WHERE id = %s";
+	private static final String SELECT = "SELECT * FROM lotes_vacunas WHERE id = %s";
 	/**
 	 * Formato sentencia select criterio.
 	 */
-	private static final String SELECT_CRITERIA = "SELECT FROM lotes_vacunas WHERE %s = %s";
+	private static final String SELECT_CRITERIA = "SELECT * FROM lotes_vacunas";
 	/**
 	 * Formato sentencia insert.
 	 */
@@ -71,7 +71,9 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	@Override
 	public Collection<LoteVacunas> getAll(String criteria, String value) throws SQLException {
 		Collection<LoteVacunas> list = new ArrayList<>();
-		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT_CRITERIA, criteria, value));
+		String sql = criteria == null ? SELECT_CRITERIA
+				: String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
+		ResultSet rs = AgenteBD.getAgente().select(sql);
 		while (rs.next()) {
 			LoteVacunas lv = new LoteVacunas(rs.getString(1), rs.getDate(2), rs.getString(3), rs.getInt(4),
 					rs.getString(5));
