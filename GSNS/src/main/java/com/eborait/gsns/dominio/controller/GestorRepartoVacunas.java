@@ -2,6 +2,7 @@ package com.eborait.gsns.dominio.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 import com.eborait.gsns.persistencia.DAOFactory;
 
 /**
@@ -31,10 +33,10 @@ public class GestorRepartoVacunas {
 	 * @param farmaceutica    Farmacéutica que ha desarrollado la vacuna.
 	 * @param fechaAprobacion Fecha de aprobación de la vacuna.
 	 * @return Devuelve 1 si se ha registrado correctamente, 0 de lo contrario.
-	 * @throws Exception Si se produce una excepción al insertar.
+	 * @throws GSNSException Si se produce una excepción al insertar.
 	 */
 	public boolean altaNuevoLoteVacunas(String id, Date fecha, int cantidad, String nombreVacuna, String farmaceutica,
-			String fechaAprobacion) throws Exception {
+			String fechaAprobacion) throws GSNSException {
 		TipoVacuna tipo = new TipoVacuna(nombreVacuna, farmaceutica, fechaAprobacion);
 		LoteVacunas lote = new LoteVacunas(id, fecha, tipo, cantidad, farmaceutica);
 		try {
@@ -42,16 +44,31 @@ public class GestorRepartoVacunas {
 		} catch (SQLException sqle) {
 			System.out.println("Excepción insertando lote:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
-			throw new Exception("Se ha producido un error al dar de alta el lote de vacunas.");
+			throw new GSNSException("Se ha producido un error al dar de alta el lote de vacunas.");
 		}
 
 	}
 
-	public List<EntregaVacunas> calcularEntregasRegion(RegionEnum region) throws Exception {
+	public List<EntregaVacunas> calcularEntregasRegion(RegionEnum region) throws GSNSException {
 		ArrayList<EntregaVacunas> entregaVacunas = null;
 		// entregaVacunas.SeleccionarEntregas(RegionEnum)
 		return entregaVacunas;
 
+	}
+
+	public Collection<String> getTipoVacunas() throws GSNSException {
+		try {
+			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(" ", " ");
+			Collection<String> tipos = new ArrayList<>();
+			for (LoteVacunas loteVacunas : lotes) {
+				tipos.add(loteVacunas.getTipo().toString());
+			}
+			return tipos;
+		} catch (SQLException sqle) {
+			System.out.println("Excepción consultado lotes de vacunas:\n\n" + sqle.getMessage());
+			sqle.printStackTrace();
+			throw new GSNSException("Se ha producido un error al consultar los tipos de vacunas.");
+		}
 	}
 
 }
