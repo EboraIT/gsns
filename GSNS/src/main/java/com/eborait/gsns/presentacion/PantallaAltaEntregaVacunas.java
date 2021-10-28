@@ -27,7 +27,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 	private JTextField txtLote;
 	private JTextField txtFecha;
 	private JTextField txtCantidad;
-	private JComboBox<String> comboPrioridad;
+	private JComboBox<String> comboGrupoPrioridad;
 	private JComboBox<String> comboRegion;
 	private JComboBox<String> comboTipoVacuna;
 
@@ -128,9 +128,9 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		btnNewButton.setBounds(10, 215, 847, 23);
 		midPanel.add(btnNewButton);
 
-		comboPrioridad = new JComboBox<String>(GrupoPrioridad.getNombres());
-		comboPrioridad.setBounds(242, 148, 181, 20);
-		midPanel.add(comboPrioridad);
+		comboGrupoPrioridad = new JComboBox<String>(GrupoPrioridad.getNombres());
+		comboGrupoPrioridad.setBounds(242, 148, 181, 20);
+		midPanel.add(comboGrupoPrioridad);
 
 		comboRegion = new JComboBox<String>(RegionEnum.getNombres());
 		comboRegion.setBounds(242, 176, 181, 20);
@@ -146,19 +146,24 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		}
 	}
 
+	/**
+	 * Invoca al gestor para realizar el alta de entrega de vacunas.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
 	private void registrarAlta(Main frame) {
 		if (validar()) {
 			try {
 				frame.getGestorVacunacion().altaEntregaVacunas(txtIdEntrega.getText(), txtLote.getText(),
 						txtFecha.getText(), Integer.parseInt(txtCantidad.getText()),
-						comboPrioridad.getSelectedIndex() + 1, comboTipoVacuna.getSelectedItem().toString(),
+						comboGrupoPrioridad.getSelectedIndex() + 1, comboTipoVacuna.getSelectedItem().toString(),
 						comboRegion.getSelectedIndex() + 1);
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
 						"Se ha producido un error al registrar el alta: La cantidad no es correcta.", "Error",
 						JOptionPane.ERROR_MESSAGE);
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (GSNSException gsnse) {
+				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
 			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
@@ -166,11 +171,20 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		}
 	}
 
+	/**
+	 * Valida los campos de texto y desplegables.
+	 * 
+	 * @return true si la validación es correcta, false de lo contrario.
+	 */
 	private boolean validar() {
 		JTextField[] textFields = { txtIdEntrega, txtLote, txtFecha, txtCantidad };
 		for (JTextField jTextField : textFields) {
 			if (jTextField.getText().length() == 0)
 				return false;
+		}
+		if (comboGrupoPrioridad.getSelectedIndex() == -1 || comboRegion.getSelectedIndex() == -1
+				|| comboTipoVacuna.getSelectedItem() == null) {
+			return false;
 		}
 		return true;
 	}
