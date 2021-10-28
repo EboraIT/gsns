@@ -14,9 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.eborait.gsns.dominio.entitymodel.GrupoPrioridad;
+import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 public class PantallaAltaEntregaVacunas extends JPanel {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txtIdEntrega;
 	private JTextField txtLote;
 	private JTextField txtFecha;
@@ -26,9 +32,10 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 	private JComboBox<String> comboTipoVacuna;
 
 	/**
-	 * Create the frame.
+	 * Crea el panel.
 	 * 
-	 * @throws GSNSException
+	 * @param frame JFrame de la aplicación.
+	 * @throws GSNSException Si se produce una excepción de la aplicación.
 	 */
 	public PantallaAltaEntregaVacunas(final Main frame) throws GSNSException {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -121,16 +128,16 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		btnNewButton.setBounds(10, 215, 847, 23);
 		midPanel.add(btnNewButton);
 
-		comboPrioridad = new JComboBox<String>();
+		comboPrioridad = new JComboBox<String>(GrupoPrioridad.getNombres());
 		comboPrioridad.setBounds(242, 148, 181, 20);
 		midPanel.add(comboPrioridad);
 
-		comboRegion = new JComboBox<String>();
+		comboRegion = new JComboBox<String>(RegionEnum.getNombres());
 		comboRegion.setBounds(242, 176, 181, 20);
 		midPanel.add(comboRegion);
 
 		try {
-			comboTipoVacuna = new JComboBox<>((String[]) frame.getGestorRepartoVacunas().getTipoVacunas().toArray());
+			comboTipoVacuna = new JComboBox<>(frame.getGestorRepartoVacunas().getTipoVacunas());
 			comboTipoVacuna.setBounds(676, 36, 181, 20);
 			midPanel.add(comboTipoVacuna);
 		} catch (GSNSException gsnse) {

@@ -17,12 +17,22 @@ import javax.swing.border.EmptyBorder;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 public class PantallaRegistrarVacunacion extends JPanel {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textNombre;
 	private JTextField textApellidos;
 	private JTextField textDNI;
 	private JTextField textFecha;
 	private JComboBox<String> comboTipoVacuna;
 
+	/**
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 * @throws GSNSException Si se produce una excepción de la aplicación.
+	 */
 	public PantallaRegistrarVacunacion(final Main frame) throws GSNSException {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
@@ -91,7 +101,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 		btnRegistrarVacunacion.setBounds(10, 117, 847, 23);
 		midPanel.add(btnRegistrarVacunacion);
 		try {
-			comboTipoVacuna = new JComboBox<>((String[]) frame.getGestorRepartoVacunas().getTipoVacunas().toArray());
+			comboTipoVacuna = new JComboBox<>(frame.getGestorRepartoVacunas().getTipoVacunas());
 			comboTipoVacuna.setBounds(242, 86, 181, 20);
 			midPanel.add(comboTipoVacuna);
 		} catch (GSNSException gsnse) {
