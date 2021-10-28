@@ -141,8 +141,8 @@ public class PantallaConsultaEstadisticas extends JPanel {
 							.consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis();
 					int porcentajeSegunda = frame.getGestorEstadisticas()
 							.consultarPorcentajeVacunadosSobreRecibidasSegundaDosis();
-					lblPorcentajePrimera
-							.setText("Porcentaje vacunados (primera dosis): " + String.valueOf(porcentajePrimera) + "%");
+					lblPorcentajePrimera.setText(
+							"Porcentaje vacunados (primera dosis): " + String.valueOf(porcentajePrimera) + "%");
 					lblPorcentajeCompletamente.setText(
 							"Porcentaje vacunados (pauta completa): " + String.valueOf(porcentajeSegunda) + "%");
 				} catch (GSNSException gsnse) {
@@ -172,10 +172,10 @@ public class PantallaConsultaEstadisticas extends JPanel {
 							.consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(
 									comboTotalRegion.getSelectedIndex() + 1);
 
-					lblPorcentaje1Dosisregion.setText(
-							"Porcentaje vacunados por región (primera dosis): " + String.valueOf(porcentajePrimera));
-					lblPorcentajeDosisRegionCompleta.setText(
-							"Porcentaje vacunados por región (pauta completa): " + String.valueOf(porcentajeSegunda));
+					lblPorcentaje1Dosisregion.setText("Porcentaje vacunados por región (primera dosis): "
+							+ String.valueOf(porcentajePrimera) + "%");
+					lblPorcentajeDosisRegionCompleta.setText("Porcentaje vacunados por región (pauta completa): "
+							+ String.valueOf(porcentajeSegunda) + "%");
 				} catch (GSNSException gsnse) {
 					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}

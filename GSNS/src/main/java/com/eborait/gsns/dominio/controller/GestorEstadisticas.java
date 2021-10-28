@@ -111,11 +111,15 @@ public class GestorEstadisticas {
 		try {
 			int totalVacunados = consultarTotalVacunadosPrimeraDosis();
 			int vacunasRecibidas = 0;
-			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll("segunda_dosis","false");
+			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null, null);
 			for (LoteVacunas loteVacunas : lotes) {
 				vacunasRecibidas += loteVacunas.getCantidad();
 			}
-			return (totalVacunados / vacunasRecibidas) * 100;
+			if(vacunasRecibidas == 0) {
+				return 0;				
+			}else {
+				return (totalVacunados / vacunasRecibidas) * 100;
+			}
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -131,13 +135,17 @@ public class GestorEstadisticas {
 	 */
 	public int consultarPorcentajeVacunadosSobreRecibidasSegundaDosis() throws GSNSException {
 		try {
-			int totalVacunados = consultarTotalVacunadosPrimeraDosis();
+			int totalVacunados = consultarTotalVacunadosSegundaDosis();
 			int vacunasRecibidas = 0;
-			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll("segunda_dosis","true");
+			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null, null);
 			for (LoteVacunas loteVacunas : lotes) {
 				vacunasRecibidas += loteVacunas.getCantidad();
 			}
-			return (totalVacunados / vacunasRecibidas) * 100;
+			if(vacunasRecibidas == 0) {
+				return 0;				
+			}else {
+				return (totalVacunados / vacunasRecibidas) * 100;
+			}
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -156,13 +164,17 @@ public class GestorEstadisticas {
 		try {
 			int totalVacunados = consultarTotalVacunadosPorRegionPrimeraDosis(region);
 			int vacunasRecibidas = 0;
-			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll("segunda_dosis","false");
+			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll(null, null);
 			for (EntregaVacunas entrega : entregas) {
 				if (entrega.getRegion().getId() == region) {
 					vacunasRecibidas += entrega.getLote().getCantidad();
 				}
 			}
-			return (totalVacunados / vacunasRecibidas) * 100;
+			if(vacunasRecibidas == 0) {
+				return 0;				
+			}else {
+				return (totalVacunados / vacunasRecibidas) * 100;
+			}
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -181,13 +193,17 @@ public class GestorEstadisticas {
 		try {
 			int totalVacunados = consultarTotalVacunadosPorRegionPrimeraDosis(region);
 			int vacunasRecibidas = 0;
-			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll("segunda_dosis","true");
+			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll(null, null);
 			for (EntregaVacunas entrega : entregas) {
 				if (entrega.getRegion().getId() == region) {
 					vacunasRecibidas += entrega.getLote().getCantidad();
 				}
 			}
-			return (totalVacunados / vacunasRecibidas) * 100;
+			if(vacunasRecibidas == 0) {
+				return 0;				
+			}else {
+				return (totalVacunados / vacunasRecibidas) * 100;
+			}
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
