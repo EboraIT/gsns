@@ -99,5 +99,18 @@ public class PantallaCalculoEntrega extends JPanel {
 		
 		
 	}
+	/**
+	 * Valida los campos de texto .
+	 * 
+	 * @return true si la validación es correcta, false de lo contrario. 
+	 */
+	private boolean validar() {
+		JTextField[] textFields = { txtIA };
+		for (JTextField jTextField : textFields) {
+			if (jTextField.getText().length() == 0)
+				return false;
+		}
+		return true;
+	}
 
 }
