@@ -24,6 +24,7 @@ public class PantallaConsultaEstadisticas extends JPanel {
 	private JComboBox<String> comboRegion;
 	private JLabel lblTotalVacPrimeraDosis;
 	private JLabel lblTotalVacSegundaDosis;
+	private JLabel lblDosisAdministradas;
 
 	/**
 	 * Crea el panel.
@@ -60,8 +61,10 @@ public class PantallaConsultaEstadisticas extends JPanel {
 				try {
 					int total2=totalVacunados(frame);
 					int total3=totalVacunadosSegunda(frame);
+					int total=total2+total3;
 					lblTotalVacPrimeraDosis.setText(lblTotalVacPrimeraDosis.getText()+String.valueOf(total2));
 					lblTotalVacSegundaDosis.setText(lblTotalVacSegundaDosis.getText()+String.valueOf(total3));
+					lblDosisAdministradas.setText(lblDosisAdministradas.getText()+total);
 				} catch (GSNSException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -117,6 +120,11 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.NORTH, lblTotalVacSegundaDosis, 0, SpringLayout.NORTH, btnTotalVacunados);
 		springLayout.putConstraint(SpringLayout.WEST, lblTotalVacSegundaDosis, 0, SpringLayout.WEST, lblTotalVacPrimeraDosis);
 		add(lblTotalVacSegundaDosis);
+		
+		lblDosisAdministradas = new JLabel("Total Dosis Administradas:");
+		springLayout.putConstraint(SpringLayout.NORTH, lblDosisAdministradas, 6, SpringLayout.SOUTH, lblTotalVacSegundaDosis);
+		springLayout.putConstraint(SpringLayout.WEST, lblDosisAdministradas, 0, SpringLayout.WEST, lblTotalVacPrimeraDosis);
+		add(lblDosisAdministradas);
 	}
 
 	protected int totalVacunadosSegunda(Main frame) throws GSNSException {
@@ -134,5 +142,4 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		return frame.getGestorEstadisticas().consultarTotalVacunadosPrimeraDosis();
 
 	}
-
 }
