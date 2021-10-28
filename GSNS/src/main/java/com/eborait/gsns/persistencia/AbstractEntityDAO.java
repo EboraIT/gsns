@@ -14,7 +14,7 @@ import java.util.Collection;
  * @param <E> Entidad de la base de datos.
  *
  */
-public abstract class AbstractEntityDAO<E> {
+public interface AbstractEntityDAO<E> {
 
 	/**
 	 * Realiza una consulta a la base de datos.

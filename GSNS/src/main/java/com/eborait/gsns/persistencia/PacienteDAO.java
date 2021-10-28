@@ -17,7 +17,7 @@ import com.eborait.gsns.dominio.entitymodel.Paciente;
  * @see Paciente
  *
  */
-public class PacienteDAO extends AbstractEntityDAO<Paciente> {
+public class PacienteDAO implements AbstractEntityDAO<Paciente> {
 	/**
 	 * Formato sentencia select.
 	 */

@@ -18,7 +18,7 @@ import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
  * @see LoteVacunas
  *
  */
-public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
+public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	/**
 	 * Formato sentencia select.
 	 */

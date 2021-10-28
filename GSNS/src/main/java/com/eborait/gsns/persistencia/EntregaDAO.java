@@ -18,7 +18,7 @@ import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
  * @see EntregaVacunas
  *
  */
-public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
+public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 	/**
 	 * Formato sentencia select.
 	 */
