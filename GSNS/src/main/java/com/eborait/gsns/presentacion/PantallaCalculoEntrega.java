@@ -3,12 +3,15 @@ package com.eborait.gsns.presentacion;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+<<<<<<< HEAD
 import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.RegionEnum;
@@ -19,7 +22,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+=======
+>>>>>>> branch 'Presentation' of git@github.com:escolanojorge/eborait.git
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class PantallaCalculoEntrega extends JPanel {
 	private JTextField txtIA;
@@ -28,6 +34,7 @@ public class PantallaCalculoEntrega extends JPanel {
 
 	public PantallaCalculoEntrega(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
+<<<<<<< HEAD
 		setLayout(null);
 		
 		JLabel lblCalculoDeReparto = new JLabel("Calculo de Reparto de Vacunas");
@@ -43,6 +50,29 @@ public class PantallaCalculoEntrega extends JPanel {
 		});
 		btnAtras.setBounds(271, 11, 89, 23);
 		add(btnAtras);
+=======
+		setLayout(new BorderLayout(0, 0));
+
+		JPanel topPanel = new JPanel();
+		add(topPanel, BorderLayout.NORTH);
+		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
+
+		JPanel midPanel = new JPanel();
+		add(midPanel, BorderLayout.CENTER);
+
+		JButton btnVolver = new JButton("Volver al menú principal");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(frame.getPanelMain());
+			}
+		});
+		topPanel.add(btnVolver);
+
+		JLabel lblTitulo = new JLabel("Gestión Sistema Nacional de Salud/Calculo de Reparto de Vacunas");
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		topPanel.add(lblTitulo);
+		midPanel.setLayout(null);
+>>>>>>> branch 'Presentation' of git@github.com:escolanojorge/eborait.git
 		
 		JLabel lblNewLabel = new JLabel("Seleccione una región:");
 		lblNewLabel.setBounds(10, 73, 125, 14);

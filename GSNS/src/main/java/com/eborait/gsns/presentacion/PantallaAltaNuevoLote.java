@@ -5,9 +5,12 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+=======
+>>>>>>> branch 'Presentation' of git@github.com:escolanojorge/eborait.git
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,16 +32,16 @@ public class PantallaAltaNuevoLote extends JPanel {
 	private JTextField txtFechaAprobacion;
 
 	public PantallaAltaNuevoLote(final Main frame) {
-		
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel topPanel = new JPanel();
 		add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
-		
+
 		JPanel midPanel = new JPanel();
 		add(midPanel, BorderLayout.CENTER);
+<<<<<<< HEAD
 		
 		JButton btnVolver = new JButton("Volver al menú principal");
 		btnVolver.addActionListener(new ActionListener() {
@@ -49,9 +52,22 @@ public class PantallaAltaNuevoLote extends JPanel {
 		topPanel.add(btnVolver);
 		
 		JLabel lblTitulo = new JLabel("Alta Nuevo Lote");
+=======
+
+		JButton btnVolver = new JButton("Volver al menú principal");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(frame.getPanelMain());
+			}
+		});
+		topPanel.add(btnVolver);
+
+		JLabel lblTitulo = new JLabel("Gestión Sistema Nacional de Salud/Alta nuevo lote de vacunas");
+>>>>>>> branch 'Presentation' of git@github.com:escolanojorge/eborait.git
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
+<<<<<<< HEAD
 		
 		JLabel lblNewLabel = new JLabel("Identificador Lote:");
 		lblNewLabel.setBounds(10, 69, 97, 14);
@@ -125,6 +141,8 @@ public class PantallaAltaNuevoLote extends JPanel {
 		});
 		btnAlta.setBounds(10, 223, 420, 23);
 		midPanel.add(btnAlta);
+=======
+>>>>>>> branch 'Presentation' of git@github.com:escolanojorge/eborait.git
 		
 	}
 
