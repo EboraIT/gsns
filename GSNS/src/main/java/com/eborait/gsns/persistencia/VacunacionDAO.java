@@ -18,7 +18,7 @@ import com.eborait.gsns.dominio.entitymodel.Vacunacion;
  * @see Vacunacion
  *
  */
-public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
+public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	/**
 	 * Formato sentencia select.
 	 */
