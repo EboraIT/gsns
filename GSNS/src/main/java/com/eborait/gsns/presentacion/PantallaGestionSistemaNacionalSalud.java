@@ -54,6 +54,7 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 		midPanel.setLayout(null);
 
 		JButton btnCalculoEntrega = new JButton("Calculo de Entrega");
+		btnCalculoEntrega.setLocation(146, 0);
 		btnCalculoEntrega.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaCalculoEntrega(frame));
@@ -62,15 +63,12 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 		midPanel.add(btnCalculoEntrega);
 
 		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
+		btnAltaNuevoLote.setLocation(292, 0);
 		btnAltaNuevoLote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaAltaNuevoLote(frame));
 			}
 		});
 		midPanel.add(btnAltaNuevoLote);
-
-		JButton btnAtras = new JButton("Atras");
-		btnAtras.setBounds(563, 287, 89, 23);
-		add(btnAtras);
 	}
 }
