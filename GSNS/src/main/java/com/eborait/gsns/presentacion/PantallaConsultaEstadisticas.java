@@ -25,6 +25,9 @@ public class PantallaConsultaEstadisticas extends JPanel {
 	private JLabel lblTotalVacPrimeraDosis;
 	private JLabel lblTotalVacSegundaDosis;
 	private JLabel lblDosisAdministradas;
+	private JLabel lblVacunadosRegionPrimera;
+	private JLabel lblTotalVacunadosRegionSegunda;
+	private JLabel lblTotalDosisAdministradasRegion;
 
 	/**
 	 * Crea el panel.
@@ -86,7 +89,7 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.EAST, lblTotalVacPrimeraDosis, -124, SpringLayout.EAST, this);
 		add(lblTotalVacPrimeraDosis);
 		
-		JLabel lblVacunadosRegionPrimera = new JLabel("Total Vacunados Region Primera Dosis:");
+		lblVacunadosRegionPrimera = new JLabel("Total Vacunados Region Primera Dosis:");
 		springLayout.putConstraint(SpringLayout.WEST, lblVacunadosRegionPrimera, 19, SpringLayout.EAST, btnVacunadosPorRegion);
 		add(lblVacunadosRegionPrimera);
 		
@@ -126,12 +129,24 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.WEST, lblDosisAdministradas, 0, SpringLayout.WEST, lblTotalVacPrimeraDosis);
 		add(lblDosisAdministradas);
 		
-		JLabel lblTotalVacunadosRegionSegunda = new JLabel("Total Vacunados Region Segunda Dosis:");
+		lblTotalVacunadosRegionSegunda = new JLabel("Total Vacunados Region Segunda Dosis:");
 		springLayout.putConstraint(SpringLayout.NORTH, lblTotalVacunadosRegionSegunda, 6, SpringLayout.SOUTH, lblVacunadosRegionPrimera);
 		springLayout.putConstraint(SpringLayout.WEST, lblTotalVacunadosRegionSegunda, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
 		add(lblTotalVacunadosRegionSegunda);
+		
+		lblTotalDosisAdministradasRegion = new JLabel("Total Dosis Administradas Region:");
+		springLayout.putConstraint(SpringLayout.NORTH, lblTotalDosisAdministradasRegion, 6, SpringLayout.SOUTH, lblTotalVacunadosRegionSegunda);
+		springLayout.putConstraint(SpringLayout.WEST, lblTotalDosisAdministradasRegion, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
+		add(lblTotalDosisAdministradasRegion);
 	}
 
+	/*
+	 * Metodo que invoca a consultar total vacunados con la segunda dosis
+	 * 
+	 * @param el Main frame
+	 * 
+	 * @return Devuelve un entero con el total de vacunados con segunda dosis.
+	 */
 	protected int totalVacunadosSegunda(Main frame) throws GSNSException {
 		return frame.getGestorEstadisticas().consultarTotalVacunadosSegundaDosis();
 	}
