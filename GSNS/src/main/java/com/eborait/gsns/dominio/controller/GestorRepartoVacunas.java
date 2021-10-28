@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
@@ -25,6 +26,7 @@ import com.eborait.gsns.persistencia.DAOFactory;
 public class GestorRepartoVacunas {
 
 	/**
+	 * Da de alta un nuevo lote de vacunas.
 	 * 
 	 * @param id              Identificador del lote.
 	 * @param fecha           Fecha de alta del lote.
@@ -46,6 +48,27 @@ public class GestorRepartoVacunas {
 			sqle.printStackTrace();
 			throw new GSNSException("Se ha producido un error al dar de alta el lote de vacunas.");
 		}
+	}
+
+	/*
+	 * Consulta que devuelve la entrega a cada región
+	 * 
+	 * @param region La cual cogeremos el nombre de la region y la población.
+	 * 
+	 * @param IA Tendremos también como parametro la Incidencia Acumulada que pasará
+	 * el cliente por parametro
+	 * 
+	 * @return cantidad Devuelve un entero con la cantidad de vacunas repartidas.
+	 * Para resolver la cantidad será dependiendo del 60% de la poblacion y 40% de
+	 * la IA.
+	 */
+	public int calcularEntregasRegion(RegionEnum region, String regionP, int IA) throws GSNSException {
+
+		LoteVacunas lv;
+		int ia = IA;
+		int cantidadPoblacion = region.getPoblacion(regionP);
+		double total;
+		return total = lv.getCantidad() / ia * 0.40 + cantidadPoblacion * 0.60;
 
 	}
 
@@ -56,12 +79,19 @@ public class GestorRepartoVacunas {
 
 	}
 
-	public Collection<String> getTipoVacunas() throws GSNSException {
+	/**
+	 * Agrupa en un array los diferentes tipos de vacuna.
+	 * 
+	 * @return Un array con los tipos de vacuna en formato String.
+	 * @throws GSNSException Si se produce una excepción al consultar.
+	 */
+	public String[] getTipoVacunas() throws GSNSException {
 		try {
 			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null, null);
-			Collection<String> tipos = new ArrayList<>();
-			for (LoteVacunas loteVacunas : lotes) {
-				tipos.add(loteVacunas.getTipo().toString());
+			Iterator<LoteVacunas> it = lotes.iterator();
+			String[] tipos = new String[lotes.size()];
+			for (int i = 0; it.hasNext(); i++) {
+				tipos[i] = it.next().getTipo().toString();
 			}
 			return tipos;
 		} catch (SQLException sqle) {

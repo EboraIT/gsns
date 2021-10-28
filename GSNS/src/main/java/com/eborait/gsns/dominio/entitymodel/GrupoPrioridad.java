@@ -3,6 +3,8 @@ package com.eborait.gsns.dominio.entitymodel;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
 public enum GrupoPrioridad {
 	RESIDENTE_ANCIANO(1, "Ancianos en residencias"), SANITARIO(2, "Personal sanitario"),
 	TRABAJADOR_ESENCIAL(3, "Trabajadores esenciales"), ANCIANO(4, "Ancianos"), ADULTO(5, "Adultos"),
@@ -44,14 +46,13 @@ public enum GrupoPrioridad {
 		return prioridad;
 	}
 
-	public static GrupoPrioridad valueOf(int prioridad) {
+	public static GrupoPrioridad valueOf(int prioridad) throws GSNSException {
 		for (GrupoPrioridad gp : values()) {
 			if (gp.getPrioridad() == prioridad) {
 				return gp;
 			}
 		}
-		// TODO cambiar excepcion por una registrada o propia
-		throw new IllegalArgumentException("El grupo de prioridad no existe.");
+		throw new GSNSException("El grupo de prioridad no existe.");
 	}
 	
 	public static String[] getNombres() {

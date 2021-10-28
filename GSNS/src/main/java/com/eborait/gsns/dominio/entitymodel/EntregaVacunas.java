@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
 public class EntregaVacunas {
 
 	private String id;
@@ -15,7 +17,7 @@ public class EntregaVacunas {
 	private int cantidad;
 
 	public EntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad, TipoVacuna tipo,
-			int region) throws ParseException {
+			int region) throws ParseException, GSNSException {
 		this.id = id;
 		this.fecha = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
 		this.lote = new LoteVacunas(lote, this.fecha, tipo, cantidad, tipo.getFarmaceutica());
@@ -33,13 +35,18 @@ public class EntregaVacunas {
 		this.id = id;
 		this.fecha = fecha;
 		this.cantidad = cantidad;
-		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
 		this.tipo = new TipoVacuna(tipo);
 		this.lote = new LoteVacunas(lote, fecha, tipo, cantidad, this.tipo.getFarmaceutica());
-		this.region = RegionEnum.valueOf(region);
+		try {
+			this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
+			this.region = RegionEnum.valueOf(region);
 
-		this.region.getEntregas().add(this);
-		this.grupoPrioridad.getEntregas().add(this);
+			this.region.getEntregas().add(this);
+			this.grupoPrioridad.getEntregas().add(this);
+		} catch (GSNSException gsnse) {
+			System.out.println(gsnse.getMessage());
+			gsnse.printStackTrace();
+		}
 		this.lote.getEntregas().add(this);
 	}
 
