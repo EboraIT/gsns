@@ -30,6 +30,8 @@ public class PantallaConsultaEstadisticas extends JPanel {
 	private JLabel lblTotalDosisAdministradasRegion;
 	private JLabel lblPorcentajePrimera;
 	private JLabel lblPorcentajeCompletamente;
+	private JLabel lblPorcentaje1Dosisregion;
+	private JLabel lblPorcentajeDosisRegionCompleta;
 
 	/**
 	 * Crea el panel.
@@ -130,6 +132,22 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		add(btnPorcentaje);
 		
 		JButton btnPorcentajeRegion = new JButton("Porcentaje Vacunados por región");
+		btnPorcentajeRegion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int porcentajeregion1=PorcentajeVacunadosregion1(frame, comboRegion.getSelectedIndex() + 1);
+					int porcentajeregion2=PorcentajeVacunadosregion2(frame, comboRegion.getSelectedIndex() + 1);
+					
+					lblPorcentaje1Dosisregion.setText(lblPorcentaje1Dosisregion.getText()+String.valueOf(porcentajeregion1));
+					lblPorcentajeDosisRegionCompleta.setText(lblPorcentajeDosisRegionCompleta.getText()+String.valueOf(porcentajeregion2));
+					
+				} catch (GSNSException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		});
 		springLayout.putConstraint(SpringLayout.NORTH, btnPorcentajeRegion, 237, SpringLayout.NORTH, this);
 		springLayout.putConstraint(SpringLayout.SOUTH, btnPorcentaje, -18, SpringLayout.NORTH, btnPorcentajeRegion);
 		springLayout.putConstraint(SpringLayout.WEST, btnPorcentajeRegion, 0, SpringLayout.WEST, topPanel);
@@ -141,10 +159,9 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.WEST, lblPorcentajePrimera, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
 		add(lblPorcentajePrimera);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("% Vacunados  region:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_1_1, 4, SpringLayout.NORTH, btnPorcentajeRegion);
-		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_1_1, 46, SpringLayout.EAST, btnPorcentajeRegion);
-		add(lblNewLabel_1_1);
+		lblPorcentaje1Dosisregion = new JLabel("% Vacunados  region 1 Dosis:");
+		springLayout.putConstraint(SpringLayout.NORTH, lblPorcentaje1Dosisregion, 4, SpringLayout.NORTH, btnPorcentajeRegion);
+		add(lblPorcentaje1Dosisregion);
 
 		comboRegion = new JComboBox<String>();
 		comboRegion.setBounds(242, 176, 181, 20);
@@ -175,6 +192,34 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.NORTH, lblPorcentajeCompletamente, 6, SpringLayout.SOUTH, lblPorcentajePrimera);
 		springLayout.putConstraint(SpringLayout.WEST, lblPorcentajeCompletamente, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
 		add(lblPorcentajeCompletamente);
+		
+		lblPorcentajeDosisRegionCompleta = new JLabel("% Vacunados  region Completamente:");
+		springLayout.putConstraint(SpringLayout.NORTH, lblPorcentajeDosisRegionCompleta, 6, SpringLayout.SOUTH, lblPorcentaje1Dosisregion);
+		springLayout.putConstraint(SpringLayout.WEST, lblPorcentaje1Dosisregion, 0, SpringLayout.WEST, lblPorcentajeDosisRegionCompleta);
+		springLayout.putConstraint(SpringLayout.EAST, lblPorcentajeDosisRegionCompleta, -43, SpringLayout.EAST, this);
+		add(lblPorcentajeDosisRegionCompleta);
+	}
+
+	/*
+	 * Metodo que invoca a consultar el porcentaje de gente vacunada completamente
+	 * 
+	 * @param el Main frame
+	 * 
+	 * @return Devuelve un entero con el porcentaje de vacunados completamente
+	 */
+	protected int PorcentajeVacunadosregion2(Main frame, int i) throws GSNSException  {
+		return frame.getGestorEstadisticas().consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(i);
+	}
+
+	/*
+	 * Metodo que invoca a consultar el porcentaje de gente vacunada con 1 dosis
+	 * 
+	 * @param el Main frame
+	 * 
+	 * @return Devuelve un entero con el porcentaje de vacunados con 1 dosis.
+	 */
+	protected int PorcentajeVacunadosregion1(Main frame, int i) throws GSNSException {
+		return frame.getGestorEstadisticas().consultarPorcentajeVacunadosSobreRecibidasEnRegionPrimeraDosis(i);
 	}
 
 	/*
