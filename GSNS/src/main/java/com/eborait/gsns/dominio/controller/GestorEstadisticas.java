@@ -24,7 +24,7 @@ public class GestorEstadisticas {
 	/**
 	 * Consulta el número total de vacunados.
 	 * 
-	 * @return El número total de vacunados.
+	 * @return El número total de vacunados con la primera dosis.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
 	public int consultarTotalVacunadosPrimeraDosis() throws GSNSException {
@@ -40,7 +40,7 @@ public class GestorEstadisticas {
 	/**
 	 * Consulta el número total de vacunados segunda dosis.
 	 * 
-	 * @return El número total de vacunados.
+	 * @return El número total de vacunados con la segunda dosis.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
 	public int consultarTotalVacunadosSegundaDosis() throws GSNSException {
@@ -64,6 +64,30 @@ public class GestorEstadisticas {
 		try {
 			int contador = 0;
 			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll("segunda_dosis","false");
+			for (Vacunacion vacunacion : vacunaciones) {
+				if (vacunacion.getPaciente().getRegion() == region) {
+					contador++;
+				}
+			}
+			return contador;
+		} catch (SQLException sqle) {
+			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			sqle.printStackTrace();
+			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados por región.");
+		}
+	}
+	
+	/**
+	 * Consulta el número total de vacunados de una región con segunda dosis.
+	 * 
+	 * @param region La región por la que se filtra la consulta.
+	 * @return El número total de vacunados de la región con la segunda dosis.
+	 * @throws GSNSException Si se produce una excepción al consultar.
+	 */
+	public int consultarTotalVacunadosPorRegionSegundaDosis(RegionEnum region) throws GSNSException {
+		try {
+			int contador = 0;
+			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll("segunda_dosis","true");
 			for (Vacunacion vacunacion : vacunaciones) {
 				if (vacunacion.getPaciente().getRegion() == region) {
 					contador++;
