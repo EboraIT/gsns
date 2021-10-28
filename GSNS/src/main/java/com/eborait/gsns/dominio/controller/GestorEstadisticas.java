@@ -84,12 +84,12 @@ public class GestorEstadisticas {
 	 * @return El número total de vacunados de la región con la segunda dosis.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarTotalVacunadosPorRegionSegundaDosis(RegionEnum region) throws GSNSException {
+	public int consultarTotalVacunadosPorRegionSegundaDosis(int region) throws GSNSException {
 		try {
 			int contador = 0;
 			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll("segunda_dosis","true");
 			for (Vacunacion vacunacion : vacunaciones) {
-				if (vacunacion.getPaciente().getRegion() == region) {
+				if (vacunacion.getPaciente().getRegion().getId() == region) {
 					contador++;
 				}
 			}
@@ -158,7 +158,7 @@ public class GestorEstadisticas {
 			int vacunasRecibidas = 0;
 			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll("segunda_dosis","false");
 			for (EntregaVacunas entrega : entregas) {
-				if (entrega.getRegion() == region) {
+				if (entrega.getRegion().getId() == region) {
 					vacunasRecibidas += entrega.getLote().getCantidad();
 				}
 			}
@@ -183,7 +183,7 @@ public class GestorEstadisticas {
 			int vacunasRecibidas = 0;
 			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll("segunda_dosis","true");
 			for (EntregaVacunas entrega : entregas) {
-				if (entrega.getRegion() == region) {
+				if (entrega.getRegion().getId() == region) {
 					vacunasRecibidas += entrega.getLote().getCantidad();
 				}
 			}
