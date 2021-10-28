@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -71,19 +72,26 @@ public class PantallaCalculoEntrega extends JPanel {
 		JButton btnCalcularReparto = new JButton("Calcular");
 		btnCalcularReparto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int reparto = 0;
-				try {
-					reparto = frame.getGestorRepartoVacunas().calcularEntregasRegion(comboRegion.getSelectedIndex()+1,
-							Integer.parseInt(txtIA.getText()));
-				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (GSNSException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(validar()) {
+					int reparto = 0;
+					try {
+						reparto = frame.getGestorRepartoVacunas().calcularEntregasRegion(comboRegion.getSelectedIndex()+1,
+								Integer.parseInt(txtIA.getText()));
+						lblCalculo.setText("" + String.valueOf(reparto));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (GSNSException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					//lblCalculo.setText("Vacunas a repartir:"+reparto);
+					}else {
+						JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
+								JOptionPane.WARNING_MESSAGE);
+					}
 				}
-				lblCalculo.setText("Vacunas a repartir:"+reparto);
-			}
+				
 		});
 		btnCalcularReparto.setBounds(10, 192, 430, 23);
 		add(btnCalcularReparto);
@@ -93,7 +101,7 @@ public class PantallaCalculoEntrega extends JPanel {
 		add(lblNewLabel_3);
 		
 		lblCalculo = new JLabel("");
-		lblCalculo.setBounds(240, 240, 46, 14);
+		lblCalculo.setBounds(240, 240, 200, 14);
 		add(lblCalculo);
 		
 		
