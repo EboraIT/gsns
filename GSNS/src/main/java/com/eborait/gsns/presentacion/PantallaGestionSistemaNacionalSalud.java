@@ -52,23 +52,26 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
+		
+
+		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
+		
 
 		JButton btnCalculoEntrega = new JButton("Calculo de Entrega");
-		btnCalculoEntrega.setLocation(146, 0);
 		btnCalculoEntrega.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaCalculoEntrega(frame));
 			}
 		});
-		midPanel.add(btnCalculoEntrega);
-
-		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
-		btnAltaNuevoLote.setLocation(292, 0);
+		btnCalculoEntrega.setBounds(245, 104, 158, 47);
+		
 		btnAltaNuevoLote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaAltaNuevoLote(frame));
 			}
 		});
+		btnAltaNuevoLote.setBounds(28, 104, 176, 47);
+		midPanel.add(btnCalculoEntrega);
 		midPanel.add(btnAltaNuevoLote);
 	}
 }
