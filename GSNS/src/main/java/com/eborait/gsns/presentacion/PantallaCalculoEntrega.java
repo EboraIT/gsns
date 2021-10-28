@@ -5,15 +5,23 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.eborait.gsns.dominio.entitymodel.RegionEnum;
+
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 
 public class PantallaCalculoEntrega extends JPanel {
 	private JTextField txtIA;
+	private JComboBox<String> comboRegion;
 
 	public PantallaCalculoEntrega(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -25,6 +33,11 @@ public class PantallaCalculoEntrega extends JPanel {
 		add(lblCalculoDeReparto);
 		
 		JButton btnAtras = new JButton("Atras");
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(frame.getPanelMain());
+			}
+		});
 		btnAtras.setBounds(271, 11, 89, 23);
 		add(btnAtras);
 		
@@ -36,7 +49,11 @@ public class PantallaCalculoEntrega extends JPanel {
 		lblNewLabel_1.setBounds(10, 109, 63, 14);
 		add(lblNewLabel_1);
 		
-		JLabel lblPoblacion = new JLabel("Nº");
+		comboRegion = new JComboBox<String>(RegionEnum.getNombres());
+		comboRegion.setBounds(140, 73, 93, 14);
+		add(comboRegion);
+		
+		JLabel lblPoblacion = new JLabel(comboRegion.getSelectedItem().toString());
 		lblPoblacion.setBounds(83, 109, 46, 14);
 		add(lblPoblacion);
 		
@@ -57,9 +74,11 @@ public class PantallaCalculoEntrega extends JPanel {
 		lblNewLabel_3.setBounds(133, 240, 97, 14);
 		add(lblNewLabel_3);
 		
-		JLabel lblCalculo = new JLabel("Nº");
+		JLabel lblCalculo = new JLabel("");
 		lblCalculo.setBounds(240, 240, 46, 14);
 		add(lblCalculo);
+		
+		
 		
 	}
 }
