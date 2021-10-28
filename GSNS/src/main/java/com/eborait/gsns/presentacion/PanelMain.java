@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -81,5 +82,7 @@ public class PanelMain extends JPanel {
 		btnGestionSRS.setBounds(622, 211, 209, 38);
 		btnGestionSRS.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnGestionSRS);
+		
+		
 	}
 }
