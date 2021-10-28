@@ -27,13 +27,29 @@ public class GestorEstadisticas {
 	 * @return El número total de vacunados.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarTotalVacunados() throws GSNSException {
+	public int consultarTotalVacunadosPrimeraDosis() throws GSNSException {
 		try {
-			return DAOFactory.getVacunacionDAO().getAll(null,null).size();
+			return DAOFactory.getVacunacionDAO().getAll("segunda_dosis","false").size();
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
-			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados.");
+			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados con la primera dosis.");
+		}
+	}
+	
+	/**
+	 * Consulta el número total de vacunados segunda dosis.
+	 * 
+	 * @return El número total de vacunados.
+	 * @throws GSNSException Si se produce una excepción al consultar.
+	 */
+	public int consultarTotalVacunadosSegundaDosis() throws GSNSException {
+		try {
+			return DAOFactory.getVacunacionDAO().getAll("segunda_dosis","true").size();
+		} catch (SQLException sqle) {
+			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			sqle.printStackTrace();
+			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados con la segunda dosis.");
 		}
 	}
 
@@ -69,7 +85,7 @@ public class GestorEstadisticas {
 	 */
 	public int consultarPorcentajeVacunadosSobreRecibidas() throws GSNSException {
 		try {
-			int totalVacunados = consultarTotalVacunados();
+			int totalVacunados = consultarTotalVacunadosPrimeraDosis();
 			int vacunasRecibidas = 0;
 			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null,null);
 			for (LoteVacunas loteVacunas : lotes) {
