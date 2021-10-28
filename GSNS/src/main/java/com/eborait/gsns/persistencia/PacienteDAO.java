@@ -21,7 +21,7 @@ public class PacienteDAO extends AbstractEntityDAO<Paciente> {
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT = "SELECT * FROM pacientes WHERE dni = %s";
+	private static final String SELECT = "SELECT * FROM pacientes WHERE dni = '%s'";
 	/**
 	 * Formato sentencia select.
 	 */
@@ -29,15 +29,15 @@ public class PacienteDAO extends AbstractEntityDAO<Paciente> {
 	/**
 	 * Formato sentencia insert.
 	 */
-	private static final String INSERT = "INSERT INTO pacientes VALUES(%s, %d, %d, %s, %s)";
+	private static final String INSERT = "INSERT INTO pacientes VALUES('%s', %s, %s, '%s', '%s')";
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE pacientes SET dni = %s, grupo = %d, region = %d, nombre = %s, apellidos = %s WHERE dni = %s";
+	private static final String UPDATE = "UPDATE pacientes SET dni = '%s', grupo = %s, region = %s, nombre = '%s', apellidos = '%s' WHERE dni = '%s'";
 	/**
 	 * Formato sentencia delete.
 	 */
-	private static final String DELETE = "DELETE FROM pacientes WHERE dni = %s";
+	private static final String DELETE = "DELETE FROM pacientes WHERE dni = '%s'";
 
 	/**
 	 * Realiza una consulta a la base de datos.
