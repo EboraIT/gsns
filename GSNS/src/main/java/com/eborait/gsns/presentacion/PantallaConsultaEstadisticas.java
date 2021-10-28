@@ -157,7 +157,7 @@ public class PantallaConsultaEstadisticas extends JPanel {
 	}
 
 	protected int totalVacunadosregion1(Main frame) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionPrimeraDosis(comboRegion.getSelectedIndex() + 1);
+		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionPrimeraDosis(frame);
 	}
 
 	protected int totalVacunadosregion2(Main frame) throws GSNSException {
