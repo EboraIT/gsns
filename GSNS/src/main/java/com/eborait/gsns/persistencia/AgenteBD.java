@@ -5,8 +5,11 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.derby.jdbc.EmbeddedDriver;
 
@@ -92,16 +95,24 @@ public class AgenteBD {
 	 * @return Los resultados de la consulta en un ResultSet
 	 * @throws SQLException Si se produce algún error al consultar en la base de
 	 *                      datos.
-	 * @see ResultSet
 	 */
-	public ResultSet select(String sql) throws SQLException {
+	public Collection<Collection<Object>> select(String sql) throws SQLException {
 		try {
 			conectarBD();
 			Statement stmt = conexion.createStatement();
-			ResultSet res = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			Collection<Collection<Object>> data = new ArrayList<>();
+			while (rs.next()) {
+				Collection<Object> rowData = new ArrayList<>();
+				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+					rowData.add(rs.getObject(i));
+				}
+				data.add(rowData);
+			}
 			stmt.close();
 			desconectarBD();
-			return res;
+			return data;
 		} catch (SQLException sqle) {
 			System.out.println("Error consultando a la base de datos:\n\n" + sqle.getMessage());
 			throw sqle;

@@ -1,9 +1,9 @@
 package com.eborait.gsns.persistencia;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 
@@ -50,10 +50,11 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	 */
 	@Override
 	public EntregaVacunas get(String id) throws SQLException {
-		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT, id));
-		rs.next();
-		EntregaVacunas ev = new EntregaVacunas(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getInt(4),
-				rs.getInt(5), rs.getString(6), rs.getInt(7));
+		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
+		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
+		EntregaVacunas ev = new EntregaVacunas(String.valueOf(rowData.get(0)), String.valueOf(rowData.get(1)),
+				(Date) rowData.get(2), (int) rowData.get(3), (int) rowData.get(4), String.valueOf(rowData.get(5)),
+				(int) rowData.get(6));
 		return ev;
 	}
 
@@ -72,10 +73,12 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 		Collection<EntregaVacunas> list = new ArrayList<>();
 		String sql = criteria == null ? SELECT_CRITERIA
 				: String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
-		ResultSet rs = AgenteBD.getAgente().select(sql);
-		while (rs.next()) {
-			EntregaVacunas ev = new EntregaVacunas(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getInt(4),
-					rs.getInt(5), rs.getString(6), rs.getInt(7));
+		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
+		for (Collection<Object> collection : data) {
+			ArrayList<Object> rowData = (ArrayList<Object>) collection;
+			EntregaVacunas ev = new EntregaVacunas(String.valueOf(rowData.get(0)), String.valueOf(rowData.get(1)),
+					(Date) rowData.get(2), (int) rowData.get(3), (int) rowData.get(4), String.valueOf(rowData.get(5)),
+					(int) rowData.get(6));
 			list.add(ev);
 		}
 		return list;

@@ -1,9 +1,9 @@
 package com.eborait.gsns.persistencia;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 
@@ -22,15 +22,15 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT = "SELECT * FROM lotes_vacunas WHERE id = %s";
+	private static final String SELECT = "SELECT * FROM lote_vacunas WHERE id = %s";
 	/**
-	 * Formato sentencia select criterio.
+	 * Formato sentencia select .
 	 */
-	private static final String SELECT_CRITERIA = "SELECT * FROM lotes_vacunas";
+	private static final String SELECT_CRITERIA = "SELECT * FROM lote_vacunas";
 	/**
 	 * Formato sentencia insert.
 	 */
-	private static final String INSERT = "INSERT INTO lotes_vacunas VALUES(%s, %s, %s, %d, %s)";
+	private static final String INSERT = "INSERT INTO lote_vacunas VALUES(%s, %s, %s, %d, %s)";
 	/**
 	 * Formato sentencia update.
 	 */
@@ -38,7 +38,7 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	/**
 	 * Formato sentencia delete.
 	 */
-	private static final String DELETE = "DELETE FROM lotes_vacunas WHERE id = %s";
+	private static final String DELETE = "DELETE FROM lote_vacunas WHERE id = %s";
 
 	/**
 	 * Realiza una consulta a la base de datos.
@@ -50,10 +50,10 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 	 */
 	@Override
 	public LoteVacunas get(String id) throws SQLException {
-		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT, id));
-		rs.next();
-		LoteVacunas lv = new LoteVacunas(rs.getString(1), rs.getDate(2), rs.getString(3), rs.getInt(4),
-				rs.getString(5));
+		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
+		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
+		LoteVacunas lv = new LoteVacunas(String.valueOf(rowData.get(1)), (Date) rowData.get(2),
+				String.valueOf(rowData.get(3)), (int) rowData.get(4), String.valueOf(rowData.get(5)));
 		return lv;
 	}
 
@@ -72,10 +72,11 @@ public class LoteVacunasDAO extends AbstractEntityDAO<LoteVacunas> {
 		Collection<LoteVacunas> list = new ArrayList<>();
 		String sql = criteria == null ? SELECT_CRITERIA
 				: String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
-		ResultSet rs = AgenteBD.getAgente().select(sql);
-		while (rs.next()) {
-			LoteVacunas lv = new LoteVacunas(rs.getString(1), rs.getDate(2), rs.getString(3), rs.getInt(4),
-					rs.getString(5));
+		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
+		for (Collection<Object> collection : data) {
+			ArrayList<Object> rowData = (ArrayList<Object>) collection;
+			LoteVacunas lv = new LoteVacunas(String.valueOf(rowData.get(1)), (Date) rowData.get(2),
+					String.valueOf(rowData.get(3)), (int) rowData.get(4), String.valueOf(rowData.get(5)));
 			list.add(lv);
 		}
 		return list;
