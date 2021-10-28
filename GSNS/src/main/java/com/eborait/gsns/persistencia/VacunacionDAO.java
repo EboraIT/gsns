@@ -1,9 +1,9 @@
 package com.eborait.gsns.persistencia;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 
@@ -50,9 +50,10 @@ public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
 	 */
 	@Override
 	public Vacunacion get(String id) throws SQLException {
-		ResultSet rs = AgenteBD.getAgente().select(String.format(SELECT, id));
-		rs.next();
-		Vacunacion v = new Vacunacion(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getBoolean(5));
+		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
+		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
+		Vacunacion v = new Vacunacion((int) rowData.get(0), String.valueOf(rowData.get(1)),
+				String.valueOf(rowData.get(2)), (Date) rowData.get(3), (boolean) rowData.get(4));
 		return v;
 	}
 
@@ -71,10 +72,11 @@ public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
 		Collection<Vacunacion> list = new ArrayList<>();
 		String sql = criteria == null ? SELECT_CRITERIA
 				: String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
-		ResultSet rs = AgenteBD.getAgente().select(sql);
-		while (rs.next()) {
-			Vacunacion v = new Vacunacion(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4),
-					rs.getBoolean(5));
+		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
+		for (Collection<Object> collection : data) {
+			ArrayList<Object> rowData = (ArrayList<Object>) collection;
+			Vacunacion v = new Vacunacion((int) rowData.get(0), String.valueOf(rowData.get(1)),
+					String.valueOf(rowData.get(2)), (Date) rowData.get(3), (boolean) rowData.get(4));
 			list.add(v);
 		}
 		return list;
