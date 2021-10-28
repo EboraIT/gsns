@@ -63,14 +63,14 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 				frame.cambiarPanel(new PantallaCalculoEntrega(frame));
 			}
 		});
-		btnCalculoEntrega.setBounds(245, 105, 158, 47);
+		btnCalculoEntrega.setBounds(546, 92, 158, 47);
 		
 		btnAltaNuevoLote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaAltaNuevoLote(frame));
 			}
 		});
-		btnAltaNuevoLote.setBounds(28, 105, 176, 47);
+		btnAltaNuevoLote.setBounds(185, 92, 176, 47);
 		midPanel.setLayout(null);
 		midPanel.add(btnCalculoEntrega);
 		midPanel.add(btnAltaNuevoLote);
