@@ -118,7 +118,7 @@ public class PantallaConsultaEstadisticas extends JPanel {
 	 * @return Devuelve un entero con el total.
 	 */
 	private int totalVacunados(Main frame) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarTotalVacunados();
+		return frame.getGestorEstadisticas().consultarTotalVacunadosPrimeraDosis();
 
 	}
 
