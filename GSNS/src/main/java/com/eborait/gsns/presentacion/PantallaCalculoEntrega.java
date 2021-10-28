@@ -67,6 +67,11 @@ public class PantallaCalculoEntrega extends JPanel {
 		txtIA.setColumns(10);
 		
 		JButton btnCalcularReparto = new JButton("Calcular");
+		btnCalcularReparto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				calcularReparto(frame);
+			}
+		});
 		btnCalcularReparto.setBounds(10, 192, 430, 23);
 		add(btnCalcularReparto);
 		
