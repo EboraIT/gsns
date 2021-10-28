@@ -102,16 +102,38 @@ public class GestorEstadisticas {
 	}
 
 	/**
-	 * Calcula el porcentaje de vacunaciones sobre vacunas recibidas.
+	 * Calcula el porcentaje de vacunaciones sobre vacunas recibida de la primera dosiss.
 	 * 
 	 * @return El porcentaje de vacunaciones sobre vacunas recibidas.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarPorcentajeVacunadosSobreRecibidas() throws GSNSException {
+	public int consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis() throws GSNSException {
 		try {
 			int totalVacunados = consultarTotalVacunadosPrimeraDosis();
 			int vacunasRecibidas = 0;
-			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null,null);
+			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll("segunda_dosis","false");
+			for (LoteVacunas loteVacunas : lotes) {
+				vacunasRecibidas += loteVacunas.getCantidad();
+			}
+			return (totalVacunados / vacunasRecibidas) * 100;
+		} catch (SQLException sqle) {
+			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			sqle.printStackTrace();
+			throw new GSNSException("Se ha producido un error al consultar el porcentaje de vacunados.");
+		}
+	}
+	
+	/**
+	 * Calcula el porcentaje de vacunaciones sobre vacunas recibida de la primera dosiss.
+	 * 
+	 * @return El porcentaje de vacunaciones sobre vacunas recibidas.
+	 * @throws GSNSException Si se produce una excepción al consultar.
+	 */
+	public int consultarPorcentajeVacunadosSobreRecibidasSegundaDosis() throws GSNSException {
+		try {
+			int totalVacunados = consultarTotalVacunadosPrimeraDosis();
+			int vacunasRecibidas = 0;
+			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll("segunda_dosis","true");
 			for (LoteVacunas loteVacunas : lotes) {
 				vacunasRecibidas += loteVacunas.getCantidad();
 			}
