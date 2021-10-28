@@ -163,7 +163,7 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.NORTH, lblPorcentaje1Dosisregion, 4, SpringLayout.NORTH, btnPorcentajeRegion);
 		add(lblPorcentaje1Dosisregion);
 
-		comboRegion = new JComboBox<String>();
+		comboRegion = new JComboBox<String>(RegionEnum.getNombres());
 		comboRegion.setBounds(242, 176, 181, 20);
 		add(comboRegion);
 		
