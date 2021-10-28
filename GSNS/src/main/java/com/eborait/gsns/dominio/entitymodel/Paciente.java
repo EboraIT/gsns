@@ -20,24 +20,19 @@ public class Paciente {
 		this.grupo.getPacientes().add(this);
 	}
 
-	public Paciente(String fromDatabase) {
-		String[] aux = fromDatabase.split(";");
-		this.dni = aux[0];
-		this.nombre = aux[1];
-		this.apellidos = aux[2];
+	public Paciente(String dni, int grupo, int region, String nombre, String apellidos) {
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
 		try {
-			this.grupo = GrupoPrioridad.valueOf(Integer.parseInt(aux[3]));
-			this.region = RegionEnum.valueOf(Integer.parseInt(aux[4]));
+			this.grupo = GrupoPrioridad.valueOf(grupo);
+			this.region = RegionEnum.valueOf(region);
 
 			this.grupo.getPacientes().add(this);
 		} catch (GSNSException gsnse) {
 			System.out.println(gsnse.getMessage());
 			gsnse.printStackTrace();
 		}
-	}
-
-	public String toDatabase() {
-		return dni + ";" + nombre + ";" + apellidos + ";" + grupo.getPrioridad() + ";" + region.getId();
 	}
 
 	public RegionEnum getRegion() {

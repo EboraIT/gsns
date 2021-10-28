@@ -93,7 +93,7 @@ public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
 	@Override
 	public int insert(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente().insert(String.format(INSERT, vacunacion.getId(), vacunacion.getVacuna().toString(),
-				vacunacion.getPaciente().toDatabase(), vacunacion.getFecha(), vacunacion.isSegundaDosis()));
+				vacunacion.getPaciente().getDni(), vacunacion.getFecha(), vacunacion.isSegundaDosis()));
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
 	public int update(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente()
 				.update(String.format(UPDATE, vacunacion.getId(), vacunacion.getVacuna().toString(),
-						vacunacion.getPaciente().toDatabase(), vacunacion.getFecha(), vacunacion.isSegundaDosis(),
+						vacunacion.getPaciente().getDni(), vacunacion.getFecha(), vacunacion.isSegundaDosis(),
 						vacunacion.getId()));
 	}
 

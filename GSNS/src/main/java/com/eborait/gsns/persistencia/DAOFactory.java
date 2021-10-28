@@ -24,6 +24,10 @@ public class DAOFactory {
 	 * Objeto VacunacionDAO.
 	 */
 	private static VacunacionDAO vacunacionDao;
+	/**
+	 * Objeto VacunacionDAO.
+	 */
+	private static PacienteDAO pacienteDAO;
 
 	/**
 	 * Instancia si es necesario el objeto EntregaDAO y lo devuelve.
@@ -53,6 +57,16 @@ public class DAOFactory {
 	 */
 	public static VacunacionDAO getVacunacionDAO() {
 		return vacunacionDao != null ? vacunacionDao : new VacunacionDAO();
+	}
+
+	/**
+	 * Instancia si es necesario el objeto PacienteDAO y lo devuelve.
+	 *
+	 * @return Objeto PacienteDAO.
+	 * @see PacienteDAO
+	 */
+	public static PacienteDAO getPacienteDAO() {
+		return pacienteDAO != null ? pacienteDAO : new PacienteDAO();
 	}
 
 }

@@ -1,6 +1,9 @@
 package com.eborait.gsns.dominio.entitymodel;
 
+import java.sql.SQLException;
 import java.util.Date;
+
+import com.eborait.gsns.persistencia.DAOFactory;
 
 public class Vacunacion {
 
@@ -18,8 +21,8 @@ public class Vacunacion {
 		this.segundaDosis = segundaDosis;
 	}
 
-	public Vacunacion(int id, String vacuna, String paciente, Date fecha, boolean segundaDosis) {
-		this(id, new TipoVacuna(vacuna), new Paciente(paciente), fecha, segundaDosis);
+	public Vacunacion(int id, String vacuna, String paciente, Date fecha, boolean segundaDosis) throws SQLException {
+		this(id, new TipoVacuna(vacuna), DAOFactory.getPacienteDAO().get(paciente), fecha, segundaDosis);
 	}
 
 	public int getId() {
