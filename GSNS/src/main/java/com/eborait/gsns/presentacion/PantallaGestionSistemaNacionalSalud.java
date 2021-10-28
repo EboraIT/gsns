@@ -1,20 +1,17 @@
 package com.eborait.gsns.presentacion;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-
-import javax.swing.JButton;
 
 public class PantallaGestionSistemaNacionalSalud extends JPanel {
 	/**
@@ -29,7 +26,6 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 	 * @throws GSNSException Si se produce una excepción de la aplicación.
 	 */
 	public PantallaGestionSistemaNacionalSalud(final Main frame) {
-
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 
