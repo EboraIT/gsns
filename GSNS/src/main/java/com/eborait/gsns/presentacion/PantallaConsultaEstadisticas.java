@@ -84,8 +84,8 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		btnVacunadosPorRegion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int vacunadosregion1=totalVacunadosregion1(comboRegion.getSelectedIndex() + 1);
-					int vacunadosregion2=totalVacunadosregion2(comboRegion.getSelectedIndex() + 1);
+					int vacunadosregion1=totalVacunadosregion1(frame, comboRegion.getSelectedIndex() + 1);
+					int vacunadosregion2=totalVacunadosregion2(frame, comboRegion.getSelectedIndex() + 1);
 					int totalregion=vacunadosregion1+vacunadosregion2;
 					lblVacunadosRegionPrimera.setText(lblVacunadosRegionPrimera.getText()+String.valueOf(vacunadosregion1));
 					lblTotalVacunadosRegionSegunda.setText(lblTotalVacunadosRegionSegunda.getText()+String.valueOf(vacunadosregion2));
@@ -199,12 +199,12 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		return frame.getGestorEstadisticas().consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis();
 	}
 
-	protected int totalVacunadosregion1(Main frame) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionPrimeraDosis(frame);
+	protected int totalVacunadosregion1(Main frame, int total) throws GSNSException {
+		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionPrimeraDosis(total);
 	}
 
-	protected int totalVacunadosregion2(Main frame) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionSegundaDosis(frame);
+	protected int totalVacunadosregion2(Main frame, int total) throws GSNSException {
+		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionSegundaDosis(total);
 	}
 	/*
 	 * Metodo que invoca a consultar total vacunados con la segunda dosis

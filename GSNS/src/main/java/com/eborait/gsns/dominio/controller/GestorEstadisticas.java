@@ -60,12 +60,12 @@ public class GestorEstadisticas {
 	 * @return El número total de vacunados de la región con la primera dosis.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarTotalVacunadosPorRegionPrimeraDosis(RegionEnum region) throws GSNSException {
+	public int consultarTotalVacunadosPorRegionPrimeraDosis(int region) throws GSNSException {
 		try {
 			int contador = 0;
 			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll("segunda_dosis","false");
 			for (Vacunacion vacunacion : vacunaciones) {
-				if (vacunacion.getPaciente().getRegion() == region) {
+				if (vacunacion.getPaciente().getRegion().getId() == region) {
 					contador++;
 				}
 			}
@@ -152,7 +152,7 @@ public class GestorEstadisticas {
 	 * @return El porcentaje de vacunaciones sobre vacunas recibidas de la regió con la primera dosis.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarPorcentajeVacunadosSobreRecibidasEnRegionPrimeraDosis(RegionEnum region) throws GSNSException {
+	public int consultarPorcentajeVacunadosSobreRecibidasEnRegionPrimeraDosis(int region) throws GSNSException {
 		try {
 			int totalVacunados = consultarTotalVacunadosPorRegionPrimeraDosis(region);
 			int vacunasRecibidas = 0;
@@ -177,7 +177,7 @@ public class GestorEstadisticas {
 	 * @return El porcentaje de vacunaciones sobre vacunas recibidas de la regió con la segunda dosis.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(RegionEnum region) throws GSNSException {
+	public int consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(int region) throws GSNSException {
 		try {
 			int totalVacunados = consultarTotalVacunadosPorRegionPrimeraDosis(region);
 			int vacunasRecibidas = 0;
