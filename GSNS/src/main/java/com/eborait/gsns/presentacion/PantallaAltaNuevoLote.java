@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -133,7 +135,7 @@ public class PantallaAltaNuevoLote extends JPanel {
 		if(validar()) {
 			try {
 				
-				frame.getGestorRepartoVacunas().altaNuevoLoteVacunas(txtIdentificador.getText(),txtFechaAlta.getText(),Integer.parseInt(txtCantidad.getText()),
+				frame.getGestorRepartoVacunas().altaNuevoLoteVacunas(txtIdentificador.getText(),ParseFecha(txtFechaAlta.getText()),Integer.parseInt(txtCantidad.getText()),
 						txtNombreVacuna.getText(),txtFarmaceutica.getText(),txtFechaAprobacion.getText());
 			} catch (GSNSException gsnse) {
 				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -157,5 +159,23 @@ public class PantallaAltaNuevoLote extends JPanel {
 				return false;
 		}
 		return true;
+	}
+	
+	/*
+	 * Convierte un String en fecha(Date)
+	 * @param fecha que pasas como cadena dd/MM/yyyy
+	 * @return Objeto date
+	 */
+	public static Date ParseFecha(String fecha) {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		Date fechaDate = null;
+		try {
+			fechaDate = formato.parse(fecha);
+		}
+		catch (ParseException ex)
+		{
+			System.out.println(ex);
+		}
+		return fechaDate;
 	}
 }
