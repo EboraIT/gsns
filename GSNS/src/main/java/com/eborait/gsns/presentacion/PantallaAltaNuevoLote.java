@@ -5,12 +5,16 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 public class PantallaAltaNuevoLote extends JPanel {
 	private JTextField textField;
@@ -48,58 +52,107 @@ public class PantallaAltaNuevoLote extends JPanel {
 		midPanel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Identificador Lote:");
-		lblNewLabel.setBounds(10, 11, 97, 14);
+		lblNewLabel.setBounds(10, 69, 97, 14);
 		midPanel.add(lblNewLabel);
 		
 		txtIdentificador = new JTextField();
-		txtIdentificador.setBounds(117, 8, 86, 20);
+		txtIdentificador.setBounds(117, 66, 86, 20);
 		midPanel.add(txtIdentificador);
 		txtIdentificador.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Fecha Alta:");
-		lblNewLabel_1.setBounds(10, 51, 97, 14);
+		lblNewLabel_1.setBounds(10, 109, 97, 14);
 		midPanel.add(lblNewLabel_1);
 		
 		txtFechaAlta = new JTextField();
-		txtFechaAlta.setBounds(117, 48, 86, 20);
+		txtFechaAlta.setBounds(117, 106, 86, 20);
 		midPanel.add(txtFechaAlta);
 		txtFechaAlta.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Cantidad de Vacunas:");
-		lblNewLabel_2.setBounds(10, 95, 116, 14);
+		lblNewLabel_2.setBounds(10, 153, 116, 14);
 		midPanel.add(lblNewLabel_2);
 		
 		txtCantidad = new JTextField();
-		txtCantidad.setBounds(117, 92, 86, 20);
+		txtCantidad.setBounds(117, 150, 86, 20);
 		midPanel.add(txtCantidad);
 		txtCantidad.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Nombre de Vacuna:");
-		lblNewLabel_3.setBounds(10, 140, 116, 14);
+		lblNewLabel_3.setBounds(237, 64, 116, 14);
 		midPanel.add(lblNewLabel_3);
 		
 		txtNombreVacuna = new JTextField();
-		txtNombreVacuna.setBounds(117, 137, 86, 20);
+		txtNombreVacuna.setBounds(344, 61, 86, 20);
 		midPanel.add(txtNombreVacuna);
 		txtNombreVacuna.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("Farmaceutica:");
-		lblNewLabel_4.setBounds(10, 186, 116, 14);
+		lblNewLabel_4.setBounds(237, 110, 116, 14);
 		midPanel.add(lblNewLabel_4);
 		
 		txtFarmaceutica = new JTextField();
-		txtFarmaceutica.setBounds(117, 183, 86, 20);
+		txtFarmaceutica.setBounds(344, 107, 86, 20);
 		midPanel.add(txtFarmaceutica);
 		txtFarmaceutica.setColumns(10);
 		
 		JLabel lblNewLabel_5 = new JLabel("Fecha de Aprobación:");
-		lblNewLabel_5.setBounds(10, 232, 116, 14);
+		lblNewLabel_5.setBounds(237, 156, 116, 14);
 		midPanel.add(lblNewLabel_5);
 		
 		txtFechaAprobacion = new JTextField();
-		txtFechaAprobacion.setBounds(117, 229, 86, 20);
+		txtFechaAprobacion.setBounds(344, 153, 86, 20);
 		midPanel.add(txtFechaAprobacion);
 		txtFechaAprobacion.setColumns(10);
 		
+		JLabel lblNewLabel_6 = new JLabel("LOTE");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_6.setBounds(10, 30, 46, 14);
+		midPanel.add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_7 = new JLabel("Vacuna");
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_7.setBounds(237, 32, 73, 14);
+		midPanel.add(lblNewLabel_7);
+		
+		JButton btnAlta = new JButton("Confirmar Alta");
+		btnAlta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				registrarLote(frame);;
+			}
+		});
+		btnAlta.setBounds(10, 223, 420, 23);
+		midPanel.add(btnAlta);
+		
+	}
+
+	protected void registrarLote(Main frame) {
+		if(validar()) {
+			try {
+				
+				frame.getGestorRepartoVacunas().altaNuevoLoteVacunas(txtIdentificador.getText(),txtFechaAlta.getText(),Integer.parseInt(txtCantidad.getText()),
+						txtNombreVacuna.getText(),txtFarmaceutica.getText(),txtFechaAprobacion.getText());
+			} catch (GSNSException gsnse) {
+				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
+					JOptionPane.WARNING_MESSAGE);
+		}
+		
+	}
+	
+	/**
+	 * Valida los campos de texto .
+	 * 
+	 * @return true si la validación es correcta, false de lo contrario. 
+	 */
+	private boolean validar() {
+		JTextField[] textFields = { txtIdentificador,txtFechaAlta,txtCantidad,txtNombreVacuna,txtFarmaceutica,txtFechaAprobacion };
+		for (JTextField jTextField : textFields) {
+			if (jTextField.getText().length() == 0)
+				return false;
+		}
+		return true;
 	}
 }
