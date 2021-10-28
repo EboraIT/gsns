@@ -79,6 +79,22 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		add(btnTotalVacunados);
 		
 		JButton btnVacunadosPorRegion = new JButton("Total Vacunados por región");
+		btnVacunadosPorRegion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int vacunadosregion1=totalVacunadosregion1(comboRegion.getSelectedIndex() + 1);
+					int vacunadosregion2=totalVacunadosregion2(comboRegion.getSelectedIndex() + 1);
+					int totalregion=vacunadosregion1+vacunadosregion2;
+					lblVacunadosRegionPrimera.setText(lblVacunadosRegionPrimera.getText()+String.valueOf(vacunadosregion1));
+					lblTotalVacunadosRegionSegunda.setText(lblTotalVacunadosRegionSegunda.getText()+String.valueOf(vacunadosregion2));
+					lblTotalDosisAdministradasRegion.setText(lblTotalDosisAdministradasRegion.getText()+totalregion);
+				} catch (GSNSException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		});
 		springLayout.putConstraint(SpringLayout.NORTH, btnVacunadosPorRegion, 29, SpringLayout.SOUTH, btnTotalVacunados);
 		springLayout.putConstraint(SpringLayout.WEST, btnVacunadosPorRegion, 0, SpringLayout.WEST, topPanel);
 		add(btnVacunadosPorRegion);
@@ -140,6 +156,13 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		add(lblTotalDosisAdministradasRegion);
 	}
 
+	protected int totalVacunadosregion1(Main frame) throws GSNSException {
+		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionPrimeraDosis(comboRegion.getSelectedIndex() + 1);
+	}
+
+	protected int totalVacunadosregion2(Main frame) throws GSNSException {
+		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionSegundaDosis(frame);
+	}
 	/*
 	 * Metodo que invoca a consultar total vacunados con la segunda dosis
 	 * 
