@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.RegionEnum;
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
@@ -22,6 +23,7 @@ import javax.swing.JTextField;
 public class PantallaCalculoEntrega extends JPanel {
 	private JTextField txtIA;
 	private JComboBox<String> comboRegion;
+	private JLabel lblCalculo;
 
 	public PantallaCalculoEntrega(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,7 +71,18 @@ public class PantallaCalculoEntrega extends JPanel {
 		JButton btnCalcularReparto = new JButton("Calcular");
 		btnCalcularReparto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				calcularReparto(frame);
+				int reparto = 0;
+				try {
+					reparto = frame.getGestorRepartoVacunas().calcularEntregasRegion(comboRegion.getSelectedIndex()+1,
+							Integer.parseInt(txtIA.getText()));
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (GSNSException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				lblCalculo.setText("Vacunas a repartir:"+reparto);
 			}
 		});
 		btnCalcularReparto.setBounds(10, 192, 430, 23);
@@ -79,11 +92,12 @@ public class PantallaCalculoEntrega extends JPanel {
 		lblNewLabel_3.setBounds(133, 240, 97, 14);
 		add(lblNewLabel_3);
 		
-		JLabel lblCalculo = new JLabel("");
+		lblCalculo = new JLabel("");
 		lblCalculo.setBounds(240, 240, 46, 14);
 		add(lblCalculo);
 		
 		
 		
 	}
+
 }
