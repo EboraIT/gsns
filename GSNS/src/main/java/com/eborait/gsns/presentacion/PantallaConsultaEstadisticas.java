@@ -28,6 +28,8 @@ public class PantallaConsultaEstadisticas extends JPanel {
 	private JLabel lblVacunadosRegionPrimera;
 	private JLabel lblTotalVacunadosRegionSegunda;
 	private JLabel lblTotalDosisAdministradasRegion;
+	private JLabel lblPorcentajePrimera;
+	private JLabel lblPorcentajeCompletamente;
 
 	/**
 	 * Crea el panel.
@@ -111,6 +113,20 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		
 		JButton btnPorcentaje = new JButton("Porcentaje Vacunados");
 		springLayout.putConstraint(SpringLayout.WEST, btnPorcentaje, 0, SpringLayout.WEST, topPanel);
+		btnPorcentaje.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int porcentajes1=porcentajesPrimeraDosis(frame);
+					int porcentajes2=porcentajesSegundaDosis(frame);
+					lblPorcentajePrimera.setText(lblPorcentajePrimera.getText()+String.valueOf(porcentajes1)+"%");
+					lblPorcentajeCompletamente.setText(lblPorcentajeCompletamente.getText()+String.valueOf(porcentajes2)+"%");
+				} catch (GSNSException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+		});
 		add(btnPorcentaje);
 		
 		JButton btnPorcentajeRegion = new JButton("Porcentaje Vacunados por región");
@@ -120,10 +136,10 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		btnPorcentajeRegion.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(btnPorcentajeRegion);
 		
-		JLabel lblVacuVacunados = new JLabel("% Vacunados:");
-		springLayout.putConstraint(SpringLayout.WEST, lblVacuVacunados, 97, SpringLayout.EAST, btnPorcentaje);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblVacuVacunados, -64, SpringLayout.SOUTH, this);
-		add(lblVacuVacunados);
+		lblPorcentajePrimera = new JLabel("% Vacunados 1 Dosis:");
+		springLayout.putConstraint(SpringLayout.NORTH, lblPorcentajePrimera, 0, SpringLayout.NORTH, btnPorcentaje);
+		springLayout.putConstraint(SpringLayout.WEST, lblPorcentajePrimera, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
+		add(lblPorcentajePrimera);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("% Vacunados  region:");
 		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_1_1, 4, SpringLayout.NORTH, btnPorcentajeRegion);
@@ -154,6 +170,33 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.NORTH, lblTotalDosisAdministradasRegion, 6, SpringLayout.SOUTH, lblTotalVacunadosRegionSegunda);
 		springLayout.putConstraint(SpringLayout.WEST, lblTotalDosisAdministradasRegion, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
 		add(lblTotalDosisAdministradasRegion);
+		
+		lblPorcentajeCompletamente = new JLabel("% Vacunados Completamente:");
+		springLayout.putConstraint(SpringLayout.NORTH, lblPorcentajeCompletamente, 6, SpringLayout.SOUTH, lblPorcentajePrimera);
+		springLayout.putConstraint(SpringLayout.WEST, lblPorcentajeCompletamente, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
+		add(lblPorcentajeCompletamente);
+	}
+
+	/*
+	 * Metodo que invoca a consultar el porcentaje de gente vacunada completamente
+	 * 
+	 * @param el Main frame
+	 * 
+	 * @return Devuelve un entero con el porcentaje de vacunados completamente.
+	 */
+	protected int porcentajesSegundaDosis(Main frame) throws GSNSException {
+		return frame.getGestorEstadisticas().consultarPorcentajeVacunadosSobreRecibidasSegundaDosis();
+	}
+
+	/*
+	 * Metodo que invoca a consultar el porcentaje de gente vacunada con 1 dosis
+	 * 
+	 * @param el Main frame
+	 * 
+	 * @return Devuelve un entero con el porcentaje de vacunados con 1 dosis.
+	 */
+	protected int porcentajesPrimeraDosis(Main frame) throws GSNSException {
+		return frame.getGestorEstadisticas().consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis();
 	}
 
 	protected int totalVacunadosregion1(Main frame) throws GSNSException {
