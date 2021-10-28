@@ -1,5 +1,6 @@
 package com.eborait.gsns.presentacion;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
@@ -15,17 +17,21 @@ import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+import javax.swing.BoxLayout;
+import javax.swing.border.TitledBorder;
+import java.awt.Component;
 
 public class PantallaConsultaEstadisticas extends JPanel {
 	/**
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-	private JComboBox<String> comboRegion;
+	private JComboBox<String> comboTotalRegion;
+	private JComboBox<String> comboPorcentajeRegion;
 	private JLabel lblTotalVacPrimeraDosis;
 	private JLabel lblTotalVacSegundaDosis;
-	private JLabel lblDosisAdministradas;
-	private JLabel lblVacunadosRegionPrimera;
+	private JLabel lblTotalDosisAdministradas;
+	private JLabel lblTotalVacunadosRegionPrimera;
 	private JLabel lblTotalVacunadosRegionSegunda;
 	private JLabel lblTotalDosisAdministradasRegion;
 	private JLabel lblPorcentajePrimera;
@@ -40,251 +46,159 @@ public class PantallaConsultaEstadisticas extends JPanel {
 	 */
 	public PantallaConsultaEstadisticas(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-		SpringLayout springLayout = new SpringLayout();
-		setLayout(springLayout);
+		setLayout(new BorderLayout(0, 0));
 
 		JPanel topPanel = new JPanel();
-		springLayout.putConstraint(SpringLayout.NORTH, topPanel, 5, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, topPanel, 5, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.EAST, topPanel, 445, SpringLayout.WEST, this);
-		add(topPanel);
+		add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 
-		JLabel lblTitulo = new JLabel("Consultar Estadisticas");
-		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		topPanel.add(lblTitulo);
+		JPanel midPanel = new JPanel();
+		add(midPanel, BorderLayout.CENTER);
 
-		JButton btnVolver = new JButton("Volver");
+		JButton btnVolver = new JButton("Volver al menú principal");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(frame.getPanelMain());
 			}
 		});
 		topPanel.add(btnVolver);
-		
-		JButton btnTotalVacunados = new JButton("Total Vacunados");
+
+		JLabel lblTitulo = new JLabel("Consulta estadísticas");
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		topPanel.add(lblTitulo);
+
+		JButton btnTotalVacunados = new JButton("Total vacunados");
+		btnTotalVacunados.setBounds(10, 100, 139, 64);
 		btnTotalVacunados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int total2=totalVacunados(frame);
-					int total3=totalVacunadosSegunda(frame);
-					int total=total2+total3;
-					lblTotalVacPrimeraDosis.setText(lblTotalVacPrimeraDosis.getText()+String.valueOf(total2));
-					lblTotalVacSegundaDosis.setText(lblTotalVacSegundaDosis.getText()+String.valueOf(total3));
-					lblDosisAdministradas.setText(lblDosisAdministradas.getText()+total);
-				} catch (GSNSException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					int totalPrimera = frame.getGestorEstadisticas().consultarTotalVacunadosPrimeraDosis();
+					int totalSegunda = frame.getGestorEstadisticas().consultarTotalVacunadosSegundaDosis();
+					int total = totalPrimera + totalSegunda;
+					lblTotalVacPrimeraDosis.setText("Total vacunados (primera dosis): " + String.valueOf(totalPrimera));
+					lblTotalVacSegundaDosis.setText("Total vacunados (segunda dosis): " + String.valueOf(totalSegunda));
+					lblTotalDosisAdministradas.setText("Total dosis administradas: " + total);
+				} catch (GSNSException gsnse) {
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-		springLayout.putConstraint(SpringLayout.NORTH, btnTotalVacunados, 37, SpringLayout.SOUTH, topPanel);
-		springLayout.putConstraint(SpringLayout.WEST, btnTotalVacunados, 0, SpringLayout.WEST, topPanel);
-		add(btnTotalVacunados);
-		
-		JButton btnVacunadosPorRegion = new JButton("Total Vacunados por región");
+		midPanel.setLayout(null);
+		midPanel.add(btnTotalVacunados);
+
+		lblTotalVacPrimeraDosis = new JLabel("Total vacunados (primera dosis):");
+		lblTotalVacPrimeraDosis.setBounds(159, 100, 228, 14);
+		midPanel.add(lblTotalVacPrimeraDosis);
+
+		lblTotalVacSegundaDosis = new JLabel("Total vacunados (segunda dosis):");
+		lblTotalVacSegundaDosis.setBounds(159, 125, 228, 14);
+		midPanel.add(lblTotalVacSegundaDosis);
+
+		lblTotalDosisAdministradas = new JLabel("Total dosis administradas:");
+		lblTotalDosisAdministradas.setBounds(159, 150, 228, 14);
+		midPanel.add(lblTotalDosisAdministradas);
+
+		JButton btnVacunadosPorRegion = new JButton("Total vacunados por región");
+		btnVacunadosPorRegion.setBounds(397, 132, 191, 32);
 		btnVacunadosPorRegion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int vacunadosregion1=totalVacunadosregion1(frame, comboRegion.getSelectedIndex() + 1);
-					int vacunadosregion2=totalVacunadosregion2(frame, comboRegion.getSelectedIndex() + 1);
-					int totalregion=vacunadosregion1+vacunadosregion2;
-					lblVacunadosRegionPrimera.setText(lblVacunadosRegionPrimera.getText()+String.valueOf(vacunadosregion1));
-					lblTotalVacunadosRegionSegunda.setText(lblTotalVacunadosRegionSegunda.getText()+String.valueOf(vacunadosregion2));
-					lblTotalDosisAdministradasRegion.setText(lblTotalDosisAdministradasRegion.getText()+totalregion);
-				} catch (GSNSException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					int totalPrimera = frame.getGestorEstadisticas()
+							.consultarTotalVacunadosPorRegionPrimeraDosis(comboTotalRegion.getSelectedIndex() + 1);
+					int totalSegunda = frame.getGestorEstadisticas()
+							.consultarTotalVacunadosPorRegionSegundaDosis(comboTotalRegion.getSelectedIndex() + 1);
+					int total = totalPrimera + totalSegunda;
+					lblTotalVacunadosRegionPrimera
+							.setText("Total vacunados por región (primera dosis): " + String.valueOf(totalPrimera));
+					lblTotalVacunadosRegionSegunda
+							.setText("Total vacunados por región (segunda dosis): " + String.valueOf(totalSegunda));
+					lblTotalDosisAdministradasRegion.setText("Total dosis administradas por región: " + total);
+				} catch (GSNSException gsnse) {
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-
 		});
-		springLayout.putConstraint(SpringLayout.NORTH, btnVacunadosPorRegion, 29, SpringLayout.SOUTH, btnTotalVacunados);
-		springLayout.putConstraint(SpringLayout.WEST, btnVacunadosPorRegion, 0, SpringLayout.WEST, topPanel);
-		add(btnVacunadosPorRegion);
-		
-		lblTotalVacPrimeraDosis = new JLabel("Total Vacunados Primera Dosis:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblTotalVacPrimeraDosis, 17, SpringLayout.SOUTH, topPanel);
-		springLayout.putConstraint(SpringLayout.WEST, lblTotalVacPrimeraDosis, 153, SpringLayout.WEST, this);
-		springLayout.putConstraint(SpringLayout.EAST, lblTotalVacPrimeraDosis, -124, SpringLayout.EAST, this);
-		add(lblTotalVacPrimeraDosis);
-		
-		lblVacunadosRegionPrimera = new JLabel("Total Vacunados Region Primera Dosis:");
-		springLayout.putConstraint(SpringLayout.WEST, lblVacunadosRegionPrimera, 19, SpringLayout.EAST, btnVacunadosPorRegion);
-		add(lblVacunadosRegionPrimera);
-		
-		JButton btnPorcentaje = new JButton("Porcentaje Vacunados");
-		springLayout.putConstraint(SpringLayout.WEST, btnPorcentaje, 0, SpringLayout.WEST, topPanel);
-		btnPorcentaje.addActionListener(new ActionListener(){
+		midPanel.add(btnVacunadosPorRegion);
+
+		lblTotalVacunadosRegionPrimera = new JLabel("Total vacunados por región (primera dosis):");
+		lblTotalVacunadosRegionPrimera.setBounds(598, 100, 282, 14);
+		midPanel.add(lblTotalVacunadosRegionPrimera);
+
+		lblTotalVacunadosRegionSegunda = new JLabel("Total vacunados por región (segunda dosis):");
+		lblTotalVacunadosRegionSegunda.setBounds(598, 125, 282, 14);
+		midPanel.add(lblTotalVacunadosRegionSegunda);
+
+		lblTotalDosisAdministradasRegion = new JLabel("Total dosis administradas por región:");
+		lblTotalDosisAdministradasRegion.setBounds(598, 150, 282, 14);
+		midPanel.add(lblTotalDosisAdministradasRegion);
+
+		JButton btnPorcentaje = new JButton("Porcentaje vacunados");
+		btnPorcentaje.setBounds(10, 190, 139, 64);
+		btnPorcentaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int porcentajes1=porcentajesPrimeraDosis(frame);
-					int porcentajes2=porcentajesSegundaDosis(frame);
-					lblPorcentajePrimera.setText(lblPorcentajePrimera.getText()+String.valueOf(porcentajes1)+"%");
-					lblPorcentajeCompletamente.setText(lblPorcentajeCompletamente.getText()+String.valueOf(porcentajes2)+"%");
-				} catch (GSNSException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					int porcentajePrimera = frame.getGestorEstadisticas()
+							.consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis();
+					int porcentajeSegunda = frame.getGestorEstadisticas()
+							.consultarPorcentajeVacunadosSobreRecibidasSegundaDosis();
+					lblPorcentajePrimera
+							.setText("Porcentaje vacunados (primera dosis): " + String.valueOf(porcentajePrimera) + "%");
+					lblPorcentajeCompletamente.setText(
+							"Porcentaje vacunados (pauta completa): " + String.valueOf(porcentajeSegunda) + "%");
+				} catch (GSNSException gsnse) {
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-
 		});
-		add(btnPorcentaje);
-		
-		JButton btnPorcentajeRegion = new JButton("Porcentaje Vacunados por región");
+		midPanel.add(btnPorcentaje);
+
+		lblPorcentajePrimera = new JLabel("Porcentaje vacunados (primera dosis):");
+		lblPorcentajePrimera.setBounds(159, 194, 228, 14);
+		midPanel.add(lblPorcentajePrimera);
+
+		lblPorcentajeCompletamente = new JLabel("Porcentaje vacunados (pauta completa):");
+		lblPorcentajeCompletamente.setBounds(159, 240, 228, 14);
+		midPanel.add(lblPorcentajeCompletamente);
+
+		JButton btnPorcentajeRegion = new JButton("Porcentaje vacunados por región");
+		btnPorcentajeRegion.setBounds(397, 222, 191, 32);
 		btnPorcentajeRegion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int porcentajeregion1=PorcentajeVacunadosregion1(frame, comboRegion.getSelectedIndex() + 1);
-					int porcentajeregion2=PorcentajeVacunadosregion2(frame, comboRegion.getSelectedIndex() + 1);
-					
-					lblPorcentaje1Dosisregion.setText(lblPorcentaje1Dosisregion.getText()+String.valueOf(porcentajeregion1));
-					lblPorcentajeDosisRegionCompleta.setText(lblPorcentajeDosisRegionCompleta.getText()+String.valueOf(porcentajeregion2));
-					
-				} catch (GSNSException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					int porcentajePrimera = frame.getGestorEstadisticas()
+							.consultarPorcentajeVacunadosSobreRecibidasEnRegionPrimeraDosis(
+									comboTotalRegion.getSelectedIndex() + 1);
+					int porcentajeSegunda = frame.getGestorEstadisticas()
+							.consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(
+									comboTotalRegion.getSelectedIndex() + 1);
+
+					lblPorcentaje1Dosisregion.setText(
+							"Porcentaje vacunados por región (primera dosis): " + String.valueOf(porcentajePrimera));
+					lblPorcentajeDosisRegionCompleta.setText(
+							"Porcentaje vacunados por región (pauta completa): " + String.valueOf(porcentajeSegunda));
+				} catch (GSNSException gsnse) {
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-
 		});
-		springLayout.putConstraint(SpringLayout.NORTH, btnPorcentajeRegion, 237, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.SOUTH, btnPorcentaje, -18, SpringLayout.NORTH, btnPorcentajeRegion);
-		springLayout.putConstraint(SpringLayout.WEST, btnPorcentajeRegion, 0, SpringLayout.WEST, topPanel);
 		btnPorcentajeRegion.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(btnPorcentajeRegion);
-		
-		lblPorcentajePrimera = new JLabel("% Vacunados 1 Dosis:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblPorcentajePrimera, 0, SpringLayout.NORTH, btnPorcentaje);
-		springLayout.putConstraint(SpringLayout.WEST, lblPorcentajePrimera, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
-		add(lblPorcentajePrimera);
-		
-		lblPorcentaje1Dosisregion = new JLabel("% Vacunados  region 1 Dosis:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblPorcentaje1Dosisregion, 4, SpringLayout.NORTH, btnPorcentajeRegion);
-		add(lblPorcentaje1Dosisregion);
+		midPanel.add(btnPorcentajeRegion);
 
-		comboRegion = new JComboBox<String>(RegionEnum.getNombres());
-		comboRegion.setBounds(242, 176, 181, 20);
-		add(comboRegion);
-		
-		lblTotalVacSegundaDosis = new JLabel("Total Vacunados Segunda Dosis:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblTotalVacSegundaDosis, 0, SpringLayout.NORTH, btnTotalVacunados);
-		springLayout.putConstraint(SpringLayout.WEST, lblTotalVacSegundaDosis, 0, SpringLayout.WEST, lblTotalVacPrimeraDosis);
-		add(lblTotalVacSegundaDosis);
-		
-		lblDosisAdministradas = new JLabel("Total Dosis Administradas:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblVacunadosRegionPrimera, 9, SpringLayout.SOUTH, lblDosisAdministradas);
-		springLayout.putConstraint(SpringLayout.NORTH, lblDosisAdministradas, 6, SpringLayout.SOUTH, lblTotalVacSegundaDosis);
-		springLayout.putConstraint(SpringLayout.WEST, lblDosisAdministradas, 0, SpringLayout.WEST, lblTotalVacPrimeraDosis);
-		add(lblDosisAdministradas);
-		
-		lblTotalVacunadosRegionSegunda = new JLabel("Total Vacunados Region Segunda Dosis:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblTotalVacunadosRegionSegunda, 6, SpringLayout.SOUTH, lblVacunadosRegionPrimera);
-		springLayout.putConstraint(SpringLayout.WEST, lblTotalVacunadosRegionSegunda, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
-		add(lblTotalVacunadosRegionSegunda);
-		
-		lblTotalDosisAdministradasRegion = new JLabel("Total Dosis Administradas Region:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblTotalDosisAdministradasRegion, 6, SpringLayout.SOUTH, lblTotalVacunadosRegionSegunda);
-		springLayout.putConstraint(SpringLayout.WEST, lblTotalDosisAdministradasRegion, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
-		add(lblTotalDosisAdministradasRegion);
-		
-		lblPorcentajeCompletamente = new JLabel("% Vacunados Completamente:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblPorcentajeCompletamente, 6, SpringLayout.SOUTH, lblPorcentajePrimera);
-		springLayout.putConstraint(SpringLayout.WEST, lblPorcentajeCompletamente, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
-		add(lblPorcentajeCompletamente);
-		
-		lblPorcentajeDosisRegionCompleta = new JLabel("% Vacunados  region Completamente:");
-		springLayout.putConstraint(SpringLayout.NORTH, lblPorcentajeDosisRegionCompleta, 6, SpringLayout.SOUTH, lblPorcentaje1Dosisregion);
-		springLayout.putConstraint(SpringLayout.WEST, lblPorcentaje1Dosisregion, 0, SpringLayout.WEST, lblPorcentajeDosisRegionCompleta);
-		springLayout.putConstraint(SpringLayout.EAST, lblPorcentajeDosisRegionCompleta, -43, SpringLayout.EAST, this);
-		add(lblPorcentajeDosisRegionCompleta);
+		comboTotalRegion = new JComboBox<String>(RegionEnum.getNombres());
+		comboTotalRegion.setBounds(397, 100, 191, 21);
+		midPanel.add(comboTotalRegion);
+
+		lblPorcentaje1Dosisregion = new JLabel("Porcentaje vacunados por región (primera dosis):");
+		lblPorcentaje1Dosisregion.setBounds(598, 194, 282, 14);
+		midPanel.add(lblPorcentaje1Dosisregion);
+
+		lblPorcentajeDosisRegionCompleta = new JLabel("Porcentaje vacunados por región (pauta completa):");
+		lblPorcentajeDosisRegionCompleta.setBounds(598, 240, 282, 14);
+		midPanel.add(lblPorcentajeDosisRegionCompleta);
+
+		comboPorcentajeRegion = new JComboBox<String>(RegionEnum.getNombres());
+		comboPorcentajeRegion.setBounds(397, 190, 191, 21);
+		midPanel.add(comboPorcentajeRegion);
 	}
 
-	/*
-	 * Metodo que invoca a consultar el porcentaje de gente vacunada completamente
-	 * 
-	 * @param el Main frame
-	 * 
-	 * @return Devuelve un entero con el porcentaje de vacunados completamente
-	 */
-	protected int PorcentajeVacunadosregion2(Main frame, int i) throws GSNSException  {
-		return frame.getGestorEstadisticas().consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(i);
-	}
-
-	/*
-	 * Metodo que invoca a consultar el porcentaje de gente vacunada con 1 dosis
-	 * 
-	 * @param el Main frame
-	 * 
-	 * @return Devuelve un entero con el porcentaje de vacunados con 1 dosis.
-	 */
-	protected int PorcentajeVacunadosregion1(Main frame, int i) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarPorcentajeVacunadosSobreRecibidasEnRegionPrimeraDosis(i);
-	}
-
-	/*
-	 * Metodo que invoca a consultar el porcentaje de gente vacunada completamente
-	 * 
-	 * @param el Main frame
-	 * 
-	 * @return Devuelve un entero con el porcentaje de vacunados completamente.
-	 */
-	protected int porcentajesSegundaDosis(Main frame) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarPorcentajeVacunadosSobreRecibidasSegundaDosis();
-	}
-
-	/*
-	 * Metodo que invoca a consultar el porcentaje de gente vacunada con 1 dosis
-	 * 
-	 * @param el Main frame
-	 * 
-	 * @return Devuelve un entero con el porcentaje de vacunados con 1 dosis.
-	 */
-	protected int porcentajesPrimeraDosis(Main frame) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis();
-	}
-
-	/*
-	 * Metodo que invoca a consultar el total de gente vacunada con 1 dosis
-	 * 
-	 * @param el Main frame
-	 * 
-	 * @return Devuelve un entero con el total de vacunados con 1 dosis.
-	 */
-	protected int totalVacunadosregion1(Main frame, int total) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionPrimeraDosis(total);
-	}
-
-	/*
-	 * Metodo que invoca a consultar el total de gente vacunada con 2 dosis
-	 * 
-	 * @param el Main frame
-	 * 
-	 * @return Devuelve un entero con el total de vacunados con 2 dosis.
-	 */
-	protected int totalVacunadosregion2(Main frame, int total) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionSegundaDosis(total);
-	}
-	/*
-	 * Metodo que invoca a consultar total vacunados con la segunda dosis
-	 * 
-	 * @param el Main frame
-	 * 
-	 * @return Devuelve un entero con el total de vacunados con segunda dosis.
-	 */
-	protected int totalVacunadosSegunda(Main frame) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarTotalVacunadosSegundaDosis();
-	}
-
-	/*
-	 * Metodo que invoca a consultar total vacunados
-	 * 
-	 * @param el Main frame
-	 * 
-	 * @return Devuelve un entero con el total.
-	 */
-	private int totalVacunados(Main frame) throws GSNSException {
-		return frame.getGestorEstadisticas().consultarTotalVacunadosPrimeraDosis();
-
-	}
 }
