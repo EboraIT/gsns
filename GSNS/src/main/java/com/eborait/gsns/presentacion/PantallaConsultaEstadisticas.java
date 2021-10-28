@@ -82,14 +82,13 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		
 		lblTotalVacPrimeraDosis = new JLabel("Total Vacunados Primera Dosis:");
 		springLayout.putConstraint(SpringLayout.NORTH, lblTotalVacPrimeraDosis, 17, SpringLayout.SOUTH, topPanel);
+		springLayout.putConstraint(SpringLayout.WEST, lblTotalVacPrimeraDosis, 153, SpringLayout.WEST, this);
 		springLayout.putConstraint(SpringLayout.EAST, lblTotalVacPrimeraDosis, -124, SpringLayout.EAST, this);
 		add(lblTotalVacPrimeraDosis);
 		
-		JLabel lblNewLabel_1 = new JLabel("Total Vacunados Region:");
-		springLayout.putConstraint(SpringLayout.WEST, lblTotalVacPrimeraDosis, -88, SpringLayout.WEST, lblNewLabel_1);
-		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_1, 116, SpringLayout.NORTH, this);
-		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_1, 73, SpringLayout.EAST, btnVacunadosPorRegion);
-		add(lblNewLabel_1);
+		JLabel lblVacunadosRegionPrimera = new JLabel("Total Vacunados Region Primera Dosis:");
+		springLayout.putConstraint(SpringLayout.WEST, lblVacunadosRegionPrimera, 19, SpringLayout.EAST, btnVacunadosPorRegion);
+		add(lblVacunadosRegionPrimera);
 		
 		JButton btnPorcentaje = new JButton("Porcentaje Vacunados");
 		springLayout.putConstraint(SpringLayout.WEST, btnPorcentaje, 0, SpringLayout.WEST, topPanel);
@@ -122,9 +121,15 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		add(lblTotalVacSegundaDosis);
 		
 		lblDosisAdministradas = new JLabel("Total Dosis Administradas:");
+		springLayout.putConstraint(SpringLayout.NORTH, lblVacunadosRegionPrimera, 9, SpringLayout.SOUTH, lblDosisAdministradas);
 		springLayout.putConstraint(SpringLayout.NORTH, lblDosisAdministradas, 6, SpringLayout.SOUTH, lblTotalVacSegundaDosis);
 		springLayout.putConstraint(SpringLayout.WEST, lblDosisAdministradas, 0, SpringLayout.WEST, lblTotalVacPrimeraDosis);
 		add(lblDosisAdministradas);
+		
+		JLabel lblTotalVacunadosRegionSegunda = new JLabel("Total Vacunados Region Segunda Dosis:");
+		springLayout.putConstraint(SpringLayout.NORTH, lblTotalVacunadosRegionSegunda, 6, SpringLayout.SOUTH, lblVacunadosRegionPrimera);
+		springLayout.putConstraint(SpringLayout.WEST, lblTotalVacunadosRegionSegunda, 0, SpringLayout.WEST, lblVacunadosRegionPrimera);
+		add(lblTotalVacunadosRegionSegunda);
 	}
 
 	protected int totalVacunadosSegunda(Main frame) throws GSNSException {
