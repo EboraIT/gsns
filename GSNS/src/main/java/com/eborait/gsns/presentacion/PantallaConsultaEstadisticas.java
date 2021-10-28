@@ -1,38 +1,32 @@
 package com.eborait.gsns.presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import com.eborait.gsns.dominio.entitymodel.RegionEnum;
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 public class PantallaConsultaEstadisticas extends JPanel {
-
-	private JPanel contentPane;
-
-	private JComboBox<String> comboRegion;
 	/**
-	 * Launch the application.
+	 * serialVersionUID
 	 */
+	private static final long serialVersionUID = 1L;
+	private JComboBox<String> comboRegion;
 
 	/**
-	 * Create the frame.
+	 * Crea el panel.
 	 * 
-	 * @param frame
+	 * @param frame JFrame de la aplicación.
 	 */
 	public PantallaConsultaEstadisticas(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -111,28 +105,20 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_1_1, 46, SpringLayout.EAST, btnPorcentajeRegion);
 		add(lblNewLabel_1_1);
 
-		comboRegion = new JComboBox<String>();
+		comboRegion = new JComboBox<String>(RegionEnum.getNombres());
 		comboRegion.setBounds(242, 176, 181, 20);
 		add(comboRegion);
-		
-		try {
-			comboRegion = new JComboBox<>((String[]) );
-			comboRegion.setBounds(676, 36, 181, 20);
-			add(comboRegion);
-		} catch (GSNSException gsnse) {
-			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			throw gsnse;
-		}
 	}
 
 	/*
 	 * Metodo que invoca a consultar total vacunados
 	 * 
 	 * @param el Main frame
+	 * 
 	 * @return Devuelve un entero con el total.
 	 */
 	private int totalVacunados(Main frame) throws GSNSException {
-		return  frame.getGestorEstadisticas().consultarTotalVacunados();
+		return frame.getGestorEstadisticas().consultarTotalVacunados();
 
 	}
 
