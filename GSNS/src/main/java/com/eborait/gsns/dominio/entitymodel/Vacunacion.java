@@ -1,6 +1,8 @@
 package com.eborait.gsns.dominio.entitymodel;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.eborait.gsns.persistencia.DAOFactory;
@@ -23,6 +25,11 @@ public class Vacunacion {
 
 	public Vacunacion(int id, String vacuna, String paciente, Date fecha, boolean segundaDosis) throws SQLException {
 		this(id, new TipoVacuna(vacuna), DAOFactory.getPacienteDAO().get(paciente), fecha, segundaDosis);
+	}
+
+	public Vacunacion(int id, TipoVacuna vacuna, Paciente paciente, String fecha, boolean segundaDosis)
+			throws ParseException {
+		this(id, vacuna, paciente, new SimpleDateFormat("dd/MM/yyyy").parse(fecha), segundaDosis);
 	}
 
 	public int getId() {

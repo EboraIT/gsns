@@ -2,7 +2,6 @@ package com.eborait.gsns.dominio.controller;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Date;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.Paciente;
@@ -55,7 +54,6 @@ public class GestorVacunacion {
 	/**
 	 * Registra la vacunación de un paciente.
 	 * 
-	 * @param id           Id de vacunación.
 	 * @param fecha        Fecha de vacunación.
 	 * @param nombre       Nombre de la persona vacunada.
 	 * @param apellidos    Apellidos de la persona vacunada.
@@ -67,12 +65,16 @@ public class GestorVacunacion {
 	 * @return Devuelve 1 si se ha registrado correctamente, 0 de lo contrario.
 	 * @throws GSNSException Si se produce una excepción al insertar.
 	 */
-	public boolean registrarVacunacion(int id, Date fecha, String nombre, String apellidos, String nif, TipoVacuna tipo,
+	public boolean registrarVacunacion(String fecha, String nombre, String apellidos, String nif, String tipo,
 			int prioridad, int region, boolean segundaDosis) throws GSNSException {
-		Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region);
-		Vacunacion vacunacion = new Vacunacion(id, tipo, paciente, fecha, segundaDosis);
 		try {
+			Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region);
+			Vacunacion vacunacion = new Vacunacion(0, new TipoVacuna(tipo), paciente, fecha, segundaDosis);
 			return DAOFactory.getVacunacionDAO().insert(vacunacion) == 1;
+		} catch (ParseException pe) {
+			System.out.println("Excepción insertando vacunación:\n\n" + pe.getMessage());
+			pe.printStackTrace();
+			throw new GSNSException("El formato de la fecha no es correcto. El formato adecuado es dd/mm/yyyy.");
 		} catch (SQLException sqle) {
 			System.out.println("Excepción insertando vacunación:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
