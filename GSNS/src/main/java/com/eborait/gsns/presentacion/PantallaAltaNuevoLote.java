@@ -126,6 +126,9 @@ public class PantallaAltaNuevoLote extends JPanel {
 		
 	}
 
+	/*
+	 * 
+	 */
 	protected void registrarLote(Main frame) {
 		if(validar()) {
 			try {
