@@ -51,6 +51,8 @@ public class GestorRepartoVacunas {
 	}
 
 	/*
+	 * TODO
+	 * 
 	 * Consulta que devuelve la entrega a cada región
 	 * 
 	 * @param region La cual cogeremos el nombre de la region y la población.
@@ -62,21 +64,20 @@ public class GestorRepartoVacunas {
 	 * Para resolver la cantidad será dependiendo del 60% de la poblacion y 40% de
 	 * la IA.
 	 */
-	public int calcularEntregasRegion(RegionEnum region, String regionP, int IA) throws GSNSException {
-
-		LoteVacunas lv;
-		int ia = IA;
-		int cantidadPoblacion = region.getPoblacion(regionP);
-		double total;
-		return total = lv.getCantidad() / ia * 0.40 + cantidadPoblacion * 0.60;
-
-	}
-
-	public List<EntregaVacunas> calcularEntregasRegion(RegionEnum region) throws GSNSException {
-		ArrayList<EntregaVacunas> entregaVacunas = null;
-		// entregaVacunas.SeleccionarEntregas(RegionEnum)
-		return entregaVacunas;
-
+	public int calcularEntregasRegion(int region, int ia) throws GSNSException {
+		try {
+			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll("region", "region");
+			int cantidad = 0;
+			for (EntregaVacunas entregaVacunas : entregas) {
+				cantidad += entregaVacunas.getCantidad();
+			}
+			int cantidadPoblacion = RegionEnum.valueOf(region).getPoblacion();
+			return (int) (cantidad / ia * 0.40 + cantidadPoblacion * 0.60);
+		} catch (SQLException sqle) {
+			System.out.println("Excepción consultando cantidad de entregas:\n\n" + sqle.getMessage());
+			sqle.printStackTrace();
+			throw new GSNSException("Se ha producido un error al calcular las entregas.");
+		}
 	}
 
 	/**
