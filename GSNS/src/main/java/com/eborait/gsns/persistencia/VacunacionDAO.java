@@ -30,11 +30,11 @@ public class VacunacionDAO extends AbstractEntityDAO<Vacunacion> {
 	/**
 	 * Formato sentencia insert.
 	 */
-	private static final String INSERT = "INSERT INTO vacunacion VALUES(%d, %s, %s, %s, %s)";
+	private static final String INSERT = "INSERT INTO vacunacion VALUES(%s, '%s', '%s', '%s', '%s')";
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE vacunacion SET id = %s, tipo = %s, paciente = %s, fecha = %s, segunda_dosis = %s WHERE id = %s";
+	private static final String UPDATE = "UPDATE vacunacion SET id = %s, tipo = '%s', paciente = '%s', fecha = '%s', segunda_dosis = %s WHERE id = %s";
 	/**
 	 * Formato sentencia delete.
 	 */

@@ -22,7 +22,7 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT = "SELECT * FROM entrega_vacunas WHERE id = %s";
+	private static final String SELECT = "SELECT * FROM entrega_vacunas WHERE id = '%s'";
 	/**
 	 * Formato sentencia select.
 	 */
@@ -30,15 +30,15 @@ public class EntregaDAO extends AbstractEntityDAO<EntregaVacunas> {
 	/**
 	 * Formato sentencia insert.
 	 */
-	private static final String INSERT = "INSERT INTO entrega_vacunas VALUES(%s, %s, %s, %d, %d, %s, %d)";
+	private static final String INSERT = "INSERT INTO entrega_vacunas VALUES('%s', '%s', '%s', %s, %s, '%s', %s)";
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE entrega_vacunas SET id = %s, lote = %s, fecha = %s, cantidad = %d, prioridad = %d, tipo_vacuna = %s, region = %d WHERE id = %s";
+	private static final String UPDATE = "UPDATE entrega_vacunas SET id = '%s', lote = '%s', fecha = '%s', cantidad = %s, prioridad = %s, tipo_vacuna = '%s', region = %s WHERE id = '%s'";
 	/**
 	 * Formato sentencia delete.
 	 */
-	private static final String DELETE = "DELETE FROM entrega_vacunas WHERE id = %s";
+	private static final String DELETE = "DELETE FROM entrega_vacunas WHERE id = '%s'";
 
 	/**
 	 * Realiza una consulta a la base de datos.
