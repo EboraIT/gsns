@@ -199,10 +199,24 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		return frame.getGestorEstadisticas().consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis();
 	}
 
+	/*
+	 * Metodo que invoca a consultar el total de gente vacunada con 1 dosis
+	 * 
+	 * @param el Main frame
+	 * 
+	 * @return Devuelve un entero con el total de vacunados con 1 dosis.
+	 */
 	protected int totalVacunadosregion1(Main frame, int total) throws GSNSException {
 		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionPrimeraDosis(total);
 	}
 
+	/*
+	 * Metodo que invoca a consultar el total de gente vacunada con 2 dosis
+	 * 
+	 * @param el Main frame
+	 * 
+	 * @return Devuelve un entero con el total de vacunados con 2 dosis.
+	 */
 	protected int totalVacunadosregion2(Main frame, int total) throws GSNSException {
 		return frame.getGestorEstadisticas().consultarTotalVacunadosPorRegionSegundaDosis(total);
 	}
