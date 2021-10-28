@@ -11,7 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-<<<<<<< HEAD
+
 import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.RegionEnum;
@@ -22,8 +22,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-=======
->>>>>>> branch 'Presentation' of git@github.com:escolanojorge/eborait.git
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -34,23 +32,10 @@ public class PantallaCalculoEntrega extends JPanel {
 
 	public PantallaCalculoEntrega(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-<<<<<<< HEAD
 		setLayout(null);
 		
-		JLabel lblCalculoDeReparto = new JLabel("Calculo de Reparto de Vacunas");
-		lblCalculoDeReparto.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCalculoDeReparto.setBounds(10, 11, 263, 25);
-		add(lblCalculoDeReparto);
 		
-		JButton btnAtras = new JButton("Atras");
-		btnAtras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(frame.getPanelMain());
-			}
-		});
-		btnAtras.setBounds(271, 11, 89, 23);
-		add(btnAtras);
-=======
+		
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel topPanel = new JPanel();
@@ -72,7 +57,6 @@ public class PantallaCalculoEntrega extends JPanel {
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
->>>>>>> branch 'Presentation' of git@github.com:escolanojorge/eborait.git
 		
 		JLabel lblNewLabel = new JLabel("Seleccione una región:");
 		lblNewLabel.setBounds(10, 73, 125, 14);
@@ -131,7 +115,7 @@ public class PantallaCalculoEntrega extends JPanel {
 		add(lblNewLabel_3);
 		
 		lblCalculo = new JLabel("");
-		lblCalculo.setBounds(240, 240, 200, 14);
+		lblCalculo.setBounds(333, 500, 97, 14);
 		add(lblCalculo);
 		
 		
