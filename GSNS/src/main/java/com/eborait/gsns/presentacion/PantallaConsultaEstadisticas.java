@@ -59,7 +59,9 @@ public class PantallaConsultaEstadisticas extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					int total2=totalVacunados(frame);
+					int total3=totalVacunadosSegunda(frame);
 					lblTotalVacPrimeraDosis.setText(lblTotalVacPrimeraDosis.getText()+String.valueOf(total2));
+					lblTotalVacSegundaDosis.setText(lblTotalVacSegundaDosis.getText()+String.valueOf(total3));
 				} catch (GSNSException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -115,6 +117,10 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		springLayout.putConstraint(SpringLayout.NORTH, lblTotalVacSegundaDosis, 0, SpringLayout.NORTH, btnTotalVacunados);
 		springLayout.putConstraint(SpringLayout.WEST, lblTotalVacSegundaDosis, 0, SpringLayout.WEST, lblTotalVacPrimeraDosis);
 		add(lblTotalVacSegundaDosis);
+	}
+
+	protected int totalVacunadosSegunda(Main frame) throws GSNSException {
+		return frame.getGestorEstadisticas().consultarTotalVacunadosSegundaDosis();
 	}
 
 	/*
