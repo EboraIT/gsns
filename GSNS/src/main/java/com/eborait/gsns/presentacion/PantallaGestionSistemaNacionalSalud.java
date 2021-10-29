@@ -11,8 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-
 public class PantallaGestionSistemaNacionalSalud extends JPanel {
 	/**
 	 * serialVersionUID
@@ -23,7 +21,6 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 	 * Crea el panel.
 	 * 
 	 * @param frame JFrame de la aplicación.
-	 * @throws GSNSException Si se produce una excepción de la aplicación.
 	 */
 	public PantallaGestionSistemaNacionalSalud(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -48,9 +45,8 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
-		
 
-		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");		
+		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
 		btnAltaNuevoLote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaAltaNuevoLote(frame));
@@ -58,7 +54,6 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 		});
 		btnAltaNuevoLote.setBounds(185, 167, 176, 47);
 		midPanel.add(btnAltaNuevoLote);
-		
 
 		JButton btnCalculoEntrega = new JButton("Calculo de Entrega");
 		btnCalculoEntrega.addActionListener(new ActionListener() {

@@ -3,6 +3,8 @@ package com.eborait.gsns.presentacion;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,13 +13,16 @@ import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class PantallaGestionSistemaRegionalSalud extends JPanel {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Create the frame.
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
 	 */
 	public PantallaGestionSistemaRegionalSalud(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
