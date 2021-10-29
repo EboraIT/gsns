@@ -11,31 +11,27 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import javax.swing.border.EmptyBorder;
-
-import com.eborait.gsns.dominio.entitymodel.RegionEnum;
-import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-
-import javax.swing.SwingConstants;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
 public class PantallaCalculoEntrega extends JPanel {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txtIA;
 	private JComboBox<String> comboRegion;
 	private JLabel lblCalculo;
 
+	/**
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
 	public PantallaCalculoEntrega(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLayout(null);
-		
-		
-		
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel topPanel = new JPanel();
@@ -57,40 +53,40 @@ public class PantallaCalculoEntrega extends JPanel {
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Seleccione una región:");
-		lblNewLabel.setBounds(10, 73, 125, 14);
-		add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Población:");
-		lblNewLabel_1.setBounds(10, 109, 63, 14);
-		add(lblNewLabel_1);
-		
-		comboRegion = new JComboBox<String>(RegionEnum.getNombres());
-		comboRegion.setBounds(140, 73, 93, 14);
-		add(comboRegion);
-		
+
+		JLabel lblSeleccionarRegion = new JLabel("Seleccione una región:");
+		lblSeleccionarRegion.setBounds(10, 36, 201, 14);
+		midPanel.add(lblSeleccionarRegion);
+
+		comboRegion = new JComboBox<String>();
+		comboRegion.setBounds(242, 36, 181, 20);
+		midPanel.add(comboRegion);
+
+		JLabel lblPoblacionTitulo = new JLabel("Población:");
+		lblPoblacionTitulo.setBounds(10, 64, 201, 14);
+		midPanel.add(lblPoblacionTitulo);
+
 		JLabel lblPoblacion = new JLabel(comboRegion.getSelectedItem().toString());
-		lblPoblacion.setBounds(83, 109, 46, 14);
-		add(lblPoblacion);
-		
-		JLabel lblNewLabel_2 = new JLabel("Introduzca la IA:");
-		lblNewLabel_2.setBounds(10, 152, 107, 14);
-		add(lblNewLabel_2);
-		
+		lblPoblacion.setBounds(242, 64, 181, 20);
+		midPanel.add(lblPoblacion);
+
+		JLabel lblIA = new JLabel("Introduzca la IA:");
+		lblIA.setBounds(10, 92, 201, 14);
+		midPanel.add(lblIA);
+
 		txtIA = new JTextField();
-		txtIA.setBounds(102, 149, 86, 20);
-		add(txtIA);
 		txtIA.setColumns(10);
-		
+		txtIA.setBounds(242, 92, 181, 20);
+		midPanel.add(txtIA);
+
 		JButton btnCalcularReparto = new JButton("Calcular");
 		btnCalcularReparto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(validar()) {
+				if (validar()) {
 					int reparto = 0;
 					try {
-						reparto = frame.getGestorRepartoVacunas().calcularEntregasRegion(comboRegion.getSelectedIndex()+1,
-								Integer.parseInt(txtIA.getText()));
+						reparto = frame.getGestorRepartoVacunas().calcularEntregasRegion(
+								comboRegion.getSelectedIndex() + 1, Integer.parseInt(txtIA.getText()));
 						lblCalculo.setText("" + String.valueOf(reparto));
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
@@ -99,32 +95,31 @@ public class PantallaCalculoEntrega extends JPanel {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					//lblCalculo.setText("Vacunas a repartir:"+reparto);
-					}else {
-						JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
-								JOptionPane.WARNING_MESSAGE);
-					}
+					// lblCalculo.setText("Vacunas a repartir: "+reparto);
+				} else {
+					JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
+							JOptionPane.WARNING_MESSAGE);
 				}
-				
+			}
+
 		});
-		btnCalcularReparto.setBounds(10, 192, 430, 23);
-		add(btnCalcularReparto);
-		
-		JLabel lblNewLabel_3 = new JLabel("Vacunas a repartir:");
-		lblNewLabel_3.setBounds(133, 240, 97, 14);
-		add(lblNewLabel_3);
-		
+		btnCalcularReparto.setBounds(10, 131, 847, 23);
+		midPanel.add(btnCalcularReparto);
+
+		JLabel lblReparto = new JLabel("Vacunas a repartir:");
+		lblReparto.setBounds(444, 36, 413, 14);
+		midPanel.add(lblReparto);
+
 		lblCalculo = new JLabel("");
 		lblCalculo.setBounds(333, 500, 97, 14);
-		add(lblCalculo);
-		
-		
-		
+		midPanel.add(lblCalculo);
+
 	}
+
 	/**
 	 * Valida los campos de texto .
 	 * 
-	 * @return true si la validación es correcta, false de lo contrario. 
+	 * @return true si la validación es correcta, false de lo contrario.
 	 */
 	private boolean validar() {
 		JTextField[] textFields = { txtIA };
