@@ -3,6 +3,8 @@ package com.eborait.gsns.presentacion;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,13 +13,23 @@ import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+/**
+ * Pantalla de gestión del Sistema Regional de Salud.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
 public class PantallaGestionSistemaRegionalSalud extends JPanel {
 
+	/** El serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
 	/**
-	 * Create the frame.
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
 	 */
 	public PantallaGestionSistemaRegionalSalud(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -52,7 +64,7 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 				}
 			}
 		});
-		btnAltaEntregas.setBounds(546, 179, 158, 47);
+		btnAltaEntregas.setBounds(546, 167, 158, 47);
 
 		JButton btnRegistrarVacunacion = new JButton("Registrar Vacunación");
 		btnRegistrarVacunacion.addActionListener(new ActionListener() {
@@ -64,7 +76,7 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 				}
 			}
 		});
-		btnRegistrarVacunacion.setBounds(185, 179, 176, 47);
+		btnRegistrarVacunacion.setBounds(185, 167, 176, 47);
 		midPanel.setLayout(null);
 		midPanel.add(btnAltaEntregas);
 		midPanel.add(btnRegistrarVacunacion);

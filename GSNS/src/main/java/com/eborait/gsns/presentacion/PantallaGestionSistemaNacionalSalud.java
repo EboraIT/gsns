@@ -11,19 +11,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-
+/**
+ * Pantalla de gestión del Sistema Nacional de Salud.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
 public class PantallaGestionSistemaNacionalSalud extends JPanel {
-	/**
-	 * serialVersionUID
-	 */
+	
+	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Crea el panel.
 	 * 
 	 * @param frame JFrame de la aplicación.
-	 * @throws GSNSException Si se produce una excepción de la aplicación.
 	 */
 	public PantallaGestionSistemaNacionalSalud(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,24 +53,22 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
 
-		JButton btnCalculoEntrega = new JButton("Calculo de Entrega");
-		btnCalculoEntrega.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(new PantallaCalculoEntrega(frame));
-			}
-		});
-		midPanel.add(btnCalculoEntrega);
-
 		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
 		btnAltaNuevoLote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaAltaNuevoLote(frame));
 			}
 		});
+		btnAltaNuevoLote.setBounds(185, 167, 176, 47);
 		midPanel.add(btnAltaNuevoLote);
 
-		JButton btnAtras = new JButton("Atras");
-		btnAtras.setBounds(563, 287, 89, 23);
-		add(btnAtras);
+		JButton btnCalculoEntrega = new JButton("Calculo de Entrega");
+		btnCalculoEntrega.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(new PantallaCalculoEntrega(frame));
+			}
+		});
+		btnCalculoEntrega.setBounds(546, 167, 158, 47);
+		midPanel.add(btnCalculoEntrega);
 	}
 }
