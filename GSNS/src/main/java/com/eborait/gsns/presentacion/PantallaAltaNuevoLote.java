@@ -85,7 +85,7 @@ public class PantallaAltaNuevoLote extends JPanel {
 		midPanel.add(lblIdLote);
 
 		try {
-			lblIdLote.setText(frame.getGestorRepartoVacunas().generarIdLote());
+			lblIdLote.setText(String.valueOf(frame.getGestorRepartoVacunas().generarIdLote()));
 		} catch (GSNSException gsnse) {
 			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			throw gsnse;
