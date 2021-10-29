@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
 /**
  * Pantalla de gestión del Sistema Nacional de Salud.
  *
@@ -20,7 +22,7 @@ import javax.swing.border.EmptyBorder;
  * @since 1.0
  */
 public class PantallaGestionSistemaNacionalSalud extends JPanel {
-	
+
 	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
@@ -56,7 +58,11 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
 		btnAltaNuevoLote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(new PantallaAltaNuevoLote(frame));
+				try {
+					frame.cambiarPanel(new PantallaAltaNuevoLote(frame));
+				} catch (GSNSException gsnse) {
+					frame.cambiarPanel(frame.getPanelMain());
+				}
 			}
 		});
 		btnAltaNuevoLote.setBounds(185, 167, 176, 47);

@@ -28,8 +28,8 @@ public class PantallaAltaNuevoLote extends JPanel {
 	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** El campo de texto del id de lote. */
-	private JTextField txtIdLote;
+	/** El label de id de lote. */
+	private JLabel lblIdLote;
 
 	/** El campo de texto de fecha de alta. */
 	private JTextField txtFechaAlta;
@@ -50,8 +50,9 @@ public class PantallaAltaNuevoLote extends JPanel {
 	 * Crea el panel.
 	 * 
 	 * @param frame JFrame de la aplicación.
+	 * @throws GSNSException Si se produce una excepción de la aplicación.
 	 */
-	public PantallaAltaNuevoLote(final Main frame) {
+	public PantallaAltaNuevoLote(final Main frame) throws GSNSException {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 
@@ -75,15 +76,20 @@ public class PantallaAltaNuevoLote extends JPanel {
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
 
-		JLabel lblIdLote = new JLabel("Identificador del lote:");
-		lblIdLote.setBounds(10, 36, 201, 14);
+		JLabel lblIdLoteTitulo = new JLabel("Identificador del lote:");
+		lblIdLoteTitulo.setBounds(10, 36, 201, 14);
+		midPanel.add(lblIdLoteTitulo);
+
+		lblIdLote = new JLabel();
+		lblIdLote.setBounds(242, 36, 181, 20);
 		midPanel.add(lblIdLote);
 
-		txtIdLote = new JTextField();
-		txtIdLote.setBounds(242, 36, 181, 20);
-		midPanel.add(txtIdLote);
-		txtIdLote.setColumns(10);
-
+		try {
+			lblIdLote.setText(frame.getGestorRepartoVacunas().generarIdLote());
+		} catch (GSNSException gsnse) {
+			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			throw gsnse;
+		}
 		JLabel lblFechaAlta = new JLabel("Fecha alta:");
 		lblFechaAlta.setBounds(10, 64, 201, 14);
 		midPanel.add(lblFechaAlta);
@@ -158,9 +164,9 @@ public class PantallaAltaNuevoLote extends JPanel {
 	private void registrarLote(Main frame) {
 		if (validar()) {
 			try {
-				frame.getGestorRepartoVacunas().altaNuevoLoteVacunas(txtIdLote.getText(),
-						txtFechaAlta.getText(), Integer.parseInt(txtCantidad.getText()),
-						txtNombreVacuna.getText(), txtFarmaceutica.getText(), txtFechaAprobacion.getText());
+				frame.getGestorRepartoVacunas().altaNuevoLoteVacunas(lblIdLote.getText(), txtFechaAlta.getText(),
+						Integer.parseInt(txtCantidad.getText()), txtNombreVacuna.getText(), txtFarmaceutica.getText(),
+						txtFechaAprobacion.getText());
 			} catch (GSNSException gsnse) {
 				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
@@ -176,8 +182,7 @@ public class PantallaAltaNuevoLote extends JPanel {
 	 * @return true si la validación es correcta, false de lo contrario.
 	 */
 	private boolean validar() {
-		JTextField[] textFields = { txtIdLote, txtFechaAlta, txtCantidad, txtNombreVacuna, txtFarmaceutica,
-				txtFechaAprobacion };
+		JTextField[] textFields = { txtFechaAlta, txtCantidad, txtNombreVacuna, txtFarmaceutica, txtFechaAprobacion };
 		for (JTextField jTextField : textFields) {
 			if (jTextField.getText().length() == 0)
 				return false;
