@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
-import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 import com.eborait.gsns.persistencia.DAOFactory;

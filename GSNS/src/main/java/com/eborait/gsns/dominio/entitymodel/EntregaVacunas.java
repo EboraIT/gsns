@@ -1,7 +1,5 @@
 package com.eborait.gsns.dominio.entitymodel;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
@@ -16,11 +14,11 @@ public class EntregaVacunas {
 	private Date fecha;
 	private int cantidad;
 
-	public EntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad, TipoVacuna tipo,
-			int region) throws ParseException, GSNSException {
+	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, TipoVacuna tipo,
+			int region) throws GSNSException {
 		this.id = id;
-		this.fecha = new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
-		this.lote = new LoteVacunas(lote, this.fecha, tipo, cantidad, tipo.getFarmaceutica());
+		this.fecha = fecha;
+		this.lote = new LoteVacunas(lote, fecha, tipo, cantidad, tipo.getFarmaceutica());
 		this.cantidad = cantidad;
 		this.grupoPrioridad = GrupoPrioridad.valueOf(prioridad);
 		this.tipo = tipo;

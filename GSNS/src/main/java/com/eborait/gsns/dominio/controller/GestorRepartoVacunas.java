@@ -1,11 +1,8 @@
 package com.eborait.gsns.dominio.controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
@@ -37,10 +34,10 @@ public class GestorRepartoVacunas {
 	 * @return Devuelve 1 si se ha registrado correctamente, 0 de lo contrario.
 	 * @throws GSNSException Si se produce una excepción al insertar.
 	 */
-	public boolean altaNuevoLoteVacunas(String id, Date fecha, int cantidad, String nombreVacuna, String farmaceutica,
+	public boolean altaNuevoLoteVacunas(String id, String fecha, int cantidad, String nombreVacuna, String farmaceutica,
 			String fechaAprobacion) throws GSNSException {
 		TipoVacuna tipo = new TipoVacuna(nombreVacuna, farmaceutica, fechaAprobacion);
-		LoteVacunas lote = new LoteVacunas(id, fecha, tipo, cantidad, farmaceutica);
+		LoteVacunas lote = new LoteVacunas(id, Util.parseFecha(fecha), tipo, cantidad, farmaceutica);
 		try {
 			return DAOFactory.getLoteVacunasDAO().insert(lote) == 1;
 		} catch (SQLException sqle) {
