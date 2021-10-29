@@ -47,19 +47,19 @@ public class GestorRepartoVacunas {
 		}
 	}
 
-	/*
+	/**
 	 * TODO
 	 * 
 	 * Consulta que devuelve la entrega a cada región
 	 * 
 	 * @param region La cual cogeremos el nombre de la region y la población.
 	 * 
-	 * @param IA Tendremos también como parametro la Incidencia Acumulada que pasará
-	 * el cliente por parametro
+	 * @param IA     Tendremos también como parametro la Incidencia Acumulada que
+	 *               pasará el cliente por parametro
 	 * 
 	 * @return cantidad Devuelve un entero con la cantidad de vacunas repartidas.
-	 * Para resolver la cantidad será dependiendo del 60% de la poblacion y 40% de
-	 * la IA.
+	 *         Para resolver la cantidad será dependiendo del 60% de la poblacion y
+	 *         40% de la IA.
 	 */
 	public int calcularEntregasRegion(int region, int ia) throws GSNSException {
 		try {
@@ -96,6 +96,22 @@ public class GestorRepartoVacunas {
 			System.out.println("Excepción consultado lotes de vacunas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
 			throw new GSNSException("Se ha producido un error al consultar los tipos de vacunas.");
+		}
+	}
+
+	/**
+	 * Genera un identificador para el lote de vacunas
+	 * 
+	 * @return El identificador para el nuevo lote de vacunas.
+	 * @throws GSNSException Si se produce una excepción al consultar.
+	 */
+	public int generarIdLote() throws GSNSException {
+		try {
+			return DAOFactory.getLoteVacunasDAO().max("id") + 1;
+		} catch (SQLException sqle) {
+			System.out.println("Excepción consultado id de lote de vacunas:\n\n" + sqle.getMessage());
+			sqle.printStackTrace();
+			throw new GSNSException("Se ha producido un error al generar el identificador de lote.");
 		}
 	}
 
