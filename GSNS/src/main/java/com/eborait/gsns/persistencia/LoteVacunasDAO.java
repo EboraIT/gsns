@@ -123,4 +123,22 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 		return AgenteBD.getAgente().delete(String.format(DELETE, lote.getId()));
 	}
 
+	/**
+	 * Consulta el valor máximo de una columna.
+	 * 
+	 * @param criteria Columna para filtrar.
+	 * @return El valor máximo de la columna por la que se filtra la consulta.
+	 * @throws SQLException Si se produce una excepción en la setencia SQL.
+	 */
+	public int max(String criteria) throws SQLException {
+		int max = 0;
+		Collection<Collection<Object>> data = AgenteBD.getAgente()
+				.select(String.format("SELECT coalesce(max(%s),0) FROM lote_vacunas"));
+		for (Collection<Object> collection : data) {
+			ArrayList<Object> rowData = (ArrayList<Object>) collection;
+			max = Integer.parseInt(rowData.get(0).toString());
+		}
+		return max;
+	}
+
 }
