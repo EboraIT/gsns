@@ -50,7 +50,14 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 		midPanel.setLayout(null);
 		
 
-		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");
+		JButton btnAltaNuevoLote = new JButton("Alta Nuevo Lote");		
+		btnAltaNuevoLote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(new PantallaAltaNuevoLote(frame));
+			}
+		});
+		btnAltaNuevoLote.setBounds(185, 167, 176, 47);
+		midPanel.add(btnAltaNuevoLote);
 		
 
 		JButton btnCalculoEntrega = new JButton("Calculo de Entrega");
@@ -59,16 +66,7 @@ public class PantallaGestionSistemaNacionalSalud extends JPanel {
 				frame.cambiarPanel(new PantallaCalculoEntrega(frame));
 			}
 		});
-		btnCalculoEntrega.setBounds(546, 92, 158, 47);
-		
-		btnAltaNuevoLote.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(new PantallaAltaNuevoLote(frame));
-			}
-		});
-		btnAltaNuevoLote.setBounds(185, 92, 176, 47);
-		midPanel.setLayout(null);
+		btnCalculoEntrega.setBounds(546, 167, 158, 47);
 		midPanel.add(btnCalculoEntrega);
-		midPanel.add(btnAltaNuevoLote);
 	}
 }

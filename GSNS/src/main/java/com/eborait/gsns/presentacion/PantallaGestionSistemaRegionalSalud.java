@@ -52,7 +52,7 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 				}
 			}
 		});
-		btnAltaEntregas.setBounds(546, 179, 158, 47);
+		btnAltaEntregas.setBounds(546, 167, 158, 47);
 
 		JButton btnRegistrarVacunacion = new JButton("Registrar Vacunación");
 		btnRegistrarVacunacion.addActionListener(new ActionListener() {
@@ -64,7 +64,7 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 				}
 			}
 		});
-		btnRegistrarVacunacion.setBounds(185, 179, 176, 47);
+		btnRegistrarVacunacion.setBounds(185, 167, 176, 47);
 		midPanel.setLayout(null);
 		midPanel.add(btnAltaEntregas);
 		midPanel.add(btnRegistrarVacunacion);
