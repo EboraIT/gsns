@@ -11,10 +11,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Pantalla de gestión del Sistema Nacional de Salud.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
 public class PantallaGestionSistemaNacionalSalud extends JPanel {
-	/**
-	 * serialVersionUID
-	 */
+	
+	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**

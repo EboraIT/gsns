@@ -5,26 +5,22 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
- * Pantalla principal de la aplicación.
- * 
+ * Panel principal de la aplicación.
+ *
  * @author Jorge Fernández Escolano
  * @author Roberto Esteban Olivares
- * @since 1.0
  * @version 1.0
- *
+ * @since 1.0
  */
 public class PanelMain extends JPanel {
 
-	/**
-	 * serialVersionUID
-	 */
+	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -82,7 +78,6 @@ public class PanelMain extends JPanel {
 		btnGestionSRS.setBounds(622, 211, 209, 38);
 		btnGestionSRS.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnGestionSRS);
-		
-		
+
 	}
 }

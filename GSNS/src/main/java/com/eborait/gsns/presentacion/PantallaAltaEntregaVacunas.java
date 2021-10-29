@@ -18,17 +18,38 @@ import com.eborait.gsns.dominio.entitymodel.GrupoPrioridad;
 import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
+/**
+ * Pantalla alta entrega de vacunas.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
 public class PantallaAltaEntregaVacunas extends JPanel {
-	/**
-	 * serialVersionUID
-	 */
+
+	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+
+	/** El campo de texto del id de entrega. */
 	private JTextField txtIdEntrega;
+
+	/** El campo de texto de lote. */
 	private JTextField txtLote;
+
+	/** El campo de texto de fecha. */
 	private JTextField txtFecha;
+
+	/** El campo de texto de cantidad. */
 	private JTextField txtCantidad;
+
+	/** El desplegable de grupo de prioridad. */
 	private JComboBox<String> comboGrupoPrioridad;
+
+	/** El desplegable de regione. */
 	private JComboBox<String> comboRegion;
+
+	/** El desplegable de tipo de vacuna. */
 	private JComboBox<String> comboTipoVacuna;
 
 	/**

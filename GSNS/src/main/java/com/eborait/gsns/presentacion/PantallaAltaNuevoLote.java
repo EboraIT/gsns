@@ -5,9 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,16 +15,35 @@ import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
+/**
+ * Pantalla alta de nuevo lote de vacunas.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
 public class PantallaAltaNuevoLote extends JPanel {
-	/**
-	 * serialVersionUID
-	 */
+
+	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+
+	/** El campo de texto del id de lote. */
 	private JTextField txtIdLote;
+
+	/** El campo de texto de fecha de alta. */
 	private JTextField txtFechaAlta;
+
+	/** El campo de texto de cantidad. */
 	private JTextField txtCantidad;
+
+	/** El campo de texto de nombre de la vacuna. */
 	private JTextField txtNombreVacuna;
+
+	/** El campo de texto de farmacéutica. */
 	private JTextField txtFarmaceutica;
+
+	/** El campo de texto de fecha de aprobación. */
 	private JTextField txtFechaAprobacion;
 
 	/**
@@ -134,15 +150,16 @@ public class PantallaAltaNuevoLote extends JPanel {
 
 	}
 
-	/*
+	/**
+	 * Invoca al gestor para realizar el alta del lote de vacunas.
 	 * 
+	 * @param frame JFrame de la aplicación.
 	 */
-	protected void registrarLote(Main frame) {
+	private void registrarLote(Main frame) {
 		if (validar()) {
 			try {
-
 				frame.getGestorRepartoVacunas().altaNuevoLoteVacunas(txtIdLote.getText(),
-						ParseFecha(txtFechaAlta.getText()), Integer.parseInt(txtCantidad.getText()),
+						txtFechaAlta.getText(), Integer.parseInt(txtCantidad.getText()),
 						txtNombreVacuna.getText(), txtFarmaceutica.getText(), txtFechaAprobacion.getText());
 			} catch (GSNSException gsnse) {
 				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -151,11 +168,10 @@ public class PantallaAltaNuevoLote extends JPanel {
 			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
 					JOptionPane.WARNING_MESSAGE);
 		}
-
 	}
 
 	/**
-	 * Valida los campos de texto .
+	 * Valida los campos de texto.
 	 * 
 	 * @return true si la validación es correcta, false de lo contrario.
 	 */
@@ -167,23 +183,5 @@ public class PantallaAltaNuevoLote extends JPanel {
 				return false;
 		}
 		return true;
-	}
-
-	/*
-	 * Convierte un String en fecha(Date)
-	 * 
-	 * @param fecha que pasas como cadena dd/MM/yyyy
-	 * 
-	 * @return Objeto date
-	 */
-	public static Date ParseFecha(String fecha) {
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		Date fechaDate = null;
-		try {
-			fechaDate = formato.parse(fecha);
-		} catch (ParseException ex) {
-			System.out.println(ex);
-		}
-		return fechaDate;
 	}
 }

@@ -19,18 +19,41 @@ import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 import javax.swing.JCheckBox;
 
+/**
+ * Pantalla de registro de vacunación.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
 public class PantallaRegistrarVacunacion extends JPanel {
-	/**
-	 * serialVersionUID
-	 */
+
+	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+
+	/** El campo de texto de nombre. */
 	private JTextField txtNombre;
+
+	/** El campo de texto de apellidos. */
 	private JTextField txtApellidos;
+
+	/** El campo de texto de dni. */
 	private JTextField txtDni;
+
+	/** El campo de texto de fecha. */
 	private JTextField txtFecha;
+
+	/** El desplegable de tipo vacuna. */
 	private JComboBox<String> comboTipoVacuna;
+
+	/** El desplegable de de region. */
 	private JComboBox<String> comboRegion;
+
+	/** El desplegable de grupo prioridad. */
 	private JComboBox<String> comboGrupoPrioridad;
+
+	/** The checkbox de segunda dosis. */
 	private JCheckBox chkSegundaDosis;
 
 	/**
@@ -169,7 +192,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 	/**
 	 * Valida los campos de texto y desplegables.
 	 * 
-	 * @return true si la validación es correcta, false de lo contrario. 
+	 * @return true si la validación es correcta, false de lo contrario.
 	 */
 	private boolean validar() {
 		JTextField[] textFields = { txtNombre, txtApellidos, txtFecha, txtDni };

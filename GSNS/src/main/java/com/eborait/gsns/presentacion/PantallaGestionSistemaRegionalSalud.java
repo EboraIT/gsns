@@ -13,10 +13,17 @@ import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
+/**
+ * Pantalla de gestión del Sistema Regional de Salud.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
 public class PantallaGestionSistemaRegionalSalud extends JPanel {
-	/**
-	 * serialVersionUID
-	 */
+
+	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**

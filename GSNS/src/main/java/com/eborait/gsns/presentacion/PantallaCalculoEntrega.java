@@ -14,16 +14,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
+/**
+ * Pantalla cálculo de entrega de vacunas.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
 public class PantallaCalculoEntrega extends JPanel {
-	/**
-	 * serialVersionUID
-	 */
+
+	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtIA;
-	private JComboBox<String> comboRegion;
-	private JLabel lblCalculo;
 
 	/**
 	 * Crea el panel.
@@ -49,7 +54,7 @@ public class PantallaCalculoEntrega extends JPanel {
 		});
 		topPanel.add(btnVolver);
 
-		JLabel lblTitulo = new JLabel("Gestión Sistema Nacional de Salud/Calculo de Reparto de Vacunas");
+		JLabel lblTitulo = new JLabel("Gestión Sistema Nacional de Salud/Cálculo de Reparto de Vacunas");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 		midPanel.setLayout(null);
@@ -58,7 +63,7 @@ public class PantallaCalculoEntrega extends JPanel {
 		lblSeleccionarRegion.setBounds(10, 36, 201, 14);
 		midPanel.add(lblSeleccionarRegion);
 
-		comboRegion = new JComboBox<String>();
+		final JComboBox<String> comboRegion = new JComboBox<String>(RegionEnum.getNombres());
 		comboRegion.setBounds(242, 36, 181, 20);
 		midPanel.add(comboRegion);
 
@@ -74,20 +79,23 @@ public class PantallaCalculoEntrega extends JPanel {
 		lblIA.setBounds(10, 92, 201, 14);
 		midPanel.add(lblIA);
 
-		txtIA = new JTextField();
+		final JTextField txtIA = new JTextField();
 		txtIA.setColumns(10);
 		txtIA.setBounds(242, 92, 181, 20);
 		midPanel.add(txtIA);
 
+		final JLabel lblReparto = new JLabel("Vacunas a repartir:");
+		lblReparto.setBounds(444, 36, 413, 14);
+		midPanel.add(lblReparto);
+
 		JButton btnCalcularReparto = new JButton("Calcular");
 		btnCalcularReparto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (validar()) {
-					int reparto = 0;
+				if (txtIA.getText().length() != 0) {
 					try {
-						reparto = frame.getGestorRepartoVacunas().calcularEntregasRegion(
+						int reparto = frame.getGestorRepartoVacunas().calcularEntregasRegion(
 								comboRegion.getSelectedIndex() + 1, Integer.parseInt(txtIA.getText()));
-						lblCalculo.setText("" + String.valueOf(reparto));
+						lblReparto.setText("Vacunas a repartir:" + String.valueOf(reparto));
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -106,28 +114,6 @@ public class PantallaCalculoEntrega extends JPanel {
 		btnCalcularReparto.setBounds(10, 131, 847, 23);
 		midPanel.add(btnCalcularReparto);
 
-		JLabel lblReparto = new JLabel("Vacunas a repartir:");
-		lblReparto.setBounds(444, 36, 413, 14);
-		midPanel.add(lblReparto);
-
-		lblCalculo = new JLabel("");
-		lblCalculo.setBounds(333, 500, 97, 14);
-		midPanel.add(lblCalculo);
-
-	}
-
-	/**
-	 * Valida los campos de texto .
-	 * 
-	 * @return true si la validación es correcta, false de lo contrario.
-	 */
-	private boolean validar() {
-		JTextField[] textFields = { txtIA };
-		for (JTextField jTextField : textFields) {
-			if (jTextField.getText().length() == 0)
-				return false;
-		}
-		return true;
 	}
 
 }

@@ -12,17 +12,41 @@ import com.eborait.gsns.dominio.controller.GestorEstadisticas;
 import com.eborait.gsns.dominio.controller.GestorRepartoVacunas;
 import com.eborait.gsns.dominio.controller.GestorVacunacion;
 
+/**
+ * Pantalla principal de la aplicación.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
 public class Main extends JFrame {
 
+	/** El serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/** El content pane. */
 	private JPanel contentPane;
+
+	/** El panel actual. */
 	private JPanel panelActual;
+
+	/** El panel principal. */
 	private PanelMain panelMain;
+
+	/** El gestor de estadisticas. */
 	private GestorEstadisticas gestorEstadisticas;
+
+	/** El gestor del reparto de vacunas. */
 	private GestorRepartoVacunas gestorRepartoVacunas;
+
+	/** El gestor de vacunaciones. */
 	private GestorVacunacion gestorVacunacion;
 
 	/**
-	 * Launch the application.
+	 * Lanza la aplicación.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -39,7 +63,7 @@ public class Main extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Crea el JFrame.
 	 */
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,33 +84,48 @@ public class Main extends JFrame {
 		gestorVacunacion = new GestorVacunacion();
 	}
 
-	
-	
-	public void cambiarPanel(JPanel nuevopanel) {
+	/**
+	 * Sustituye el panel actual por uno nuevo.
+	 *
+	 * @param nuevoPanel el nuevo panel
+	 */
+	public void cambiarPanel(JPanel nuevoPanel) {
 		contentPane.remove(panelActual);
-		panelActual = nuevopanel;
+		panelActual = nuevoPanel;
 		contentPane.add(panelActual, BorderLayout.CENTER);
 		setContentPane(contentPane);
 	}
 
+	/**
+	 *
+	 * @return El panel principal.
+	 */
 	public PanelMain getPanelMain() {
 		return panelMain;
 	}
 
+	/**
+	 *
+	 * @return El gestor de estadísticas.
+	 */
 	public GestorEstadisticas getGestorEstadisticas() {
 		return gestorEstadisticas;
 	}
 
+	/**
+	 *
+	 * @return El gestor del reparto de vacunas.
+	 */
 	public GestorRepartoVacunas getGestorRepartoVacunas() {
 		return gestorRepartoVacunas;
 	}
 
+	/**
+	 * 
+	 * @return El gestor de vacunaciones.
+	 */
 	public GestorVacunacion getGestorVacunacion() {
 		return gestorVacunacion;
 	}
-
-	
-
-	
 
 }
