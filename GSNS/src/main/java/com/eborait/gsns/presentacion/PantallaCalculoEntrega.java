@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -49,7 +50,6 @@ public class PantallaCalculoEntrega extends JPanel {
 		JButton btnVolver = new JButton("Volver al menú principal");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(frame.getPanelMain());
 			}
 		});
 		topPanel.add(btnVolver);
@@ -63,17 +63,28 @@ public class PantallaCalculoEntrega extends JPanel {
 		lblSeleccionarRegion.setBounds(10, 36, 201, 14);
 		midPanel.add(lblSeleccionarRegion);
 
+		final JLabel lblPoblacion = new JLabel();
+		lblPoblacion.setBounds(242, 64, 181, 20);
+		midPanel.add(lblPoblacion);
+
 		final JComboBox<String> comboRegion = new JComboBox<String>(RegionEnum.getNombres());
 		comboRegion.setBounds(242, 36, 181, 20);
+		comboRegion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					lblPoblacion.setText(
+							formatearPoblacion(RegionEnum.valueOf(comboRegion.getSelectedIndex() + 1).getPoblacion()));
+				} catch (GSNSException gsnse) {
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					frame.cambiarPanel(frame.getPanelMain());
+				}
+			}
+		});
 		midPanel.add(comboRegion);
 
 		JLabel lblPoblacionTitulo = new JLabel("Población:");
 		lblPoblacionTitulo.setBounds(10, 64, 201, 14);
 		midPanel.add(lblPoblacionTitulo);
-
-		JLabel lblPoblacion = new JLabel(comboRegion.getSelectedItem().toString());
-		lblPoblacion.setBounds(242, 64, 181, 20);
-		midPanel.add(lblPoblacion);
 
 		JLabel lblIA = new JLabel("Introduzca la IA:");
 		lblIA.setBounds(10, 92, 201, 14);
@@ -95,15 +106,10 @@ public class PantallaCalculoEntrega extends JPanel {
 					try {
 						int reparto = frame.getGestorRepartoVacunas().calcularEntregasRegion(
 								comboRegion.getSelectedIndex() + 1, Integer.parseInt(txtIA.getText()));
-						lblReparto.setText("Vacunas a repartir:" + String.valueOf(reparto));
-					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (GSNSException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						lblReparto.setText("Vacunas a repartir: " + String.valueOf(reparto));
+					} catch (GSNSException gsnse) {
+						JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
-					// lblCalculo.setText("Vacunas a repartir: "+reparto);
 				} else {
 					JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
 							JOptionPane.WARNING_MESSAGE);
@@ -114,6 +120,19 @@ public class PantallaCalculoEntrega extends JPanel {
 		btnCalcularReparto.setBounds(10, 131, 847, 23);
 		midPanel.add(btnCalcularReparto);
 
+		comboRegion.setSelectedIndex(0);
+	}
+
+	/**
+	 * Añade el separador de miles a un número entero.
+	 * 
+	 * @param poblacion Población de la región.
+	 * @return Una cadena con la población formateada.
+	 * 
+	 * @see DecimalFormat
+	 */
+	private String formatearPoblacion(int poblacion) {
+		return new DecimalFormat("###,###.##").format(poblacion);
 	}
 
 }

@@ -11,8 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-
 /**
  * Pantalla de gestión del Sistema Regional de Salud.
  *
@@ -54,26 +52,18 @@ public class PantallaGestionSistemaRegionalSalud extends JPanel {
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 
-		JButton btnAltaEntregas = new JButton("Alta Entrega Vacunas");
+		JButton btnAltaEntregas = new JButton("Alta entrega vacunas");
 		btnAltaEntregas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					frame.cambiarPanel(new PantallaAltaEntregaVacunas(frame));
-				} catch (GSNSException gsnse) {
-					frame.cambiarPanel(frame.getPanelMain());
-				}
+				frame.cambiarPanel(new PantallaAltaEntregaVacunas(frame));
 			}
 		});
 		btnAltaEntregas.setBounds(546, 167, 158, 47);
 
-		JButton btnRegistrarVacunacion = new JButton("Registrar Vacunación");
+		JButton btnRegistrarVacunacion = new JButton("Registrar vacunación");
 		btnRegistrarVacunacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					frame.cambiarPanel(new PantallaRegistrarVacunacion(frame));
-				} catch (GSNSException gsnse) {
-					frame.cambiarPanel(frame.getPanelMain());
-				}
+				frame.cambiarPanel(new PantallaRegistrarVacunacion(frame));
 			}
 		});
 		btnRegistrarVacunacion.setBounds(185, 167, 176, 47);

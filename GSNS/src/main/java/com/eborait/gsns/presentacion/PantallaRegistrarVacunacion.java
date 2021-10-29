@@ -60,9 +60,8 @@ public class PantallaRegistrarVacunacion extends JPanel {
 	 * Crea el panel.
 	 * 
 	 * @param frame JFrame de la aplicación.
-	 * @throws GSNSException Si se produce una excepción de la aplicación.
 	 */
-	public PantallaRegistrarVacunacion(final Main frame) throws GSNSException {
+	public PantallaRegistrarVacunacion(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 
@@ -140,7 +139,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 			midPanel.add(comboTipoVacuna);
 		} catch (GSNSException gsnse) {
 			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			throw gsnse;
+			frame.cambiarPanel(frame.getPanelMain());
 		}
 
 		comboGrupoPrioridad = new JComboBox<String>(GrupoPrioridad.getNombres());

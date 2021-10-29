@@ -50,9 +50,8 @@ public class PantallaAltaNuevoLote extends JPanel {
 	 * Crea el panel.
 	 * 
 	 * @param frame JFrame de la aplicación.
-	 * @throws GSNSException Si se produce una excepción de la aplicación.
 	 */
-	public PantallaAltaNuevoLote(final Main frame) throws GSNSException {
+	public PantallaAltaNuevoLote(final Main frame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 
@@ -88,7 +87,7 @@ public class PantallaAltaNuevoLote extends JPanel {
 			lblIdLote.setText(String.valueOf(frame.getGestorRepartoVacunas().generarIdLote()));
 		} catch (GSNSException gsnse) {
 			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			throw gsnse;
+			frame.cambiarPanel(frame.getPanelMain());
 		}
 		JLabel lblFechaAlta = new JLabel("Fecha alta:");
 		lblFechaAlta.setBounds(10, 64, 201, 14);

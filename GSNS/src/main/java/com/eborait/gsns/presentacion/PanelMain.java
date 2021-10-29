@@ -49,7 +49,7 @@ public class PanelMain extends JPanel {
 		lblMensajeMenu.setBounds(215, 115, 470, 30);
 		add(lblMensajeMenu);
 
-		JButton btnConsultarEstadisticas = new JButton("Consultar estadadísticas");
+		JButton btnConsultarEstadisticas = new JButton("Consultar estadísticas");
 		btnConsultarEstadisticas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaConsultaEstadisticas(frame));
@@ -59,7 +59,7 @@ public class PanelMain extends JPanel {
 		btnConsultarEstadisticas.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnConsultarEstadisticas);
 
-		JButton btnGestionSNS = new JButton("Gestion Sistema Nacional de Salud");
+		JButton btnGestionSNS = new JButton("Gestión Sistema Nacional de Salud");
 		btnGestionSNS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.cambiarPanel(new PantallaGestionSistemaNacionalSalud(frame));

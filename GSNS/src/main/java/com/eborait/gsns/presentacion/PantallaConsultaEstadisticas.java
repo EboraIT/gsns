@@ -60,7 +60,7 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		});
 		topPanel.add(btnVolver);
 
-		JLabel lblTitulo = new JLabel("Consulta estadísticas");
+		JLabel lblTitulo = new JLabel("Consultar estadísticas");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		topPanel.add(lblTitulo);
 
