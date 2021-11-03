@@ -31,7 +31,7 @@ public class GestorRepartoVacunas {
 	 * @param nombreVacuna    Nombre de la vacuna.
 	 * @param farmaceutica    Farmacéutica que ha desarrollado la vacuna.
 	 * @param fechaAprobacion Fecha de aprobación de la vacuna.
-	 * @return Devuelve 1 si se ha registrado correctamente, 0 de lo contrario.
+	 * @return Devuelve true si se ha registrado correctamente, false de lo contrario.
 	 * @throws GSNSException Si se produce una excepción al insertar.
 	 */
 	public boolean altaNuevoLoteVacunas(String id, String fecha, int cantidad, String nombreVacuna, String farmaceutica,
@@ -54,7 +54,7 @@ public class GestorRepartoVacunas {
 	 * 
 	 * @param region La cual cogeremos el nombre de la region y la población.
 	 * 
-	 * @param IA     Tendremos también como parametro la Incidencia Acumulada que
+	 * @param ia     Tendremos también como parametro la Incidencia Acumulada que
 	 *               pasará el cliente por parametro
 	 * 
 	 * @return cantidad Devuelve un entero con la cantidad de vacunas repartidas.

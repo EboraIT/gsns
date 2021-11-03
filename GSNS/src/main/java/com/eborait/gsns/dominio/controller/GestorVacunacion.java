@@ -30,7 +30,7 @@ public class GestorVacunacion {
 	 * @param prioridad Prioridad.
 	 * @param vacuna    Tipo de vacuna.
 	 * @param region    Región de la entrega.
-	 * @return Devuelve 1 si se ha registrado correctamente, 0 de lo contrario.
+	 * @return Devuelve true si se ha registrado correctamente, false de lo contrario.
 	 * @throws GSNSException Si se produce una excepción al insertar.
 	 */
 	public boolean altaEntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad, String vacuna,
@@ -58,7 +58,7 @@ public class GestorVacunacion {
 	 * @param prioridad    Grupo de prioridad de la persona vacunada.
 	 * @param region       Región a la que pertenece la persona vacunada.
 	 * @param segundaDosis Si es primera o segunda dósis.
-	 * @return Devuelve 1 si se ha registrado correctamente, 0 de lo contrario.
+	 * @return Devuelve true si se ha registrado correctamente, false de lo contrario.
 	 * @throws GSNSException Si se produce una excepción al insertar.
 	 */
 	public boolean registrarVacunacion(String fecha, String nombre, String apellidos, String nif, String tipo,

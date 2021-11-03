@@ -26,7 +26,7 @@ public class AgenteBD {
 	/**
 	 * Instancia del agente.
 	 */
-	private static AgenteBD agente = null;
+	private static AgenteBD agente;
 	/**
 	 * Conexión con la base de datos.
 	 */

@@ -174,10 +174,15 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 	private void registrarAlta(Main frame) {
 		if (validar()) {
 			try {
-				frame.getGestorVacunacion().altaEntregaVacunas(txtIdEntrega.getText(), txtLote.getText(),
-						txtFecha.getText(), Integer.parseInt(txtCantidad.getText()),
+				boolean correcto = frame.getGestorVacunacion().altaEntregaVacunas(txtIdEntrega.getText(),
+						txtLote.getText(), txtFecha.getText(), Integer.parseInt(txtCantidad.getText()),
 						comboGrupoPrioridad.getSelectedIndex() + 1, comboTipoVacuna.getSelectedItem().toString(),
 						comboRegion.getSelectedIndex() + 1);
+				if (correcto) {
+					JOptionPane.showMessageDialog(frame, "La entrega se ha registrado correctamente.", "Información",
+							JOptionPane.INFORMATION_MESSAGE);
+					// TODO volver al menú principal o borrar campos
+				}
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
 						"Se ha producido un error al registrar el alta: La cantidad no es correcta.", "Error",

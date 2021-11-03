@@ -52,10 +52,8 @@ public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 	public EntregaVacunas get(String id) throws SQLException {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
 		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
-		EntregaVacunas ev = new EntregaVacunas(String.valueOf(rowData.get(0)), String.valueOf(rowData.get(1)),
-				(Date) rowData.get(2), (int) rowData.get(3), (int) rowData.get(4), String.valueOf(rowData.get(5)),
-				(int) rowData.get(6));
-		return ev;
+		return new EntregaVacunas(String.valueOf(rowData.get(0)), String.valueOf(rowData.get(1)), (Date) rowData.get(2),
+				(int) rowData.get(3), (int) rowData.get(4), String.valueOf(rowData.get(5)), (int) rowData.get(6));
 	}
 
 	/**

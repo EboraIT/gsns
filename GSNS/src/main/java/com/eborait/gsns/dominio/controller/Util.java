@@ -28,7 +28,7 @@ public class Util {
 	 */
 	public static Date parseFecha(String fecha) throws GSNSException {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		Date fechaDate = null;
+		Date fechaDate;
 		try {
 			fechaDate = formato.parse(fecha);
 		} catch (ParseException pe) {

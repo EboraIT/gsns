@@ -52,9 +52,8 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	public Vacunacion get(String id) throws SQLException {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
 		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
-		Vacunacion v = new Vacunacion((int) rowData.get(0), String.valueOf(rowData.get(1)),
-				String.valueOf(rowData.get(2)), (Date) rowData.get(3), (boolean) rowData.get(4));
-		return v;
+		return new Vacunacion((int) rowData.get(0), String.valueOf(rowData.get(1)), String.valueOf(rowData.get(2)),
+				(Date) rowData.get(3), (boolean) rowData.get(4));
 	}
 
 	/**
@@ -92,8 +91,10 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	 */
 	@Override
 	public int insert(Vacunacion vacunacion) throws SQLException {
-		return AgenteBD.getAgente().insert(String.format(INSERT, vacunacion.getId(), vacunacion.getVacuna().toString(),
-				vacunacion.getPaciente().getDni(), new java.sql.Date(vacunacion.getFecha().getTime()), vacunacion.isSegundaDosis()));
+		return AgenteBD.getAgente()
+				.insert(String.format(INSERT, vacunacion.getId(), vacunacion.getVacuna().toString(),
+						vacunacion.getPaciente().getDni(), new java.sql.Date(vacunacion.getFecha().getTime()),
+						vacunacion.isSegundaDosis()));
 	}
 
 	/**
@@ -108,8 +109,8 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	public int update(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente()
 				.update(String.format(UPDATE, vacunacion.getId(), vacunacion.getVacuna().toString(),
-						vacunacion.getPaciente().getDni(), new java.sql.Date(vacunacion.getFecha().getTime()), vacunacion.isSegundaDosis(),
-						vacunacion.getId()));
+						vacunacion.getPaciente().getDni(), new java.sql.Date(vacunacion.getFecha().getTime()),
+						vacunacion.isSegundaDosis(), vacunacion.getId()));
 	}
 
 	/**

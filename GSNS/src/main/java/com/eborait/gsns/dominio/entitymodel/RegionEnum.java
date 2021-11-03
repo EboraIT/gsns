@@ -154,24 +154,4 @@ public enum RegionEnum {
 		return nombres;
 	}
 
-	/**
-	 * Se obtiene la población mediante el nombre de la región.
-	 *
-	 * @param nombre El nombre de la región.
-	 * @return La población de la región.
-	 */
-	public static int getPoblacion(String nombre) {
-		int cantidad = 0;
-		String[] nombres = new String[values().length];
-		for (int i = 0; i < nombres.length; i++) {
-			nombres[i] = values()[i].getNombre();
-			if (nombres[i] == nombre) {
-				cantidad = values()[i].getPoblacion();
-
-			}
-		}
-		return cantidad;
-
-	}
-
 }

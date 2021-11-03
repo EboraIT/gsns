@@ -163,9 +163,14 @@ public class PantallaAltaNuevoLote extends JPanel {
 	private void registrarLote(Main frame) {
 		if (validar()) {
 			try {
-				frame.getGestorRepartoVacunas().altaNuevoLoteVacunas(lblIdLote.getText(), txtFechaAlta.getText(),
-						Integer.parseInt(txtCantidad.getText()), txtNombreVacuna.getText(), txtFarmaceutica.getText(),
-						txtFechaAprobacion.getText());
+				boolean correcto = frame.getGestorRepartoVacunas().altaNuevoLoteVacunas(lblIdLote.getText(),
+						txtFechaAlta.getText(), Integer.parseInt(txtCantidad.getText()), txtNombreVacuna.getText(),
+						txtFarmaceutica.getText(), txtFechaAprobacion.getText());
+				if (correcto) {
+					JOptionPane.showMessageDialog(frame, "La entrega se ha registrado correctamente.", "Información",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+				// TODO volver al menú principal o borrar campos
 			} catch (GSNSException gsnse) {
 				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}

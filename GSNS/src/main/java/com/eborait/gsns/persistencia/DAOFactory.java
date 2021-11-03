@@ -36,7 +36,10 @@ public class DAOFactory {
 	 * @see EntregaDAO
 	 */
 	public static EntregaDAO getEntregaDAO() {
-		return entregaDao != null ? entregaDao : new EntregaDAO();
+		if (entregaDao == null) {
+			entregaDao = new EntregaDAO();
+		}
+		return entregaDao;
 	}
 
 	/**
@@ -46,7 +49,10 @@ public class DAOFactory {
 	 * @see LoteVacunasDAO
 	 */
 	public static LoteVacunasDAO getLoteVacunasDAO() {
-		return loteVacunasDao != null ? loteVacunasDao : new LoteVacunasDAO();
+		if (loteVacunasDao == null) {
+			loteVacunasDao = new LoteVacunasDAO();
+		}
+		return loteVacunasDao;
 	}
 
 	/**
@@ -56,7 +62,10 @@ public class DAOFactory {
 	 * @see VacunacionDAO
 	 */
 	public static VacunacionDAO getVacunacionDAO() {
-		return vacunacionDao != null ? vacunacionDao : new VacunacionDAO();
+		if (vacunacionDao == null) {
+			vacunacionDao = new VacunacionDAO();
+		}
+		return vacunacionDao;
 	}
 
 	/**
@@ -66,7 +75,10 @@ public class DAOFactory {
 	 * @see PacienteDAO
 	 */
 	public static PacienteDAO getPacienteDAO() {
-		return pacienteDAO != null ? pacienteDAO : new PacienteDAO();
+		if (pacienteDAO == null) {
+			pacienteDAO = new PacienteDAO();
+		}
+		return pacienteDAO;
 	}
 
 }
