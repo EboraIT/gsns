@@ -3,7 +3,7 @@ package com.eborait.gsns.persistencia;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 
@@ -96,7 +96,7 @@ public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 	public int insert(EntregaVacunas entregaVacunas) throws SQLException {
 		return AgenteBD.getAgente()
 				.insert(String.format(INSERT, entregaVacunas.getId(), entregaVacunas.getLote().getId(),
-						entregaVacunas.getFecha(), entregaVacunas.getCantidad(),
+						new java.sql.Date(entregaVacunas.getFecha().getTime()), entregaVacunas.getCantidad(),
 						entregaVacunas.getGrupoPrioridad().getPrioridad(), entregaVacunas.getTipo().toString(),
 						entregaVacunas.getRegion().getId()));
 	}
@@ -113,7 +113,7 @@ public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 	public int update(EntregaVacunas entregaVacunas) throws SQLException {
 		return AgenteBD.getAgente()
 				.update(String.format(UPDATE, entregaVacunas.getId(), entregaVacunas.getLote().getId(),
-						entregaVacunas.getFecha(), entregaVacunas.getCantidad(),
+						new java.sql.Date(entregaVacunas.getFecha().getTime()), entregaVacunas.getCantidad(),
 						entregaVacunas.getGrupoPrioridad().getPrioridad(), entregaVacunas.getTipo().toString(),
 						entregaVacunas.getRegion().getId(), entregaVacunas.getId()));
 	}

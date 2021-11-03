@@ -3,7 +3,7 @@ package com.eborait.gsns.persistencia;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 
@@ -93,7 +93,7 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	@Override
 	public int insert(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente().insert(String.format(INSERT, vacunacion.getId(), vacunacion.getVacuna().toString(),
-				vacunacion.getPaciente().getDni(), vacunacion.getFecha(), vacunacion.isSegundaDosis()));
+				vacunacion.getPaciente().getDni(), new java.sql.Date(vacunacion.getFecha().getTime()), vacunacion.isSegundaDosis()));
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	public int update(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente()
 				.update(String.format(UPDATE, vacunacion.getId(), vacunacion.getVacuna().toString(),
-						vacunacion.getPaciente().getDni(), vacunacion.getFecha(), vacunacion.isSegundaDosis(),
+						vacunacion.getPaciente().getDni(), new java.sql.Date(vacunacion.getFecha().getTime()), vacunacion.isSegundaDosis(),
 						vacunacion.getId()));
 	}
 

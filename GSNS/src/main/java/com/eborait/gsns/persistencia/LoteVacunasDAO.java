@@ -3,7 +3,7 @@ package com.eborait.gsns.persistencia;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 
@@ -75,8 +75,8 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
-			LoteVacunas lv = new LoteVacunas(String.valueOf(rowData.get(1)), (Date) rowData.get(2),
-					String.valueOf(rowData.get(3)), (int) rowData.get(4), String.valueOf(rowData.get(5)));
+			LoteVacunas lv = new LoteVacunas(String.valueOf(rowData.get(0)), (Date) rowData.get(1),
+					String.valueOf(rowData.get(2)), (int) rowData.get(3), String.valueOf(rowData.get(4)));
 			list.add(lv);
 		}
 		return list;
@@ -92,8 +92,9 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	 */
 	@Override
 	public int insert(LoteVacunas lote) throws SQLException {
-		return AgenteBD.getAgente().insert(String.format(INSERT, lote.getId(), lote.getFecha(), lote.getTipo(),
-				lote.getCantidad(), lote.getFarmaceutica()));
+		return AgenteBD.getAgente()
+				.insert(String.format(INSERT, lote.getId(), new java.sql.Date(lote.getFecha().getTime()),
+						lote.getTipo(), lote.getCantidad(), lote.getFarmaceutica()));
 	}
 
 	/**
@@ -106,7 +107,7 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	 */
 	@Override
 	public int update(LoteVacunas lote) throws SQLException {
-		return AgenteBD.getAgente().insert(String.format(UPDATE, lote.getId(), lote.getFecha(), lote.getTipo(),
+		return AgenteBD.getAgente().insert(String.format(UPDATE, lote.getId(), new java.sql.Date(lote.getFecha().getTime()), lote.getTipo(),
 				lote.getCantidad(), lote.getFarmaceutica(), lote.getId()));
 	}
 
