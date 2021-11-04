@@ -39,10 +39,10 @@ public class PanelMain extends JPanel {
 		lblMensajeBienvenida.setBounds(215, 23, 470, 30);
 		add(lblMensajeBienvenida);
 
-		JLabel lblMensajeDescripcion = new JLabel("Este es el programa de gestión del Sistema Nacional de Salud.");
+		JLabel lblMensajeDescripcion = new JLabel("Este es el programa de gestión de vacunación COVID-19 del Sistema Nacional de Salud.");
 		lblMensajeDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMensajeDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensajeDescripcion.setBounds(215, 60, 470, 30);
+		lblMensajeDescripcion.setBounds(103, 60, 693, 30);
 		add(lblMensajeDescripcion);
 
 		JLabel lblMensajeMenu = new JLabel("Selecciona una opción:");
