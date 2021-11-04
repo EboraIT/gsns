@@ -9,6 +9,8 @@ Para desarrollar dicho problema hemos ido desarrollando una metodología ágil, 
 * **To do** , aquí situamos las tareas o progresos que teniamos plantado hacer.
 * **In progress**, aquí situamos las tareas o progresos que estamos haciendo en ese momento.
 * **Done**, y por último aquí estarán las tareas ya completadas.
+Todo esto utilizado como Product Backlog del cúal luego hemos ido seleccionando historias de usuarios para realizar los Sprint Backlog durante el proyecto.
+El enlace para visitar nuestro project sería [Product Backlog](https://github.com/escolanojorge/eborait/projects/2)
 
 Además durante el desarrollo del problema se han ido realizando reuniones entre los miembros de la empresa para ir poniendo todo a punto y resolver posibles dudas de las que se pedía en el enunciado.
  
