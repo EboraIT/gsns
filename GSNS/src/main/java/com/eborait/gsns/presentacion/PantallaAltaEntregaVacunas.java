@@ -181,7 +181,8 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 				if (correcto) {
 					JOptionPane.showMessageDialog(frame, "La entrega se ha registrado correctamente.", "Información",
 							JOptionPane.INFORMATION_MESSAGE);
-					// TODO volver al menú principal o borrar campos
+					frame.cambiarPanel(frame.getPanelMain());
+					
 				}
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
