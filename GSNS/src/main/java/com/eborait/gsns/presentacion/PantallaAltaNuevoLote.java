@@ -169,6 +169,7 @@ public class PantallaAltaNuevoLote extends JPanel {
 				if (correcto) {
 					JOptionPane.showMessageDialog(frame, "La entrega se ha registrado correctamente.", "Información",
 							JOptionPane.INFORMATION_MESSAGE);
+					frame.cambiarPanel(frame.getPanelMain());
 				}
 				// TODO volver al menú principal o borrar campos
 			} catch (GSNSException gsnse) {
