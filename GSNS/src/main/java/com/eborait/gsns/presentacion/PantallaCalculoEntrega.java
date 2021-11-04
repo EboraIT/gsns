@@ -50,6 +50,7 @@ public class PantallaCalculoEntrega extends JPanel {
 		JButton btnVolver = new JButton("Volver al menú principal");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.cambiarPanel(frame.getPanelMain());
 			}
 		});
 		topPanel.add(btnVolver);
