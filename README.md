@@ -19,8 +19,8 @@ Hemos considerado en dividir el problema en las 3 capas habituales utilizadas en
 * **[Dominio](./GSNS/src/main/java/com/eborait/gsns/dominio)** , esta la hemos utilizado para dividir también en dos paquetes:
 	* **Controller**, en controller tendremos los gestores los cuales más tarde se encargaran de llamar a las clases DAO. Estos comunmente harán referencias a insetar,mostrar o actualizar datos.
 	* **entitymodel**, en este paquete estarán las clases con sus metodos getters y setter así como los toString de cada una de ellas. 
-* **Persistencia** , en esta capa tendremos mayormente las clases DAO de Entrega,LoteVacunas y VacunacionDAO, tendremos también las clase DAOFactory la cual se usará para crear los objetos DAO siguiendo el patron singleton. También tendremos la clase BDConstantes en la cual vamos a tener todos los datos para instanciar nuestra BD. Y por último implementamos en este paquete la clase AbstractEntityDAO en la que definimos los métodos para implementar en los DAO.
-* **Presentacion** , en esta última capa tendremos las vistas en forma de JPanel para la parte gráfica de nuestro proyecto.
+* **[Persistencia](./GSNS/src/main/java/com/eborait/gsns/persistencia)** , en esta capa tendremos mayormente las clases DAO de Entrega,LoteVacunas y VacunacionDAO, tendremos también las clase DAOFactory la cual se usará para crear los objetos DAO siguiendo el patron singleton. También tendremos la clase BDConstantes en la cual vamos a tener todos los datos para instanciar nuestra BD. Y por último implementamos en este paquete la clase AbstractEntityDAO en la que definimos los métodos para implementar en los DAO.
+* **[Persistencia](./GSNS/src/main/java/com/eborait/gsns/presentacion)** , en esta última capa tendremos las vistas en forma de JPanel para la parte gráfica de nuestro proyecto.
 
 
 ## Autores ✒️
