@@ -182,12 +182,11 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 					JOptionPane.showMessageDialog(frame, "La entrega se ha registrado correctamente.", "Información",
 							JOptionPane.INFORMATION_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
-					
 				}
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
-						"Se ha producido un error al registrar el alta: La cantidad no es correcta.", "Error",
-						JOptionPane.ERROR_MESSAGE);
+						"Se ha producido un error al registrar el alta: La cantidad no es correcta. Introduce un número entero.",
+						"Error", JOptionPane.ERROR_MESSAGE);
 			} catch (GSNSException gsnse) {
 				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}

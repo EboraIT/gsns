@@ -171,7 +171,10 @@ public class PantallaAltaNuevoLote extends JPanel {
 							JOptionPane.INFORMATION_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
 				}
-				// TODO volver al menú principal o borrar campos
+			} catch (NumberFormatException nfe) {
+				JOptionPane.showMessageDialog(frame,
+						"Se ha producido un error al registrar el alta: La cantidad no es correcta. Introduce un número entero.",
+						"Error", JOptionPane.ERROR_MESSAGE);
 			} catch (GSNSException gsnse) {
 				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}

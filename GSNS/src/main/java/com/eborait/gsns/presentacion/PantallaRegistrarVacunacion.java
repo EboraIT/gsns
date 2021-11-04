@@ -141,7 +141,6 @@ public class PantallaRegistrarVacunacion extends JPanel {
 			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			frame.cambiarPanel(frame.getPanelMain());
 		}
-
 		comboGrupoPrioridad = new JComboBox<String>(GrupoPrioridad.getNombres());
 		comboGrupoPrioridad.setBounds(676, 86, 181, 20);
 		midPanel.add(comboGrupoPrioridad);
@@ -183,7 +182,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 					JOptionPane.showMessageDialog(frame, "La vacunación se ha registrado correctamente.", "Información",
 							JOptionPane.INFORMATION_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
-					
+
 					// TODO volver al menú principal o borrar campos
 				}
 			} catch (GSNSException gsnse) {

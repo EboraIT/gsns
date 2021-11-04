@@ -107,7 +107,12 @@ public class PantallaCalculoEntrega extends JPanel {
 					try {
 						int reparto = frame.getGestorRepartoVacunas().calcularEntregasRegion(
 								comboRegion.getSelectedIndex() + 1, Integer.parseInt(txtIA.getText()));
-						lblReparto.setText("Vacunas a repartir: " + String.valueOf(reparto));
+						lblReparto.setText("Vacunas a repartir: " + formatearPoblacion(reparto));
+
+					} catch (NumberFormatException nfe) {
+						JOptionPane.showMessageDialog(frame,
+								"Se ha producido un error al realizar el cálculo: La IA no es correcta. Introduce un número entero.",
+								"Error", JOptionPane.ERROR_MESSAGE);
 					} catch (GSNSException gsnse) {
 						JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					}
