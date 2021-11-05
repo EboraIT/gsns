@@ -22,7 +22,7 @@ import org.apache.derby.jdbc.EmbeddedDriver;
  * @version 1.0
  *
  */
-public class AgenteBD {
+public class AgenteBD implements BDConstantes{
 	/**
 	 * Instancia del agente.
 	 */
@@ -34,7 +34,7 @@ public class AgenteBD {
 	/**
 	 * Identificador ODBC de la base de datos.
 	 */
-	private static final String URL = BDConstantes.DRIVER + ":" + BDConstantes.DBNAME + ";create=false";
+	private static final String URL = CONNECTION_STRING + ";create=false";
 
 	/**
 	 * 
@@ -66,7 +66,7 @@ public class AgenteBD {
 		try {
 			Driver derbyEmbeddedDriver = new EmbeddedDriver();
 			DriverManager.registerDriver(derbyEmbeddedDriver);
-			conexion = DriverManager.getConnection(URL, BDConstantes.DBUSER, BDConstantes.DBPASS);
+			conexion = DriverManager.getConnection(URL, DBUSER, DBPASS);
 		} catch (SQLException sqle) {
 			System.out.println("Error conectando con la base de datos:\n\n" + sqle.getMessage());
 			throw sqle;

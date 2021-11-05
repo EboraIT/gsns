@@ -15,13 +15,13 @@ public interface BDConstantes {
 	 */
 	public static final String DRIVER = "jdbc:derby";
 	/**
-	 * Conexión.
-	 */
-	public static final String CONNECTION_STRING = "jdbc:derby:gsns_db;create=true";
-	/**
 	 * Nombre de la base de datos.
 	 */
 	public static final String DBNAME = "gsns_db";
+	/**
+	 * Conexión.
+	 */
+	public static final String CONNECTION_STRING = DRIVER + ":" + DBNAME;
 	/**
 	 * Usuario de la base de datos.
 	 */
@@ -30,8 +30,4 @@ public interface BDConstantes {
 	 * Contraseña de la base de datos.
 	 */
 	public static final String DBPASS = "admin";
-	/**
-	 * Puerto de la base de datos.
-	 */
-	public static final String DBPORT = "3308";
 }
