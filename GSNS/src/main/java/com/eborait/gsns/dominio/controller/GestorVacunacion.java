@@ -64,10 +64,10 @@ public class GestorVacunacion {
 	public boolean registrarVacunacion(String fecha, String nombre, String apellidos, String nif, String tipo,
 			int prioridad, int region, boolean segundaDosis) throws GSNSException {
 		try {
-			Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region);
+			Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region, segundaDosis);
 			Vacunacion vacunacion = new Vacunacion(0, new TipoVacuna(tipo), paciente, Util.parseFecha(fecha),
 					segundaDosis);
-			return DAOFactory.getVacunacionDAO().insert(vacunacion) == 1;
+			return DAOFactory.getVacunacionDAO().insert(vacunacion) == 1 && DAOFactory.getPacienteDAO().insert(paciente) == 1;
 		} catch (SQLException sqle) {
 			System.out.println("Excepción insertando vacunación:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
