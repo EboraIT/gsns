@@ -60,6 +60,7 @@ public class GestorRepartoVacunas {
 	 * @return cantidad Devuelve un entero con la cantidad de vacunas repartidas.
 	 *         Para resolver la cantidad será dependiendo del 60% de la poblacion y
 	 *         40% de la IA.
+	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
 	public int calcularEntregasRegion(int region, int ia) throws GSNSException {
 		try {

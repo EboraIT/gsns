@@ -61,6 +61,7 @@ public class Paciente {
 	 * @param region    La region.
 	 * @param nombre    El nombre.
 	 * @param apellidos Los apellidos.
+	 * @param segundaDosis La segunda dosis.
 	 */
 	public Paciente(String dni, int grupo, int region, String nombre, String apellidos, boolean segundaDosis) {
 		this.dni = dni;

@@ -22,6 +22,7 @@ public class Util {
 	 * @param fecha La fecha con formato dd/MM/yyyy.
 	 * 
 	 * @return Objeto Date.
+	 * @throws GSNSException Si se produce una excepción al transformar la fecha.
 	 * 
 	 * @see Date
 	 * @see SimpleDateFormat
