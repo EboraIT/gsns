@@ -177,13 +177,11 @@ public class PantallaRegistrarVacunacion extends JPanel {
 				boolean correcto = frame.getGestorVacunacion().registrarVacunacion(txtFecha.getText(),
 						txtNombre.getText(), txtApellidos.getText(), txtDni.getText(),
 						comboTipoVacuna.getSelectedItem().toString(), comboGrupoPrioridad.getSelectedIndex() + 1,
-						comboRegion.getSelectedIndex() + 1, chkSegundaDosis.isEnabled());
+						comboRegion.getSelectedIndex() + 1, chkSegundaDosis.isSelected());
 				if (correcto) {
 					JOptionPane.showMessageDialog(frame, "La vacunación se ha registrado correctamente.", "Información",
 							JOptionPane.INFORMATION_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
-
-					// TODO volver al menú principal o borrar campos
 				}
 			} catch (GSNSException gsnse) {
 				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
