@@ -27,6 +27,9 @@ public class Paciente {
 	/** Los apellidos. */
 	private String apellidos;
 
+	/** La segunda dosis. */
+	private boolean segundaDosis;
+
 	/**
 	 * Instancia un nuevo paciente.
 	 *
@@ -35,15 +38,17 @@ public class Paciente {
 	 * @param apellidos Los apellidos.
 	 * @param grupo     El grupo.
 	 * @param region    La region.
+	 * @param segundaDosis La segunda dosis.
 	 * @throws GSNSException Si se produce una excepción en el grupo de prioridad o
 	 *                       la región.
 	 */
-	public Paciente(String dni, String nombre, String apellidos, int grupo, int region) throws GSNSException {
+	public Paciente(String dni, String nombre, String apellidos, int grupo, int region, boolean segundaDosis) throws GSNSException {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.grupo = GrupoPrioridad.valueOf(grupo);
 		this.region = RegionEnum.valueOf(region);
+		this.segundaDosis = segundaDosis;
 
 		this.grupo.getPacientes().add(this);
 	}
@@ -57,10 +62,11 @@ public class Paciente {
 	 * @param nombre    El nombre.
 	 * @param apellidos Los apellidos.
 	 */
-	public Paciente(String dni, int grupo, int region, String nombre, String apellidos) {
+	public Paciente(String dni, int grupo, int region, String nombre, String apellidos, boolean segundaDosis) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
+		this.segundaDosis = segundaDosis;
 		try {
 			this.grupo = GrupoPrioridad.valueOf(grupo);
 			this.region = RegionEnum.valueOf(region);
@@ -160,6 +166,24 @@ public class Paciente {
 	 */
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
+	}
+	
+	/**
+	 * Comprueba si es la segunda dosis.
+	 *
+	 * @return Verdadero, si es la segunda dosis.
+	 */
+	public boolean isSegundaDosis() {
+		return segundaDosis;
+	}
+
+	/**
+	 * Establece si es segunda dosis.
+	 *
+	 * @param segundaDosis Si es la segunda dosis.
+	 */
+	public void setSegundaDosis(boolean segundaDosis) {
+		this.segundaDosis = segundaDosis;
 	}
 
 }

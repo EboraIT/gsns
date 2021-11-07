@@ -3,6 +3,7 @@ package com.eborait.gsns.persistencia;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import com.eborait.gsns.dominio.entitymodel.Paciente;
 
@@ -29,11 +30,11 @@ public class PacienteDAO implements AbstractEntityDAO<Paciente> {
 	/**
 	 * Formato sentencia insert.
 	 */
-	private static final String INSERT = "INSERT INTO pacientes VALUES('%s', %s, %s, '%s', '%s')";
+	private static final String INSERT = "INSERT INTO pacientes VALUES('%s', %s, %s, '%s', '%s', '%s')";
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE pacientes SET dni = '%s', grupo = %s, region = %s, nombre = '%s', apellidos = '%s' WHERE dni = '%s'";
+	private static final String UPDATE = "UPDATE pacientes SET dni = '%s', grupo = %s, region = %s, nombre = '%s', apellidos = '%s', segunda_dosis = %s WHERE dni = '%s'";
 	/**
 	 * Formato sentencia delete.
 	 */
@@ -50,9 +51,13 @@ public class PacienteDAO implements AbstractEntityDAO<Paciente> {
 	@Override
 	public Paciente get(String id) throws SQLException {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
-		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
-		return new Paciente(String.valueOf(rowData.get(0)), (int) rowData.get(1), (int) rowData.get(2),
-				String.valueOf(rowData.get(3)), String.valueOf(rowData.get(4)));
+		Iterator<Collection<Object>> it = data.iterator();
+		if (it.hasNext()) {
+			ArrayList<Object> rowData = (ArrayList<Object>) it.next();
+			return new Paciente(String.valueOf(rowData.get(0)), (int) rowData.get(1), (int) rowData.get(2),
+					String.valueOf(rowData.get(3)), String.valueOf(rowData.get(4)), (boolean) rowData.get(5));
+		}
+		return null;
 	}
 
 	/**
@@ -74,7 +79,7 @@ public class PacienteDAO implements AbstractEntityDAO<Paciente> {
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
 			Paciente p = new Paciente(String.valueOf(rowData.get(0)), (int) rowData.get(1), (int) rowData.get(2),
-					String.valueOf(rowData.get(3)), String.valueOf(rowData.get(4)));
+					String.valueOf(rowData.get(3)), String.valueOf(rowData.get(4)), (boolean) rowData.get(5));
 			list.add(p);
 		}
 		return list;
@@ -91,7 +96,7 @@ public class PacienteDAO implements AbstractEntityDAO<Paciente> {
 	@Override
 	public int insert(Paciente paciente) throws SQLException {
 		return AgenteBD.getAgente().insert(String.format(INSERT, paciente.getDni(), paciente.getGrupo().getPrioridad(),
-				paciente.getRegion().getId(), paciente.getNombre(), paciente.getApellidos()));
+				paciente.getRegion().getId(), paciente.getNombre(), paciente.getApellidos(), paciente.isSegundaDosis()));
 	}
 
 	/**
@@ -105,7 +110,7 @@ public class PacienteDAO implements AbstractEntityDAO<Paciente> {
 	@Override
 	public int update(Paciente paciente) throws SQLException {
 		return AgenteBD.getAgente().update(String.format(UPDATE, paciente.getDni(), paciente.getGrupo().getPrioridad(),
-				paciente.getRegion().getId(), paciente.getNombre(), paciente.getApellidos(), paciente.getDni()));
+				paciente.getRegion().getId(), paciente.getNombre(), paciente.getApellidos(), paciente.isSegundaDosis(), paciente.getDni()));
 	}
 
 	/**
