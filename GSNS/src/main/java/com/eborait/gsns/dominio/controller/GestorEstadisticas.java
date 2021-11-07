@@ -28,14 +28,15 @@ public class GestorEstadisticas {
 	 */
 	public int consultarTotalVacunadosPrimeraDosis() throws GSNSException {
 		try {
-			return DAOFactory.getVacunacionDAO().getAll("segunda_dosis","false").size();
+			return DAOFactory.getVacunacionDAO().getAll("segunda_dosis", "false").size();
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
-			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados con la primera dosis.");
+			throw new GSNSException(
+					"Se ha producido un error al consultar el número total de vacunados con la primera dosis.");
 		}
 	}
-	
+
 	/**
 	 * Consulta el número total de vacunados segunda dosis.
 	 * 
@@ -44,11 +45,12 @@ public class GestorEstadisticas {
 	 */
 	public int consultarTotalVacunadosSegundaDosis() throws GSNSException {
 		try {
-			return DAOFactory.getVacunacionDAO().getAll("segunda_dosis","true").size();
+			return DAOFactory.getVacunacionDAO().getAll("segunda_dosis", "true").size();
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
-			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados con la segunda dosis.");
+			throw new GSNSException(
+					"Se ha producido un error al consultar el número total de vacunados con la segunda dosis.");
 		}
 	}
 
@@ -62,7 +64,7 @@ public class GestorEstadisticas {
 	public int consultarTotalVacunadosPorRegionPrimeraDosis(int region) throws GSNSException {
 		try {
 			int contador = 0;
-			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll("segunda_dosis","false");
+			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll("segunda_dosis", "false");
 			for (Vacunacion vacunacion : vacunaciones) {
 				if (vacunacion.getPaciente().getRegion().getId() == region) {
 					contador++;
@@ -75,7 +77,7 @@ public class GestorEstadisticas {
 			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados por región.");
 		}
 	}
-	
+
 	/**
 	 * Consulta el número total de vacunados de una región con segunda dosis.
 	 * 
@@ -86,7 +88,7 @@ public class GestorEstadisticas {
 	public int consultarTotalVacunadosPorRegionSegundaDosis(int region) throws GSNSException {
 		try {
 			int contador = 0;
-			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll("segunda_dosis","true");
+			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll("segunda_dosis", "true");
 			for (Vacunacion vacunacion : vacunaciones) {
 				if (vacunacion.getPaciente().getRegion().getId() == region) {
 					contador++;
@@ -101,12 +103,13 @@ public class GestorEstadisticas {
 	}
 
 	/**
-	 * Calcula el porcentaje de vacunaciones sobre vacunas recibida de la primera dosiss.
+	 * Calcula el porcentaje de vacunaciones sobre vacunas recibida de la primera
+	 * dosiss.
 	 * 
 	 * @return El porcentaje de vacunaciones sobre vacunas recibidas.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis() throws GSNSException {
+	public double consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis() throws GSNSException {
 		try {
 			int totalVacunados = consultarTotalVacunadosPrimeraDosis();
 			int vacunasRecibidas = 0;
@@ -114,25 +117,27 @@ public class GestorEstadisticas {
 			for (LoteVacunas loteVacunas : lotes) {
 				vacunasRecibidas += loteVacunas.getCantidad();
 			}
-			if(vacunasRecibidas == 0) {
-				return 0;				
-			}else {
-				return (totalVacunados / vacunasRecibidas) * 100;
+			if (vacunasRecibidas == 0) {
+				return 0;
+			} else {
+				return (totalVacunados / (vacunasRecibidas * 1.0)) * 100;
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
-			throw new GSNSException("Se ha producido un error al consultar el porcentaje de vacunados con la primera dosis.");
+			throw new GSNSException(
+					"Se ha producido un error al consultar el porcentaje de vacunados con la primera dosis.");
 		}
 	}
-	
+
 	/**
-	 * Calcula el porcentaje de vacunaciones sobre vacunas recibida de la primera dosiss.
+	 * Calcula el porcentaje de vacunaciones sobre vacunas recibida de la primera
+	 * dosiss.
 	 * 
 	 * @return El porcentaje de vacunaciones sobre vacunas recibidas.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarPorcentajeVacunadosSobreRecibidasSegundaDosis() throws GSNSException {
+	public double consultarPorcentajeVacunadosSobreRecibidasSegundaDosis() throws GSNSException {
 		try {
 			int totalVacunados = consultarTotalVacunadosSegundaDosis();
 			int vacunasRecibidas = 0;
@@ -140,26 +145,29 @@ public class GestorEstadisticas {
 			for (LoteVacunas loteVacunas : lotes) {
 				vacunasRecibidas += loteVacunas.getCantidad();
 			}
-			if(vacunasRecibidas == 0) {
-				return 0;				
-			}else {
-				return (totalVacunados / vacunasRecibidas) * 100;
+			if (vacunasRecibidas == 0) {
+				return 0;
+			} else {
+				return (totalVacunados / (vacunasRecibidas * 1.0)) * 100;
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
-			throw new GSNSException("Se ha producido un error al consultar el porcentaje de vacunados con la segunda dosis.");
+			throw new GSNSException(
+					"Se ha producido un error al consultar el porcentaje de vacunados con la segunda dosis.");
 		}
 	}
 
 	/**
-	 * Calcula el porcentaje de vacunaciones sobre vacunas recibidas de una región con la primera dosis.
+	 * Calcula el porcentaje de vacunaciones sobre vacunas recibidas de una región
+	 * con la primera dosis.
 	 * 
 	 * @param region La región por la que se filtra la consulta.
-	 * @return El porcentaje de vacunaciones sobre vacunas recibidas de la regió con la primera dosis.
+	 * @return El porcentaje de vacunaciones sobre vacunas recibidas de la regió con
+	 *         la primera dosis.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarPorcentajeVacunadosSobreRecibidasEnRegionPrimeraDosis(int region) throws GSNSException {
+	public double consultarPorcentajeVacunadosSobreRecibidasEnRegionPrimeraDosis(int region) throws GSNSException {
 		try {
 			int totalVacunados = consultarTotalVacunadosPorRegionPrimeraDosis(region);
 			int vacunasRecibidas = 0;
@@ -169,26 +177,29 @@ public class GestorEstadisticas {
 					vacunasRecibidas += entrega.getLote().getCantidad();
 				}
 			}
-			if(vacunasRecibidas == 0) {
-				return 0;				
-			}else {
-				return (totalVacunados / vacunasRecibidas) * 100;
+			if (vacunasRecibidas == 0) {
+				return 0;
+			} else {
+				return (totalVacunados / (vacunasRecibidas * 1.0)) * 100;
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
-			throw new GSNSException("Se ha producido un error al consultar el porcentaje de vacunados por región con la primera dosis.");
+			throw new GSNSException(
+					"Se ha producido un error al consultar el porcentaje de vacunados por región con la primera dosis.");
 		}
 	}
-	
+
 	/**
-	 * Calcula el porcentaje de vacunaciones sobre vacunas recibidas de una región con la segunda dosis.
+	 * Calcula el porcentaje de vacunaciones sobre vacunas recibidas de una región
+	 * con la segunda dosis.
 	 * 
 	 * @param region La región por la que se filtra la consulta.
-	 * @return El porcentaje de vacunaciones sobre vacunas recibidas de la regió con la segunda dosis.
+	 * @return El porcentaje de vacunaciones sobre vacunas recibidas de la regió con
+	 *         la segunda dosis.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(int region) throws GSNSException {
+	public double consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(int region) throws GSNSException {
 		try {
 			int totalVacunados = consultarTotalVacunadosPorRegionPrimeraDosis(region);
 			int vacunasRecibidas = 0;
@@ -198,15 +209,16 @@ public class GestorEstadisticas {
 					vacunasRecibidas += entrega.getLote().getCantidad();
 				}
 			}
-			if(vacunasRecibidas == 0) {
-				return 0;				
-			}else {
-				return (totalVacunados / vacunasRecibidas) * 100;
+			if (vacunasRecibidas == 0) {
+				return 0;
+			} else {
+				return (totalVacunados / (vacunasRecibidas * 1.0)) * 100;
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
-			throw new GSNSException("Se ha producido un error al consultar el porcentaje de vacunados por región con la segunda dosis.");
+			throw new GSNSException(
+					"Se ha producido un error al consultar el porcentaje de vacunados por región con la segunda dosis.");
 		}
 	}
 

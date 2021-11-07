@@ -65,19 +65,19 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		topPanel.add(lblTitulo);
 
 		final JLabel lblTotalVacPrimeraDosis = new JLabel("Total vacunados (primera dosis):");
-		lblTotalVacPrimeraDosis.setBounds(159, 100, 228, 14);
+		lblTotalVacPrimeraDosis.setBounds(211, 50, 377, 14);
 		midPanel.add(lblTotalVacPrimeraDosis);
 
 		final JLabel lblTotalVacSegundaDosis = new JLabel("Total vacunados (segunda dosis):");
-		lblTotalVacSegundaDosis.setBounds(159, 125, 228, 14);
+		lblTotalVacSegundaDosis.setBounds(211, 75, 377, 14);
 		midPanel.add(lblTotalVacSegundaDosis);
 
 		final JLabel lblTotalDosisAdministradas = new JLabel("Total dosis administradas:");
-		lblTotalDosisAdministradas.setBounds(159, 150, 228, 14);
+		lblTotalDosisAdministradas.setBounds(211, 100, 377, 14);
 		midPanel.add(lblTotalDosisAdministradas);
 
 		JButton btnTotalVacunados = new JButton("Total vacunados");
-		btnTotalVacunados.setBounds(10, 100, 139, 64);
+		btnTotalVacunados.setBounds(10, 50, 191, 64);
 		btnTotalVacunados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -96,19 +96,19 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		midPanel.add(btnTotalVacunados);
 
 		final JLabel lblTotalVacunadosRegionPrimera = new JLabel("Total vacunados por región (primera dosis):");
-		lblTotalVacunadosRegionPrimera.setBounds(598, 100, 282, 14);
+		lblTotalVacunadosRegionPrimera.setBounds(211, 200, 377, 14);
 		midPanel.add(lblTotalVacunadosRegionPrimera);
 
 		final JLabel lblTotalVacunadosRegionSegunda = new JLabel("Total vacunados por región (segunda dosis):");
-		lblTotalVacunadosRegionSegunda.setBounds(598, 125, 282, 14);
+		lblTotalVacunadosRegionSegunda.setBounds(211, 225, 377, 14);
 		midPanel.add(lblTotalVacunadosRegionSegunda);
 
 		final JLabel lblTotalDosisAdministradasRegion = new JLabel("Total dosis administradas por región:");
-		lblTotalDosisAdministradasRegion.setBounds(598, 150, 282, 14);
+		lblTotalDosisAdministradasRegion.setBounds(211, 250, 377, 14);
 		midPanel.add(lblTotalDosisAdministradasRegion);
 
 		JButton btnVacunadosPorRegion = new JButton("Total vacunados por región");
-		btnVacunadosPorRegion.setBounds(397, 132, 191, 32);
+		btnVacunadosPorRegion.setBounds(10, 232, 191, 32);
 		btnVacunadosPorRegion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -130,21 +130,21 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		midPanel.add(btnVacunadosPorRegion);
 
 		final JLabel lblPorcentajePrimera = new JLabel("Porcentaje vacunados (primera dosis):");
-		lblPorcentajePrimera.setBounds(159, 194, 228, 14);
+		lblPorcentajePrimera.setBounds(211, 129, 377, 14);
 		midPanel.add(lblPorcentajePrimera);
 
 		final JLabel lblPorcentajeCompletamente = new JLabel("Porcentaje vacunados (pauta completa):");
-		lblPorcentajeCompletamente.setBounds(159, 240, 228, 14);
+		lblPorcentajeCompletamente.setBounds(211, 175, 377, 14);
 		midPanel.add(lblPorcentajeCompletamente);
 
 		JButton btnPorcentaje = new JButton("Porcentaje vacunados");
-		btnPorcentaje.setBounds(10, 190, 139, 64);
+		btnPorcentaje.setBounds(10, 125, 191, 64);
 		btnPorcentaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int porcentajePrimera = frame.getGestorEstadisticas()
+					double porcentajePrimera = frame.getGestorEstadisticas()
 							.consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis();
-					int porcentajeSegunda = frame.getGestorEstadisticas()
+					double porcentajeSegunda = frame.getGestorEstadisticas()
 							.consultarPorcentajeVacunadosSobreRecibidasSegundaDosis();
 					lblPorcentajePrimera.setText(
 							"Porcentaje vacunados (primera dosis): " + String.valueOf(porcentajePrimera) + "%");
@@ -158,24 +158,24 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		midPanel.add(btnPorcentaje);
 
 		final JLabel lblPorcentaje1Dosisregion = new JLabel("Porcentaje vacunados por región (primera dosis):");
-		lblPorcentaje1Dosisregion.setBounds(598, 194, 282, 14);
+		lblPorcentaje1Dosisregion.setBounds(211, 294, 377, 14);
 		midPanel.add(lblPorcentaje1Dosisregion);
 
 		final JLabel lblPorcentajeDosisRegionCompleta = new JLabel("Porcentaje vacunados por región (pauta completa):");
-		lblPorcentajeDosisRegionCompleta.setBounds(598, 240, 282, 14);
+		lblPorcentajeDosisRegionCompleta.setBounds(211, 340, 377, 14);
 		midPanel.add(lblPorcentajeDosisRegionCompleta);
 
 		JButton btnPorcentajeRegion = new JButton("Porcentaje vacunados por región");
-		btnPorcentajeRegion.setBounds(397, 222, 191, 32);
+		btnPorcentajeRegion.setBounds(10, 322, 191, 32);
 		btnPorcentajeRegion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int porcentajePrimera = frame.getGestorEstadisticas()
+					double porcentajePrimera = frame.getGestorEstadisticas()
 							.consultarPorcentajeVacunadosSobreRecibidasEnRegionPrimeraDosis(
-									comboTotalRegion.getSelectedIndex() + 1);
-					int porcentajeSegunda = frame.getGestorEstadisticas()
+									comboPorcentajeRegion.getSelectedIndex() + 1);
+					double porcentajeSegunda = frame.getGestorEstadisticas()
 							.consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(
-									comboTotalRegion.getSelectedIndex() + 1);
+									comboPorcentajeRegion.getSelectedIndex() + 1);
 
 					lblPorcentaje1Dosisregion.setText("Porcentaje vacunados por región (primera dosis): "
 							+ String.valueOf(porcentajePrimera) + "%");
@@ -190,11 +190,11 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		midPanel.add(btnPorcentajeRegion);
 
 		comboTotalRegion = new JComboBox<String>(RegionEnum.getNombres());
-		comboTotalRegion.setBounds(397, 100, 191, 21);
+		comboTotalRegion.setBounds(10, 200, 191, 21);
 		midPanel.add(comboTotalRegion);
 
 		comboPorcentajeRegion = new JComboBox<String>(RegionEnum.getNombres());
-		comboPorcentajeRegion.setBounds(397, 190, 191, 21);
+		comboPorcentajeRegion.setBounds(10, 290, 191, 21);
 		midPanel.add(comboPorcentajeRegion);
 	}
 
