@@ -7,7 +7,6 @@ import com.eborait.gsns.dominio.entitymodel.Paciente;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-import com.eborait.gsns.persistencia.DAOFactory;
 
 /**
  * Realiza la gestión de vacunación.
@@ -19,6 +18,18 @@ import com.eborait.gsns.persistencia.DAOFactory;
  *
  */
 public class GestorVacunacion {
+
+	/** El gestor de la aplicación. */
+	private GestorGSNS gestorGSNS;
+
+	/**
+	 * Instancia un nuevo GestorVacunacion.
+	 * 
+	 * @param gestorGSNS El gestor de la aplicación.
+	 */
+	public GestorVacunacion(GestorGSNS gestorGSNS) {
+		this.gestorGSNS = gestorGSNS;
+	}
 
 	/**
 	 * Da de alta una nueva entrega de vacunas.
@@ -39,7 +50,7 @@ public class GestorVacunacion {
 		try {
 			EntregaVacunas entregaVac = new EntregaVacunas(id, lote, Util.parseFecha(fecha), cantidad, prioridad,
 					tipoVacuna, region);
-			return DAOFactory.getEntregaDAO().insert(entregaVac) == 1;
+			return gestorGSNS.getEntregaDAO().insert(entregaVac) == 1;
 		} catch (SQLException sqle) {
 			System.out.println("Excepción insertando entrega:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -67,7 +78,7 @@ public class GestorVacunacion {
 			Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region, segundaDosis);
 			Vacunacion vacunacion = new Vacunacion(0, new TipoVacuna(tipo), paciente, Util.parseFecha(fecha),
 					segundaDosis);
-			return DAOFactory.getVacunacionDAO().insert(vacunacion) == 1 && DAOFactory.getPacienteDAO().insert(paciente) == 1;
+			return gestorGSNS.getVacunacionDAO().insert(vacunacion) == 1 && gestorGSNS.getPacienteDAO().insert(paciente) == 1;
 		} catch (SQLException sqle) {
 			System.out.println("Excepción insertando vacunación:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();

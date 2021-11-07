@@ -7,7 +7,6 @@ import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-import com.eborait.gsns.persistencia.DAOFactory;
 
 /**
  * Realiza la gestión de estadísticas.
@@ -20,6 +19,18 @@ import com.eborait.gsns.persistencia.DAOFactory;
  */
 public class GestorEstadisticas {
 
+	/** El gestor de la aplicación. */
+	private GestorGSNS gestorGSNS;
+
+	/**
+	 * Instancia un nuevo GestorEstadisticas.
+	 * 
+	 * @param gestorGSNS El gestor de la aplicación.
+	 */
+	public GestorEstadisticas(GestorGSNS gestorGSNS) {
+		this.gestorGSNS = gestorGSNS;
+	}
+
 	/**
 	 * Consulta el número total de vacunados.
 	 * 
@@ -28,7 +39,7 @@ public class GestorEstadisticas {
 	 */
 	public int consultarTotalVacunadosPrimeraDosis() throws GSNSException {
 		try {
-			return DAOFactory.getVacunacionDAO().getAll("segunda_dosis", "false").size();
+			return gestorGSNS.getVacunacionDAO().getAll("segunda_dosis", "false").size();
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -45,7 +56,7 @@ public class GestorEstadisticas {
 	 */
 	public int consultarTotalVacunadosSegundaDosis() throws GSNSException {
 		try {
-			return DAOFactory.getVacunacionDAO().getAll("segunda_dosis", "true").size();
+			return gestorGSNS.getVacunacionDAO().getAll("segunda_dosis", "true").size();
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -64,7 +75,7 @@ public class GestorEstadisticas {
 	public int consultarTotalVacunadosPorRegionPrimeraDosis(int region) throws GSNSException {
 		try {
 			int contador = 0;
-			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll("segunda_dosis", "false");
+			Collection<Vacunacion> vacunaciones = gestorGSNS.getVacunacionDAO().getAll("segunda_dosis", "false");
 			for (Vacunacion vacunacion : vacunaciones) {
 				if (vacunacion.getPaciente().getRegion().getId() == region) {
 					contador++;
@@ -88,7 +99,7 @@ public class GestorEstadisticas {
 	public int consultarTotalVacunadosPorRegionSegundaDosis(int region) throws GSNSException {
 		try {
 			int contador = 0;
-			Collection<Vacunacion> vacunaciones = DAOFactory.getVacunacionDAO().getAll("segunda_dosis", "true");
+			Collection<Vacunacion> vacunaciones = gestorGSNS.getVacunacionDAO().getAll("segunda_dosis", "true");
 			for (Vacunacion vacunacion : vacunaciones) {
 				if (vacunacion.getPaciente().getRegion().getId() == region) {
 					contador++;
@@ -113,7 +124,7 @@ public class GestorEstadisticas {
 		try {
 			int totalVacunados = consultarTotalVacunadosPrimeraDosis();
 			int vacunasRecibidas = 0;
-			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null, null);
+			Collection<LoteVacunas> lotes = gestorGSNS.getLoteVacunasDAO().getAll(null, null);
 			for (LoteVacunas loteVacunas : lotes) {
 				vacunasRecibidas += loteVacunas.getCantidad();
 			}
@@ -141,7 +152,7 @@ public class GestorEstadisticas {
 		try {
 			int totalVacunados = consultarTotalVacunadosSegundaDosis();
 			int vacunasRecibidas = 0;
-			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null, null);
+			Collection<LoteVacunas> lotes = gestorGSNS.getLoteVacunasDAO().getAll(null, null);
 			for (LoteVacunas loteVacunas : lotes) {
 				vacunasRecibidas += loteVacunas.getCantidad();
 			}
@@ -171,7 +182,7 @@ public class GestorEstadisticas {
 		try {
 			int totalVacunados = consultarTotalVacunadosPorRegionPrimeraDosis(region);
 			int vacunasRecibidas = 0;
-			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll(null, null);
+			Collection<EntregaVacunas> entregas = gestorGSNS.getEntregaDAO().getAll(null, null);
 			for (EntregaVacunas entrega : entregas) {
 				if (entrega.getRegion().getId() == region) {
 					vacunasRecibidas += entrega.getLote().getCantidad();
@@ -203,7 +214,7 @@ public class GestorEstadisticas {
 		try {
 			int totalVacunados = consultarTotalVacunadosPorRegionPrimeraDosis(region);
 			int vacunasRecibidas = 0;
-			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll(null, null);
+			Collection<EntregaVacunas> entregas = gestorGSNS.getEntregaDAO().getAll(null, null);
 			for (EntregaVacunas entrega : entregas) {
 				if (entrega.getRegion().getId() == region) {
 					vacunasRecibidas += entrega.getLote().getCantidad();

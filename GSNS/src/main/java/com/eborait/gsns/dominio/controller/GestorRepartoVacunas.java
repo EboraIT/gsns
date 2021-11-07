@@ -6,10 +6,8 @@ import java.util.Iterator;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
-import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-import com.eborait.gsns.persistencia.DAOFactory;
 
 /**
  * Realiza la gestión del reparto de vacunas.
@@ -21,6 +19,18 @@ import com.eborait.gsns.persistencia.DAOFactory;
  *
  */
 public class GestorRepartoVacunas {
+
+	/** El gestor de la aplicación. */
+	private GestorGSNS gestorGSNS;
+
+	/**
+	 * Instancia un nuevo GestorRepartoVacunas.
+	 * 
+	 * @param gestorGSNS El gestor de la aplicación.
+	 */
+	public GestorRepartoVacunas(GestorGSNS gestorGSNS) {
+		this.gestorGSNS = gestorGSNS;
+	}
 
 	/**
 	 * Da de alta un nuevo lote de vacunas.
@@ -39,7 +49,7 @@ public class GestorRepartoVacunas {
 		TipoVacuna tipo = new TipoVacuna(nombreVacuna, farmaceutica, fechaAprobacion);
 		LoteVacunas lote = new LoteVacunas(id, Util.parseFecha(fecha), tipo, cantidad, farmaceutica);
 		try {
-			return DAOFactory.getLoteVacunasDAO().insert(lote) == 1;
+			return gestorGSNS.getLoteVacunasDAO().insert(lote) == 1;
 		} catch (SQLException sqle) {
 			System.out.println("Excepción insertando lote:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -48,14 +58,12 @@ public class GestorRepartoVacunas {
 	}
 
 	/**
-	 * TODO
-	 * 
-	 * Consulta que devuelve la entrega a cada región
+	 * Consulta que devuelve la entrega a cada región.
 	 * 
 	 * @param region La cual cogeremos el nombre de la region y la población.
 	 * 
-	 * @param ia     Tendremos también como parametro la Incidencia Acumulada que
-	 *               pasará el cliente por parametro
+	 * @param IA     Tendremos también como parametro la Incidencia Acumulada que
+	 *               pasará el cliente por parámetro.
 	 * 
 	 * @return cantidad Devuelve un entero con la cantidad de vacunas repartidas.
 	 *         Para resolver la cantidad será dependiendo del 60% de la poblacion y
@@ -64,13 +72,17 @@ public class GestorRepartoVacunas {
 	 */
 	public int calcularEntregasRegion(int region, int ia) throws GSNSException {
 		try {
-			Collection<EntregaVacunas> entregas = DAOFactory.getEntregaDAO().getAll("region", "region");
+			Collection<EntregaVacunas> entregas = gestorGSNS.getEntregaDAO().getAll("region", "region");
 			int cantidad = 0;
 			for (EntregaVacunas entregaVacunas : entregas) {
 				cantidad += entregaVacunas.getCantidad();
 			}
-			int cantidadPoblacion = RegionEnum.valueOf(region).getPoblacion();
-			return (int) (cantidad / ia * 0.40 + cantidadPoblacion * 0.60);
+			int cantidadPoblacion = gestorGSNS.getRegionPorId(region).getPoblacion();
+			if (ia == 0) {
+				return (int) (cantidad * 0.40 + cantidadPoblacion * 0.60);
+			} else {
+				return (int) (cantidad / ia * 0.40 + cantidadPoblacion * 0.60);
+			}
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando cantidad de entregas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -86,7 +98,7 @@ public class GestorRepartoVacunas {
 	 */
 	public String[] getTipoVacunas() throws GSNSException {
 		try {
-			Collection<LoteVacunas> lotes = DAOFactory.getLoteVacunasDAO().getAll(null, null);
+			Collection<LoteVacunas> lotes = gestorGSNS.getLoteVacunasDAO().getAll(null, null);
 			Iterator<LoteVacunas> it = lotes.iterator();
 			String[] tipos = new String[lotes.size()];
 			for (int i = 0; it.hasNext(); i++) {
@@ -108,7 +120,7 @@ public class GestorRepartoVacunas {
 	 */
 	public int generarIdLote() throws GSNSException {
 		try {
-			return DAOFactory.getLoteVacunasDAO().max("id") + 1;
+			return gestorGSNS.getLoteVacunasDAO().max("id") + 1;
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultado id de lote de vacunas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();

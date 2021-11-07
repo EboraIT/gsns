@@ -84,7 +84,7 @@ public class PantallaAltaNuevoLote extends JPanel {
 		midPanel.add(lblIdLote);
 
 		try {
-			lblIdLote.setText(String.valueOf(frame.getGestorRepartoVacunas().generarIdLote()));
+			lblIdLote.setText(String.valueOf(frame.getGestorGSNS().getGestorRepartoVacunas().generarIdLote()));
 		} catch (GSNSException gsnse) {
 			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			frame.cambiarPanel(frame.getPanelMain());
@@ -163,7 +163,7 @@ public class PantallaAltaNuevoLote extends JPanel {
 	private void registrarLote(Main frame) {
 		if (validar()) {
 			try {
-				boolean correcto = frame.getGestorRepartoVacunas().altaNuevoLoteVacunas(lblIdLote.getText(),
+				boolean correcto = frame.getGestorGSNS().getGestorRepartoVacunas().altaNuevoLoteVacunas(lblIdLote.getText(),
 						txtFechaAlta.getText(), Integer.parseInt(txtCantidad.getText()), txtNombreVacuna.getText(),
 						txtFarmaceutica.getText(), txtFechaAprobacion.getText());
 				if (correcto) {

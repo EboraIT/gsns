@@ -8,9 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import com.eborait.gsns.dominio.controller.GestorEstadisticas;
-import com.eborait.gsns.dominio.controller.GestorRepartoVacunas;
-import com.eborait.gsns.dominio.controller.GestorVacunacion;
+import com.eborait.gsns.dominio.controller.GestorGSNS;
 
 /**
  * Pantalla principal de la aplicación.
@@ -34,14 +32,8 @@ public class Main extends JFrame {
 	/** El panel principal. */
 	private PanelMain panelMain;
 
-	/** El gestor de estadisticas. */
-	private GestorEstadisticas gestorEstadisticas;
-
-	/** El gestor del reparto de vacunas. */
-	private GestorRepartoVacunas gestorRepartoVacunas;
-
-	/** El gestor de vacunaciones. */
-	private GestorVacunacion gestorVacunacion;
+	/** El gestor de la aplicación. */
+	private GestorGSNS gestorGSNS;
 
 	/**
 	 * Lanza la aplicación.
@@ -78,10 +70,7 @@ public class Main extends JFrame {
 		panelActual = panelMain;
 		contentPane.add(panelActual, BorderLayout.CENTER);
 		setContentPane(contentPane);
-
-		gestorEstadisticas = new GestorEstadisticas();
-		gestorRepartoVacunas = new GestorRepartoVacunas();
-		gestorVacunacion = new GestorVacunacion();
+		this.gestorGSNS = new GestorGSNS();
 	}
 
 	/**
@@ -106,26 +95,10 @@ public class Main extends JFrame {
 
 	/**
 	 *
-	 * @return El gestor de estadísticas.
+	 * @return El gestor de la aplicación.
 	 */
-	public GestorEstadisticas getGestorEstadisticas() {
-		return gestorEstadisticas;
-	}
-
-	/**
-	 *
-	 * @return El gestor del reparto de vacunas.
-	 */
-	public GestorRepartoVacunas getGestorRepartoVacunas() {
-		return gestorRepartoVacunas;
-	}
-
-	/**
-	 * 
-	 * @return El gestor de vacunaciones.
-	 */
-	public GestorVacunacion getGestorVacunacion() {
-		return gestorVacunacion;
+	public GestorGSNS getGestorGSNS() {
+		return gestorGSNS;
 	}
 
 }

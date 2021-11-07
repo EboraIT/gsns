@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 /**
@@ -68,13 +67,13 @@ public class PantallaCalculoEntrega extends JPanel {
 		lblPoblacion.setBounds(242, 64, 181, 20);
 		midPanel.add(lblPoblacion);
 
-		final JComboBox<String> comboRegion = new JComboBox<String>(RegionEnum.getNombres());
+		final JComboBox<String> comboRegion = new JComboBox<String>(frame.getGestorGSNS().getNombresRegion());
 		comboRegion.setBounds(242, 36, 181, 20);
 		comboRegion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					lblPoblacion.setText(
-							formatearPoblacion(RegionEnum.valueOf(comboRegion.getSelectedIndex() + 1).getPoblacion()));
+							formatearPoblacion(frame.getGestorGSNS().getRegionPorId(comboRegion.getSelectedIndex() + 1).getPoblacion()));
 				} catch (GSNSException gsnse) {
 					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
@@ -105,7 +104,7 @@ public class PantallaCalculoEntrega extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (txtIA.getText().length() != 0) {
 					try {
-						int reparto = frame.getGestorRepartoVacunas().calcularEntregasRegion(
+						int reparto = frame.getGestorGSNS().getGestorRepartoVacunas().calcularEntregasRegion(
 								comboRegion.getSelectedIndex() + 1, Integer.parseInt(txtIA.getText()));
 						lblReparto.setText("Vacunas a repartir: " + formatearPoblacion(reparto));
 
