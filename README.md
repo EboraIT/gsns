@@ -5,7 +5,7 @@ Laboratorio Ingeniería del Software II
 Las tarea práctica consiste en la realización de un proyecto (durante todo el cuatrimestre) de desarrollo software siguiendo los métodos y técnicas de ingeniería del software vistas en teoría así como aplicando las herramientas que se irán presentando en algunas sesiones de prácticas.
 
 ## Resolución del problema 🔨
-Para desarrollar dicho problema hemos ido desarrollando una metodología ágil, también con ayuda de projects de Github hemos podido ir creando tickets con tareas las cuales hemos ido resolviendo, el tipo de projects utilizado es Kanva. Teniamos 3 columnas las cuales eran:
+Para desarrollar dicho problema hemos ido desarrollando una metodología ágil, también con ayuda de projects de Github hemos podido ir creando tickets con tareas las cuales hemos ido resolviendo, el tipo de projects utilizado es Kanban. Teniamos 3 columnas las cuales eran:
 * **To do** , aquí situamos las tareas o progresos que teniamos plantado hacer.
 * **In progress**, aquí situamos las tareas o progresos que estamos haciendo en ese momento.
 * **Done**, y por último aquí estarán las tareas ya completadas.
