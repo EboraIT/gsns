@@ -14,8 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import com.eborait.gsns.dominio.entitymodel.GrupoPrioridad;
-import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 /**
@@ -148,16 +146,16 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		btnNewButton.setBounds(10, 215, 847, 23);
 		midPanel.add(btnNewButton);
 
-		comboGrupoPrioridad = new JComboBox<String>(GrupoPrioridad.getNombres());
+		comboGrupoPrioridad = new JComboBox<String>(frame.getGestorGSNS().getNombresGrupoPrioridad());
 		comboGrupoPrioridad.setBounds(242, 148, 181, 20);
 		midPanel.add(comboGrupoPrioridad);
 
-		comboRegion = new JComboBox<String>(RegionEnum.getNombres());
+		comboRegion = new JComboBox<String>(frame.getGestorGSNS().getNombresRegion());
 		comboRegion.setBounds(242, 176, 181, 20);
 		midPanel.add(comboRegion);
 
 		try {
-			comboTipoVacuna = new JComboBox<>(frame.getGestorRepartoVacunas().getTipoVacunas());
+			comboTipoVacuna = new JComboBox<>(frame.getGestorGSNS().getGestorRepartoVacunas().getTipoVacunas());
 			comboTipoVacuna.setBounds(676, 36, 181, 20);
 			midPanel.add(comboTipoVacuna);
 		} catch (GSNSException gsnse) {
@@ -174,7 +172,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 	private void registrarAlta(Main frame) {
 		if (validar()) {
 			try {
-				frame.getGestorVacunacion().altaEntregaVacunas(txtIdEntrega.getText(), txtLote.getText(),
+				frame.getGestorGSNS().getGestorVacunacion().altaEntregaVacunas(txtIdEntrega.getText(), txtLote.getText(),
 						txtFecha.getText(), Integer.parseInt(txtCantidad.getText()),
 						comboGrupoPrioridad.getSelectedIndex() + 1, comboTipoVacuna.getSelectedItem().toString(),
 						comboRegion.getSelectedIndex() + 1);
