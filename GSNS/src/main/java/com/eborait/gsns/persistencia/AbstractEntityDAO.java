@@ -1,47 +1,65 @@
 package com.eborait.gsns.persistencia;
 
-import java.sql.Date;
+import java.sql.SQLException;
+import java.util.Collection;
 
-public abstract class AbstractEntityDAO<E> {
-
-	private String id;
-	private Date fechaInserccion;
-	private Date fechaActualizacion;
-
-	/**
-	 * 
-	 * @param id
-	 */
-	public E get(String id) {
-		// TODO - implement AbstractEntityDAO.get
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param entity
-	 */
-	public int insert(E entity) {
-		// TODO - implement AbstractEntityDAO.insert
-		throw new UnsupportedOperationException();
-	}
+/**
+ * Define los métodos para implementar en los DAO.
+ * 
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @since 1.0
+ * @version 1.0
+ * 
+ * @param <E> Entidad de la base de datos.
+ *
+ */
+public interface AbstractEntityDAO<E> {
 
 	/**
+	 * Realiza una consulta a la base de datos.
 	 * 
-	 * @param entity
+	 * @param id Identificador de la entidad que se busca.
+	 * @return Una única entidad.
+	 * @throws SQLException Si se produce una excepción en la consulta SQL.
 	 */
-	public E update(E entity) {
-		// TODO - implement AbstractEntityDAO.update
-		throw new UnsupportedOperationException();
-	}
+	public abstract E get(String id) throws SQLException;
 
 	/**
+	 * Realiza una consulta a la base de datos.
 	 * 
-	 * @param entity
+	 * @param criteria Columna por la que se filtra
+	 * @param value    Valor por el que se filtra.
+	 * @return Una colección con las entidades encontradas.
+	 * @throws SQLException Si se produce una excepción en la consulta SQL.
 	 */
-	public int delete(E entity) {
-		// TODO - implement AbstractEntityDAO.delete
-		throw new UnsupportedOperationException();
-	}
+	public abstract Collection<E> getAll(String criteria, String value) throws SQLException;
+
+	/**
+	 * Realiza una inserción en la base de datos.
+	 * 
+	 * @param entity entidad a insertar.
+	 * @return El número de filas insertadas.
+	 * @throws SQLException Si se produce una excepción en la consulta SQL.
+	 */
+	public abstract int insert(E entity) throws SQLException;
+
+	/**
+	 * Realiza una actualización en la base de datos.
+	 * 
+	 * @param entity entidad a actualizar.
+	 * @return El número de filas actualizadas.
+	 * @throws SQLException Si se produce una excepción en la consulta SQL.
+	 */
+	public abstract int update(E entity) throws SQLException;
+
+	/**
+	 * Realiza un borrado en la base de datos.
+	 * 
+	 * @param entity entidad a eliminar.
+	 * @return El número de filas eliminadas.
+	 * @throws SQLException Si se produce una excepción en la consulta SQL.
+	 */
+	public abstract int delete(E entity) throws SQLException;
 
 }
