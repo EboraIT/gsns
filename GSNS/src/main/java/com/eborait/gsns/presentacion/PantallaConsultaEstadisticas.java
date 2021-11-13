@@ -58,10 +58,8 @@ public class PantallaConsultaEstadisticas extends PanelBase {
 		btnTotalVacunados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int totalPrimera = frame.getGestorGSNS().getGestorEstadisticas()
-							.consultarTotalVacunadosPrimeraDosis();
-					int totalSegunda = frame.getGestorGSNS().getGestorEstadisticas()
-							.consultarTotalVacunadosSegundaDosis();
+					int totalPrimera = frame.getGestorGSNS().getGestorEstadisticas().consultarTotalVacunados(false);
+					int totalSegunda = frame.getGestorGSNS().getGestorEstadisticas().consultarTotalVacunados(true);
 					int total = totalPrimera + totalSegunda;
 					lblTotalVacPrimeraDosis.setText("Total vacunados (primera dosis): " + totalPrimera);
 					lblTotalVacSegundaDosis.setText("Total vacunados (segunda dosis): " + totalSegunda);
@@ -92,9 +90,9 @@ public class PantallaConsultaEstadisticas extends PanelBase {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					int totalPrimera = frame.getGestorGSNS().getGestorEstadisticas()
-							.consultarTotalVacunadosPorRegionPrimeraDosis(comboTotalRegion.getSelectedIndex() + 1);
+							.consultarTotalVacunadosPorRegion(comboTotalRegion.getSelectedIndex() + 1, false);
 					int totalSegunda = frame.getGestorGSNS().getGestorEstadisticas()
-							.consultarTotalVacunadosPorRegionSegundaDosis(comboTotalRegion.getSelectedIndex() + 1);
+							.consultarTotalVacunadosPorRegion(comboTotalRegion.getSelectedIndex() + 1, true);
 					int total = totalPrimera + totalSegunda;
 					lblTotalVacunadosRegionPrimera
 							.setText("Total vacunados por región (primera dosis): " + totalPrimera);
