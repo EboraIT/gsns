@@ -7,8 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import com.eborait.gsns.dominio.controller.GestorGSNS;
+import com.eborait.gsns.dominio.entitymodel.Paciente;
 
 /**
  * Pantalla principal de la aplicación.
@@ -34,6 +37,9 @@ public class Main extends JFrame {
 
 	/** El gestor de la aplicación. */
 	private GestorGSNS gestorGSNS;
+	
+	/** Objeto Logger. */
+	private static final Logger LOG = Logger.getLogger(Main.class.getName());
 
 	/**
 	 * Lanza la aplicación.
@@ -48,7 +54,7 @@ public class Main extends JFrame {
 					Main frame = new Main();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOG.log(Level.SEVERE, "", e);
 				}
 			}
 		});

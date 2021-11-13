@@ -1,6 +1,9 @@
 package com.eborait.gsns.dominio.entitymodel;
 
+import com.eborait.gsns.dominio.controller.Util;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Define la información relativa a un paciente.
@@ -11,6 +14,10 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
  * @since 1.0
  */
 public class Paciente {
+	
+	/** Objeto Logger. */
+	private static final Logger LOG = Logger.getLogger(Paciente.class.getName());
+
 
 	/** La region. */
 	private RegionEnum region;
@@ -74,8 +81,8 @@ public class Paciente {
 
 			this.grupo.getPacientes().add(this);
 		} catch (GSNSException gsnse) {
-			System.out.println(gsnse.getMessage());
-			gsnse.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}", "" + gsnse.getMessage());
+			LOG.log(Level.SEVERE, "", gsnse);
 		}
 	}
 
