@@ -35,8 +35,10 @@ public class PantallaConsultaEstadisticas extends JPanel {
 	/** El desplegable de porcentaje region. */
 	private JComboBox<String> comboPorcentajeRegion;
 
-	/*Se crea constante para error*/
+	/* Se crea constante para error. */
 	private static final String ERROR="Error";
+	
+	
 	/**
 	 * Crea el panel.
 	 * 
