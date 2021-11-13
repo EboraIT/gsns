@@ -2,6 +2,8 @@ package com.eborait.gsns.dominio.controller;
 
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
@@ -21,12 +23,15 @@ public class GestorEstadisticas {
 
 	/** El gestor de la aplicación. */
 	private GestorGSNS gestorGSNS;
-	
-	/** Se crea constante para segunda_dosis. **/
-	private static final String SEGUNDA_DOSIS="segunda_dosis";
-	
-	/** Se crea constante para Excepción. **/
-	private static final String EXCEPCION_ESTADISTICAS="Excepción consultando estadísticas:\\n\\n";
+
+	/** Se crea constante para segunda_dosis. */
+	private static final String SEGUNDA_DOSIS = "segunda_dosis";
+
+	/** Se crea constante para Excepción. */
+	private static final String EXCEPCION_ESTADISTICAS = "Excepción consultando estadísticas: ";
+
+	/** Objeto Logger. */
+	private static final Logger LOG = Logger.getLogger(GestorEstadisticas.class.getName());
 
 	/**
 	 * Instancia un nuevo GestorEstadisticas.
@@ -47,8 +52,8 @@ public class GestorEstadisticas {
 		try {
 			return gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "false").size();
 		} catch (SQLException sqle) {
-			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
-			sqle.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}", EXCEPCION_ESTADISTICAS + sqle.getMessage());
+			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException(
 					"Se ha producido un error al consultar el número total de vacunados con la primera dosis.");
 		}
