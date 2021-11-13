@@ -41,7 +41,8 @@ public class GestorRepartoVacunas {
 	 * @param nombreVacuna    Nombre de la vacuna.
 	 * @param farmaceutica    Farmacéutica que ha desarrollado la vacuna.
 	 * @param fechaAprobacion Fecha de aprobación de la vacuna.
-	 * @return Devuelve true si se ha registrado correctamente, false de lo contrario.
+	 * @return Devuelve true si se ha registrado correctamente, false de lo
+	 *         contrario.
 	 * @throws GSNSException Si se produce una excepción al insertar.
 	 */
 	public boolean altaNuevoLoteVacunas(String id, String fecha, int cantidad, String nombreVacuna, String farmaceutica,
@@ -81,7 +82,7 @@ public class GestorRepartoVacunas {
 			if (ia == 0) {
 				return (int) (cantidad * 0.40 + cantidadPoblacion * 0.60);
 			} else {
-				return (int) (cantidad / ia * 0.40 + cantidadPoblacion * 0.60);
+				return (int) (cantidad / (ia * 1.0) * 0.40 + cantidadPoblacion * 0.60);
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando cantidad de entregas:\n\n" + sqle.getMessage());
