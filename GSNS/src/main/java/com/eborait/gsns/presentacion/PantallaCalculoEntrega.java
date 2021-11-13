@@ -26,7 +26,7 @@ public class PantallaCalculoEntrega extends PanelBase {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constante Error
+	 * Constante Error.
 	 */
 	private static final String ERROR = "Error";
 
@@ -90,7 +90,7 @@ public class PantallaCalculoEntrega extends PanelBase {
 					} catch (NumberFormatException nfe) {
 						JOptionPane.showMessageDialog(frame,
 								"Se ha producido un error al realizar el cálculo: La IA no es correcta. Introduce un número entero.",
-								"Error", JOptionPane.ERROR_MESSAGE);
+								ERROR, JOptionPane.ERROR_MESSAGE);
 					} catch (GSNSException gsnse) {
 						JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
 					}

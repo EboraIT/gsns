@@ -39,7 +39,8 @@ public class PanelMain extends JPanel {
 		lblMensajeBienvenida.setBounds(215, 23, 470, 30);
 		add(lblMensajeBienvenida);
 
-		JLabel lblMensajeDescripcion = new JLabel("Este es el programa de gestión de vacunación COVID-19 del Sistema Nacional de Salud.");
+		JLabel lblMensajeDescripcion = new JLabel(
+				"Este es el programa de gestión de vacunación COVID-19 del Sistema Nacional de Salud.");
 		lblMensajeDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMensajeDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensajeDescripcion.setBounds(103, 60, 693, 30);
@@ -80,7 +81,7 @@ public class PanelMain extends JPanel {
 		btnGestionSRS.setBounds(622, 211, 209, 38);
 		btnGestionSRS.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(btnGestionSRS);
-		
+
 		JLabel imgMinisterio = new JLabel("");
 		Image img = new ImageIcon(this.getClass().getResource("/logoMS.png")).getImage();
 		imgMinisterio.setIcon(new ImageIcon(img));

@@ -25,7 +25,7 @@ public class PantallaGestionSistemaNacionalSalud extends PanelBase {
 	 */
 	public PantallaGestionSistemaNacionalSalud(final Main frame) {
 		super(frame, "Gestión Sistema Nacional de Salud");
-		
+
 		JButton btnAltaNuevoLote = new JButton("Alta nuevo lote de vacunas");
 		btnAltaNuevoLote.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

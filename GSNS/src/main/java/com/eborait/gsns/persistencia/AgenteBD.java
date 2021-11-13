@@ -34,6 +34,7 @@ public class AgenteBD implements BDConstantes {
 	 * Identificador ODBC de la base de datos.
 	 */
 	private static final String URL = CONNECTION_STRING + ";create=false";
+
 	/**
 	 * 
 	 * @throws SQLException Si se produce algún error al conectar con la base de

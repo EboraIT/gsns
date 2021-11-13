@@ -24,10 +24,10 @@ public class GestorEstadisticas {
 	/** El gestor de la aplicación. */
 	private GestorGSNS gestorGSNS;
 
-	/** Se crea constante para segunda_dosis. */
+	/** Constante segunda_dosis. */
 	private static final String SEGUNDA_DOSIS = "segunda_dosis";
 
-	/** Se crea constante para Excepción. */
+	/** Constante del mensaje de excepción. */
 	private static final String EXCEPCION_ESTADISTICAS = "Excepción consultando estadísticas: ";
 
 	/** Objeto Logger. */

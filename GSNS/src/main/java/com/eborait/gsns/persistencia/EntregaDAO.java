@@ -19,22 +19,27 @@ import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
  *
  */
 public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
+	
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT = "SELECT * FROM entrega_vacunas WHERE id = '%s'";
+	
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT_CRITERIA = "SELECT * FROM entrega_vacunas";
+	
 	/**
 	 * Formato sentencia insert.
 	 */
 	private static final String INSERT = "INSERT INTO entrega_vacunas VALUES('%s', '%s', '%s', %s, %s, '%s', %s)";
+	
 	/**
 	 * Formato sentencia update.
 	 */
 	private static final String UPDATE = "UPDATE entrega_vacunas SET id = '%s', lote = '%s', fecha = '%s', cantidad = %s, prioridad = %s, tipo_vacuna = '%s', region = %s WHERE id = '%s'";
+	
 	/**
 	 * Formato sentencia delete.
 	 */

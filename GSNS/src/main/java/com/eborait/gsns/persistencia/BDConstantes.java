@@ -10,24 +10,30 @@ package com.eborait.gsns.persistencia;
  * 
  */
 public interface BDConstantes {
+
 	/**
 	 * Driver de Derby.
 	 */
 	public static final String DRIVER = "jdbc:derby";
+
 	/**
 	 * Nombre de la base de datos.
 	 */
 	public static final String DBNAME = "gsns_db";
+
 	/**
 	 * Conexión.
 	 */
 	public static final String CONNECTION_STRING = DRIVER + ":" + DBNAME;
+
 	/**
 	 * Usuario de la base de datos.
 	 */
 	public static final String DBUSER = "admin";
+
 	/**
 	 * Contraseña de la base de datos.
 	 */
 	public static final String DBPASS = "admin";
+
 }

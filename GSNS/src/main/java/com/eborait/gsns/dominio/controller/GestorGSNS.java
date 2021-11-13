@@ -29,6 +29,9 @@ public class GestorGSNS {
 	/** El gestor de vacunaciones. */
 	private GestorVacunacion gestorVacunacion;
 
+	/**
+	 * Instancia un nuevo GestorGSNS.
+	 */
 	public GestorGSNS() {
 		this.gestorEstadisticas = new GestorEstadisticas(this);
 		this.gestorRepartoVacunas = new GestorRepartoVacunas(this);

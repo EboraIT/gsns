@@ -1,7 +1,5 @@
 package com.eborait.gsns.persistencia;
 
-
-
 /**
  * Crea (si es necesario) y devuelve los objetos DAO siguiendo el patrón
  * Singleton.
@@ -14,28 +12,32 @@ package com.eborait.gsns.persistencia;
  */
 public class DAOFactory {
 
-	/*
-	 * Se crea constructor privado
-	 */
-	private DAOFactory() {
-		throw new IllegalStateException("Utility class");
-	}
 	/**
 	 * Objeto EntregaDAO.
 	 */
 	private static EntregaDAO entregaDao;
+
 	/**
 	 * Objeto LoteVacunasDAO.
 	 */
 	private static LoteVacunasDAO loteVacunasDao;
+
 	/**
 	 * Objeto VacunacionDAO.
 	 */
 	private static VacunacionDAO vacunacionDao;
+
 	/**
 	 * Objeto VacunacionDAO.
 	 */
 	private static PacienteDAO pacienteDAO;
+
+	/*
+	 * Constructor privado.
+	 */
+	private DAOFactory() {
+
+	}
 
 	/**
 	 * Instancia si es necesario el objeto EntregaDAO y lo devuelve.
