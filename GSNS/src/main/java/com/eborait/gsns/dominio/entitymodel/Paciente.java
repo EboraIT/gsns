@@ -1,6 +1,6 @@
 package com.eborait.gsns.dominio.entitymodel;
 
-import com.eborait.gsns.dominio.controller.Util;
+
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 import java.util.logging.Logger;
 import java.util.logging.Level;

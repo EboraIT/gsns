@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import com.eborait.gsns.dominio.controller.GestorGSNS;
-import com.eborait.gsns.dominio.entitymodel.Paciente;
+
 
 /**
  * Pantalla principal de la aplicación.

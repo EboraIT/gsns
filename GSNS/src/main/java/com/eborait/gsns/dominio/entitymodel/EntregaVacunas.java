@@ -3,7 +3,7 @@ package com.eborait.gsns.dominio.entitymodel;
 import java.util.Date;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-import com.eborait.gsns.presentacion.Main;
+
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
