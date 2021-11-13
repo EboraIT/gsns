@@ -12,6 +12,12 @@ package com.eborait.gsns.persistencia;
  */
 public class DAOFactory {
 
+	/*
+	 * Se crea constructor privado
+	 */
+	private DAOFactory() {
+		throw new IllegalStateException("Utility class");
+	}
 	/**
 	 * Objeto EntregaDAO.
 	 */
