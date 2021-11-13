@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+
 import org.apache.derby.jdbc.EmbeddedDriver;
 
 /**
@@ -22,14 +23,17 @@ import org.apache.derby.jdbc.EmbeddedDriver;
  *
  */
 public class AgenteBD implements BDConstantes {
+
 	/**
 	 * Instancia del agente.
 	 */
 	private static AgenteBD agente;
+
 	/**
 	 * Conexión con la base de datos.
 	 */
 	private static Connection conexion;
+
 	/**
 	 * Identificador ODBC de la base de datos.
 	 */
