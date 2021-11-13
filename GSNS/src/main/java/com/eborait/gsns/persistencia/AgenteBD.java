@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-
+import java.util.logging.*;
 import org.apache.derby.jdbc.EmbeddedDriver;
 
 /**
@@ -35,6 +35,11 @@ public class AgenteBD implements BDConstantes {
 	 * Identificador ODBC de la base de datos.
 	 */
 	private static final String URL = CONNECTION_STRING + ";create=false";
+	
+	/*
+	 * Declaracion para el LOG
+	 */
+	private static final Logger LOGGER= Logger.getLogger("AGENTEBD");
 	/**
 	 * 
 	 * @throws SQLException Si se produce algún error al conectar con la base de
@@ -67,7 +72,7 @@ public class AgenteBD implements BDConstantes {
 			DriverManager.registerDriver(derbyEmbeddedDriver);
 			conexion = DriverManager.getConnection(URL, DBUSER, DBPASS);
 		} catch (SQLException sqle) {
-			System.out.println("Error conectando con la base de datos:\n\n" + sqle.getMessage());
+			LOGGER.log(Level.FINE,"Error conectando con la base de datos:\n\n" + sqle.getMessage());
 			throw sqle;
 		}
 	}

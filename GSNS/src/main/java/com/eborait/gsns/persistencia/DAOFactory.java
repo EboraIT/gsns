@@ -1,5 +1,7 @@
 package com.eborait.gsns.persistencia;
 
+
+
 /**
  * Crea (si es necesario) y devuelve los objetos DAO siguiendo el patrón
  * Singleton.
