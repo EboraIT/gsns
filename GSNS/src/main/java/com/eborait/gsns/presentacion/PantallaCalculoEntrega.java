@@ -30,10 +30,11 @@ public class PantallaCalculoEntrega extends JPanel {
 	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/*
+	/**
 	 * Constante Error
 	 */
-	private static String ERROR="Error";
+	private static final String ERROR = "Error";
+
 	/**
 	 * Crea el panel.
 	 * 
@@ -76,8 +77,8 @@ public class PantallaCalculoEntrega extends JPanel {
 		comboRegion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					lblPoblacion.setText(
-							formatearPoblacion(frame.getGestorGSNS().getRegionPorId(comboRegion.getSelectedIndex() + 1).getPoblacion()));
+					lblPoblacion.setText(formatearPoblacion(
+							frame.getGestorGSNS().getRegionPorId(comboRegion.getSelectedIndex() + 1).getPoblacion()));
 				} catch (GSNSException gsnse) {
 					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
