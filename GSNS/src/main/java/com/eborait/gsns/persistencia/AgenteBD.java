@@ -79,8 +79,7 @@ public class AgenteBD implements BDConstantes {
 			DriverManager.registerDriver(derbyEmbeddedDriver);
 			conexion = DriverManager.getConnection(URL, DBUSER, DBPASS);
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}", "Error conectando con la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error conectando con la base de datos:\n\n" + sqle.getMessage(),sqle);
 			
 		}
 	}
@@ -95,8 +94,7 @@ public class AgenteBD implements BDConstantes {
 		try {
 			conexion.close();
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}", "Error cerrando la conexión con la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error cerrando la conexión con la base de datos:\n\n" + sqle.getMessage(),sqle);
 		}
 	}
 
@@ -127,8 +125,7 @@ public class AgenteBD implements BDConstantes {
 			desconectarBD();
 			return data;
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}", "Error consultando a la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error consultando a la base de datos:\n\n" + sqle.getMessage(),sqle);
 		}
 	}
 
@@ -144,8 +141,7 @@ public class AgenteBD implements BDConstantes {
 		try {
 			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}", "Error insertando en la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error insertando en la base de datos:\n\n" + sqle.getMessage(),sqle);
 		}
 	}
 
@@ -161,8 +157,7 @@ public class AgenteBD implements BDConstantes {
 		try {
 			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}", "Error actualizando en la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error actualizando en la base de datos:\n\n" + sqle.getMessage(),sqle);
 		}
 	}
 
@@ -177,8 +172,7 @@ public class AgenteBD implements BDConstantes {
 		try {
 			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}", "Error borrando en la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error borrando en la base de datos:\n\n" + sqle.getMessage(),sqle);
 		}
 	}
 
