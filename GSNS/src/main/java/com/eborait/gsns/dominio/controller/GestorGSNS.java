@@ -9,6 +9,15 @@ import com.eborait.gsns.persistencia.LoteVacunasDAO;
 import com.eborait.gsns.persistencia.PacienteDAO;
 import com.eborait.gsns.persistencia.VacunacionDAO;
 
+/**
+ * Gestor principal de la aplicación.
+ * 
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @since 1.0
+ * @version 1.0
+ *
+ */
 public class GestorGSNS {
 
 	/** El gestor de estadisticas. */
