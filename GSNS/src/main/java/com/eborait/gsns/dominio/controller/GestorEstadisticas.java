@@ -80,8 +80,8 @@ public class GestorEstadisticas {
 			}
 			return contador;
 		} catch (SQLException sqle) {
-			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
-			sqle.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}", EXCEPCION_ESTADISTICAS + sqle.getMessage());
+			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados por región.");
 		}
 	}
@@ -108,8 +108,8 @@ public class GestorEstadisticas {
 				return (totalVacunados / (vacunasRecibidas * 1.0)) * 100;
 			}
 		} catch (SQLException sqle) {
-			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
-			sqle.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}", EXCEPCION_ESTADISTICAS + sqle.getMessage());
+			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException(
 					"Se ha producido un error al consultar el porcentaje de vacunados con la primera dosis.");
 		}
@@ -142,8 +142,8 @@ public class GestorEstadisticas {
 				return (totalVacunados / (vacunasRecibidas * 1.0)) * 100;
 			}
 		} catch (SQLException sqle) {
-			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
-			sqle.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}", EXCEPCION_ESTADISTICAS + sqle.getMessage());
+			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException(
 					"Se ha producido un error al consultar el porcentaje de vacunados por región con la primera dosis.");
 		}
