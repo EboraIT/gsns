@@ -45,12 +45,13 @@ public class GestorEstadisticas {
 	/**
 	 * Consulta el número total de vacunados.
 	 * 
+	 * @param segundaDosis Si se filtra por primera o segunda dosis.
 	 * @return El número total de vacunados con la primera dosis.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarTotalVacunadosPrimeraDosis() throws GSNSException {
+	public int consultarTotalVacunados(boolean segundaDosis) throws GSNSException {
 		try {
-			return gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "false").size();
+			return gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, String.valueOf(segundaDosis)).size();
 		} catch (SQLException sqle) {
 			LOG.log(Level.SEVERE, "{0}", EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
@@ -60,57 +61,18 @@ public class GestorEstadisticas {
 	}
 
 	/**
-	 * Consulta el número total de vacunados segunda dosis.
-	 * 
-	 * @return El número total de vacunados con la segunda dosis.
-	 * @throws GSNSException Si se produce una excepción al consultar.
-	 */
-	public int consultarTotalVacunadosSegundaDosis() throws GSNSException {
-		try {
-			return gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "true").size();
-		} catch (SQLException sqle) {
-			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
-			sqle.printStackTrace();
-			throw new GSNSException(
-					"Se ha producido un error al consultar el número total de vacunados con la segunda dosis.");
-		}
-	}
-
-	/**
 	 * Consulta el número total de vacunados de una región con primera dosis.
 	 * 
-	 * @param region La región por la que se filtra la consulta.
+	 * @param region       La región por la que se filtra la consulta.
+	 * @param segundaDosis Si se filtra por primera o segunda dosis.
 	 * @return El número total de vacunados de la región con la primera dosis.
 	 * @throws GSNSException Si se produce una excepción al consultar.
 	 */
-	public int consultarTotalVacunadosPorRegionPrimeraDosis(int region) throws GSNSException {
+	public int consultarTotalVacunadosPorRegion(int region, boolean segundaDosis) throws GSNSException {
 		try {
 			int contador = 0;
-			Collection<Vacunacion> vacunaciones = gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "false");
-			for (Vacunacion vacunacion : vacunaciones) {
-				if (vacunacion.getPaciente().getRegion().getId() == region) {
-					contador++;
-				}
-			}
-			return contador;
-		} catch (SQLException sqle) {
-			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
-			sqle.printStackTrace();
-			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados por región.");
-		}
-	}
-
-	/**
-	 * Consulta el número total de vacunados de una región con segunda dosis.
-	 * 
-	 * @param region La región por la que se filtra la consulta.
-	 * @return El número total de vacunados de la región con la segunda dosis.
-	 * @throws GSNSException Si se produce una excepción al consultar.
-	 */
-	public int consultarTotalVacunadosPorRegionSegundaDosis(int region) throws GSNSException {
-		try {
-			int contador = 0;
-			Collection<Vacunacion> vacunaciones = gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "true");
+			Collection<Vacunacion> vacunaciones = gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS,
+					String.valueOf(segundaDosis));
 			for (Vacunacion vacunacion : vacunaciones) {
 				if (vacunacion.getPaciente().getRegion().getId() == region) {
 					contador++;
@@ -133,7 +95,7 @@ public class GestorEstadisticas {
 	 */
 	public double consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis() throws GSNSException {
 		try {
-			int totalVacunados = consultarTotalVacunadosPrimeraDosis();
+			int totalVacunados = consultarTotalVacunados(false);
 			int vacunasRecibidas = 0;
 			Collection<LoteVacunas> lotes = gestorGSNS.getLoteVacunasDAO().getAll(null, null);
 			for (LoteVacunas loteVacunas : lotes) {
@@ -161,7 +123,7 @@ public class GestorEstadisticas {
 	 */
 	public double consultarPorcentajeVacunadosSobreRecibidasSegundaDosis() throws GSNSException {
 		try {
-			int totalVacunados = consultarTotalVacunadosSegundaDosis();
+			int totalVacunados = consultarTotalVacunados(true);
 			int vacunasRecibidas = 0;
 			Collection<LoteVacunas> lotes = gestorGSNS.getLoteVacunasDAO().getAll(null, null);
 			for (LoteVacunas loteVacunas : lotes) {
@@ -191,7 +153,7 @@ public class GestorEstadisticas {
 	 */
 	public double consultarPorcentajeVacunadosSobreRecibidasEnRegionPrimeraDosis(int region) throws GSNSException {
 		try {
-			int totalVacunados = consultarTotalVacunadosPorRegionPrimeraDosis(region);
+			int totalVacunados = consultarTotalVacunadosPorRegion(region, false);
 			int vacunasRecibidas = 0;
 			Collection<EntregaVacunas> entregas = gestorGSNS.getEntregaDAO().getAll(null, null);
 			for (EntregaVacunas entrega : entregas) {
@@ -223,7 +185,7 @@ public class GestorEstadisticas {
 	 */
 	public double consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(int region) throws GSNSException {
 		try {
-			int totalVacunados = consultarTotalVacunadosPorRegionPrimeraDosis(region);
+			int totalVacunados = consultarTotalVacunadosPorRegion(region, true);
 			int vacunasRecibidas = 0;
 			Collection<EntregaVacunas> entregas = gestorGSNS.getEntregaDAO().getAll(null, null);
 			for (EntregaVacunas entrega : entregas) {
