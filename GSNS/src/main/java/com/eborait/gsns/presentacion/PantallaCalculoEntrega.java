@@ -30,6 +30,10 @@ public class PantallaCalculoEntrega extends JPanel {
 	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/*
+	 * Constante Error
+	 */
+	private static String ERROR="Error";
 	/**
 	 * Crea el panel.
 	 * 
@@ -75,7 +79,7 @@ public class PantallaCalculoEntrega extends JPanel {
 					lblPoblacion.setText(
 							formatearPoblacion(frame.getGestorGSNS().getRegionPorId(comboRegion.getSelectedIndex() + 1).getPoblacion()));
 				} catch (GSNSException gsnse) {
-					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
 				}
 			}
@@ -113,7 +117,7 @@ public class PantallaCalculoEntrega extends JPanel {
 								"Se ha producido un error al realizar el cálculo: La IA no es correcta. Introduce un número entero.",
 								"Error", JOptionPane.ERROR_MESSAGE);
 					} catch (GSNSException gsnse) {
-						JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
 					JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
