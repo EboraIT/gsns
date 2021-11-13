@@ -21,6 +21,9 @@ public class GestorEstadisticas {
 
 	/** El gestor de la aplicación. */
 	private GestorGSNS gestorGSNS;
+	
+	/** Se crea constante para segunda_dosis. **/
+	private static final String SEGUNDA_DOSIS="segunda_dosis";
 
 	/**
 	 * Instancia un nuevo GestorEstadisticas.
@@ -39,7 +42,7 @@ public class GestorEstadisticas {
 	 */
 	public int consultarTotalVacunadosPrimeraDosis() throws GSNSException {
 		try {
-			return gestorGSNS.getVacunacionDAO().getAll("segunda_dosis", "false").size();
+			return gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "false").size();
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -56,7 +59,7 @@ public class GestorEstadisticas {
 	 */
 	public int consultarTotalVacunadosSegundaDosis() throws GSNSException {
 		try {
-			return gestorGSNS.getVacunacionDAO().getAll("segunda_dosis", "true").size();
+			return gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "true").size();
 		} catch (SQLException sqle) {
 			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
 			sqle.printStackTrace();
@@ -75,7 +78,7 @@ public class GestorEstadisticas {
 	public int consultarTotalVacunadosPorRegionPrimeraDosis(int region) throws GSNSException {
 		try {
 			int contador = 0;
-			Collection<Vacunacion> vacunaciones = gestorGSNS.getVacunacionDAO().getAll("segunda_dosis", "false");
+			Collection<Vacunacion> vacunaciones = gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "false");
 			for (Vacunacion vacunacion : vacunaciones) {
 				if (vacunacion.getPaciente().getRegion().getId() == region) {
 					contador++;
@@ -99,7 +102,7 @@ public class GestorEstadisticas {
 	public int consultarTotalVacunadosPorRegionSegundaDosis(int region) throws GSNSException {
 		try {
 			int contador = 0;
-			Collection<Vacunacion> vacunaciones = gestorGSNS.getVacunacionDAO().getAll("segunda_dosis", "true");
+			Collection<Vacunacion> vacunaciones = gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "true");
 			for (Vacunacion vacunacion : vacunaciones) {
 				if (vacunacion.getPaciente().getRegion().getId() == region) {
 					contador++;
