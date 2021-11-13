@@ -24,6 +24,9 @@ public class GestorEstadisticas {
 	
 	/** Se crea constante para segunda_dosis. **/
 	private static final String SEGUNDA_DOSIS="segunda_dosis";
+	
+	/** Se crea constante para Excepción. **/
+	private static final String EXCEPCION_ESTADISTICAS="Excepción consultando estadísticas:\\n\\n";
 
 	/**
 	 * Instancia un nuevo GestorEstadisticas.
@@ -44,7 +47,7 @@ public class GestorEstadisticas {
 		try {
 			return gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "false").size();
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			sqle.printStackTrace();
 			throw new GSNSException(
 					"Se ha producido un error al consultar el número total de vacunados con la primera dosis.");
@@ -61,7 +64,7 @@ public class GestorEstadisticas {
 		try {
 			return gestorGSNS.getVacunacionDAO().getAll(SEGUNDA_DOSIS, "true").size();
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			sqle.printStackTrace();
 			throw new GSNSException(
 					"Se ha producido un error al consultar el número total de vacunados con la segunda dosis.");
@@ -86,7 +89,7 @@ public class GestorEstadisticas {
 			}
 			return contador;
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			sqle.printStackTrace();
 			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados por región.");
 		}
@@ -110,7 +113,7 @@ public class GestorEstadisticas {
 			}
 			return contador;
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			sqle.printStackTrace();
 			throw new GSNSException("Se ha producido un error al consultar el número total de vacunados por región.");
 		}
@@ -137,7 +140,7 @@ public class GestorEstadisticas {
 				return (totalVacunados / (vacunasRecibidas * 1.0)) * 100;
 			}
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			sqle.printStackTrace();
 			throw new GSNSException(
 					"Se ha producido un error al consultar el porcentaje de vacunados con la primera dosis.");
@@ -165,7 +168,7 @@ public class GestorEstadisticas {
 				return (totalVacunados / (vacunasRecibidas * 1.0)) * 100;
 			}
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			sqle.printStackTrace();
 			throw new GSNSException(
 					"Se ha producido un error al consultar el porcentaje de vacunados con la segunda dosis.");
@@ -197,7 +200,7 @@ public class GestorEstadisticas {
 				return (totalVacunados / (vacunasRecibidas * 1.0)) * 100;
 			}
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			sqle.printStackTrace();
 			throw new GSNSException(
 					"Se ha producido un error al consultar el porcentaje de vacunados por región con la primera dosis.");
@@ -229,7 +232,7 @@ public class GestorEstadisticas {
 				return (totalVacunados / (vacunasRecibidas * 1.0)) * 100;
 			}
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultando estadísticas:\n\n" + sqle.getMessage());
+			System.out.println(EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			sqle.printStackTrace();
 			throw new GSNSException(
 					"Se ha producido un error al consultar el porcentaje de vacunados por región con la segunda dosis.");
