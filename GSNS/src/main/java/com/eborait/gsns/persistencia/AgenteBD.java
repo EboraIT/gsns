@@ -97,20 +97,21 @@ public class AgenteBD implements BDConstantes {
 	 *                      datos.
 	 */
 	public Collection<Collection<Object>> select(String sql) throws SQLException {
+		Collection<Collection<Object>> data;
 		try {
 			conectarBD();
-			Statement stmt = conexion.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-			ResultSetMetaData rsmd = rs.getMetaData();
-			Collection<Collection<Object>> data = new ArrayList<>();
-			while (rs.next()) {
-				Collection<Object> rowData = new ArrayList<>();
-				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-					rowData.add(rs.getObject(i));
+			try (Statement stmt = conexion.createStatement()) {
+				ResultSet rs = stmt.executeQuery(sql);
+				ResultSetMetaData rsmd = rs.getMetaData();
+				data = new ArrayList<>();
+				while (rs.next()) {
+					Collection<Object> rowData = new ArrayList<>();
+					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+						rowData.add(rs.getObject(i));
+					}
+					data.add(rowData);
 				}
-				data.add(rowData);
 			}
-			stmt.close();
 			desconectarBD();
 			return data;
 		} catch (SQLException sqle) {
@@ -171,9 +172,10 @@ public class AgenteBD implements BDConstantes {
 
 	private int prepareAndExecuteStatement(String sql) throws SQLException {
 		conectarBD();
-		PreparedStatement stmt = conexion.prepareStatement(sql);
-		int res = stmt.executeUpdate();
-		stmt.close();
+		int res;
+		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+			res = stmt.executeUpdate();
+		}
 		desconectarBD();
 		return res;
 	}
