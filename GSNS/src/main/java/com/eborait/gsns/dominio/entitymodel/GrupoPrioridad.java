@@ -69,7 +69,7 @@ public enum GrupoPrioridad {
 	 *
 	 * @param pacientes Los nuevos pacientes.
 	 */
-	public void setPacientes(Collection<Paciente> pacientes) {
+	private void setPacientes(Collection<Paciente> pacientes) {
 		this.pacientes = pacientes;
 	}
 
