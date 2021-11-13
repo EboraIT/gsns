@@ -35,7 +35,6 @@ public class AgenteBD implements BDConstantes {
 	 * Identificador ODBC de la base de datos.
 	 */
 	private static final String URL = CONNECTION_STRING + ";create=false";
-
 	/**
 	 * 
 	 * @throws SQLException Si se produce algún error al conectar con la base de
@@ -62,7 +61,7 @@ public class AgenteBD implements BDConstantes {
 	 * @throws SQLException Si se produce algún error al conectar con la base de
 	 *                      datos.
 	 */
-	public void conectarBD() throws SQLException {
+	public static void conectarBD() throws SQLException {
 		try {
 			Driver derbyEmbeddedDriver = new EmbeddedDriver();
 			DriverManager.registerDriver(derbyEmbeddedDriver);
