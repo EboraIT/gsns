@@ -17,6 +17,13 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 public class Util {
 
 	/**
+	 * Constructor privado.
+	 */
+	private Util() {
+
+	}
+
+	/**
 	 * Transforma una fecha de String a Date.
 	 * 
 	 * @param fecha La fecha con formato dd/MM/yyyy.
