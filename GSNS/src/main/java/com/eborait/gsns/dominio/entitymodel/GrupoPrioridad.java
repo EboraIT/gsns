@@ -65,30 +65,12 @@ public enum GrupoPrioridad {
 	}
 
 	/**
-	 * Establece los pacientes.
-	 *
-	 * @param pacientes Los nuevos pacientes.
-	 */
-	private void setPacientes (Collection<Paciente> pacientes) {
-		this.pacientes = pacientes;
-	}
-
-	/**
 	 * Se obtienen las entregas.
 	 *
 	 * @return Las entregas.
 	 */
 	public Collection<EntregaVacunas> getEntregas() {
 		return entregas;
-	}
-
-	/**
-	 * Establece las entregas.
-	 *
-	 * @param entregas Las nuevas entregas.
-	 */
-	private void setEntregas(Collection<EntregaVacunas> entregas) {
-		this.entregas = entregas;
 	}
 
 	/**

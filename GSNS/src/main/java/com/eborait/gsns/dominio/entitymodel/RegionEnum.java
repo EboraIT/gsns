@@ -90,15 +90,6 @@ public enum RegionEnum {
 	}
 
 	/**
-	 * Establece las entregas.
-	 *
-	 * @param entregas Las nuevas entregas.
-	 */
-	public void setEntregas(Collection<EntregaVacunas> entregas) {
-		this.entregas = entregas;
-	}
-
-	/**
 	 * Se obtiene el id.
 	 *
 	 * @return El id.
