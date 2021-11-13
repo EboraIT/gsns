@@ -120,9 +120,9 @@ public class PantallaConsultaEstadisticas extends PanelBase {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double porcentajePrimera = frame.getGestorGSNS().getGestorEstadisticas()
-							.consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis();
+							.consultarPorcentajeVacunadosSobreRecibidas(false);
 					double porcentajeSegunda = frame.getGestorGSNS().getGestorEstadisticas()
-							.consultarPorcentajeVacunadosSobreRecibidasSegundaDosis();
+							.consultarPorcentajeVacunadosSobreRecibidas(true);
 					lblPorcentajePrimera.setText("Porcentaje vacunados (primera dosis): " + porcentajePrimera + "%");
 					lblPorcentajeCompletamente
 							.setText("Porcentaje vacunados (pauta completa): " + porcentajeSegunda + "%");
@@ -147,11 +147,11 @@ public class PantallaConsultaEstadisticas extends PanelBase {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double porcentajePrimera = frame.getGestorGSNS().getGestorEstadisticas()
-							.consultarPorcentajeVacunadosSobreRecibidasEnRegionPrimeraDosis(
-									comboPorcentajeRegion.getSelectedIndex() + 1);
+							.consultarPorcentajeVacunadosSobreRecibidasEnRegion(
+									comboPorcentajeRegion.getSelectedIndex() + 1, false);
 					double porcentajeSegunda = frame.getGestorGSNS().getGestorEstadisticas()
-							.consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(
-									comboPorcentajeRegion.getSelectedIndex() + 1);
+							.consultarPorcentajeVacunadosSobreRecibidasEnRegion(
+									comboPorcentajeRegion.getSelectedIndex() + 1, true);
 
 					lblPorcentaje1Dosisregion
 							.setText("Porcentaje vacunados por región (primera dosis): " + porcentajePrimera + "%");
