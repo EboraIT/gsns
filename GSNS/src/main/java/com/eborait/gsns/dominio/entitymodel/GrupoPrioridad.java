@@ -69,7 +69,7 @@ public enum GrupoPrioridad {
 	 *
 	 * @param pacientes Los nuevos pacientes.
 	 */
-	private void setPacientes(Collection<Paciente> pacientes) {
+	private void setPacientes (Collection<Paciente> pacientes) {
 		this.pacientes = pacientes;
 	}
 
@@ -87,7 +87,7 @@ public enum GrupoPrioridad {
 	 *
 	 * @param entregas Las nuevas entregas.
 	 */
-	public void setEntregas(Collection<EntregaVacunas> entregas) {
+	private void setEntregas(Collection<EntregaVacunas> entregas) {
 		this.entregas = entregas;
 	}
 
