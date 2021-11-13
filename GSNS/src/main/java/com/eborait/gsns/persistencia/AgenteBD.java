@@ -22,7 +22,7 @@ import org.apache.derby.jdbc.EmbeddedDriver;
  * @version 1.0
  *
  */
-public class AgenteBD implements BDConstantes{
+public class AgenteBD implements BDConstantes {
 	/**
 	 * Instancia del agente.
 	 */
@@ -129,12 +129,7 @@ public class AgenteBD implements BDConstantes{
 	 */
 	public int insert(String sql) throws SQLException {
 		try {
-			conectarBD();
-			PreparedStatement stmt = conexion.prepareStatement(sql);
-			int res = stmt.executeUpdate();
-			stmt.close();
-			desconectarBD();
-			return res;
+			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
 			System.out.println("Error insertando en la base de datos:\n\n" + sqle.getMessage());
 			throw sqle;
@@ -151,12 +146,7 @@ public class AgenteBD implements BDConstantes{
 	 */
 	public int update(String sql) throws SQLException {
 		try {
-			conectarBD();
-			PreparedStatement stmt = conexion.prepareStatement(sql);
-			int res = stmt.executeUpdate();
-			stmt.close();
-			desconectarBD();
-			return res;
+			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
 			System.out.println("Error actualizando en la base de datos:\n\n" + sqle.getMessage());
 			throw sqle;
@@ -172,16 +162,20 @@ public class AgenteBD implements BDConstantes{
 	 */
 	public int delete(String sql) throws SQLException {
 		try {
-			conectarBD();
-			PreparedStatement stmt = conexion.prepareStatement(sql);
-			int res = stmt.executeUpdate();
-			stmt.close();
-			desconectarBD();
-			return res;
+			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
 			System.out.println("Error borrando en la base de datos:\n\n" + sqle.getMessage());
 			throw sqle;
 		}
+	}
+
+	private int prepareAndExecuteStatement(String sql) throws SQLException {
+		conectarBD();
+		PreparedStatement stmt = conexion.prepareStatement(sql);
+		int res = stmt.executeUpdate();
+		stmt.close();
+		desconectarBD();
+		return res;
 	}
 
 }
