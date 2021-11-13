@@ -139,7 +139,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			frame.cambiarPanel(frame.getPanelMain());
 		}
-		comboGrupoPrioridad = new JComboBox<String>(frame.getGestorGSNS().getNombresGrupoPrioridad());
+		comboGrupoPrioridad = new JComboBox<>(frame.getGestorGSNS().getNombresGrupoPrioridad());
 		comboGrupoPrioridad.setBounds(676, 86, 181, 20);
 		midPanel.add(comboGrupoPrioridad);
 
@@ -147,7 +147,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 		lblGrupoPrioridad.setBounds(444, 86, 201, 14);
 		midPanel.add(lblGrupoPrioridad);
 
-		comboRegion = new JComboBox<String>(frame.getGestorGSNS().getNombresRegion());
+		comboRegion = new JComboBox<>(frame.getGestorGSNS().getNombresRegion());
 		comboRegion.setBounds(242, 111, 181, 20);
 		midPanel.add(comboRegion);
 

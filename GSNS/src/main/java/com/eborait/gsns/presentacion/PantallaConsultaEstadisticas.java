@@ -25,20 +25,19 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
  * @since 1.0
  */
 public class PantallaConsultaEstadisticas extends JPanel {
-	
+
 	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** El desplegable de total region. */
 	private JComboBox<String> comboTotalRegion;
-	
+
 	/** El desplegable de porcentaje region. */
 	private JComboBox<String> comboPorcentajeRegion;
 
-	/* Se crea constante para error. */
-	private static final String ERROR="Error";
-	
-	
+	/** Constante error. */
+	private static final String ERROR = "Error";
+
 	/**
 	 * Crea el panel.
 	 * 
@@ -84,8 +83,10 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		btnTotalVacunados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int totalPrimera = frame.getGestorGSNS().getGestorEstadisticas().consultarTotalVacunadosPrimeraDosis();
-					int totalSegunda = frame.getGestorGSNS().getGestorEstadisticas().consultarTotalVacunadosSegundaDosis();
+					int totalPrimera = frame.getGestorGSNS().getGestorEstadisticas()
+							.consultarTotalVacunadosPrimeraDosis();
+					int totalSegunda = frame.getGestorGSNS().getGestorEstadisticas()
+							.consultarTotalVacunadosSegundaDosis();
 					int total = totalPrimera + totalSegunda;
 					lblTotalVacPrimeraDosis.setText("Total vacunados (primera dosis): " + totalPrimera);
 					lblTotalVacSegundaDosis.setText("Total vacunados (segunda dosis): " + totalSegunda);
@@ -149,10 +150,9 @@ public class PantallaConsultaEstadisticas extends JPanel {
 							.consultarPorcentajeVacunadosSobreRecibidasPrimeraDosis();
 					double porcentajeSegunda = frame.getGestorGSNS().getGestorEstadisticas()
 							.consultarPorcentajeVacunadosSobreRecibidasSegundaDosis();
-					lblPorcentajePrimera.setText(
-							"Porcentaje vacunados (primera dosis): " + porcentajePrimera + "%");
-					lblPorcentajeCompletamente.setText(
-							"Porcentaje vacunados (pauta completa): " + porcentajeSegunda + "%");
+					lblPorcentajePrimera.setText("Porcentaje vacunados (primera dosis): " + porcentajePrimera + "%");
+					lblPorcentajeCompletamente
+							.setText("Porcentaje vacunados (pauta completa): " + porcentajeSegunda + "%");
 				} catch (GSNSException gsnse) {
 					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
 				}
@@ -180,10 +180,10 @@ public class PantallaConsultaEstadisticas extends JPanel {
 							.consultarPorcentajeVacunadosSobreRecibidasEnRegionSegundaDosis(
 									comboPorcentajeRegion.getSelectedIndex() + 1);
 
-					lblPorcentaje1Dosisregion.setText("Porcentaje vacunados por región (primera dosis): "
-							+ porcentajePrimera + "%");
-					lblPorcentajeDosisRegionCompleta.setText("Porcentaje vacunados por región (pauta completa): "
-							+ porcentajeSegunda + "%");
+					lblPorcentaje1Dosisregion
+							.setText("Porcentaje vacunados por región (primera dosis): " + porcentajePrimera + "%");
+					lblPorcentajeDosisRegionCompleta
+							.setText("Porcentaje vacunados por región (pauta completa): " + porcentajeSegunda + "%");
 				} catch (GSNSException gsnse) {
 					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
 				}
@@ -192,12 +192,11 @@ public class PantallaConsultaEstadisticas extends JPanel {
 		btnPorcentajeRegion.setHorizontalAlignment(SwingConstants.RIGHT);
 		midPanel.add(btnPorcentajeRegion);
 
-		
-		comboTotalRegion = new JComboBox<String>(frame.getGestorGSNS().getNombresRegion());
+		comboTotalRegion = new JComboBox<>(frame.getGestorGSNS().getNombresRegion());
 		comboTotalRegion.setBounds(10, 200, 191, 21);
 		midPanel.add(comboTotalRegion);
 
-		comboPorcentajeRegion = new JComboBox<String>(frame.getGestorGSNS().getNombresRegion());
+		comboPorcentajeRegion = new JComboBox<>(frame.getGestorGSNS().getNombresRegion());
 		comboPorcentajeRegion.setBounds(10, 290, 191, 21);
 		midPanel.add(comboPorcentajeRegion);
 	}

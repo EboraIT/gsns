@@ -146,11 +146,11 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 		btnNewButton.setBounds(10, 215, 847, 23);
 		midPanel.add(btnNewButton);
 
-		comboGrupoPrioridad = new JComboBox<String>(frame.getGestorGSNS().getNombresGrupoPrioridad());
+		comboGrupoPrioridad = new JComboBox<>(frame.getGestorGSNS().getNombresGrupoPrioridad());
 		comboGrupoPrioridad.setBounds(242, 148, 181, 20);
 		midPanel.add(comboGrupoPrioridad);
 
-		comboRegion = new JComboBox<String>(frame.getGestorGSNS().getNombresRegion());
+		comboRegion = new JComboBox<>(frame.getGestorGSNS().getNombresRegion());
 		comboRegion.setBounds(242, 176, 181, 20);
 		midPanel.add(comboRegion);
 

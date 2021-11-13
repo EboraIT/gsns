@@ -67,7 +67,7 @@ public class PantallaCalculoEntrega extends JPanel {
 		lblPoblacion.setBounds(242, 64, 181, 20);
 		midPanel.add(lblPoblacion);
 
-		final JComboBox<String> comboRegion = new JComboBox<String>(frame.getGestorGSNS().getNombresRegion());
+		final JComboBox<String> comboRegion = new JComboBox<>(frame.getGestorGSNS().getNombresRegion());
 		comboRegion.setBounds(242, 36, 181, 20);
 		comboRegion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
