@@ -172,10 +172,10 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 	private void registrarAlta(Main frame) {
 		if (validar()) {
 			try {
-				boolean correcto = frame.getGestorGSNS().getGestorVacunacion().altaEntregaVacunas(txtIdEntrega.getText(),
-						txtLote.getText(), txtFecha.getText(), Integer.parseInt(txtCantidad.getText()),
-						comboGrupoPrioridad.getSelectedIndex() + 1, comboTipoVacuna.getSelectedItem().toString(),
-						comboRegion.getSelectedIndex() + 1);
+				boolean correcto = frame.getGestorGSNS().getGestorVacunacion().altaEntregaVacunas(
+						txtIdEntrega.getText(), txtLote.getText(), txtFecha.getText(),
+						Integer.parseInt(txtCantidad.getText()), comboGrupoPrioridad.getSelectedIndex() + 1,
+						comboTipoVacuna.getSelectedItem().toString(), comboRegion.getSelectedIndex() + 1);
 				if (correcto) {
 					JOptionPane.showMessageDialog(frame, "La entrega se ha registrado correctamente.", "Información",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -205,10 +205,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 			if (jTextField.getText().length() == 0)
 				return false;
 		}
-		if (comboGrupoPrioridad.getSelectedIndex() == -1 || comboRegion.getSelectedIndex() == -1
-				|| comboTipoVacuna.getSelectedItem() == null) {
-			return false;
-		}
-		return true;
+		return !(comboGrupoPrioridad.getSelectedIndex() == -1 || comboRegion.getSelectedIndex() == -1
+				|| comboTipoVacuna.getSelectedItem() == null);
 	}
 }

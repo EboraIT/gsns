@@ -201,10 +201,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 			if (jTextField.getText().length() == 0)
 				return false;
 		}
-		if (comboGrupoPrioridad.getSelectedIndex() == -1 || comboRegion.getSelectedIndex() == -1
-				|| comboTipoVacuna.getSelectedItem() == null) {
-			return false;
-		}
-		return true;
+		return !(comboGrupoPrioridad.getSelectedIndex() == -1 || comboRegion.getSelectedIndex() == -1
+				|| comboTipoVacuna.getSelectedItem() == null);
 	}
 }
