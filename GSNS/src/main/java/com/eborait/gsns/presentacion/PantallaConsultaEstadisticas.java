@@ -35,6 +35,8 @@ public class PantallaConsultaEstadisticas extends JPanel {
 	/** El desplegable de porcentaje region. */
 	private JComboBox<String> comboPorcentajeRegion;
 
+	/*Se crea constante para error*/
+	private static final String ERROR="Error";
 	/**
 	 * Crea el panel.
 	 * 
@@ -83,11 +85,11 @@ public class PantallaConsultaEstadisticas extends JPanel {
 					int totalPrimera = frame.getGestorGSNS().getGestorEstadisticas().consultarTotalVacunadosPrimeraDosis();
 					int totalSegunda = frame.getGestorGSNS().getGestorEstadisticas().consultarTotalVacunadosSegundaDosis();
 					int total = totalPrimera + totalSegunda;
-					lblTotalVacPrimeraDosis.setText("Total vacunados (primera dosis): " + String.valueOf(totalPrimera));
-					lblTotalVacSegundaDosis.setText("Total vacunados (segunda dosis): " + String.valueOf(totalSegunda));
+					lblTotalVacPrimeraDosis.setText("Total vacunados (primera dosis): " + totalPrimera);
+					lblTotalVacSegundaDosis.setText("Total vacunados (segunda dosis): " + totalSegunda);
 					lblTotalDosisAdministradas.setText("Total dosis administradas: " + total);
 				} catch (GSNSException gsnse) {
-					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -117,12 +119,12 @@ public class PantallaConsultaEstadisticas extends JPanel {
 							.consultarTotalVacunadosPorRegionSegundaDosis(comboTotalRegion.getSelectedIndex() + 1);
 					int total = totalPrimera + totalSegunda;
 					lblTotalVacunadosRegionPrimera
-							.setText("Total vacunados por región (primera dosis): " + String.valueOf(totalPrimera));
+							.setText("Total vacunados por región (primera dosis): " + totalPrimera);
 					lblTotalVacunadosRegionSegunda
-							.setText("Total vacunados por región (segunda dosis): " + String.valueOf(totalSegunda));
+							.setText("Total vacunados por región (segunda dosis): " + totalSegunda);
 					lblTotalDosisAdministradasRegion.setText("Total dosis administradas por región: " + total);
 				} catch (GSNSException gsnse) {
-					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -146,11 +148,11 @@ public class PantallaConsultaEstadisticas extends JPanel {
 					double porcentajeSegunda = frame.getGestorGSNS().getGestorEstadisticas()
 							.consultarPorcentajeVacunadosSobreRecibidasSegundaDosis();
 					lblPorcentajePrimera.setText(
-							"Porcentaje vacunados (primera dosis): " + String.valueOf(porcentajePrimera) + "%");
+							"Porcentaje vacunados (primera dosis): " + porcentajePrimera + "%");
 					lblPorcentajeCompletamente.setText(
-							"Porcentaje vacunados (pauta completa): " + String.valueOf(porcentajeSegunda) + "%");
+							"Porcentaje vacunados (pauta completa): " + porcentajeSegunda + "%");
 				} catch (GSNSException gsnse) {
-					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -177,17 +179,18 @@ public class PantallaConsultaEstadisticas extends JPanel {
 									comboPorcentajeRegion.getSelectedIndex() + 1);
 
 					lblPorcentaje1Dosisregion.setText("Porcentaje vacunados por región (primera dosis): "
-							+ String.valueOf(porcentajePrimera) + "%");
+							+ porcentajePrimera + "%");
 					lblPorcentajeDosisRegionCompleta.setText("Porcentaje vacunados por región (pauta completa): "
-							+ String.valueOf(porcentajeSegunda) + "%");
+							+ porcentajeSegunda + "%");
 				} catch (GSNSException gsnse) {
-					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 		btnPorcentajeRegion.setHorizontalAlignment(SwingConstants.RIGHT);
 		midPanel.add(btnPorcentajeRegion);
 
+		
 		comboTotalRegion = new JComboBox<String>(frame.getGestorGSNS().getNombresRegion());
 		comboTotalRegion.setBounds(10, 200, 191, 21);
 		midPanel.add(comboTotalRegion);
