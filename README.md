@@ -24,6 +24,7 @@ Hemos considerado en dividir el problema en las 3 capas habituales utilizadas en
 
 También hacemos referencia al [POM](./GSNS/pom.xml), en el cual hemos declarado y utilizado las dependencias de junit y de apache.derby esta última para utilizar una Base de Datos embebida. Además de los plugins de Maven. También destacar que este fichero lo hemos utilizado a cada version, por lo tanto para el versionado de la aplicación. 
 
+Por último también hacemos referencia al [Diagrama de clases de diseño](./Diagrama%20de%20clases%20de%20diseño.png)  en UML.
 ## Autores ✒️
 
 _Proyecto creado por_ 
@@ -34,4 +35,5 @@ _Proyecto creado por_
 
 _Las tecnologías utilizadas para el desarrollo del proyecto son:_
 
-⚙️Java <br>
+☕Java <br>
+⚙️Maven <br>
