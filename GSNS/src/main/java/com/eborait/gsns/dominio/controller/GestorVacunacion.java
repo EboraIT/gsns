@@ -1,6 +1,8 @@
 package com.eborait.gsns.dominio.controller;
 
 import java.sql.SQLException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.Paciente;
@@ -21,6 +23,9 @@ public class GestorVacunacion {
 
 	/** El gestor de la aplicación. */
 	private GestorGSNS gestorGSNS;
+
+	/** Objeto Logger. */
+	private static final Logger LOG = Logger.getLogger(GestorVacunacion.class.getName());
 
 	/**
 	 * Instancia un nuevo GestorVacunacion.
@@ -52,8 +57,8 @@ public class GestorVacunacion {
 					tipoVacuna, region);
 			return gestorGSNS.getEntregaDAO().insert(entregaVac) == 1;
 		} catch (SQLException sqle) {
-			System.out.println("Excepción insertando entrega:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}","Excepción insertando entrega:\n\n"  + sqle.getMessage());
+			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al dar de alta la entrega de vacunas.");
 		}
 	}
@@ -80,8 +85,8 @@ public class GestorVacunacion {
 					segundaDosis);
 			return gestorGSNS.getVacunacionDAO().insert(vacunacion) == 1 && gestorGSNS.getPacienteDAO().insert(paciente) == 1;
 		} catch (SQLException sqle) {
-			System.out.println("Excepción insertando vacunación:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}","Excepción insertando vacunación:\n\n"  + sqle.getMessage());
+			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al registrar la vacunación.");
 		}
 	}
