@@ -3,6 +3,8 @@ package com.eborait.gsns.dominio.controller;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
@@ -22,6 +24,10 @@ public class GestorRepartoVacunas {
 
 	/** El gestor de la aplicación. */
 	private GestorGSNS gestorGSNS;
+	
+	/** Objeto Logger. */
+	private static final Logger LOG = Logger.getLogger(GestorRepartoVacunas.class.getName());
+
 
 	/**
 	 * Instancia un nuevo GestorRepartoVacunas.
@@ -52,8 +58,8 @@ public class GestorRepartoVacunas {
 		try {
 			return gestorGSNS.getLoteVacunasDAO().insert(lote) == 1;
 		} catch (SQLException sqle) {
-			System.out.println("Excepción insertando lote:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}","Excepción insertando lote:\n\n" + sqle.getMessage());
+			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al dar de alta el lote de vacunas.");
 		}
 	}
@@ -85,8 +91,8 @@ public class GestorRepartoVacunas {
 				return (int) (cantidad / (ia * 1.0) * 0.40 + cantidadPoblacion * 0.60);
 			}
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultando cantidad de entregas:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}","Excepción consultando cantidad de entregas:\n\n" + sqle.getMessage());
+			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al calcular las entregas.");
 		}
 	}
@@ -107,8 +113,8 @@ public class GestorRepartoVacunas {
 			}
 			return tipos;
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultado lotes de vacunas:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}","Excepción consultado lotes de vacunas:\n\n" + sqle.getMessage());
+			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al consultar los tipos de vacunas.");
 		}
 	}
@@ -123,8 +129,8 @@ public class GestorRepartoVacunas {
 		try {
 			return gestorGSNS.getLoteVacunasDAO().max("id") + 1;
 		} catch (SQLException sqle) {
-			System.out.println("Excepción consultado id de lote de vacunas:\n\n" + sqle.getMessage());
-			sqle.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}","Excepción consultado id de lote de vacunas:\n\n" + sqle.getMessage());
+			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al generar el identificador de lote.");
 		}
 	}
