@@ -110,7 +110,7 @@ public class PantallaRegistrarVacunacion extends PanelBase {
 			comboTipoVacuna.setBounds(242, 86, 181, 20);
 			midPanel.add(comboTipoVacuna);
 		} catch (GSNSException gsnse) {
-			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			frame.cambiarPanel(frame.getPanelMain());
 		}
 		comboGrupoPrioridad = new JComboBox<>(frame.getGestorGSNS().getNombresGrupoPrioridad());
@@ -156,7 +156,7 @@ public class PantallaRegistrarVacunacion extends PanelBase {
 					frame.cambiarPanel(frame.getPanelMain());
 				}
 			} catch (GSNSException gsnse) {
-				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
 			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",

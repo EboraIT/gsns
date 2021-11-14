@@ -37,6 +37,11 @@ public class Main extends JFrame {
 
 	/** El gestor de la aplicación. */
 	private GestorGSNS gestorGSNS;
+
+	/**
+	 * Constante Error.
+	 */
+	public static final String ERROR = "Error";
 	
 	/** Objeto Logger. */
 	private static final Logger LOG = Logger.getLogger(Main.class.getName());

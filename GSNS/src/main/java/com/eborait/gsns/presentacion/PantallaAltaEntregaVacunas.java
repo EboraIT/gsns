@@ -134,7 +134,7 @@ public class PantallaAltaEntregaVacunas extends PanelBase {
 			comboTipoVacuna.setBounds(676, 36, 181, 20);
 			midPanel.add(comboTipoVacuna);
 		} catch (GSNSException gsnse) {
-			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			frame.cambiarPanel(frame.getPanelMain());
 		}
 	}
@@ -159,9 +159,9 @@ public class PantallaAltaEntregaVacunas extends PanelBase {
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
 						"Se ha producido un error al registrar el alta: La cantidad no es correcta. Introduce un número entero.",
-						"Error", JOptionPane.ERROR_MESSAGE);
+						Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			} catch (GSNSException gsnse) {
-				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
 			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",

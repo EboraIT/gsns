@@ -30,9 +30,6 @@ public class PantallaConsultaEstadisticas extends PanelBase {
 	/** El desplegable de porcentaje region. */
 	private JComboBox<String> comboPorcentajeRegion;
 
-	/** Constante error. */
-	private static final String ERROR = "Error";
-
 	/**
 	 * Crea el panel.
 	 * 
@@ -65,7 +62,7 @@ public class PantallaConsultaEstadisticas extends PanelBase {
 					lblTotalVacSegundaDosis.setText("Total vacunados (segunda dosis): " + totalSegunda);
 					lblTotalDosisAdministradas.setText("Total dosis administradas: " + total);
 				} catch (GSNSException gsnse) {
-					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -100,7 +97,7 @@ public class PantallaConsultaEstadisticas extends PanelBase {
 							.setText("Total vacunados por región (segunda dosis): " + totalSegunda);
 					lblTotalDosisAdministradasRegion.setText("Total dosis administradas por región: " + total);
 				} catch (GSNSException gsnse) {
-					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -127,7 +124,7 @@ public class PantallaConsultaEstadisticas extends PanelBase {
 					lblPorcentajeCompletamente
 							.setText("Porcentaje vacunados (pauta completa): " + porcentajeSegunda + "%");
 				} catch (GSNSException gsnse) {
-					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -158,7 +155,7 @@ public class PantallaConsultaEstadisticas extends PanelBase {
 					lblPorcentajeDosisRegionCompleta
 							.setText("Porcentaje vacunados por región (pauta completa): " + porcentajeSegunda + "%");
 				} catch (GSNSException gsnse) {
-					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), ERROR, JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

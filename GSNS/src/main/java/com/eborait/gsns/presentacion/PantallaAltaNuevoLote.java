@@ -61,7 +61,7 @@ public class PantallaAltaNuevoLote extends PanelBase {
 		try {
 			lblIdLote.setText(String.valueOf(frame.getGestorGSNS().getGestorRepartoVacunas().generarIdLote()));
 		} catch (GSNSException gsnse) {
-			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			frame.cambiarPanel(frame.getPanelMain());
 		}
 		JLabel lblFechaAlta = new JLabel("Fecha alta:");
@@ -149,9 +149,9 @@ public class PantallaAltaNuevoLote extends PanelBase {
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
 						"Se ha producido un error al registrar el alta: La cantidad no es correcta. Introduce un número entero.",
-						"Error", JOptionPane.ERROR_MESSAGE);
+						Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			} catch (GSNSException gsnse) {
-				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
 			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
