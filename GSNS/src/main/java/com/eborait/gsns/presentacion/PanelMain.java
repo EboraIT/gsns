@@ -24,9 +24,9 @@ public class PanelMain extends JPanel {
 
 	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** Tipo de letra */
-	private static final String LETRA="Tahoma";
+	private static final String LETRA = "Tahoma";
 
 	/**
 	 * Crea el panel.

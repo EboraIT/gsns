@@ -17,10 +17,9 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
  * @since 1.0
  */
 public class Util {
-	
+
 	/** Objeto Logger. */
 	private static final Logger LOG = Logger.getLogger(Util.class.getName());
-
 
 	/**
 	 * Constructor privado.

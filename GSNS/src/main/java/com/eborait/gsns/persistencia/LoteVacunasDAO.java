@@ -19,27 +19,27 @@ import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
  *
  */
 public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
-	
+
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT = "SELECT * FROM lote_vacunas WHERE id = '%s'";
-	
+
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT_CRITERIA = "SELECT * FROM lote_vacunas";
-	
+
 	/**
 	 * Formato sentencia insert.
 	 */
 	private static final String INSERT = "INSERT INTO lote_vacunas VALUES('%s', '%s', '%s', %s, '%s')";
-	
+
 	/**
 	 * Formato sentencia update.
 	 */
 	private static final String UPDATE = "UPDATE lote_vacunas SET id = '%s', fecha = '%s', tipo = '%s', cantidad = %s, farmaceutica = '%s' WHERE id = '%s'";
-	
+
 	/**
 	 * Formato sentencia delete.
 	 */

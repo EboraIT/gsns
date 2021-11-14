@@ -46,7 +46,8 @@ public class GestorVacunacion {
 	 * @param prioridad Prioridad.
 	 * @param vacuna    Tipo de vacuna.
 	 * @param region    Región de la entrega.
-	 * @return Devuelve true si se ha registrado correctamente, false de lo contrario.
+	 * @return Devuelve true si se ha registrado correctamente, false de lo
+	 *         contrario.
 	 * @throws GSNSException Si se produce una excepción al insertar.
 	 */
 	public boolean altaEntregaVacunas(String id, String lote, String fecha, int cantidad, int prioridad, String vacuna,
@@ -57,7 +58,7 @@ public class GestorVacunacion {
 					tipoVacuna, region);
 			return gestorGSNS.getEntregaDAO().insert(entregaVac) == 1;
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}","Excepción insertando entrega: "  + sqle.getMessage());
+			LOG.log(Level.SEVERE, "{0}", "Excepción insertando entrega: " + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al dar de alta la entrega de vacunas.");
 		}
@@ -74,7 +75,8 @@ public class GestorVacunacion {
 	 * @param prioridad    Grupo de prioridad de la persona vacunada.
 	 * @param region       Región a la que pertenece la persona vacunada.
 	 * @param segundaDosis Si es primera o segunda dósis.
-	 * @return Devuelve true si se ha registrado correctamente, false de lo contrario.
+	 * @return Devuelve true si se ha registrado correctamente, false de lo
+	 *         contrario.
 	 * @throws GSNSException Si se produce una excepción al insertar.
 	 */
 	public boolean registrarVacunacion(String fecha, String nombre, String apellidos, String nif, String tipo,
@@ -83,9 +85,10 @@ public class GestorVacunacion {
 			Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region, segundaDosis);
 			Vacunacion vacunacion = new Vacunacion(0, new TipoVacuna(tipo), paciente, Util.parseFecha(fecha),
 					segundaDosis);
-			return gestorGSNS.getVacunacionDAO().insert(vacunacion) == 1 && gestorGSNS.getPacienteDAO().insert(paciente) == 1;
+			return gestorGSNS.getVacunacionDAO().insert(vacunacion) == 1
+					&& gestorGSNS.getPacienteDAO().insert(paciente) == 1;
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}","Excepción insertando vacunación: "  + sqle.getMessage());
+			LOG.log(Level.SEVERE, "{0}", "Excepción insertando vacunación: " + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al registrar la vacunación.");
 		}

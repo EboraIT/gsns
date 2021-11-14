@@ -19,27 +19,27 @@ import com.eborait.gsns.dominio.entitymodel.Paciente;
  *
  */
 public class PacienteDAO implements AbstractEntityDAO<Paciente> {
-	
+
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT = "SELECT * FROM pacientes WHERE dni = '%s'";
-	
+
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT_CRITERIA = "SELECT * FROM pacientes";
-	
+
 	/**
 	 * Formato sentencia insert.
 	 */
 	private static final String INSERT = "INSERT INTO pacientes VALUES('%s', %s, %s, '%s', '%s', '%s')";
-	
+
 	/**
 	 * Formato sentencia update.
 	 */
 	private static final String UPDATE = "UPDATE pacientes SET dni = '%s', grupo = %s, region = %s, nombre = '%s', apellidos = '%s', segunda_dosis = %s WHERE dni = '%s'";
-	
+
 	/**
 	 * Formato sentencia delete.
 	 */

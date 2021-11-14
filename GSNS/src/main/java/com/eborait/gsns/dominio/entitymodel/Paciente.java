@@ -1,6 +1,5 @@
 package com.eborait.gsns.dominio.entitymodel;
 
-
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -14,10 +13,9 @@ import java.util.logging.Level;
  * @since 1.0
  */
 public class Paciente {
-	
+
 	/** Objeto Logger. */
 	private static final Logger LOG = Logger.getLogger(Paciente.class.getName());
-
 
 	/** La region. */
 	private RegionEnum region;
@@ -40,16 +38,17 @@ public class Paciente {
 	/**
 	 * Instancia un nuevo paciente.
 	 *
-	 * @param dni       El dni.
-	 * @param nombre    El nombre.
-	 * @param apellidos Los apellidos.
-	 * @param grupo     El grupo.
-	 * @param region    La region.
+	 * @param dni          El dni.
+	 * @param nombre       El nombre.
+	 * @param apellidos    Los apellidos.
+	 * @param grupo        El grupo.
+	 * @param region       La region.
 	 * @param segundaDosis La segunda dosis.
 	 * @throws GSNSException Si se produce una excepción en el grupo de prioridad o
 	 *                       la región.
 	 */
-	public Paciente(String dni, String nombre, String apellidos, int grupo, int region, boolean segundaDosis) throws GSNSException {
+	public Paciente(String dni, String nombre, String apellidos, int grupo, int region, boolean segundaDosis)
+			throws GSNSException {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -63,11 +62,11 @@ public class Paciente {
 	/**
 	 * Instancia un nuevo paciente.
 	 *
-	 * @param dni       El dni.
-	 * @param grupo     El grupo.
-	 * @param region    La region.
-	 * @param nombre    El nombre.
-	 * @param apellidos Los apellidos.
+	 * @param dni          El dni.
+	 * @param grupo        El grupo.
+	 * @param region       La region.
+	 * @param nombre       El nombre.
+	 * @param apellidos    Los apellidos.
 	 * @param segundaDosis La segunda dosis.
 	 */
 	public Paciente(String dni, int grupo, int region, String nombre, String apellidos, boolean segundaDosis) {
@@ -175,7 +174,7 @@ public class Paciente {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-	
+
 	/**
 	 * Comprueba si es la segunda dosis.
 	 *

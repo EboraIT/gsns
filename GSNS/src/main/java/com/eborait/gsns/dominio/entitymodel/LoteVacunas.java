@@ -170,5 +170,5 @@ public class LoteVacunas {
 	public void setFarmaceutica(String farmaceutica) {
 		this.farmaceutica = farmaceutica;
 	}
-	
+
 }

@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
-
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -38,7 +37,7 @@ public class EntregaVacunas {
 
 	/** La cantidad. */
 	private int cantidad;
-	
+
 	/** Objeto Logger. */
 	private static final Logger LOG = Logger.getLogger(EntregaVacunas.class.getName());
 
