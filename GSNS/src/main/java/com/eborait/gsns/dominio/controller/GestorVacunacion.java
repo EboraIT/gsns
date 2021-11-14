@@ -22,7 +22,7 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 public class GestorVacunacion {
 
 	/** El gestor de la aplicación. */
-	private GestorGSNS gestorGSNS;
+	private final GestorGSNS gestorGSNS;
 
 	/** Objeto Logger. */
 	private static final Logger LOG = Logger.getLogger(GestorVacunacion.class.getName());

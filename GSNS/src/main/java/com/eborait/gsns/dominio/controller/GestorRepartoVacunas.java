@@ -23,7 +23,7 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 public class GestorRepartoVacunas {
 
 	/** El gestor de la aplicación. */
-	private GestorGSNS gestorGSNS;
+	private final GestorGSNS gestorGSNS;
 
 	/** Objeto Logger. */
 	private static final Logger LOG = Logger.getLogger(GestorRepartoVacunas.class.getName());
@@ -68,7 +68,7 @@ public class GestorRepartoVacunas {
 	 * 
 	 * @param region La cual cogeremos el nombre de la region y la población.
 	 * 
-	 * @param IA     Tendremos también como parametro la Incidencia Acumulada que
+	 * @param ia     Tendremos también como parametro la Incidencia Acumulada que
 	 *               pasará el cliente por parámetro.
 	 * 
 	 * @return cantidad Devuelve un entero con la cantidad de vacunas repartidas.

@@ -22,7 +22,7 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 public class GestorEstadisticas {
 
 	/** El gestor de la aplicación. */
-	private GestorGSNS gestorGSNS;
+	private final GestorGSNS gestorGSNS;
 
 	/** Constante segunda_dosis. */
 	private static final String SEGUNDA_DOSIS = "segunda_dosis";

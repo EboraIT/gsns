@@ -25,22 +25,22 @@ public class PantallaAltaNuevoLote extends PanelBase {
 	private static final long serialVersionUID = 1L;
 
 	/** El label de id de lote. */
-	private JLabel lblIdLote;
+	private final JLabel lblIdLote;
 
 	/** El campo de texto de fecha de alta. */
-	private JTextField txtFechaAlta;
+	private final JTextField txtFechaAlta;
 
 	/** El campo de texto de cantidad. */
-	private JTextField txtCantidad;
+	private final JTextField txtCantidad;
 
 	/** El campo de texto de nombre de la vacuna. */
-	private JTextField txtNombreVacuna;
+	private final JTextField txtNombreVacuna;
 
 	/** El campo de texto de farmacéutica. */
-	private JTextField txtFarmaceutica;
+	private final JTextField txtFarmaceutica;
 
 	/** El campo de texto de fecha de aprobación. */
-	private JTextField txtFechaAprobacion;
+	private final JTextField txtFechaAprobacion;
 
 	/**
 	 * Crea el panel.

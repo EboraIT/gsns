@@ -27,16 +27,16 @@ public class Main extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** El content pane. */
-	private JPanel contentPane;
+	private final JPanel contentPane;
 
 	/** El panel actual. */
 	private JPanel panelActual;
 
 	/** El panel principal. */
-	private PanelMain panelMain;
+	private final PanelMain panelMain;
 
 	/** El gestor de la aplicación. */
-	private transient GestorGSNS gestorGSNS;
+	private final transient GestorGSNS gestorGSNS;
 
 	/**
 	 * Constante Error.

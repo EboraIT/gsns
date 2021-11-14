@@ -21,13 +21,13 @@ import com.eborait.gsns.persistencia.VacunacionDAO;
 public class GestorGSNS {
 
 	/** El gestor de estadisticas. */
-	private GestorEstadisticas gestorEstadisticas;
+	private final GestorEstadisticas gestorEstadisticas;
 
 	/** El gestor del reparto de vacunas. */
-	private GestorRepartoVacunas gestorRepartoVacunas;
+	private final GestorRepartoVacunas gestorRepartoVacunas;
 
 	/** El gestor de vacunaciones. */
-	private GestorVacunacion gestorVacunacion;
+	private final GestorVacunacion gestorVacunacion;
 
 	/**
 	 * Instancia un nuevo GestorGSNS.

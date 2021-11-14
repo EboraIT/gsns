@@ -26,28 +26,28 @@ public class PantallaRegistrarVacunacion extends PanelBase {
 	private static final long serialVersionUID = 1L;
 
 	/** El campo de texto de nombre. */
-	private JTextField txtNombre;
+	private final JTextField txtNombre;
 
 	/** El campo de texto de apellidos. */
-	private JTextField txtApellidos;
+	private final JTextField txtApellidos;
 
 	/** El campo de texto de dni. */
-	private JTextField txtDni;
+	private final JTextField txtDni;
 
 	/** El campo de texto de fecha. */
-	private JTextField txtFecha;
+	private final JTextField txtFecha;
 
 	/** El desplegable de tipo vacuna. */
 	private JComboBox<String> comboTipoVacuna;
 
 	/** El desplegable de de region. */
-	private JComboBox<String> comboRegion;
+	private final JComboBox<String> comboRegion;
 
 	/** El desplegable de grupo prioridad. */
-	private JComboBox<String> comboGrupoPrioridad;
+	private final JComboBox<String> comboGrupoPrioridad;
 
 	/** The checkbox de segunda dosis. */
-	private JCheckBox chkSegundaDosis;
+	private final JCheckBox chkSegundaDosis;
 
 	/**
 	 * Crea el panel.

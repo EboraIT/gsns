@@ -60,7 +60,8 @@ public class AgenteBD {
 	 * 
 	 */
 	public static AgenteBD getAgente() throws SQLException {
-		return agente == null ? new AgenteBD() : agente;
+		agente = agente == null ? new AgenteBD() : agente;
+		return agente;
 	}
 
 	/**

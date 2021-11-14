@@ -25,10 +25,10 @@ public class PantallaConsultaEstadisticas extends PanelBase {
 	private static final long serialVersionUID = 1L;
 
 	/** El desplegable de total region. */
-	private JComboBox<String> comboTotalRegion;
+	private final JComboBox<String> comboTotalRegion;
 
 	/** El desplegable de porcentaje region. */
-	private JComboBox<String> comboPorcentajeRegion;
+	private final JComboBox<String> comboPorcentajeRegion;
 
 	/**
 	 * Crea el panel.

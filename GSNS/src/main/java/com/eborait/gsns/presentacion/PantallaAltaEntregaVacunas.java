@@ -26,22 +26,22 @@ public class PantallaAltaEntregaVacunas extends PanelBase {
 	private static final long serialVersionUID = 1L;
 
 	/** El campo de texto del id de entrega. */
-	private JTextField txtIdEntrega;
+	private final JTextField txtIdEntrega;
 
 	/** El campo de texto de lote. */
-	private JTextField txtLote;
+	private final JTextField txtLote;
 
 	/** El campo de texto de fecha. */
-	private JTextField txtFecha;
+	private final JTextField txtFecha;
 
 	/** El campo de texto de cantidad. */
-	private JTextField txtCantidad;
+	private final JTextField txtCantidad;
 
 	/** El desplegable de grupo de prioridad. */
-	private JComboBox<String> comboGrupoPrioridad;
+	private final JComboBox<String> comboGrupoPrioridad;
 
 	/** El desplegable de regione. */
-	private JComboBox<String> comboRegion;
+	private final JComboBox<String> comboRegion;
 
 	/** El desplegable de tipo de vacuna. */
 	private JComboBox<String> comboTipoVacuna;
