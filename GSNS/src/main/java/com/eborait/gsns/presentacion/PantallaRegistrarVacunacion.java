@@ -151,7 +151,7 @@ public class PantallaRegistrarVacunacion extends PanelBase {
 						comboTipoVacuna.getSelectedItem().toString(), comboGrupoPrioridad.getSelectedIndex() + 1,
 						comboRegion.getSelectedIndex() + 1, chkSegundaDosis.isSelected());
 				if (correcto) {
-					JOptionPane.showMessageDialog(frame, "La vacunación se ha registrado correctamente.", "Información",
+					JOptionPane.showMessageDialog(frame, "La vacunación se ha registrado correctamente.", Main.INFO,
 							JOptionPane.INFORMATION_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
 				}

@@ -43,6 +43,11 @@ public class Main extends JFrame {
 	 */
 	public static final String ERROR = "Error";
 
+	/**
+	 * Constante Información.
+	 */
+	public static final String INFO = "Información";
+
 	/** Objeto Logger. */
 	private static final Logger LOG = Logger.getLogger(Main.class.getName());
 

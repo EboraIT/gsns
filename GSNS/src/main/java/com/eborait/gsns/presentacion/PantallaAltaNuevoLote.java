@@ -142,13 +142,13 @@ public class PantallaAltaNuevoLote extends PanelBase {
 						lblIdLote.getText(), txtFechaAlta.getText(), Integer.parseInt(txtCantidad.getText()),
 						txtNombreVacuna.getText(), txtFarmaceutica.getText(), txtFechaAprobacion.getText());
 				if (correcto) {
-					JOptionPane.showMessageDialog(frame, "La entrega se ha registrado correctamente.", "Información",
+					JOptionPane.showMessageDialog(frame, "El nuevo lote se ha registrado correctamente.", Main.INFO,
 							JOptionPane.INFORMATION_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
 				}
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
-						"Se ha producido un error al registrar el alta: La cantidad no es correcta. Introduce un número entero.",
+						"Se ha producido un error al registrar el alta del nuevo lote: La cantidad no es correcta. Introduce un número entero.",
 						Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			} catch (GSNSException gsnse) {
 				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
