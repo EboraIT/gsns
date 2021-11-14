@@ -9,7 +9,14 @@ package com.eborait.gsns.persistencia;
  * @version 1.0
  * 
  */
-public interface BDConstantes {
+public final class BDConstantes {
+
+	/**
+	 * Constructor privado.
+	 */
+	private BDConstantes() {
+
+	}
 
 	/**
 	 * Driver de Derby.

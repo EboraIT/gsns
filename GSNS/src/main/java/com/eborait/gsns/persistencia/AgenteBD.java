@@ -26,7 +26,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
  * @version 1.0
  *
  */
-public class AgenteBD implements BDConstantes {
+public class AgenteBD {
 
 	/**
 	 * Instancia del agente.
@@ -41,7 +41,7 @@ public class AgenteBD implements BDConstantes {
 	/**
 	 * Identificador ODBC de la base de datos.
 	 */
-	private static final String URL = CONNECTION_STRING + ";create=false";
+	private static final String URL = BDConstantes.CONNECTION_STRING + ";create=false";
 
 	/**
 	 * 
@@ -94,7 +94,7 @@ public class AgenteBD implements BDConstantes {
 		try {
 			Driver derbyEmbeddedDriver = new EmbeddedDriver();
 			DriverManager.registerDriver(derbyEmbeddedDriver);
-			conexion = DriverManager.getConnection(URL, DBUSER, getEncryptedPass());
+			conexion = DriverManager.getConnection(URL, BDConstantes.DBUSER, getEncryptedPass());
 		} catch (SQLException sqle) {
 			throw new SQLException("Error conectando con la base de datos: " + sqle.getMessage(), sqle);
 
