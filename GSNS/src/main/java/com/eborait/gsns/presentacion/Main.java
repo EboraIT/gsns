@@ -6,12 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import com.eborait.gsns.dominio.controller.GestorGSNS;
-
 
 /**
  * Pantalla principal de la aplicación.
@@ -42,7 +42,7 @@ public class Main extends JFrame {
 	 * Constante Error.
 	 */
 	public static final String ERROR = "Error";
-	
+
 	/** Objeto Logger. */
 	private static final Logger LOG = Logger.getLogger(Main.class.getName());
 
@@ -69,7 +69,7 @@ public class Main extends JFrame {
 	 * Crea el JFrame.
 	 */
 	public Main() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(0, 0, 900, 500);
 		setTitle("Gestión Sistema Nacional de Salud");
