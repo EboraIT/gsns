@@ -118,4 +118,4 @@ _Las tecnologías utilizadas para el desarrollo del proyecto son:_
 
 ☕Java <br>
 ⚙️Maven <br>
-⚙️SonarCloud <br>
+☁️SonarCloud <br>
