@@ -36,7 +36,7 @@ public class Main extends JFrame {
 	private PanelMain panelMain;
 
 	/** El gestor de la aplicación. */
-	private GestorGSNS gestorGSNS;
+	private transient GestorGSNS gestorGSNS;
 
 	/**
 	 * Constante Error.
