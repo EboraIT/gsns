@@ -43,6 +43,8 @@ Al principio utilizamos la forma de analizar manualmente , lo que haciamos era u
 	
 En el primer análisis nos salió que teniamos:
 
+<img src="10_SonarCloud.JPG">
+
 	- 5 Bugs
 	- 68 Code Smells
 	- 19 Security Hotspots
@@ -98,6 +100,8 @@ Destacar la última línea la cual hace la llamada a mvn verify sonar:sonar pero
 Al realizar la Integración continua ahora lo tenemos configurado para que una vez realizemos un push en la rama Develop , esta ejecutará a su vez un actions del proyecto que llamará al archivo anteriormente descrito para realizar el analisis del proyecto.
 
 Actualmente a día 14/11/2021 tenemos la calidad de nuestro código:
+
+<img src="14_SonarCloud.JPG">
 
 	- 0 Bugs
 	- 10 Code Smells
