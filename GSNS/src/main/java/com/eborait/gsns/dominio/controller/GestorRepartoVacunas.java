@@ -58,7 +58,7 @@ public class GestorRepartoVacunas {
 		try {
 			return gestorGSNS.getLoteVacunasDAO().insert(lote) == 1;
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}","Excepción insertando lote:\n\n" + sqle.getMessage());
+			LOG.log(Level.SEVERE, "{0}","Excepción insertando lote: " + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al dar de alta el lote de vacunas.");
 		}
@@ -91,7 +91,7 @@ public class GestorRepartoVacunas {
 				return (int) (cantidad / (ia * 1.0) * 0.40 + cantidadPoblacion * 0.60);
 			}
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}","Excepción consultando cantidad de entregas:\n\n" + sqle.getMessage());
+			LOG.log(Level.SEVERE, "{0}","Excepción consultando cantidad de entregas: " + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al calcular las entregas.");
 		}
@@ -113,7 +113,7 @@ public class GestorRepartoVacunas {
 			}
 			return tipos;
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}","Excepción consultado lotes de vacunas:\n\n" + sqle.getMessage());
+			LOG.log(Level.SEVERE, "{0}","Excepción consultado lotes de vacunas: " + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al consultar los tipos de vacunas.");
 		}
@@ -129,7 +129,7 @@ public class GestorRepartoVacunas {
 		try {
 			return gestorGSNS.getLoteVacunasDAO().max("id") + 1;
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}","Excepción consultado id de lote de vacunas:\n\n" + sqle.getMessage());
+			LOG.log(Level.SEVERE, "{0}","Excepción consultado id de lote de vacunas: " + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al generar el identificador de lote.");
 		}

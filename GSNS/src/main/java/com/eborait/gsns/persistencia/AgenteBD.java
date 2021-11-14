@@ -10,12 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 
 import org.apache.derby.jdbc.EmbeddedDriver;
-
-import com.eborait.gsns.dominio.controller.GestorEstadisticas;
 
 /**
  * La clase AgenteBD realiza las operaciones contra la base de datos.
@@ -43,10 +39,6 @@ public class AgenteBD implements BDConstantes {
 	 */
 	private static final String URL = CONNECTION_STRING + ";create=false";
 
-	/** Objeto Logger. */
-	private static final Logger LOG = Logger.getLogger(AgenteBD.class.getName());
-
-	
 	/**
 	 * 
 	 * @throws SQLException Si se produce algún error al conectar con la base de
@@ -79,8 +71,8 @@ public class AgenteBD implements BDConstantes {
 			DriverManager.registerDriver(derbyEmbeddedDriver);
 			conexion = DriverManager.getConnection(URL, DBUSER, DBPASS);
 		} catch (SQLException sqle) {
-			throw new SQLException("Error conectando con la base de datos:\n\n" + sqle.getMessage(),sqle);
-			
+			throw new SQLException("Error conectando con la base de datos: " + sqle.getMessage(), sqle);
+
 		}
 	}
 
@@ -94,7 +86,7 @@ public class AgenteBD implements BDConstantes {
 		try {
 			conexion.close();
 		} catch (SQLException sqle) {
-			throw new SQLException("Error cerrando la conexión con la base de datos:\n\n" + sqle.getMessage(),sqle);
+			throw new SQLException("Error cerrando la conexión con la base de datos: " + sqle.getMessage(), sqle);
 		}
 	}
 
@@ -125,7 +117,7 @@ public class AgenteBD implements BDConstantes {
 			desconectarBD();
 			return data;
 		} catch (SQLException sqle) {
-			throw new SQLException("Error consultando a la base de datos:\n\n" + sqle.getMessage(),sqle);
+			throw new SQLException("Error consultando a la base de datos: " + sqle.getMessage(), sqle);
 		}
 	}
 
@@ -141,7 +133,7 @@ public class AgenteBD implements BDConstantes {
 		try {
 			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
-			throw new SQLException("Error insertando en la base de datos:\n\n" + sqle.getMessage(),sqle);
+			throw new SQLException("Error insertando en la base de datos: " + sqle.getMessage(), sqle);
 		}
 	}
 
@@ -157,7 +149,7 @@ public class AgenteBD implements BDConstantes {
 		try {
 			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
-			throw new SQLException("Error actualizando en la base de datos:\n\n" + sqle.getMessage(),sqle);
+			throw new SQLException("Error actualizando en la base de datos: " + sqle.getMessage(), sqle);
 		}
 	}
 
@@ -172,7 +164,7 @@ public class AgenteBD implements BDConstantes {
 		try {
 			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
-			throw new SQLException("Error borrando en la base de datos:\n\n" + sqle.getMessage(),sqle);
+			throw new SQLException("Error borrando en la base de datos: " + sqle.getMessage(), sqle);
 		}
 	}
 

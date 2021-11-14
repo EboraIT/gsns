@@ -46,7 +46,7 @@ public class Util {
 		try {
 			fechaDate = formato.parse(fecha);
 		} catch (ParseException pe) {
-			LOG.log(Level.SEVERE, "{0}", "Excepción parseando fecha:\n\n" + pe.getMessage());
+			LOG.log(Level.SEVERE, "{0}", "Excepción parseando fecha: " + pe.getMessage());
 			LOG.log(Level.SEVERE, "", pe);
 			throw new GSNSException("El formato de la fecha no es correcto. El formato adecuado es dd/mm/yyyy.");
 		}

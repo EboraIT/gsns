@@ -57,7 +57,7 @@ public class GestorVacunacion {
 					tipoVacuna, region);
 			return gestorGSNS.getEntregaDAO().insert(entregaVac) == 1;
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}","Excepción insertando entrega:\n\n"  + sqle.getMessage());
+			LOG.log(Level.SEVERE, "{0}","Excepción insertando entrega: "  + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al dar de alta la entrega de vacunas.");
 		}
@@ -85,7 +85,7 @@ public class GestorVacunacion {
 					segundaDosis);
 			return gestorGSNS.getVacunacionDAO().insert(vacunacion) == 1 && gestorGSNS.getPacienteDAO().insert(paciente) == 1;
 		} catch (SQLException sqle) {
-			LOG.log(Level.SEVERE, "{0}","Excepción insertando vacunación:\n\n"  + sqle.getMessage());
+			LOG.log(Level.SEVERE, "{0}","Excepción insertando vacunación: "  + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException("Se ha producido un error al registrar la vacunación.");
 		}
