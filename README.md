@@ -101,7 +101,7 @@ Al realizar la Integración continua ahora lo tenemos configurado para que una v
 
 Actualmente a día 14/11/2021 tenemos la calidad de nuestro código:
 
-<img src="https://github.com/EboraIT/gsns/blob/Development/14_SonarCloud.JPG">
+<img src="https://github.com/EboraIT/gsns/blob/Development/14_SonarCloud_2.JPG">
 
 	- 0 Bugs
 	- 10 Code Smells
