@@ -17,7 +17,7 @@ También hacemos referencia al [POM](./GSNS/pom.xml), en el cual hemos declarado
 
 Por último también hacemos referencia al [Diagrama de clases de diseño](./Diagrama%20de%20clases%20de%20diseño.png)  en UML.
 
-## Planificación y Gestión 🔨
+## Planificación y Gestión 📆
 
 Para desarrollar dicho problema hemos ido desarrollando una metodología ágil, también con ayuda de projects de Github hemos podido ir creando tickets con tareas las cuales hemos ido resolviendo, el tipo de projects utilizado es Kanban. Teniamos 3 columnas las cuales eran:
 * **To do** , aquí situamos las tareas o progresos que teniamos plantado hacer.
