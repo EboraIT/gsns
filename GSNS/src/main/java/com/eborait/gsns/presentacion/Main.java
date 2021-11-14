@@ -48,6 +48,11 @@ public class Main extends JFrame {
 	 */
 	public static final String INFO = "Información";
 
+	/**
+	 * Constante Advertencia.
+	 */
+	public static final String WARNING = "Advertencia";
+
 	/** Objeto Logger. */
 	private static final Logger LOG = Logger.getLogger(Main.class.getName());
 

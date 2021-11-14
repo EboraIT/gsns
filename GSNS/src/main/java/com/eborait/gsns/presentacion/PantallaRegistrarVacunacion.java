@@ -159,7 +159,7 @@ public class PantallaRegistrarVacunacion extends PanelBase {
 				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
+			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", Main.WARNING,
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}
