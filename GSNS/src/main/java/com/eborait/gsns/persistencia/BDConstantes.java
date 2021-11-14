@@ -31,9 +31,4 @@ public interface BDConstantes {
 	 */
 	public static final String DBUSER = "admin";
 
-	/**
-	 * Contraseña de la base de datos.
-	 */
-	public static final String DBPASS = "admin";
-
 }

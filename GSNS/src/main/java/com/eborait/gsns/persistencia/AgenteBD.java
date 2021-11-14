@@ -1,5 +1,6 @@
 package com.eborait.gsns.persistencia;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -10,8 +11,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Properties;
 
 import org.apache.derby.jdbc.EmbeddedDriver;
+import org.jasypt.properties.EncryptableProperties;
+import org.jasypt.util.text.BasicTextEncryptor;
 
 /**
  * La clase AgenteBD realiza las operaciones contra la base de datos.
@@ -60,6 +64,27 @@ public class AgenteBD implements BDConstantes {
 	}
 
 	/**
+	 * Obtiene la contraseña de la base de datos de un fichero de configuración.
+	 * 
+	 * @return La contraseña de la base de datos.
+	 * @throws SQLException Si se produce algún error al leer el fichero.
+	 */
+	private static String getEncryptedPass() throws SQLException {
+		BasicTextEncryptor encryptor = new BasicTextEncryptor();
+		encryptor.setPassword("jasypt");
+
+		Properties props = new EncryptableProperties(encryptor);
+		try {
+			props.load(AgenteBD.class.getClassLoader().getResourceAsStream("datasource.properties"));
+			return props.getProperty("datasource.password");
+		} catch (IOException ioe) {
+			throw new SQLException(
+					"Error leyendo la contraseña de la base de datos del fichero de configuración: " + ioe.getMessage(),
+					ioe);
+		}
+	}
+
+	/**
 	 * Abre la conexión con la base de datos.
 	 * 
 	 * @throws SQLException Si se produce algún error al conectar con la base de
@@ -69,7 +94,7 @@ public class AgenteBD implements BDConstantes {
 		try {
 			Driver derbyEmbeddedDriver = new EmbeddedDriver();
 			DriverManager.registerDriver(derbyEmbeddedDriver);
-			conexion = DriverManager.getConnection(URL, DBUSER, DBPASS);
+			conexion = DriverManager.getConnection(URL, DBUSER, getEncryptedPass());
 		} catch (SQLException sqle) {
 			throw new SQLException("Error conectando con la base de datos: " + sqle.getMessage(), sqle);
 
