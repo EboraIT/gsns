@@ -99,7 +99,7 @@ Destacar la última línea la cual hace la llamada a mvn verify sonar:sonar pero
 
 Al realizar la Integración continua ahora lo tenemos configurado para que una vez realizemos un push en la rama Develop , esta ejecutará a su vez un actions del proyecto que llamará al archivo anteriormente descrito para realizar el analisis del proyecto.
 
-Actualmente a día 14/11/2021 tenemos la calidad de nuestro código:
+En el día 14/11/2021 tenemos la calidad de nuestro código:
 
 <img src="https://github.com/EboraIT/gsns/blob/Development/14_SonarCloud_2.JPG">
 
@@ -109,7 +109,19 @@ Actualmente a día 14/11/2021 tenemos la calidad de nuestro código:
 	- 0 Vulnerabilities
 	- 1,9 K Lines of Code
 	- 1,3 % Duplications
-	
+
+Actualmente a día 16/11/2021 la calidad de nuestro código estaría casi acaba a falta de definir el porcentaje (Quality Gate):
+
+<img src="https://github.com/EboraIT/gsns/blob/Development/16_SonarCloud_2.JPG">
+
+	- 0 Bugs
+	- 3 Code Smells
+	- 0 Security Hotspots
+	- 0 Vulnerabilities
+	- 1,9 K Lines of Code
+	- 1,2 % Duplications
+
+
 ## Autores ✒️
 
 _Proyecto creado por_ 
