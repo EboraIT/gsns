@@ -1,7 +1,5 @@
 package com.eborait.gsns.presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
@@ -24,28 +20,28 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
  * @version 1.0
  * @since 1.0
  */
-public class PantallaAltaEntregaVacunas extends JPanel {
+public class PantallaAltaEntregaVacunas extends PanelBase {
 
 	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** El campo de texto del id de entrega. */
-	private JTextField txtIdEntrega;
+	private final JTextField txtIdEntrega;
 
 	/** El campo de texto de lote. */
-	private JTextField txtLote;
+	private final JTextField txtLote;
 
 	/** El campo de texto de fecha. */
-	private JTextField txtFecha;
+	private final JTextField txtFecha;
 
 	/** El campo de texto de cantidad. */
-	private JTextField txtCantidad;
+	private final JTextField txtCantidad;
 
 	/** El desplegable de grupo de prioridad. */
-	private JComboBox<String> comboGrupoPrioridad;
+	private final JComboBox<String> comboGrupoPrioridad;
 
 	/** El desplegable de regione. */
-	private JComboBox<String> comboRegion;
+	private final JComboBox<String> comboRegion;
 
 	/** El desplegable de tipo de vacuna. */
 	private JComboBox<String> comboTipoVacuna;
@@ -56,28 +52,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 	 * @param frame JFrame de la aplicación.
 	 */
 	public PantallaAltaEntregaVacunas(final Main frame) {
-		setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLayout(new BorderLayout(0, 0));
-
-		JPanel topPanel = new JPanel();
-		add(topPanel, BorderLayout.NORTH);
-		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
-
-		JPanel midPanel = new JPanel();
-		add(midPanel, BorderLayout.CENTER);
-
-		JButton btnVolver = new JButton("Volver al menú principal");
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(frame.getPanelMain());
-			}
-		});
-		topPanel.add(btnVolver);
-
-		JLabel lblTitulo = new JLabel("Gestión Sistema Regional de Salud/Alta entrega de vacunas");
-		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		topPanel.add(lblTitulo);
-		midPanel.setLayout(null);
+		super(frame, "Gestión Sistema Regional de Salud/Alta entrega de vacunas");
 
 		JLabel lblIdEntrega = new JLabel("Identificador de la entrega:");
 		lblIdEntrega.setBounds(10, 36, 201, 14);
@@ -159,7 +134,7 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 			comboTipoVacuna.setBounds(676, 36, 181, 20);
 			midPanel.add(comboTipoVacuna);
 		} catch (GSNSException gsnse) {
-			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			frame.cambiarPanel(frame.getPanelMain());
 		}
 	}
@@ -177,19 +152,19 @@ public class PantallaAltaEntregaVacunas extends JPanel {
 						Integer.parseInt(txtCantidad.getText()), comboGrupoPrioridad.getSelectedIndex() + 1,
 						comboTipoVacuna.getSelectedItem().toString(), comboRegion.getSelectedIndex() + 1);
 				if (correcto) {
-					JOptionPane.showMessageDialog(frame, "La entrega se ha registrado correctamente.", "Información",
+					JOptionPane.showMessageDialog(frame, "La entrega se ha registrado correctamente.", Main.INFO,
 							JOptionPane.INFORMATION_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
 				}
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
-						"Se ha producido un error al registrar el alta: La cantidad no es correcta. Introduce un número entero.",
-						"Error", JOptionPane.ERROR_MESSAGE);
+						"Se ha producido un error al registrar el alta de la entrega de vacunas: La cantidad no es correcta. Introduce un número entero.",
+						Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			} catch (GSNSException gsnse) {
-				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
+			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", Main.WARNING,
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}

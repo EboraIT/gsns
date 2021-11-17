@@ -19,22 +19,27 @@ import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
  *
  */
 public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
+
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT = "SELECT * FROM lote_vacunas WHERE id = '%s'";
+
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT_CRITERIA = "SELECT * FROM lote_vacunas";
+
 	/**
 	 * Formato sentencia insert.
 	 */
 	private static final String INSERT = "INSERT INTO lote_vacunas VALUES('%s', '%s', '%s', %s, '%s')";
+
 	/**
 	 * Formato sentencia update.
 	 */
 	private static final String UPDATE = "UPDATE lote_vacunas SET id = '%s', fecha = '%s', tipo = '%s', cantidad = %s, farmaceutica = '%s' WHERE id = '%s'";
+
 	/**
 	 * Formato sentencia delete.
 	 */
@@ -52,8 +57,8 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	public LoteVacunas get(String id) throws SQLException {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
 		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
-		return new LoteVacunas(String.valueOf(rowData.get(1)), (Date) rowData.get(2),
-				String.valueOf(rowData.get(3)), (int) rowData.get(4), String.valueOf(rowData.get(5)));
+		return new LoteVacunas(String.valueOf(rowData.get(1)), (Date) rowData.get(2), String.valueOf(rowData.get(3)),
+				(int) rowData.get(4), String.valueOf(rowData.get(5)));
 	}
 
 	/**
@@ -106,8 +111,9 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	 */
 	@Override
 	public int update(LoteVacunas lote) throws SQLException {
-		return AgenteBD.getAgente().insert(String.format(UPDATE, lote.getId(), new java.sql.Date(lote.getFecha().getTime()), lote.getTipo(),
-				lote.getCantidad(), lote.getFarmaceutica(), lote.getId()));
+		return AgenteBD.getAgente()
+				.insert(String.format(UPDATE, lote.getId(), new java.sql.Date(lote.getFecha().getTime()),
+						lote.getTipo(), lote.getCantidad(), lote.getFarmaceutica(), lote.getId()));
 	}
 
 	/**

@@ -4,6 +4,9 @@ import java.util.Date;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 /**
  * Define la información relativa a una entrega de vacunas.
  *
@@ -34,6 +37,9 @@ public class EntregaVacunas {
 
 	/** La cantidad. */
 	private int cantidad;
+
+	/** Objeto Logger. */
+	private static final Logger LOG = Logger.getLogger(EntregaVacunas.class.getName());
 
 	/**
 	 * Instancia un objeto EntregaVacunas.
@@ -87,8 +93,8 @@ public class EntregaVacunas {
 			this.region.getEntregas().add(this);
 			this.grupoPrioridad.getEntregas().add(this);
 		} catch (GSNSException gsnse) {
-			System.out.println(gsnse.getMessage());
-			gsnse.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}", "" + gsnse.getMessage());
+			LOG.log(Level.SEVERE, "", gsnse);
 		}
 		this.lote.getEntregas().add(this);
 	}

@@ -16,18 +16,28 @@ public class DAOFactory {
 	 * Objeto EntregaDAO.
 	 */
 	private static EntregaDAO entregaDao;
+
 	/**
 	 * Objeto LoteVacunasDAO.
 	 */
 	private static LoteVacunasDAO loteVacunasDao;
+
 	/**
 	 * Objeto VacunacionDAO.
 	 */
 	private static VacunacionDAO vacunacionDao;
+
 	/**
 	 * Objeto VacunacionDAO.
 	 */
 	private static PacienteDAO pacienteDAO;
+
+	/*
+	 * Constructor privado.
+	 */
+	private DAOFactory() {
+
+	}
 
 	/**
 	 * Instancia si es necesario el objeto EntregaDAO y lo devuelve.

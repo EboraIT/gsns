@@ -1,8 +1,8 @@
-name: Build
+name: build
 on:
   push:
     branches:
-      - Development
+      - master
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
@@ -33,4 +33,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B -f /home/runner/work/gsns/gsns/GSNS/pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=eborait -Dsonar.projectKey=com.eborait:gsns
+        run: mvn verify sonar:sonar

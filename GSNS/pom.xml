@@ -20,7 +20,7 @@
 		<sonar.organization>eborait</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
-
+	
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 		<dependency>
@@ -36,12 +36,17 @@
 			<version>10.14.2.0</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>1.9.3</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
-
-
 	<build>
-		<pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
+				defaults (may be moved to parent pom) -->
 			<plugins>
 				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
 				<plugin>
