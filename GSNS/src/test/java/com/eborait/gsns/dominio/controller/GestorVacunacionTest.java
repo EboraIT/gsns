@@ -9,7 +9,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
+import com.eborait.gsns.dominio.entitymodel.Paciente;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
+import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 public class GestorVacunacionTest {
@@ -55,6 +57,22 @@ public class GestorVacunacionTest {
 			fail("Excepcion inesperada (fecha mal) "+e);
 		
 		}
+	}
+	public void registrarVacunacion() throws GSNSException {
+		String fecha= "12/11/2021";
+		String nombre= "Alberto";
+		String apellidos="Garcia Lopez";
+		String nif="03263243T";
+		String tipo="Pfizer";
+		int prioridad=2;
+		int region=2;
+		boolean segundaDosis=false;
+		
+		Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region, segundaDosis);
+		Vacunacion vacunacion = new Vacunacion(0,new TipoVacuna(tipo), paciente, Util.parseFecha(fecha),
+					segundaDosis);
+		assertTrue(gestorGSNS.getVacunacionDAO().insert(vacunacion) == 1 && gestorGSNS.getPacienteDAO().insert(paciente) == 1);
+		
 	}
 
 }
