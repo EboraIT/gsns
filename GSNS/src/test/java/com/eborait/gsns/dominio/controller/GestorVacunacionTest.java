@@ -1,6 +1,9 @@
 package com.eborait.gsns.dominio.controller;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -43,6 +46,7 @@ public class GestorVacunacionTest {
 		String Vacuna = "Pfizer";
 		int region = 4;
 		TipoVacuna tipoVacuna = new TipoVacuna(Vacuna);
+		GestorGSNS gestorGSNS = new GestorGSNS();
 		EntregaVacunas entregaVac = new EntregaVacunas(id,lote,Util.parseFecha(fecha),cantidad,prioridad,tipoVacuna,region);
 		EntregaVacunas entregaVac2 = new EntregaVacunas(id,lote,Util.parseFecha("01-23-2021"),cantidad,prioridad,tipoVacuna,region);
 		try {
@@ -67,11 +71,15 @@ public class GestorVacunacionTest {
 		int prioridad=2;
 		int region=2;
 		boolean segundaDosis=false;
-		
+		GestorGSNS gestorGSNS = new GestorGSNS();
 		Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region, segundaDosis);
 		Vacunacion vacunacion = new Vacunacion(0,new TipoVacuna(tipo), paciente, Util.parseFecha(fecha),
 					segundaDosis);
-		assertTrue(gestorGSNS.getVacunacionDAO().insert(vacunacion) == 1 && gestorGSNS.getPacienteDAO().insert(paciente) == 1);
+		try {
+			assertTrue(gestorGSNS.getVacunacionDAO().insert(vacunacion) == 1 && gestorGSNS.getPacienteDAO().insert(paciente) == 1);
+		} catch (SQLException e) {
+			fail("Excepcion inesperada  "+e);
+		}
 		
 	}
 
