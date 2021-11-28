@@ -20,11 +20,10 @@ class UtilTest {
 			assertEquals("Sat Dec 11 00:00:00 CET 2021", date.toString());
 		} catch (GSNSException gsnse) {
 			fail("Excepción GSNSException no esperada.");
-		}
-		
+		}		
 		assertThrows(GSNSException.class, new Executable() {
 			@Override
-			public void execute() throws Throwable {
+			public void execute() throws Exception {
 				Util.parseFecha("11-12-2021");
 			}
 		});
