@@ -20,16 +20,12 @@ class UtilTest {
 			date = Util.parseFecha("11/12/2021");
 		} catch (GSNSException e) {
 			fail("Excepción GSNSException no esperada.");
-<<<<<<< HEAD
 		}
 		assertEquals("Sat Dec 11 00:00:00 CET 2021", date.toString());
 	}
 
 	@Test
 	final void testParseFechaIncorrecta() {
-=======
-		}		
->>>>>>> branch 'Development' of git@github.com:EboraIT/gsns.git
 		assertThrows(GSNSException.class, new Executable() {
 			@Override
 			public void execute() throws Exception {
