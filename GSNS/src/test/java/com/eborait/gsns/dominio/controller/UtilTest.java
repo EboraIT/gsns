@@ -14,13 +14,18 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 class UtilTest {
 
 	@Test
-	final void testParseFecha() {
+	final void testParseFechaCorrecta() {
+		Date date = null;
 		try {
-			Date date = Util.parseFecha("11/12/2021");
-			assertEquals("Sat Dec 11 00:00:00 CET 2021", date.toString());
-		} catch (GSNSException gsnse) {
+			date = Util.parseFecha("11/12/2021");
+		} catch (GSNSException e) {
 			fail("Excepción GSNSException no esperada.");
-		}		
+		}
+		assertEquals("Sat Dec 11 00:00:00 CET 2021", date.toString());
+	}
+
+	@Test
+	final void testParseFechaIncorrecta() {
 		assertThrows(GSNSException.class, new Executable() {
 			@Override
 			public void execute() throws Exception {
