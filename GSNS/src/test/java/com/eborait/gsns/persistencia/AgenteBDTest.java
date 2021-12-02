@@ -1,5 +1,6 @@
 package com.eborait.gsns.persistencia;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -43,9 +44,7 @@ class AgenteBDTest {
 	final void testGetAgente() {
 		try {
 			AgenteBD agente = AgenteBD.getAgente();
-			if (agente == null) {
-				fail("No se devuelve el agente de base de datos.");
-			}
+			assertNotNull(agente);
 			assertTrue(agente instanceof AgenteBD);
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
