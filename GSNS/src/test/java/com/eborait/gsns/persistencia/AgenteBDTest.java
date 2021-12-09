@@ -14,10 +14,16 @@ import org.junit.jupiter.api.Test;
 
 class AgenteBDTest {
 	
-	String sql="Select * from  pacientes";
+	String select="Select * from  pacientes";
 	String insertsql="INSERT INTO pacientes VALUES('21715362G', 6, 6 , 'Roberto', 'Esteban', 'False')";
 	String deletesql="DELETE FROM pacientes WHERE dni = '21715362G'";
 	String updatesql="UPDATE pacientes SET dni = '21715362G', grupo = 6, region = 7, nombre = 'Roberto', apellidos = 'Esteban Olivares', segunda_dosis = 'False' WHERE dni = '21715362G'";
+	
+	String selectException="Select * from coches";
+	String insertsql2="INSERT INTO pacientes VALUES('21715362G',seis, 6 , 'Roberto', 'Esteban', 'False')";
+	String deletesql2="DELETE FROM pacientes WHERE dni = '21715362H'";
+	String updatesql2="UPDATE pacientes SET dni = '21715362G', grupo = 6, region = 7, nombre = 'Roberto', apellidos = 'Esteban Olivares', segunda_dosis = 'False' WHERE dni = '21715362H'";
+	
 	
 
 	@BeforeAll
@@ -79,6 +85,7 @@ class AgenteBDTest {
 
 	@Test
 	final void testSelect() {
+		
 		throw new RuntimeException("not yet implemented");
 	}
 
