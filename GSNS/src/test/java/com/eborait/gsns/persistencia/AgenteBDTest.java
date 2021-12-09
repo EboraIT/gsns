@@ -13,6 +13,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class AgenteBDTest {
+	
+	String sql="Select * from  pacientes";
+	String insertsql="INSERT INTO pacientes VALUES('21715362G', 6, 6 , 'Roberto', 'Esteban', 'False')";
+	String deletesql="DELETE FROM pacientes WHERE dni = '21715362G'";
+	String updatesql="UPDATE pacientes SET dni = '21715362G', grupo = 6, region = 7, nombre = 'Roberto', apellidos = 'Esteban Olivares', segunda_dosis = 'False' WHERE dni = '21715362G'";
+	
 
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
@@ -24,6 +30,7 @@ class AgenteBDTest {
 
 	@BeforeEach
 	protected void setUp() throws Exception {
+		
 	}
 
 	@AfterEach
@@ -72,7 +79,6 @@ class AgenteBDTest {
 
 	@Test
 	final void testSelect() {
-		// TODO
 		throw new RuntimeException("not yet implemented");
 	}
 
