@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.eborait.gsns.dominio.controller.Util;
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
@@ -78,8 +79,7 @@ public class EntregaDAOTest {
 
 	@Test
 	void testInsert() throws  ParseException, GSNSException, SQLException {
-		SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy"); 
-	    Date dt_1 = objSDF.parse("20-08-2021"); 
+		Date dt_1 = Util.parseFecha("2/12/2021");
 		TipoVacuna vacuna = new TipoVacuna("Pfizer","Moderna","23/11/2021");
 		EntregaVacunas Entrega = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
 		try {
@@ -95,8 +95,7 @@ public class EntregaDAOTest {
 
 	@Test
 	 void testUpdate() throws ParseException, GSNSException, SQLException {
-		SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy"); 
-	    Date dt_1 = objSDF.parse("20-08-2021"); 
+		Date dt_1 = Util.parseFecha("2/12/2021");
 		TipoVacuna vacuna = new TipoVacuna("Pfizer","Moderna","23/11/2021");
 		EntregaVacunas Entrega = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
 		EntregaVacunas Entrega2 = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
