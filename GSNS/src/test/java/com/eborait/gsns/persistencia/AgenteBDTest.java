@@ -98,7 +98,7 @@ class AgenteBDTest {
 					AgenteBD.getAgente().select(SELECT_SQL_EXCEPTION);
 				}
 			});
-		} catch (SQLException e) {
+		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
 			AgenteBD.getAgente().delete(DELETE_SQL);
@@ -122,7 +122,7 @@ class AgenteBDTest {
 					AgenteBD.getAgente().insert(INSERT_SQL_EXCEPTION);
 				}
 			});
-		} catch (SQLException e) {
+		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
 			AgenteBD.getAgente().delete(DELETE_SQL);
@@ -140,7 +140,7 @@ class AgenteBDTest {
 					AgenteBD.getAgente().update(UPDATE_SQL_EXCEPTION);
 				}
 			});
-		} catch (SQLException e) {
+		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
 			AgenteBD.getAgente().delete(DELETE_SQL);
