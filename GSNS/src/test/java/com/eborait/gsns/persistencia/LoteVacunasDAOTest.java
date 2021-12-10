@@ -74,7 +74,7 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 	}
 
 	@Test
-	public void testUpdate() throws SQLException {
+	void testUpdate() throws SQLException {
 		try {
 			lotevacunasDAO.insert(lote);
 			lote.setCantidad(4501);
@@ -87,9 +87,14 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 	}
 
 	@Test
-	public void testDelete() {
-		// TODO
-		throw new RuntimeException("not yet implemented");
+	 void testDelete() {
+		try {
+			lotevacunasDAO.insert(lote);
+			assertEquals(1, lotevacunasDAO.delete(lote));
+			assertEquals(0, lotevacunasDAO.delete(lote));
+		} catch (SQLException sqle) {
+			fail("Excepción SQLException no esperada.");
+		}
 	}
 
 	@Test
