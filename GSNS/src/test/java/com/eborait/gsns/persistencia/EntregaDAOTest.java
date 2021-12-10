@@ -68,8 +68,20 @@ public class EntregaDAOTest {
 	}
 
 	@Test
-	public void testGet() {
-		// TODO
+	public void testGet() throws GSNSException, SQLException {
+		Date dt_1 = Util.parseFecha("2/12/2021");
+		TipoVacuna vacuna = new TipoVacuna("Pfizer","Moderna","23/11/2021");
+		EntregaVacunas Entrega = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
+		String id=Entrega.getId();
+		try {
+			entregaDAO.insert(Entrega);
+			//TODO no coge el size() al hacer el get y no se puede comparar con 1.
+		}catch(SQLException e) {
+			fail("Excepción SQLException no esperada.");
+			
+		} finally {
+			entregaDAO.delete(Entrega);
+		}
 	}
 
 	@Test
@@ -98,13 +110,12 @@ public class EntregaDAOTest {
 		Date dt_1 = Util.parseFecha("2/12/2021");
 		TipoVacuna vacuna = new TipoVacuna("Pfizer","Moderna","23/11/2021");
 		EntregaVacunas Entrega = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
-		EntregaVacunas Entrega2 = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
 		
 		try {
 
 			entregaDAO.insert(Entrega);
-			Entrega2.setCantidad(4501);
-			//TODO UPDATE
+			Entrega.setCantidad(4501);
+			assertTrue(Entrega.getCantidad() == 4501);
 		}catch(SQLException e) {
 			fail("Excepción SQLException no esperada.");
 			
