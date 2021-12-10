@@ -1,5 +1,6 @@
 package com.eborait.gsns.persistencia;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -36,6 +37,16 @@ class AgenteBDTest {
 
 	@BeforeEach
 	protected void setUp() throws Exception {
+		AgenteBD agente = new AgenteBD();
+		try {
+			agente.delete(deletesql);
+			assertEquals(1,agente.insert(insertsql));
+		}catch(Exception e){
+			assertEquals(1,agente.insert(insertsql));
+		}finally {
+			agente.delete(deletesql);
+		}
+		
 		
 	}
 
@@ -84,27 +95,68 @@ class AgenteBDTest {
 	}
 
 	@Test
-	final void testSelect() {
+	final void testSelect() throws SQLException {
 		
-		throw new RuntimeException("not yet implemented");
+		AgenteBD agente=null;
+		try {
+			agente = new AgenteBD();
+			agente.insert(insertsql);
+			assertEquals(1,agente.select(select).size());
+			
+		} catch (SQLException e) {
+			fail("Excepción SQLException no esperada.");
+		}finally {
+			
+			agente.delete(deletesql);
+		}
+		
 	}
 
 	@Test
-	final void testInsert() {
-		// TODO
-		throw new RuntimeException("not yet implemented");
+	final void testInsert() throws SQLException {
+		AgenteBD agente=null;
+		try {
+			agente = new AgenteBD();
+			assertEquals(1,agente.insert(insertsql));
+			
+		} catch (SQLException e) {
+			fail("Excepción SQLException no esperada.");
+		}finally {
+			
+			agente.delete(deletesql);
+		}
 	}
-
+	
+	
 	@Test
-	final void testUpdate() {
-		// TODO
-		throw new RuntimeException("not yet implemented");
+	final void testUpdate() throws SQLException {
+		AgenteBD agente=null;
+		try {
+			agente = new AgenteBD();
+			agente.insert(insertsql);
+			assertEquals(1,agente.update(updatesql));
+			
+		} catch (SQLException e) {
+			fail("Excepción SQLException no esperada.");
+		}finally {
+			
+			agente.delete(deletesql);
+		}
 	}
 
 	@Test
 	final void testDelete() {
-		// TODO
-		throw new RuntimeException("not yet implemented");
+		AgenteBD agente=null;
+		try {
+			agente = new AgenteBD();
+			agente.insert(insertsql);
+			assertEquals(1,agente.delete(deletesql));
+			
+		} catch (SQLException e) {
+			fail("Excepción SQLException no esperada.");
+		}finally {
+			
+		}
 	}
 
 }
