@@ -1,56 +1,36 @@
 package com.eborait.gsns.persistencia;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import com.eborait.gsns.dominio.controller.Util;
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
-public class EntregaDAOTest {
-	/**
-	 * Formato sentencia select.
-	 */
-	private static final String SELECT = "SELECT * FROM entrega_vacunas WHERE id = '%s'";
+class EntregaDAOTest {
 
-	/**
-	 * Formato sentencia select.
-	 */
-	private static final String SELECT_CRITERIA = "SELECT * FROM entrega_vacunas";
-
-	/**
-	 * Formato sentencia insert.
-	 */
-	private static final String INSERT = "INSERT INTO entrega_vacunas VALUES('%s', '%s', '%s', %s, %s, '%s', %s)";
-
-	/**
-	 * Formato sentencia update.
-	 */
-	private static final String UPDATE = "UPDATE entrega_vacunas SET id = '%s', lote = '%s', fecha = '%s', cantidad = %s, prioridad = %s, tipo_vacuna = '%s', region = %s WHERE id = '%s'";
-
-	/**
-	 * Formato sentencia delete.
-	 */
-	private static final String DELETE = "DELETE FROM entrega_vacunas WHERE id = '%s'";
-	
-	EntregaDAO entregaDAO = DAOFactory.getEntregaDAO();
-	
+	private static EntregaDAO entregaDAO;
+	private Date fecha;
+	private TipoVacuna vacuna;
+	private EntregaVacunas entrega;
 
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
+		entregaDAO = DAOFactory.getEntregaDAO();
 	}
 
 	@AfterAll
@@ -59,8 +39,9 @@ public class EntregaDAOTest {
 
 	@BeforeEach
 	protected void setUp() throws Exception {
-		
-		
+		fecha = Util.parseFecha("2/12/2021");
+		vacuna = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
+		entrega = new EntregaVacunas("loteVacuna001", "Lote1", fecha, 2333, 1, vacuna, 6);
 	}
 
 	@AfterEach
@@ -68,80 +49,91 @@ public class EntregaDAOTest {
 	}
 
 	@Test
-	public void testGet() throws GSNSException, SQLException {
-		Date dt_1 = Util.parseFecha("2/12/2021");
-		TipoVacuna vacuna = new TipoVacuna("Pfizer","Moderna","23/11/2021");
-		EntregaVacunas Entrega = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
-		String id=Entrega.getId();
+	final void testGet() throws SQLException {
 		try {
-			entregaDAO.insert(Entrega);
-			assertTrue(Entrega.getId() == id);
-			//TODO no coge el size() al hacer el get y no se puede comparar con 1.
-		}catch(SQLException e) {
+			entregaDAO.insert(entrega);
+			EntregaVacunas entregaDevuelta = entregaDAO.get("loteVacuna001");
+			assertEquals(entrega, entregaDevuelta);
+			assertThrows(Exception.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					entregaDAO.get("id_falso");
+				}
+			});
+		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
-			
 		} finally {
-			entregaDAO.delete(Entrega);
+			entregaDAO.delete(entrega);
 		}
 	}
 
 	@Test
-	public void testGetAll() {
-		// TODO
-	}
-
-	@Test
-	void testInsert() throws  ParseException, GSNSException, SQLException {
-		Date dt_1 = Util.parseFecha("2/12/2021");
-		TipoVacuna vacuna = new TipoVacuna("Pfizer","Moderna","23/11/2021");
-		EntregaVacunas Entrega = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
+	final void testGetAll() throws GSNSException, SQLException {
+		EntregaVacunas entrega2 = null;
 		try {
-
-			assertEquals(1,entregaDAO.insert(Entrega));
-		}catch(SQLException e) {
+			entregaDAO.insert(entrega);
+			entrega2 = new EntregaVacunas("loteVacuna002", "Lote1", fecha, 2333, 1, vacuna, 6);
+			entregaDAO.insert(entrega2);
+			Collection<EntregaVacunas> entregas = entregaDAO.getAll(null, null);
+			Iterator<EntregaVacunas> it = entregas.iterator();
+			assertEquals(entrega, it.next());
+			assertEquals(entrega2, it.next());
+			entregas = entregaDAO.getAll("id", "loteVacuna002");
+			assertEquals(entrega2, entregas.iterator().next());
+			assertThrows(Exception.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					entregaDAO.getAll("columna_falsa", "");
+				}
+			});
+		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
-			
 		} finally {
-			entregaDAO.delete(Entrega);
+			entregaDAO.delete(entrega);
+			entregaDAO.delete(entrega2);
 		}
 	}
 
 	@Test
-	 void testUpdate() throws ParseException, GSNSException, SQLException {
-		Date dt_1 = Util.parseFecha("2/12/2021");
-		TipoVacuna vacuna = new TipoVacuna("Pfizer","Moderna","23/11/2021");
-		EntregaVacunas Entrega = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
-		
+	final void testInsert() throws SQLException {
 		try {
-
-			entregaDAO.insert(Entrega);
-			Entrega.setCantidad(4501);
-			assertTrue(Entrega.getCantidad() == 4501);
-		}catch(SQLException e) {
+			assertEquals(1, entregaDAO.insert(entrega));
+			assertThrows(SQLException.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					entregaDAO.insert(entrega);
+				}
+			});
+		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
-			
 		} finally {
-			entregaDAO.delete(Entrega);
+			entregaDAO.delete(entrega);
 		}
 	}
 
 	@Test
-	 void testDelete() throws GSNSException {
-		Date dt_1 = Util.parseFecha("2/12/2021");
-		TipoVacuna vacuna = new TipoVacuna("Pfizer","Moderna","23/11/2021");
-		EntregaVacunas Entrega = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
+	final void testUpdate() throws SQLException {
 		try {
-
-			entregaDAO.insert(Entrega);
-			assertEquals(1,entregaDAO.delete(Entrega));
-			assertEquals(0,entregaDAO.delete(Entrega));
-			//TODO UPDATE
-		}catch(SQLException e) {
+			entregaDAO.insert(entrega);
+			entrega.setCantidad(4501);
+			assertEquals(1, entregaDAO.update(entrega));
+		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
-			
-		
+		} finally {
+			entregaDAO.delete(entrega);
 		}
-		
+	}
+
+	@Test
+	final void testDelete() {
+		try {
+			entregaDAO.insert(entrega);
+			assertEquals(1, entregaDAO.delete(entrega));
+			assertEquals(0, entregaDAO.delete(entrega));
+			// TODO UPDATE
+		} catch (SQLException sqle) {
+			fail("Excepción SQLException no esperada.");
+		}
 	}
 
 }
