@@ -171,4 +171,14 @@ public class LoteVacunas {
 		this.farmaceutica = farmaceutica;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		LoteVacunas lv = (LoteVacunas) obj;
+		if (lv != null) {
+			return entregas.size() == lv.getEntregas().size() && tipo.equals(lv.getTipo()) && id.equals(lv.getId())
+					&& cantidad == lv.getCantidad() && farmaceutica.equals(lv.getFarmaceutica());
+		} else {
+			return false;
+		}
+	}
 }

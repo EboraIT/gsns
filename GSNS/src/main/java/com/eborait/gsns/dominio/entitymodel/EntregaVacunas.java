@@ -225,4 +225,16 @@ public class EntregaVacunas {
 		this.cantidad = cantidad;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		EntregaVacunas ev = (EntregaVacunas) obj;
+		if (ev != null) {
+			return id.equals(ev.getId()) && tipo.equals(ev.getTipo()) && region.equals(ev.getRegion())
+					&& grupoPrioridad.equals(ev.getGrupoPrioridad()) && lote.equals(ev.getLote())
+					&& cantidad == ev.getCantidad();
+		} else {
+			return false;
+		}
+	}
+
 }
