@@ -1,5 +1,10 @@
 package com.eborait.gsns.persistencia;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.sql.SQLException;
 import java.util.Date;
 
 import org.junit.jupiter.api.AfterAll;
@@ -7,6 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import com.eborait.gsns.dominio.controller.Util;
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
@@ -31,18 +37,17 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 	@BeforeEach
 	protected void setUp() throws Exception {
 		fecha = Util.parseFecha("2/12/2021");
-		tipo = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
-		lote = new LoteVacunas("Lote1", fecha, "Pfizer", 4500, "Moderna");
+		tipo = new TipoVacuna("Pfizer", "Moderna","23/11/2021");
+		lote = new LoteVacunas("loteVacuna001", fecha, tipo, 4500, "Moderna");
 	}
-
+	
 	@AfterEach
 	protected void tearDown() throws Exception {
 	}
 
 	@Test
-	public void testGet() {
-		// TODO
-		throw new RuntimeException("not yet implemented");
+	 void testGet() throws SQLException  {
+		//TODO
 	}
 
 	@Test
@@ -52,15 +57,33 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 	}
 
 	@Test
-	public void testInsert() {
-		// TODO
-		throw new RuntimeException("not yet implemented");
+	void testInsert() throws SQLException {
+		try {
+			assertEquals(1, lotevacunasDAO.insert(lote));
+			assertThrows(SQLException.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					lotevacunasDAO.insert(lote);
+				}
+			});
+		} catch (SQLException sqle) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			lotevacunasDAO.delete(lote);
+		}
 	}
 
 	@Test
-	public void testUpdate() {
-		// TODO
-		throw new RuntimeException("not yet implemented");
+	public void testUpdate() throws SQLException {
+		try {
+			lotevacunasDAO.insert(lote);
+			lote.setCantidad(4501);
+			assertEquals(1, lotevacunasDAO.update(lote));
+		} catch (SQLException sqle) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			lotevacunasDAO.delete(lote);
+		}
 	}
 
 	@Test
