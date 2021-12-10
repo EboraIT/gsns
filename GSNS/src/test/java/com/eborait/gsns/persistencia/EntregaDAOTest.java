@@ -75,6 +75,7 @@ public class EntregaDAOTest {
 		String id=Entrega.getId();
 		try {
 			entregaDAO.insert(Entrega);
+			assertTrue(Entrega.getId() == id);
 			//TODO no coge el size() al hacer el get y no se puede comparar con 1.
 		}catch(SQLException e) {
 			fail("Excepción SQLException no esperada.");
