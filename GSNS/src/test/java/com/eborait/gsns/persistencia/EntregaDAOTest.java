@@ -114,8 +114,21 @@ public class EntregaDAOTest {
 	}
 
 	@Test
-	public void testDelete() {
+	 void testDelete() throws GSNSException {
+		Date dt_1 = Util.parseFecha("2/12/2021");
+		TipoVacuna vacuna = new TipoVacuna("Pfizer","Moderna","23/11/2021");
+		EntregaVacunas Entrega = new EntregaVacunas("loteVacuna001","Lote1" ,dt_1, 2333, 1, vacuna, 6); 
+		try {
+
+			entregaDAO.insert(Entrega);
+			assertEquals(1,entregaDAO.delete(Entrega));
+			assertEquals(0,entregaDAO.delete(Entrega));
+			//TODO UPDATE
+		}catch(SQLException e) {
+			fail("Excepción SQLException no esperada.");
+			
 		
+		}
 		
 	}
 
