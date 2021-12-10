@@ -38,7 +38,7 @@ public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE entrega_vacunas SET id = '%s', lote = '%s', fecha = '%s', cantidad = %s, prioridad = %s, tipo_vacuna = '%s', region = %s WHERE id = '%s'";
+	private static final String UPDATE = "UPDATE entrega_vacunas SET id = '%s', lote = '%s', fecha = '%s', cantidad = %s, prioridad = %s, tipo = '%s', region = %s WHERE id = '%s'";
 
 	/**
 	 * Formato sentencia delete.
@@ -75,7 +75,7 @@ public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 	public Collection<EntregaVacunas> getAll(String criteria, String value) throws SQLException {
 		Collection<EntregaVacunas> list = new ArrayList<>();
 		String sql = criteria == null ? SELECT_CRITERIA
-				: String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
+				: String.format(SELECT_CRITERIA + " WHERE %s = '%s'", criteria, value);
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;

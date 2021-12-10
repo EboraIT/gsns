@@ -75,7 +75,7 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	public Collection<Vacunacion> getAll(String criteria, String value) throws SQLException {
 		Collection<Vacunacion> list = new ArrayList<>();
 		String sql = criteria == null ? SELECT_CRITERIA
-				: String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
+				: String.format(SELECT_CRITERIA + " WHERE %s = '%s'", criteria, value);
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
