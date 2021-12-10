@@ -2,6 +2,7 @@ package com.eborait.gsns.persistencia;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -12,20 +13,19 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 class AgenteBDTest {
-	
-	String select="Select * from  pacientes";
-	String insertsql="INSERT INTO pacientes VALUES('21715362G', 6, 6 , 'Roberto', 'Esteban', 'False')";
-	String deletesql="DELETE FROM pacientes WHERE dni = '21715362G'";
-	String updatesql="UPDATE pacientes SET dni = '21715362G', grupo = 6, region = 7, nombre = 'Roberto', apellidos = 'Esteban Olivares', segunda_dosis = 'False' WHERE dni = '21715362G'";
-	
-	String selectException="Select * from coches";
-	String insertsql2="INSERT INTO pacientes VALUES('21715362G',seis, 6 , 'Roberto', 'Esteban', 'False')";
-	String deletesql2="DELETE FROM pacientes WHERE dni = '21715362H'";
-	String updatesql2="UPDATE pacientes SET dni = '21715362G', grupo = 6, region = 7, nombre = 'Roberto', apellidos = 'Esteban Olivares', segunda_dosis = 'False' WHERE dni = '21715362H'";
-	
-	
+
+	private final static String selectSql = "SELECT * FROM  pacientes";
+	private final static String insertSql = "INSERT INTO pacientes VALUES('21715362G', 6, 6 , 'Roberto', 'Esteban', 'False')";
+	private final static String deleteSql = "DELETE FROM pacientes WHERE dni = '21715362G'";
+	private final static String updateSql = "UPDATE pacientes SET dni = '21715362G', grupo = 6, region = 7, nombre = 'Roberto', apellidos = 'Esteban Olivares', segunda_dosis = 'False' WHERE dni = '21715362G'";
+
+	private final static String selectException = "SELECT * FROM coches";
+	private final static String insertSqlException = "INSERT INTO pacientes VALUES('21715362G',seis, 6 , 'Roberto', 'Esteban', 'False')";
+	private final static String deleteSqlException = "DELETE FROM pacientes WHERE adni = '21715362G'";
+	private final static String updateSqlException = "UPDATE pacientes SET dni = '21715362G', grupo = 6, region = 7, nombre = 'Roberto', apellidos = 'Esteban Olivares', segunda_dosis = 'False' WHERE adni = '21715362G'";
 
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
@@ -37,17 +37,6 @@ class AgenteBDTest {
 
 	@BeforeEach
 	protected void setUp() throws Exception {
-		AgenteBD agente = new AgenteBD();
-		try {
-			agente.delete(deletesql);
-			assertEquals(1,agente.insert(insertsql));
-		}catch(Exception e){
-			assertEquals(1,agente.insert(insertsql));
-		}finally {
-			agente.delete(deletesql);
-		}
-		
-		
 	}
 
 	@AfterEach
@@ -56,23 +45,25 @@ class AgenteBDTest {
 
 	@Test
 	final void testAgenteBD() {
+		AgenteBD agente = null;
 		try {
-			AgenteBD agente = new AgenteBD();
-			assertTrue(agente instanceof AgenteBD);
+			agente = new AgenteBD();
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		}
+		assertTrue(agente instanceof AgenteBD);
 	}
 
 	@Test
 	final void testGetAgente() {
+		AgenteBD agente = null;
 		try {
-			AgenteBD agente = AgenteBD.getAgente();
-			assertNotNull(agente);
-			assertTrue(agente instanceof AgenteBD);
+			agente = AgenteBD.getAgente();
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		}
+		assertNotNull(agente);
+		assertTrue(agente instanceof AgenteBD);
 	}
 
 	@Test
@@ -96,67 +87,81 @@ class AgenteBDTest {
 
 	@Test
 	final void testSelect() throws SQLException {
-		
-		AgenteBD agente=null;
+
 		try {
-			agente = new AgenteBD();
-			agente.insert(insertsql);
-			assertEquals(1,agente.select(select).size());
-			
+			assertEquals(0, AgenteBD.getAgente().select(selectSql).size());
+			AgenteBD.getAgente().insert(insertSql);
+			assertEquals(1, AgenteBD.getAgente().select(selectSql).size());
+			assertThrows(SQLException.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					AgenteBD.getAgente().select(selectException);
+				}
+			});
 		} catch (SQLException e) {
 			fail("Excepción SQLException no esperada.");
-		}finally {
-			
-			agente.delete(deletesql);
+		} finally {
+			AgenteBD.getAgente().delete(deleteSql);
 		}
-		
+
 	}
 
 	@Test
 	final void testInsert() throws SQLException {
-		AgenteBD agente=null;
 		try {
-			agente = new AgenteBD();
-			assertEquals(1,agente.insert(insertsql));
-			
+			assertEquals(1, AgenteBD.getAgente().insert(insertSql));
+			assertThrows(SQLException.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					AgenteBD.getAgente().insert(insertSql);
+				}
+			});
+			assertThrows(SQLException.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					AgenteBD.getAgente().insert(insertSqlException);
+				}
+			});
 		} catch (SQLException e) {
 			fail("Excepción SQLException no esperada.");
-		}finally {
-			
-			agente.delete(deletesql);
+		} finally {
+			AgenteBD.getAgente().delete(deleteSql);
 		}
 	}
-	
-	
+
 	@Test
 	final void testUpdate() throws SQLException {
-		AgenteBD agente=null;
 		try {
-			agente = new AgenteBD();
-			agente.insert(insertsql);
-			assertEquals(1,agente.update(updatesql));
-			
+			AgenteBD.getAgente().insert(insertSql);
+			assertEquals(1, AgenteBD.getAgente().update(updateSql));
+			assertThrows(SQLException.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					AgenteBD.getAgente().update(updateSqlException);
+				}
+			});
 		} catch (SQLException e) {
 			fail("Excepción SQLException no esperada.");
-		}finally {
-			
-			agente.delete(deletesql);
+		} finally {
+			AgenteBD.getAgente().delete(deleteSql);
 		}
 	}
 
 	@Test
 	final void testDelete() {
-		AgenteBD agente=null;
 		try {
-			agente = new AgenteBD();
-			agente.insert(insertsql);
-			assertEquals(1,agente.delete(deletesql));
-			
-		} catch (SQLException e) {
+			AgenteBD.getAgente().insert(insertSql);
+			assertEquals(1, AgenteBD.getAgente().delete(deleteSql));
+			assertEquals(0, AgenteBD.getAgente().delete(deleteSql));
+		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
-		}finally {
-			
 		}
+		assertThrows(SQLException.class, new Executable() {
+			@Override
+			public void execute() throws Exception {
+				AgenteBD.getAgente().delete(deleteSqlException);
+			}
+		});
 	}
 
 }
