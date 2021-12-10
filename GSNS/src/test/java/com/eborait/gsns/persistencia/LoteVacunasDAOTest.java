@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -47,13 +49,48 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 
 	@Test
 	 void testGet() throws SQLException  {
-		//TODO
+		try {
+			lotevacunasDAO.insert(lote);
+			LoteVacunas loteDevuelta = lotevacunasDAO.get("loteVacuna001");
+			assertEquals(lote, loteDevuelta);
+			assertThrows(Exception.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					lotevacunasDAO.get("id_falso");
+				}
+			});
+		} catch (SQLException sqle) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			lotevacunasDAO.delete(lote);
+		}
 	}
 
 	@Test
-	public void testGetAll() {
-		// TODO
-		throw new RuntimeException("not yet implemented");
+	public void testGetAll() throws SQLException {
+		LoteVacunas lote2 = null;
+		try {
+			lotevacunasDAO.insert(lote);
+			lote2 = new LoteVacunas("loteVacuna002", fecha, tipo, 4500, "Moderna");
+			lotevacunasDAO.insert(lote2);
+			Collection<LoteVacunas> lotes = lotevacunasDAO.getAll(null, null);
+			Iterator<LoteVacunas> it = lotes.iterator();
+			assertEquals(lote, it.next());
+			assertEquals(lote2, it.next());
+			lotes = lotevacunasDAO.getAll("id", "loteVacuna002");
+			assertEquals(lote2, lotes.iterator().next());
+			assertThrows(Exception.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					lotevacunasDAO.getAll("columna_falsa", "");
+				}
+			});
+		} catch (SQLException sqle) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			lotevacunasDAO.delete(lote);
+			lotevacunasDAO.delete(lote2);
+		}
 	}
 
 	@Test
