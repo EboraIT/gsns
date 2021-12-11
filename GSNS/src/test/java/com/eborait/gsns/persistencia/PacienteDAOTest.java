@@ -62,8 +62,8 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 		}
 	}
 
-	
-	public void testGetAll() throws GSNSException, SQLException {
+	@Test
+ void testGetAll() throws GSNSException, SQLException {
 		Paciente paciente2 = null;
 		try {
 			pacienteDAO.insert(paciente);
