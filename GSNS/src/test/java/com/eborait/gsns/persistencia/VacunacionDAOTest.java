@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Date;
 
 import org.junit.jupiter.api.AfterAll;
@@ -15,20 +16,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import com.eborait.gsns.dominio.controller.Util;
+import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 import com.eborait.gsns.dominio.entitymodel.Paciente;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 
- class VacunacionDAOTest {
+class VacunacionDAOTest {
 
-	 private static VacunacionDAO vacunacionDAO;
-	 private Date fecha;
-	 private Vacunacion vacunacion;
-	 private TipoVacuna tipoVacuna;
-	 private Paciente paciente;
+	private static VacunacionDAO vacunacionDAO;
+	private Date fecha;
+	private Vacunacion vacunacion;
+	private TipoVacuna tipoVacuna;
+	private Paciente paciente;
+
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
-		vacunacionDAO=DAOFactory.getVacunacionDAO();
+		vacunacionDAO = DAOFactory.getVacunacionDAO();
 	}
 
 	@AfterAll
@@ -38,9 +41,9 @@ import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 	@BeforeEach
 	protected void setUp() throws Exception {
 		fecha = Util.parseFecha("2/12/2021");
-		paciente = new Paciente("21715362G",6, 6, "Roberto", "Esteban Olivares", false);
+		paciente = new Paciente("21715362G", 6, 6, "Roberto", "Esteban Olivares", false);
 		tipoVacuna = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
-		vacunacion= new Vacunacion(0, tipoVacuna, paciente, fecha, false);
+		vacunacion = new Vacunacion(0, tipoVacuna, paciente, fecha, false);
 	}
 
 	@AfterEach
@@ -48,25 +51,15 @@ import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 	}
 
 	@Test
-	public void testGet() {
-		// TODO
-		throw new RuntimeException("not yet implemented");
-	}
-
-	@Test
-	public void testGetAll() {
-		// TODO
-		throw new RuntimeException("not yet implemented");
-	}
-
-	@Test
-	public void testInsert() throws SQLException {
+	final void testGet() throws SQLException {
 		try {
-			assertEquals(1, vacunacionDAO.insert(vacunacion));
-			assertThrows(SQLException.class, new Executable() {
+			vacunacionDAO.insert(vacunacion);
+			Vacunacion vacunacionDevuelta = vacunacionDAO.get("" + vacunacionDAO.max());
+			assertEquals(vacunacion, vacunacionDevuelta);
+			assertThrows(Exception.class, new Executable() {
 				@Override
 				public void execute() throws Exception {
-					vacunacionDAO.insert(vacunacion);
+					vacunacionDAO.get("id_falso");
 				}
 			});
 		} catch (SQLException sqle) {
@@ -77,11 +70,13 @@ import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 	}
 
 	@Test
-	 void testUpdate() throws SQLException {
+	final void testGetAll() {
+	}
+
+	@Test
+	final void testInsert() throws SQLException {
 		try {
-			vacunacionDAO.insert(vacunacion);
-			vacunacion.setSegundaDosis(true);
-			assertEquals(1, vacunacionDAO.update(vacunacion));
+			assertEquals(1, vacunacionDAO.insert(vacunacion));
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
@@ -90,14 +85,34 @@ import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 	}
 
 	@Test
-	 void testDelete() {
+	final void testUpdate() throws SQLException {
 		try {
 			vacunacionDAO.insert(vacunacion);
+			vacunacion.setSegundaDosis(true);
+			vacunacion.setId(vacunacionDAO.max());
+			assertEquals(1, vacunacionDAO.update(vacunacion));
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			vacunacionDAO.delete(vacunacion);
+		}
+	}
+
+	@Test
+	final void testDelete() {
+		try {
+			vacunacionDAO.insert(vacunacion);
+			vacunacion.setId(vacunacionDAO.max());
 			assertEquals(1, vacunacionDAO.delete(vacunacion));
 			assertEquals(0, vacunacionDAO.delete(vacunacion));
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		}
+	}
+
+	@Test
+	void testMax() throws SQLException {
 	}
 
 }

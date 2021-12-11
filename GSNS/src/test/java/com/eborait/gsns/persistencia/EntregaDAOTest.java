@@ -130,7 +130,6 @@ class EntregaDAOTest {
 			entregaDAO.insert(entrega);
 			assertEquals(1, entregaDAO.delete(entrega));
 			assertEquals(0, entregaDAO.delete(entrega));
-			// TODO UPDATE
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		}
