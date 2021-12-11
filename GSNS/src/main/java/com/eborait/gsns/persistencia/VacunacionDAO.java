@@ -33,12 +33,12 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	/**
 	 * Formato sentencia insert.
 	 */
-	private static final String INSERT = "INSERT INTO vacunacion VALUES(%s, '%s', '%s', '%s', '%s')";
+	private static final String INSERT = "INSERT INTO vacunacion(tipo, paciente, fecha, segunda_dosis) VALUES('%s', '%s', '%s', '%s')";
 
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE vacunacion SET id = %s, tipo = '%s', paciente = '%s', fecha = '%s', segunda_dosis = %s WHERE id = %s";
+	private static final String UPDATE = "UPDATE vacunacion SET tipo = '%s', paciente = '%s', fecha = '%s', segunda_dosis = %s WHERE id = %s";
 
 	/**
 	 * Formato sentencia delete.
@@ -97,7 +97,7 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	@Override
 	public int insert(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente()
-				.insert(String.format(INSERT, vacunacion.getId(), vacunacion.getVacuna().toString(),
+				.insert(String.format(INSERT, vacunacion.getVacuna().toString(),
 						vacunacion.getPaciente().getDni(), new java.sql.Date(vacunacion.getFecha().getTime()),
 						vacunacion.isSegundaDosis()));
 	}
@@ -113,7 +113,7 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	@Override
 	public int update(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente()
-				.update(String.format(UPDATE, vacunacion.getId(), vacunacion.getVacuna().toString(),
+				.update(String.format(UPDATE, vacunacion.getVacuna().toString(),
 						vacunacion.getPaciente().getDni(), new java.sql.Date(vacunacion.getFecha().getTime()),
 						vacunacion.isSegundaDosis(), vacunacion.getId()));
 	}
@@ -129,6 +129,23 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	@Override
 	public int delete(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente().delete(String.format(DELETE, vacunacion.getId()));
+	}
+	
+	/**
+	 * Consulta el id máximo de una columna.
+	 * 
+	 * @return El valor máximo del id.
+	 * @throws SQLException Si se produce una excepción en la setencia SQL.
+	 */
+	public int max() throws SQLException {
+		int max = 0;
+		Collection<Collection<Object>> data = AgenteBD.getAgente()
+				.select("SELECT coalesce(max(id), 0) FROM vacunacion");
+		for (Collection<Object> collection : data) {
+			ArrayList<Object> rowData = (ArrayList<Object>) collection;
+			max = Integer.parseInt(rowData.get(0).toString());
+		}
+		return max;
 	}
 
 }
