@@ -152,4 +152,15 @@ public class Vacunacion {
 		this.segundaDosis = segundaDosis;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Vacunacion v = (Vacunacion) obj;
+		if (v != null) {
+			return vacuna.equals(v.getVacuna()) && paciente.equals(v.getPaciente())
+					&& segundaDosis == v.isSegundaDosis();
+		} else {
+			return false;
+		}
+	}
+
 }

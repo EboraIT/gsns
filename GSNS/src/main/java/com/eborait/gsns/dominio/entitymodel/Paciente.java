@@ -193,4 +193,16 @@ public class Paciente {
 		this.segundaDosis = segundaDosis;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Paciente p = (Paciente) obj;
+		if (p != null) {
+			return dni.equals(p.getDni()) && nombre.equals(p.getNombre()) && region.equals(p.getRegion())
+					&& grupo.equals(p.getGrupo()) && apellidos.equals(p.getApellidos())
+					&& segundaDosis == p.isSegundaDosis();
+		} else {
+			return false;
+		}
+	}
+
 }
