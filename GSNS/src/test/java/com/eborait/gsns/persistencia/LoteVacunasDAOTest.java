@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import com.eborait.gsns.dominio.controller.Util;
-import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 
@@ -136,13 +135,17 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 
 	@Test
 	 void testMax() throws SQLException {
+		LoteVacunas lote2 = null;
 		try {
 			lotevacunasDAO.insert(lote);
-			assertEquals(1, lotevacunasDAO.max("cantidad"));
+			lote2 = new LoteVacunas("loteVacuna002", fecha, tipo, 7000, "Moderna");
+			lotevacunasDAO.insert(lote2);
+			assertEquals(7000, lotevacunasDAO.max("cantidad"));
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
 			lotevacunasDAO.delete(lote);
+			lotevacunasDAO.delete(lote2);
 		}
 	}
 

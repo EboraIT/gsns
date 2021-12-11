@@ -139,7 +139,7 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	public int max(String criteria) throws SQLException {
 		int max = 0;
 		Collection<Collection<Object>> data = AgenteBD.getAgente()
-				.select(String.format("SELECT coalesce(max(%s),'0') FROM lote_vacunas", criteria));
+				.select(String.format("SELECT coalesce(max(%s), 0) FROM lote_vacunas", criteria));
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
 			max = Integer.parseInt(rowData.get(0).toString());
