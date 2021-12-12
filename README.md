@@ -123,8 +123,17 @@ Respecto a las pruebas unitarias las tenemos almacenadas en el directorio [test]
 
 En la capa de persistencia hicimos test de toda la base de datos y sus clases DAO. Y en el dominio.controller estuvimos realizando test de las clases de los gestores que como comentamos anteriormente hemos creado un excel en el cual tenemos documentado los casos de pruebas.
 
-También destacar que hemos implementado en nuestro código la dependencia de Surefire para que nos genere un informe sobre los test realizados. Todas estas pruebas siguen vinculadas al sonarcloud y su actualización de estado.
+También destacar que hemos implementado en nuestro código la dependencia de Surefire para que nos genere un _informe_ sobre los test realizados. Todas estas pruebas siguen vinculadas al sonarcloud y su actualización de estado.
+
+## Mantenimiento 🔨
+
+Una vez realizado los test llevaremos a cabo nuestro plan de mantenimiento. El cual se detallará a continuación.
+
+	1. Realizaremos una rama _maintenance_
+	2. Desde el primer día de despliegue en la rama master los fallos, correciones, bugs ...etc se resolverán en la rama anterior.
+	3. Cada fallo que se detecte se resolverá en dicha rama y después se hará un merge a la capa _development_ para mas tarde que este resuelto en la siguiente version.
 	
+
 ## Autores ✒️
 
 _Proyecto creado por_ 
