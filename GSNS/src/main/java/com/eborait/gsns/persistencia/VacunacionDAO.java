@@ -130,22 +130,5 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	public int delete(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente().delete(String.format(DELETE, vacunacion.getId()));
 	}
-	
-	/**
-	 * Consulta el id máximo de una columna.
-	 * 
-	 * @return El valor máximo del id.
-	 * @throws SQLException Si se produce una excepción en la setencia SQL.
-	 */
-	public int max() throws SQLException {
-		int max = 0;
-		Collection<Collection<Object>> data = AgenteBD.getAgente()
-				.select("SELECT coalesce(max(id), 0) FROM vacunacion");
-		for (Collection<Object> collection : data) {
-			ArrayList<Object> rowData = (ArrayList<Object>) collection;
-			max = Integer.parseInt(rowData.get(0).toString());
-		}
-		return max;
-	}
 
 }

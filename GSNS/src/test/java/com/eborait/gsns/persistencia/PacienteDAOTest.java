@@ -15,15 +15,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.Paciente;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
- class PacienteDAOTest {
-	
+class PacienteDAOTest {
+
 	private static PacienteDAO pacienteDAO;
 	private Paciente paciente;
-	
 
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
@@ -36,7 +34,7 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
 	@BeforeEach
 	protected void setUp() throws Exception {
-		paciente = new Paciente("21715362G",6, 6, "Roberto", "Esteban Olivares", false);
+		paciente = new Paciente("21715362G", 6, 6, "Roberto", "Esteban Olivares", false);
 	}
 
 	@AfterEach
@@ -63,11 +61,11 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 	}
 
 	@Test
- void testGetAll() throws GSNSException, SQLException {
+	void testGetAll() throws GSNSException, SQLException {
 		Paciente paciente2 = null;
 		try {
 			pacienteDAO.insert(paciente);
-			paciente2 = new Paciente("01915362H",6, 7, "Jorge", "Fernandez Escolano", false);
+			paciente2 = new Paciente("01915362H", 6, 7, "Jorge", "Fernandez Escolano", false);
 			pacienteDAO.insert(paciente2);
 			Collection<Paciente> pacientes = pacienteDAO.getAll(null, null);
 			Iterator<Paciente> it = pacientes.iterator();
@@ -88,7 +86,7 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 			pacienteDAO.delete(paciente2);
 		}
 	}
-	
+
 	@Test
 	void testInsert() throws SQLException {
 		try {
@@ -110,7 +108,8 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 	void testUpdate() throws SQLException {
 		try {
 			pacienteDAO.insert(paciente);
-			paciente.setNombre("Alberto");;
+			paciente.setNombre("Alberto");
+			;
 			assertEquals(1, pacienteDAO.update(paciente));
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");

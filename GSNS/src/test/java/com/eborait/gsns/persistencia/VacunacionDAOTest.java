@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -16,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import com.eborait.gsns.dominio.controller.Util;
-import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 import com.eborait.gsns.dominio.entitymodel.Paciente;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
@@ -24,6 +24,7 @@ import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 class VacunacionDAOTest {
 
 	private static VacunacionDAO vacunacionDAO;
+	private static PacienteDAO pacienteDAO;
 	private Date fecha;
 	private Vacunacion vacunacion;
 	private TipoVacuna tipoVacuna;
@@ -32,6 +33,7 @@ class VacunacionDAOTest {
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
 		vacunacionDAO = DAOFactory.getVacunacionDAO();
+		pacienteDAO = DAOFactory.getPacienteDAO();
 	}
 
 	@AfterAll
@@ -53,8 +55,9 @@ class VacunacionDAOTest {
 	@Test
 	final void testGet() throws SQLException {
 		try {
+			pacienteDAO.insert(paciente);
 			vacunacionDAO.insert(vacunacion);
-			Vacunacion vacunacionDevuelta = vacunacionDAO.get("" + vacunacionDAO.max());
+			Vacunacion vacunacionDevuelta = vacunacionDAO.get("" + max());
 			assertEquals(vacunacion, vacunacionDevuelta);
 			assertThrows(Exception.class, new Executable() {
 				@Override
@@ -66,6 +69,7 @@ class VacunacionDAOTest {
 			fail("Excepción SQLException no esperada.");
 		} finally {
 			vacunacionDAO.delete(vacunacion);
+			pacienteDAO.delete(paciente);
 		}
 	}
 
@@ -89,10 +93,9 @@ class VacunacionDAOTest {
 		try {
 			vacunacionDAO.insert(vacunacion);
 			vacunacion.setSegundaDosis(true);
-			vacunacion.setId(vacunacionDAO.max());
+			vacunacion.setId(max());
 			assertEquals(1, vacunacionDAO.update(vacunacion));
 		} catch (SQLException sqle) {
-			sqle.printStackTrace();
 			fail("Excepción SQLException no esperada.");
 		} finally {
 			vacunacionDAO.delete(vacunacion);
@@ -103,7 +106,7 @@ class VacunacionDAOTest {
 	final void testDelete() {
 		try {
 			vacunacionDAO.insert(vacunacion);
-			vacunacion.setId(vacunacionDAO.max());
+			vacunacion.setId(max());
 			assertEquals(1, vacunacionDAO.delete(vacunacion));
 			assertEquals(0, vacunacionDAO.delete(vacunacion));
 		} catch (SQLException sqle) {
@@ -111,8 +114,15 @@ class VacunacionDAOTest {
 		}
 	}
 
-	@Test
-	void testMax() throws SQLException {
+	final int max() throws SQLException {
+		int max = 0;
+		Collection<Collection<Object>> data = AgenteBD.getAgente()
+				.select("SELECT coalesce(max(id), 0) FROM vacunacion");
+		for (Collection<Object> collection : data) {
+			ArrayList<Object> rowData = (ArrayList<Object>) collection;
+			max = Integer.parseInt(rowData.get(0).toString());
+		}
+		return max;
 	}
 
 }

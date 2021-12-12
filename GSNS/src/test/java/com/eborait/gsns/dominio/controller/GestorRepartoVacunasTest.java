@@ -17,20 +17,19 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 import com.eborait.gsns.persistencia.DAOFactory;
 import com.eborait.gsns.persistencia.LoteVacunasDAO;
-import com.eborait.gsns.persistencia.PacienteDAO;
 
- class GestorRepartoVacunasTest {
+class GestorRepartoVacunasTest {
 	private static GestorRepartoVacunas gestorRepartoVacunas;
 	private static LoteVacunasDAO lotevacunasDAO;
 	private TipoVacuna tipovacuna;
 	private LoteVacunas lote;
 	private Date fecha;
-	private  GestorGSNS gestorGSNS;
 
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
 		lotevacunasDAO = DAOFactory.getLoteVacunasDAO();
-		
+		gestorRepartoVacunas = new GestorRepartoVacunas(new GestorGSNS());
+
 	}
 
 	@AfterAll
@@ -40,7 +39,7 @@ import com.eborait.gsns.persistencia.PacienteDAO;
 	@BeforeEach
 	protected void setUp() throws Exception {
 		fecha = Util.parseFecha("2/12/2021");
-		tipovacuna = new TipoVacuna("Pfizer", "Moderna","23/11/2021");
+		tipovacuna = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
 		lote = new LoteVacunas("loteVacuna001", fecha, tipovacuna, 4500, "Moderna");
 	}
 
@@ -49,36 +48,35 @@ import com.eborait.gsns.persistencia.PacienteDAO;
 	}
 
 	@Test
-	 void testGestorRepartoVacunas() {
-		//TODO
+	void testGestorRepartoVacunas() {
+		// TODO
 	}
 
 	@Test
-	 void testAltaNuevoLoteVacunas() throws GSNSException, SQLException {
+	void testAltaNuevoLoteVacunas() throws GSNSException, SQLException {
 		try {
-			assertTrue(gestorRepartoVacunas.altaNuevoLoteVacunas("loteVacuna001","23/11/2021",4500, "Pfizer","Pfizer-Moderna","10/02/2020"));
-			
-		}catch (GSNSException e) {
+			assertTrue(gestorRepartoVacunas.altaNuevoLoteVacunas(lote.getId(), "2/12/2021", lote.getCantidad(),
+					lote.getTipo().getNombre(), lote.getFarmaceutica(), "23/11/2021"));
+		} catch (GSNSException e) {
 			fail("Excepción SQLException no esperada.");
-			
-		}finally {
+		} finally {
 			lotevacunasDAO.delete(lote);
 		}
-		
+
 	}
 
 	@Test
-	public void testCalcularEntregasRegion() {
+	final void testCalcularEntregasRegion() {
 		// TODO
 	}
 
 	@Test
-	public void testGetTipoVacunas() {
+	final void testGetTipoVacunas() {
 		// TODO
 	}
 
 	@Test
-	public void testGenerarIdLote() {
+	final void testGenerarIdLote() {
 		// TODO
 	}
 
