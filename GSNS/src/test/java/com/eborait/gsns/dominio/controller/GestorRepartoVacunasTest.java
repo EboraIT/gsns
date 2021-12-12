@@ -1,7 +1,6 @@
 package com.eborait.gsns.dominio.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -16,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
-import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 import com.eborait.gsns.persistencia.DAOFactory;
@@ -27,20 +25,23 @@ class GestorRepartoVacunasTest {
 	private static GestorRepartoVacunas gestorRepartoVacunas;
 	private static LoteVacunasDAO lotevacunasDAO;
 	private static EntregaDAO entregavacunasDAO;
-	private TipoVacuna tipovacuna;
-	private LoteVacunas lote;
-	private Date fecha;
-	private int region2;
-	private int ia;
-	private EntregaVacunas entrega;
+	private static TipoVacuna tipovacuna;
+	private static LoteVacunas lote;
+	private static Date fecha;
+	private static int region2;
+	private static int ia;
+	private static EntregaVacunas entrega;
 
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
+		fecha = Util.parseFecha("2/12/2021");
+		tipovacuna = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
+		lote = new LoteVacunas("loteVacuna001", fecha, tipovacuna, 4500, "Moderna");
+		entrega = new EntregaVacunas("loteVacuna001", "Lote1", fecha, 2333, 1, tipovacuna, 6);
+		region2=entrega.getRegion().getId();
 		lotevacunasDAO = DAOFactory.getLoteVacunasDAO();
 		gestorRepartoVacunas = new GestorRepartoVacunas(new GestorGSNS());
 		entregavacunasDAO=DAOFactory.getEntregaDAO();
-		
-
 	}
 
 	@AfterAll
@@ -49,11 +50,6 @@ class GestorRepartoVacunasTest {
 
 	@BeforeEach
 	protected void setUp() throws Exception {
-		fecha = Util.parseFecha("2/12/2021");
-		tipovacuna = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
-		lote = new LoteVacunas("loteVacuna001", fecha, tipovacuna, 4500, "Moderna");
-		entrega = new EntregaVacunas("loteVacuna001", "Lote1", fecha, 2333, 1, tipovacuna, 6);
-		region2=entrega.getRegion().getId();
 	}
 
 	@AfterEach
