@@ -20,7 +20,7 @@ import com.eborait.gsns.dominio.controller.Util;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 
- class LoteVacunasDAOTest {
+class LoteVacunasDAOTest {
 	private static LoteVacunasDAO lotevacunasDAO;
 	private Date fecha;
 	private LoteVacunas lote;
@@ -38,19 +38,19 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 	@BeforeEach
 	protected void setUp() throws Exception {
 		fecha = Util.parseFecha("2/12/2021");
-		tipo = new TipoVacuna("Pfizer", "Moderna","23/11/2021");
-		lote = new LoteVacunas("loteVacuna001", fecha, tipo, 4500, "Moderna");
+		tipo = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
+		lote = new LoteVacunas("1", fecha, tipo, 4500, "Moderna");
 	}
-	
+
 	@AfterEach
 	protected void tearDown() throws Exception {
 	}
 
 	@Test
-	 void testGet() throws SQLException  {
+	void testGet() throws SQLException {
 		try {
 			lotevacunasDAO.insert(lote);
-			LoteVacunas loteDevuelta = lotevacunasDAO.get("loteVacuna001");
+			LoteVacunas loteDevuelta = lotevacunasDAO.get("1");
 			assertEquals(lote, loteDevuelta);
 			assertThrows(Exception.class, new Executable() {
 				@Override
@@ -70,13 +70,13 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 		LoteVacunas lote2 = null;
 		try {
 			lotevacunasDAO.insert(lote);
-			lote2 = new LoteVacunas("loteVacuna002", fecha, tipo, 4500, "Moderna");
+			lote2 = new LoteVacunas("2", fecha, tipo, 4500, "Moderna");
 			lotevacunasDAO.insert(lote2);
 			Collection<LoteVacunas> lotes = lotevacunasDAO.getAll(null, null);
 			Iterator<LoteVacunas> it = lotes.iterator();
 			assertEquals(lote, it.next());
 			assertEquals(lote2, it.next());
-			lotes = lotevacunasDAO.getAll("id", "loteVacuna002");
+			lotes = lotevacunasDAO.getAll("id", "2");
 			assertEquals(lote2, lotes.iterator().next());
 			assertThrows(Exception.class, new Executable() {
 				@Override
@@ -123,7 +123,7 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 	}
 
 	@Test
-	 void testDelete() {
+	void testDelete() {
 		try {
 			lotevacunasDAO.insert(lote);
 			assertEquals(1, lotevacunasDAO.delete(lote));
@@ -134,13 +134,13 @@ import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 	}
 
 	@Test
-	 void testMax() throws SQLException {
+	void testMaxId() throws SQLException {
 		LoteVacunas lote2 = null;
 		try {
 			lotevacunasDAO.insert(lote);
-			lote2 = new LoteVacunas("loteVacuna002", fecha, tipo, 7000, "Moderna");
+			lote2 = new LoteVacunas("2", fecha, tipo, 7000, "Moderna");
 			lotevacunasDAO.insert(lote2);
-			assertEquals(7000, lotevacunasDAO.max("cantidad"));
+			assertEquals(2, lotevacunasDAO.maxId());
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {

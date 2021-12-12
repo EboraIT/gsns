@@ -126,7 +126,7 @@ public class GestorRepartoVacunas {
 	 */
 	public int generarIdLote() throws GSNSException {
 		try {
-			return gestorGSNS.getLoteVacunasDAO().max("id") + 1;
+			return gestorGSNS.getLoteVacunasDAO().maxId() + 1;
 		} catch (SQLException sqle) {
 			LOG.log(Level.SEVERE, "{0}", "Excepción consultado id de lote de vacunas: " + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
