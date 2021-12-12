@@ -117,7 +117,13 @@ Después de realizar los test de la capa de persistencia y algunos en la capa de
 	- 2,1 K Lines of Code
 	- 1,2% Duplications
 
+## Pruebas Unitarias / Test 🔨
 
+Respecto a las pruebas unitarias las tenemos almacenadas en el directorio [test](https://github.com/EboraIT/gsns/tree/master/GSNS/src/test/java/com/eborait/gsns). Como se ve en dicho directorio tenemos pruebas de la capa de persistencia y dominio.controller.
+
+En la capa de persistencia hicimos test de toda la base de datos y sus clases DAO. Y en el dominio.controller estuvimos realizando test de las clases de los gestores que como comentamos anteriormente hemos creado un excel en el cual tenemos documentado los casos de pruebas.
+
+También destacar que hemos implementado en nuestro código la dependencia de Surefire para que nos genere un informe sobre los test realizados. Todas estas pruebas siguen vinculadas al sonarcloud y su actualización de estado.
 	
 ## Autores ✒️
 
