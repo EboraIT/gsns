@@ -33,6 +33,8 @@ Se fueron realizando reuniones durante el Sprint Backlog para conocer el estado 
 
 Durante el periodo de gestionar la calidad también tuvimos una primera reunión el Miércoles 10/11/2021 para planificar nuestro Sprint Backlog el cúal quedaría definido y repartido en arreglar bugs, code smells , security hostpots y código duplicado.
 
+Una vez que teniamos todo los errores que nos salieron en el sonarcloud , empezamos a crear las pruebas unitarias para nuestras clases y paquetes desarrollados en Java. Empezamos a desarrollar primero los test de la capa de persistencia, y una vez que tengamos los test realizados en estas clases empezaremos a realizar los test de los Gestores los cuales desarrollaremos en un Excel para determinar el tipo de casos de pruebas que realizaremos con sus datos...etc.
+
 ## Gestión de Calidad 🔨
 
 Para la Gestión de Calidad hemos utilizado el SonarCloud, en el cúal nuestro proyecto actual le tuvimos que incorporar a una organización de github para poder trabajar de mejor forma en SonarCloud. Una vez realizado esto ya solo tuvimos que analizar nuestro proyecto en este software para comprobar nuestra calidad del código.
@@ -97,7 +99,7 @@ Destacar la última línea la cual hace la llamada a mvn verify sonar:sonar pero
 
 Al realizar la Integración continua ahora lo tenemos configurado para que una vez realizemos un push en la rama Develop , esta ejecutará a su vez un actions del proyecto que llamará al archivo anteriormente descrito para realizar el analisis del proyecto.
 
-Actualmente a día 14/11/2021 tenemos la calidad de nuestro código:
+Wn el  día 14/11/2021 tenemos la calidad de nuestro código:
 
 	- 0 Bugs
 	- 10 Code Smells
@@ -105,6 +107,17 @@ Actualmente a día 14/11/2021 tenemos la calidad de nuestro código:
 	- 0 Vulnerabilities
 	- 1,9 K Lines of Code
 	- 1,3 % Duplications
+
+Después de realizar los test de la capa de persistencia y algunos en la capa de los gestores la calidad de nuestro código de vio afectada:
+
+	- 10 Bugs
+	- 6 Code Smells
+	- 1 Security Smells
+	- 0 Vulnerabilities
+	- 2,1 K Lines of Code
+	- 1,2% Duplications
+
+
 	
 ## Autores ✒️
 
