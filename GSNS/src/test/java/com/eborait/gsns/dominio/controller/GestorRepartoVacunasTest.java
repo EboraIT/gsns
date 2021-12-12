@@ -1,5 +1,7 @@
 package com.eborait.gsns.dominio.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -12,23 +14,32 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
+import com.eborait.gsns.dominio.entitymodel.RegionEnum;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 import com.eborait.gsns.persistencia.DAOFactory;
+import com.eborait.gsns.persistencia.EntregaDAO;
 import com.eborait.gsns.persistencia.LoteVacunasDAO;
 
 class GestorRepartoVacunasTest {
 	private static GestorRepartoVacunas gestorRepartoVacunas;
 	private static LoteVacunasDAO lotevacunasDAO;
+	private static EntregaDAO entregavacunasDAO;
 	private TipoVacuna tipovacuna;
 	private LoteVacunas lote;
 	private Date fecha;
+	private int region2;
+	private int ia;
+	private EntregaVacunas entrega;
 
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
 		lotevacunasDAO = DAOFactory.getLoteVacunasDAO();
 		gestorRepartoVacunas = new GestorRepartoVacunas(new GestorGSNS());
+		entregavacunasDAO=DAOFactory.getEntregaDAO();
+		
 
 	}
 
@@ -41,16 +52,15 @@ class GestorRepartoVacunasTest {
 		fecha = Util.parseFecha("2/12/2021");
 		tipovacuna = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
 		lote = new LoteVacunas("loteVacuna001", fecha, tipovacuna, 4500, "Moderna");
+		entrega = new EntregaVacunas("loteVacuna001", "Lote1", fecha, 2333, 1, tipovacuna, 6);
+		region2=entrega.getRegion().getId();
 	}
 
 	@AfterEach
 	protected void tearDown() throws Exception {
 	}
 
-	@Test
-	void testGestorRepartoVacunas() {
-		// TODO
-	}
+	
 
 	@Test
 	void testAltaNuevoLoteVacunas() throws GSNSException, SQLException {
@@ -66,8 +76,19 @@ class GestorRepartoVacunasTest {
 	}
 
 	@Test
-	final void testCalcularEntregasRegion() {
-		// TODO
+	final void testCalcularEntregasRegion() throws SQLException {
+		try {
+			entregavacunasDAO.insert(entrega);
+			gestorRepartoVacunas.altaNuevoLoteVacunas(lote.getId(), "2/12/2021", lote.getCantidad(),
+					lote.getTipo().getNombre(), lote.getFarmaceutica(), "23/11/2021");
+			assertEquals(1229673,gestorRepartoVacunas.calcularEntregasRegion(region2, 240));
+		} catch (GSNSException e) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+
+			lotevacunasDAO.delete(lote);
+			entregavacunasDAO.delete(entrega);
+		}
 	}
 
 	@Test
@@ -76,8 +97,8 @@ class GestorRepartoVacunasTest {
 	}
 
 	@Test
-	final void testGenerarIdLote() {
-		// TODO
+	final void testGenerarIdLote() throws GSNSException, SQLException {
+		//TODO
 	}
 
 }
