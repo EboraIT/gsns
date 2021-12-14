@@ -65,6 +65,7 @@ class VacunacionDAOTest {
 					vacunacionDAO.get("id_falso");
 				}
 			});
+			vacunacion.setId(max());
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
@@ -81,6 +82,7 @@ class VacunacionDAOTest {
 	final void testInsert() throws SQLException {
 		try {
 			assertEquals(1, vacunacionDAO.insert(vacunacion));
+			vacunacion.setId(max());
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
