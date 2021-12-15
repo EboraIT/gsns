@@ -1,9 +1,10 @@
 package com.eborait.gsns.persistencia;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.sql.Date;
+import java.util.Iterator;
 
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 
@@ -56,9 +57,14 @@ public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 	@Override
 	public EntregaVacunas get(String id) throws SQLException {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
-		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
-		return new EntregaVacunas(String.valueOf(rowData.get(0)), String.valueOf(rowData.get(1)), (Date) rowData.get(2),
-				(int) rowData.get(3), (int) rowData.get(4), String.valueOf(rowData.get(5)), (int) rowData.get(6));
+		Iterator<Collection<Object>> it = data.iterator();
+		if (it.hasNext()) {
+			ArrayList<Object> rowData = (ArrayList<Object>) it.next();
+			return new EntregaVacunas(String.valueOf(rowData.get(0)), String.valueOf(rowData.get(1)),
+					(Date) rowData.get(2), (int) rowData.get(3), (int) rowData.get(4), String.valueOf(rowData.get(5)),
+					(int) rowData.get(6));
+		}
+		return null;
 	}
 
 	/**

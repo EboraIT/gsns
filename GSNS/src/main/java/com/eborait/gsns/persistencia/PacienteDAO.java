@@ -57,9 +57,12 @@ public class PacienteDAO implements AbstractEntityDAO<Paciente> {
 	public Paciente get(String id) throws SQLException {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
 		Iterator<Collection<Object>> it = data.iterator();
-		ArrayList<Object> rowData = (ArrayList<Object>) it.next();
-		return new Paciente(String.valueOf(rowData.get(0)), (int) rowData.get(1), (int) rowData.get(2),
-				String.valueOf(rowData.get(3)), String.valueOf(rowData.get(4)), (boolean) rowData.get(5));
+		if (it.hasNext()) {
+			ArrayList<Object> rowData = (ArrayList<Object>) it.next();
+			return new Paciente(String.valueOf(rowData.get(0)), (int) rowData.get(1), (int) rowData.get(2),
+					String.valueOf(rowData.get(3)), String.valueOf(rowData.get(4)), (boolean) rowData.get(5));
+		}
+		return null;
 	}
 
 	/**

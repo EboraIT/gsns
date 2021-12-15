@@ -3,6 +3,7 @@ package com.eborait.gsns.persistencia;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.sql.Date;
 
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
@@ -56,9 +57,13 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	@Override
 	public LoteVacunas get(String id) throws SQLException {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
-		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
-		return new LoteVacunas(String.valueOf(rowData.get(0)), (Date) rowData.get(1), String.valueOf(rowData.get(2)),
-				(int) rowData.get(3), String.valueOf(rowData.get(4)));
+		Iterator<Collection<Object>> it = data.iterator();
+		if (it.hasNext()) {
+			ArrayList<Object> rowData = (ArrayList<Object>) it.next();
+			return new LoteVacunas(String.valueOf(rowData.get(0)), (Date) rowData.get(1),
+					String.valueOf(rowData.get(2)), (int) rowData.get(3), String.valueOf(rowData.get(4)));
+		}
+		return null;
 	}
 
 	/**
