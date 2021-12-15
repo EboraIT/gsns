@@ -102,7 +102,6 @@ class GestorVacunacionTest {
 		}
 	}
 
-	@Test
 	final int max() throws SQLException {
 		int max = 0;
 		Collection<Collection<Object>> data = AgenteBD.getAgente()
