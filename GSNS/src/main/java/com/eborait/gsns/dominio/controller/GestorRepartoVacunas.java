@@ -78,7 +78,7 @@ public class GestorRepartoVacunas {
 	 */
 	public int calcularEntregasRegion(int region, int ia) throws GSNSException {
 		try {
-			Collection<EntregaVacunas> entregas = gestorGSNS.getEntregaDAO().getAll("region", "region");
+			Collection<EntregaVacunas> entregas = gestorGSNS.getEntregaDAO().getAll("region", String.valueOf(region));
 			int cantidad = 0;
 			for (EntregaVacunas entregaVacunas : entregas) {
 				cantidad += entregaVacunas.getCantidad();

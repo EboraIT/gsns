@@ -57,7 +57,7 @@ class VacunacionDAOTest {
 		try {
 			pacienteDAO.insert(paciente);
 			vacunacionDAO.insert(vacunacion);
-			Vacunacion vacunacionDevuelta = vacunacionDAO.get("" + max());
+			Vacunacion vacunacionDevuelta = vacunacionDAO.get(String.valueOf(max()));
 			assertEquals(vacunacion, vacunacionDevuelta);
 			assertThrows(Exception.class, new Executable() {
 				@Override
