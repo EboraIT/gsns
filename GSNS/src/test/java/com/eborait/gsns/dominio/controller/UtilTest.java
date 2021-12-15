@@ -27,7 +27,7 @@ class UtilTest {
 		assertEquals(0, date.compareTo(date2));
 		assertThrows(GSNSException.class, new Executable() {
 			@Override
-			public void execute() throws Exception {
+			public void execute() throws GSNSException {
 				Util.parseFecha("11-12-2021");
 			}
 		});

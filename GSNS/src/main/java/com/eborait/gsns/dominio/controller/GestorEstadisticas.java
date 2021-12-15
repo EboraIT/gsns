@@ -56,7 +56,7 @@ public class GestorEstadisticas {
 			LOG.log(Level.SEVERE, "{0}", EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException(
-					"Se ha producido un error al consultar el número total de vacunados con la primera dosis.");
+					"Se ha producido un error al consultar el número total de vacunados.");
 		}
 	}
 
@@ -111,7 +111,7 @@ public class GestorEstadisticas {
 			LOG.log(Level.SEVERE, "{0}", EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException(
-					"Se ha producido un error al consultar el porcentaje de vacunados con la primera dosis.");
+					"Se ha producido un error al consultar el porcentaje de vacunados.");
 		}
 	}
 
@@ -145,7 +145,7 @@ public class GestorEstadisticas {
 			LOG.log(Level.SEVERE, "{0}", EXCEPCION_ESTADISTICAS + sqle.getMessage());
 			LOG.log(Level.SEVERE, "", sqle);
 			throw new GSNSException(
-					"Se ha producido un error al consultar el porcentaje de vacunados por región con la primera dosis.");
+					"Se ha producido un error al consultar el porcentaje de vacunados por región.");
 		}
 	}
 

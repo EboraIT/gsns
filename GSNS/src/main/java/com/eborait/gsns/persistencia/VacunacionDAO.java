@@ -1,12 +1,11 @@
 package com.eborait.gsns.persistencia;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.sql.Date;
 
-import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 
 /**
@@ -80,8 +79,17 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	@Override
 	public Collection<Vacunacion> getAll(String criteria, String value) throws SQLException {
 		Collection<Vacunacion> list = new ArrayList<>();
-		String sql = criteria == null ? SELECT_CRITERIA
-				: String.format(SELECT_CRITERIA + " WHERE %s = '%s'", criteria, value);
+		String sql = "";
+		if (criteria == null) {
+			sql = SELECT_CRITERIA;
+		} else {
+			try {
+				Integer.parseInt(value);
+				sql = String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
+			} catch (NumberFormatException nfe) {
+				sql = String.format(SELECT_CRITERIA + " WHERE %s = '%s'", criteria, value);
+			}
+		}
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
