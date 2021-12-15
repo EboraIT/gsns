@@ -1,6 +1,7 @@
 package com.eborait.gsns.persistencia;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -52,12 +53,7 @@ class LoteVacunasDAOTest {
 			lotevacunasDAO.insert(lote);
 			LoteVacunas loteDevuelta = lotevacunasDAO.get("1");
 			assertEquals(lote, loteDevuelta);
-			assertThrows(Exception.class, new Executable() {
-				@Override
-				public void execute() throws Exception {
-					lotevacunasDAO.get("id_falso");
-				}
-			});
+			assertNull(lotevacunasDAO.get("id_falso"));
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {

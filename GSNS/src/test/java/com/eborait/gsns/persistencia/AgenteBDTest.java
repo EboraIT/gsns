@@ -45,25 +45,23 @@ class AgenteBDTest {
 
 	@Test
 	final void testAgenteBD() {
-		AgenteBD agente = null;
 		try {
-			agente = new AgenteBD();
+			AgenteBD agente = new AgenteBD();
+			assertTrue(agente instanceof AgenteBD);
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		}
-		assertTrue(agente instanceof AgenteBD);
 	}
 
 	@Test
 	final void testGetAgente() {
-		AgenteBD agente = null;
 		try {
-			agente = AgenteBD.getAgente();
+			AgenteBD agente = AgenteBD.getAgente();
+			assertNotNull(agente);
+			assertTrue(agente instanceof AgenteBD);
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		}
-		assertNotNull(agente);
-		assertTrue(agente instanceof AgenteBD);
 	}
 
 	@Test
@@ -87,7 +85,6 @@ class AgenteBDTest {
 
 	@Test
 	final void testSelect() throws SQLException {
-
 		try {
 			assertEquals(0, AgenteBD.getAgente().select(SELECT_SQL).size());
 			AgenteBD.getAgente().insert(INSERT_SQL);
@@ -103,7 +100,6 @@ class AgenteBDTest {
 		} finally {
 			AgenteBD.getAgente().delete(DELETE_SQL);
 		}
-
 	}
 
 	@Test

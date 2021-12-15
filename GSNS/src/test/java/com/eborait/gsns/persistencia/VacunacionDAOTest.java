@@ -1,7 +1,7 @@
 package com.eborait.gsns.persistencia;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import com.eborait.gsns.dominio.controller.Util;
 import com.eborait.gsns.dominio.entitymodel.Paciente;
@@ -59,14 +58,10 @@ class VacunacionDAOTest {
 			vacunacionDAO.insert(vacunacion);
 			Vacunacion vacunacionDevuelta = vacunacionDAO.get(String.valueOf(max()));
 			assertEquals(vacunacion, vacunacionDevuelta);
-			assertThrows(Exception.class, new Executable() {
-				@Override
-				public void execute() throws Exception {
-					vacunacionDAO.get("id_falso");
-				}
-			});
+			assertNull(vacunacionDAO.get("34897132"));
 			vacunacion.setId(max());
 		} catch (SQLException sqle) {
+			sqle.printStackTrace();
 			fail("Excepción SQLException no esperada.");
 		} finally {
 			vacunacionDAO.delete(vacunacion);
