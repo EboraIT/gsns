@@ -1,5 +1,6 @@
 package com.eborait.gsns.dominio.controller;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -93,7 +94,7 @@ class GestorRepartoVacunasTest {
 		}
 
 	}
-
+	
 	@Test
 	final void testCalcularEntregasRegion() throws SQLException {
 		try {
@@ -110,8 +111,14 @@ class GestorRepartoVacunasTest {
 	}
 
 	@Test
-	final void testGetTipoVacunas() {
-		// TODO
+	final void testGetTipoVacunas() throws SQLException, GSNSException {
+		try {
+			lotevacunasDAO.insert(lote);
+			String [] lotes= {"Pfizer-Moderna-23/11/2021"};
+			assertArrayEquals(lotes,gestorRepartoVacunas.getTipoVacunas());
+		} finally {
+			lotevacunasDAO.delete(lote);
+		}
 	}
 
 	@Test
