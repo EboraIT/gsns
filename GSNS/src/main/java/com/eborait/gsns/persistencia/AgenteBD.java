@@ -95,7 +95,6 @@ public class AgenteBD {
 		try {
 			Driver derbyEmbeddedDriver = new EmbeddedDriver();
 			DriverManager.registerDriver(derbyEmbeddedDriver);
-			//conexion = DriverManager.getConnection(URL, BDConstantes.DBUSER, "admin");
 			conexion = DriverManager.getConnection(URL, BDConstantes.DBUSER, getEncryptedPass());
 		} catch (SQLException sqle) {
 			throw new SQLException("Error conectando con la base de datos: " + sqle.getMessage(), sqle);
