@@ -2,11 +2,14 @@ package com.eborait.gsns.dominio.controller;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.junit.jupiter.api.AfterAll;
@@ -30,6 +33,7 @@ class GestorRepartoVacunasTest {
 	private static EntregaDAO entregavacunasDAO;
 	private static TipoVacuna tipovacuna;
 	private static LoteVacunas lote;
+	private static LoteVacunas lote2;
 	private static Date fecha;
 	private static int region2;
 	private static int ia;
@@ -41,6 +45,7 @@ class GestorRepartoVacunasTest {
 		fecha = Util.parseFecha("2/12/2021");
 		tipovacuna = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
 		lote = new LoteVacunas("loteVacuna001", fecha, tipovacuna, 4500, "Moderna");
+		lote2 = new LoteVacunas("1", fecha, tipovacuna, 4500, "Moderna");
 		entrega = new EntregaVacunas("loteVacuna001", "Lote1", fecha, 2333, 1, tipovacuna, 6);
 		region2 = entrega.getRegion().getId();
 		lotevacunasDAO = DAOFactory.getLoteVacunasDAO();
@@ -115,7 +120,11 @@ class GestorRepartoVacunasTest {
 		try {
 			lotevacunasDAO.insert(lote);
 			String [] lotes= {"Pfizer-Moderna-23/11/2021"};
+			String [] lotesMal= {"Pfizer-Pfizer-23/11/2021"};
 			assertArrayEquals(lotes,gestorRepartoVacunas.getTipoVacunas());
+			assertFalse(Arrays.equals(lotesMal,gestorRepartoVacunas.getTipoVacunas()));
+		} catch (GSNSException e) {
+			fail("Excepción SQLException no esperada.");
 		} finally {
 			lotevacunasDAO.delete(lote);
 		}
@@ -123,7 +132,16 @@ class GestorRepartoVacunasTest {
 
 	@Test
 	final void testGenerarIdLote() throws GSNSException, SQLException {
-		// TODO
+		try {
+			lotevacunasDAO.insert(lote2);
+			int id=Integer.parseInt(lote2.getId())+1;
+			assertEquals(id,gestorRepartoVacunas.generarIdLote());
+			assertNotEquals(id-1,gestorRepartoVacunas.generarIdLote());
+		} catch (GSNSException e) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			lotevacunasDAO.delete(lote2);
+		}
 	}
 
 }
