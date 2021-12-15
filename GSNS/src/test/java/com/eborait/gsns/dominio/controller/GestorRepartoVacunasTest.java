@@ -2,6 +2,7 @@ package com.eborait.gsns.dominio.controller;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
@@ -32,6 +33,7 @@ class GestorRepartoVacunasTest {
 	private static int region2;
 	private static int ia;
 	private static EntregaVacunas entrega;
+	private static String FarmaceuticaMal;
 
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
@@ -43,6 +45,9 @@ class GestorRepartoVacunasTest {
 		lotevacunasDAO = DAOFactory.getLoteVacunasDAO();
 		gestorRepartoVacunas = new GestorRepartoVacunas(new GestorGSNS());
 		entregavacunasDAO = DAOFactory.getEntregaDAO();
+		FarmaceuticaMal="XgQkciifDEULnBvrkiiHjVbbPavxjKZVSCAxxhVnFjBkLjMFjLnNDcKMmeckTyLQdxPYrUnRQpqRMpqnYFqNyiFNbczuWywbZDMTqEvWEScMJAKnkxNnCcgEzGikWcGNaQwBcKLBfrvSzHuXDtvrwUTbPQgXJpfJeJWkbNQJvWxrAPPbYKReBUSzuZTgpBhpvUGRXHhtLyvUgCTDrKSGHUTifGvHTfBzjLttGgZkFiJtdiwBBQhzqiUaQLcxLbVX";
+		
+		
 	}
 
 	@AfterAll
@@ -62,6 +67,25 @@ class GestorRepartoVacunasTest {
 		try {
 			assertTrue(gestorRepartoVacunas.altaNuevoLoteVacunas(lote.getId(), "2/12/2021", lote.getCantidad(),
 					lote.getTipo().getNombre(), lote.getFarmaceutica(), "23/11/2021"));
+			assertThrows(GSNSException.class, new Executable() {
+				@Override
+				public void execute() throws Exception {
+					gestorRepartoVacunas.altaNuevoLoteVacunas(lote.getId(), "2/12/2021", lote.getCantidad(),
+							lote.getTipo().getNombre(), lote.getFarmaceutica(), "23/11/2021");
+				}
+			});
+		} catch (GSNSException e) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			lotevacunasDAO.delete(lote);
+		}
+
+	}
+	
+	@Test
+	void testAltaNuevoLoteVacunasFallo() throws GSNSException, SQLException {
+		try {
+			assertTrue(gestorRepartoVacunas.altaNuevoLoteVacunas(lote.getId(), "2/12/2021", lote.getCantidad()," ", lote.getFarmaceutica(), "23/11-2021"));
 			assertThrows(GSNSException.class, new Executable() {
 				@Override
 				public void execute() throws Exception {
