@@ -74,9 +74,9 @@ class LoteVacunasDAOTest {
 			assertEquals(lote2, it.next());
 			lotes = lotevacunasDAO.getAll("id", "2");
 			assertEquals(lote2, lotes.iterator().next());
-			assertThrows(Exception.class, new Executable() {
+			assertThrows(SQLException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws SQLException {
 					lotevacunasDAO.getAll("columna_falsa", "");
 				}
 			});
@@ -94,7 +94,7 @@ class LoteVacunasDAOTest {
 			assertEquals(1, lotevacunasDAO.insert(lote));
 			assertThrows(SQLException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws SQLException {
 					lotevacunasDAO.insert(lote);
 				}
 			});

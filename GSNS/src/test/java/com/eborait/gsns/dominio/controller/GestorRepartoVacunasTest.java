@@ -75,7 +75,7 @@ class GestorRepartoVacunasTest {
 					lote.getTipo().getNombre(), lote.getFarmaceutica(), "23/11/2021"));
 			assertThrows(GSNSException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws GSNSException {
 					gestorRepartoVacunas.altaNuevoLoteVacunas(lote.getId(), "2/12/2021", lote.getCantidad(),
 							lote.getTipo().getNombre(), lote.getFarmaceutica(), "23/11/2021");
 				}

@@ -55,6 +55,34 @@ class GestorEstadisticasTest {
 	@Test
 	final void testConsultarTotalVacunados() throws SQLException {
 		try {
+			assertEquals(0, gestorEstadisticas.consultarTotalVacunados(false));
+			assertEquals(0, gestorEstadisticas.consultarTotalVacunados(true));
+			pacienteDAO.insert(vacunacion.getPaciente());
+			vacunacionDAO.insert(vacunacion);
+			assertEquals(1, gestorEstadisticas.consultarTotalVacunados(false));
+			vacunacion.setId(max());
+			vacunacionDAO.delete(vacunacion);
+			vacunacion.setSegundaDosis(true);
+			vacunacionDAO.insert(vacunacion);
+			vacunacion.setSegundaDosis(false);
+			assertEquals(1, gestorEstadisticas.consultarTotalVacunados(true));
+ 
+			// TODO forzar SQLException para GSNSException
+
+		} catch (GSNSException sqle) {
+			fail("Excepción GSNSException no esperada.");
+		} catch (SQLException sqle) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			vacunacion.setId(max());
+			vacunacionDAO.delete(vacunacion);
+			pacienteDAO.delete(vacunacion.getPaciente());
+		}
+	}
+
+	@Test
+	final void testConsultarTotalVacunadosPorRegion() throws SQLException {
+		try {
 			int region = vacunacion.getPaciente().getRegion().getId();
 			assertEquals(0, gestorEstadisticas.consultarTotalVacunadosPorRegion(region, false));
 			assertEquals(0, gestorEstadisticas.consultarTotalVacunadosPorRegion(region, true));
@@ -65,21 +93,21 @@ class GestorEstadisticasTest {
 			vacunacionDAO.delete(vacunacion);
 			vacunacion.setSegundaDosis(true);
 			vacunacionDAO.insert(vacunacion);
+			vacunacion.setSegundaDosis(false);
 			assertEquals(1, gestorEstadisticas.consultarTotalVacunadosPorRegion(region, true));
 			assertEquals(0, gestorEstadisticas.consultarTotalVacunadosPorRegion(897, true));
+
+			// TODO forzar SQLException para GSNSException
+
 		} catch (GSNSException sqle) {
+			fail("Excepción GSNSException no esperada.");
+		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
 			vacunacion.setId(max());
 			vacunacionDAO.delete(vacunacion);
 			pacienteDAO.delete(vacunacion.getPaciente());
 		}
-
-	}
-
-	@Test
-	final void testConsultarTotalVacunadosPorRegion() {
-		// TODO
 	}
 
 	@Test

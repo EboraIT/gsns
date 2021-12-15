@@ -67,7 +67,7 @@ class GestorVacunacionTest {
 					entrega.getCantidad(), 1, entrega.getTipo().toString(), 6));
 			assertThrows(GSNSException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws GSNSException {
 					gestorVacunacion.altaEntregaVacunas(entrega.getId(), entrega.getLote().getId(), "2/12/2021",
 							entrega.getCantidad(), 1, entrega.getTipo().toString(), 6);
 				}
@@ -88,7 +88,7 @@ class GestorVacunacionTest {
 			vacunacionDAO.delete(vacunacion);
 			assertThrows(GSNSException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws GSNSException {
 					gestorVacunacion.registrarVacunacion("03/01/2022", paciente.getNombre(), paciente.getApellidos(),
 							paciente.getDni(), vacunacion.getVacuna().toString(), 1, 6, vacunacion.isSegundaDosis());
 				}

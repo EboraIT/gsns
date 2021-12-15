@@ -2,18 +2,21 @@ package com.eborait.gsns.persistencia;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import com.eborait.gsns.dominio.controller.Util;
 import com.eborait.gsns.dominio.entitymodel.Paciente;
@@ -70,7 +73,38 @@ class VacunacionDAOTest {
 	}
 
 	@Test
-	final void testGetAll() {
+	final void testGetAll() throws SQLException {
+		Vacunacion vacunacion2 = null;
+		Paciente paciente2 = null;
+		try {
+			pacienteDAO.insert(paciente);
+			vacunacionDAO.insert(vacunacion);
+			vacunacion.setId(max());
+			paciente2 = new Paciente("73847120K", 6, 6, "Roberto", "Esteban Olivares", false);
+			vacunacion2 = new Vacunacion(0, tipoVacuna, paciente2, fecha, false);
+			pacienteDAO.insert(paciente2);
+			vacunacionDAO.insert(vacunacion2);
+			vacunacion2.setId(max());
+			Collection<Vacunacion> vacunas = vacunacionDAO.getAll(null, null);
+			Iterator<Vacunacion> it = vacunas.iterator();
+			assertEquals(vacunacion, it.next());
+			assertEquals(vacunacion2, it.next());
+			vacunas = vacunacionDAO.getAll("id", String.valueOf(max()));
+			assertEquals(vacunacion2, vacunas.iterator().next());
+			assertThrows(SQLException.class, new Executable() {
+				@Override
+				public void execute() throws SQLException {
+					vacunacionDAO.getAll("columna_falsa", "");
+				}
+			});
+		} catch (SQLException sqle) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			vacunacionDAO.delete(vacunacion);
+			vacunacionDAO.delete(vacunacion2);
+			pacienteDAO.delete(paciente);
+			pacienteDAO.delete(paciente2);
+		}
 	}
 
 	@Test

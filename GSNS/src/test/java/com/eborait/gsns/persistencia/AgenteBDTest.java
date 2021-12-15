@@ -91,7 +91,7 @@ class AgenteBDTest {
 			assertEquals(1, AgenteBD.getAgente().select(SELECT_SQL).size());
 			assertThrows(SQLException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws SQLException {
 					AgenteBD.getAgente().select(SELECT_SQL_EXCEPTION);
 				}
 			});
@@ -108,13 +108,13 @@ class AgenteBDTest {
 			assertEquals(1, AgenteBD.getAgente().insert(INSERT_SQL));
 			assertThrows(SQLException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws SQLException {
 					AgenteBD.getAgente().insert(INSERT_SQL);
 				}
 			});
 			assertThrows(SQLException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws SQLException {
 					AgenteBD.getAgente().insert(INSERT_SQL_EXCEPTION);
 				}
 			});
@@ -132,7 +132,7 @@ class AgenteBDTest {
 			assertEquals(1, AgenteBD.getAgente().update(UPDATE_SQL));
 			assertThrows(SQLException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws SQLException {
 					AgenteBD.getAgente().update(UPDATE_SQL_EXCEPTION);
 				}
 			});
@@ -154,7 +154,7 @@ class AgenteBDTest {
 		}
 		assertThrows(SQLException.class, new Executable() {
 			@Override
-			public void execute() throws Exception {
+			public void execute() throws SQLException {
 				AgenteBD.getAgente().delete(DELETE_SQL_EXCEPTION);
 			}
 		});

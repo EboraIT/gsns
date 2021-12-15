@@ -69,9 +69,9 @@ class PacienteDAOTest {
 			assertEquals(paciente2, it.next());
 			pacientes = pacienteDAO.getAll("dni", "01915362H");
 			assertEquals(paciente2, pacientes.iterator().next());
-			assertThrows(Exception.class, new Executable() {
+			assertThrows(SQLException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws SQLException {
 					pacienteDAO.getAll("columna_falsa", "");
 				}
 			});
@@ -89,7 +89,7 @@ class PacienteDAOTest {
 			assertEquals(1, pacienteDAO.insert(paciente));
 			assertThrows(SQLException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws SQLException {
 					pacienteDAO.insert(paciente);
 				}
 			});

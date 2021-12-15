@@ -75,9 +75,9 @@ class EntregaDAOTest {
 			assertEquals(entrega2, it.next());
 			entregas = entregaDAO.getAll("id", "loteVacuna002");
 			assertEquals(entrega2, entregas.iterator().next());
-			assertThrows(Exception.class, new Executable() {
+			assertThrows(SQLException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws SQLException {
 					entregaDAO.getAll("columna_falsa", "");
 				}
 			});
@@ -95,7 +95,7 @@ class EntregaDAOTest {
 			assertEquals(1, entregaDAO.insert(entrega));
 			assertThrows(SQLException.class, new Executable() {
 				@Override
-				public void execute() throws Exception {
+				public void execute() throws SQLException {
 					entregaDAO.insert(entrega);
 				}
 			});
