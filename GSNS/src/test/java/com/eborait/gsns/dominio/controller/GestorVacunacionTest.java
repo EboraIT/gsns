@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -15,12 +13,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import com.eborait.gsns.Utilidades;
 import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
 import com.eborait.gsns.dominio.entitymodel.Paciente;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-import com.eborait.gsns.persistencia.AgenteBD;
 import com.eborait.gsns.persistencia.DAOFactory;
 import com.eborait.gsns.persistencia.EntregaDAO;
 import com.eborait.gsns.persistencia.PacienteDAO;
@@ -84,7 +82,7 @@ class GestorVacunacionTest {
 		try {
 			assertTrue(gestorVacunacion.registrarVacunacion("03/01/2022", paciente.getNombre(), paciente.getApellidos(),
 					paciente.getDni(), vacunacion.getVacuna().toString(), 1, 6, vacunacion.isSegundaDosis()));
-			vacunacion.setId(max());
+			vacunacion.setId(Utilidades.max());
 			vacunacionDAO.delete(vacunacion);
 			assertThrows(GSNSException.class, new Executable() {
 				@Override
@@ -93,7 +91,7 @@ class GestorVacunacionTest {
 							paciente.getDni(), vacunacion.getVacuna().toString(), 1, 6, vacunacion.isSegundaDosis());
 				}
 			});
-			vacunacion.setId(max());
+			vacunacion.setId(Utilidades.max());
 		} catch (GSNSException gsnse) {
 			fail("Excepción GSNSException no esperada.");
 		} finally {
@@ -101,16 +99,4 @@ class GestorVacunacionTest {
 			pacienteDAO.delete(paciente);
 		}
 	}
-
-	final int max() throws SQLException {
-		int max = 0;
-		Collection<Collection<Object>> data = AgenteBD.getAgente()
-				.select("SELECT coalesce(max(id), 0) FROM vacunacion");
-		for (Collection<Object> collection : data) {
-			ArrayList<Object> rowData = (ArrayList<Object>) collection;
-			max = Integer.parseInt(rowData.get(0).toString());
-		}
-		return max;
-	}
-
 }

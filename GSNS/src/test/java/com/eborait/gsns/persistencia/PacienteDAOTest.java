@@ -105,7 +105,6 @@ class PacienteDAOTest {
 		try {
 			pacienteDAO.insert(paciente);
 			paciente.setNombre("Alberto");
-			;
 			assertEquals(1, pacienteDAO.update(paciente));
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");

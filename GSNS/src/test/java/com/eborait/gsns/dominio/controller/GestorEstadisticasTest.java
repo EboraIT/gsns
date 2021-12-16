@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -13,11 +11,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.eborait.gsns.Utilidades;
 import com.eborait.gsns.dominio.entitymodel.Paciente;
 import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
-import com.eborait.gsns.persistencia.AgenteBD;
 import com.eborait.gsns.persistencia.DAOFactory;
 import com.eborait.gsns.persistencia.PacienteDAO;
 import com.eborait.gsns.persistencia.VacunacionDAO;
@@ -28,7 +26,6 @@ class GestorEstadisticasTest {
 	private static PacienteDAO pacienteDAO;
 	private static Paciente paciente;
 	private static Vacunacion vacunacion;
-	private static final String SEGUNDA_DOSIS = "segunda_dosis";
 
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
@@ -60,7 +57,7 @@ class GestorEstadisticasTest {
 			pacienteDAO.insert(vacunacion.getPaciente());
 			vacunacionDAO.insert(vacunacion);
 			assertEquals(1, gestorEstadisticas.consultarTotalVacunados(false));
-			vacunacion.setId(max());
+			vacunacion.setId(Utilidades.max());
 			vacunacionDAO.delete(vacunacion);
 			vacunacion.setSegundaDosis(true);
 			vacunacionDAO.insert(vacunacion);
@@ -74,7 +71,7 @@ class GestorEstadisticasTest {
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
-			vacunacion.setId(max());
+			vacunacion.setId(Utilidades.max());
 			vacunacionDAO.delete(vacunacion);
 			pacienteDAO.delete(vacunacion.getPaciente());
 		}
@@ -89,7 +86,7 @@ class GestorEstadisticasTest {
 			pacienteDAO.insert(vacunacion.getPaciente());
 			vacunacionDAO.insert(vacunacion);
 			assertEquals(1, gestorEstadisticas.consultarTotalVacunadosPorRegion(region, false));
-			vacunacion.setId(max());
+			vacunacion.setId(Utilidades.max());
 			vacunacionDAO.delete(vacunacion);
 			vacunacion.setSegundaDosis(true);
 			vacunacionDAO.insert(vacunacion);
@@ -104,7 +101,7 @@ class GestorEstadisticasTest {
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
-			vacunacion.setId(max());
+			vacunacion.setId(Utilidades.max());
 			vacunacionDAO.delete(vacunacion);
 			pacienteDAO.delete(vacunacion.getPaciente());
 		}
@@ -118,17 +115,6 @@ class GestorEstadisticasTest {
 	@Test
 	final void testConsultarPorcentajeVacunadosSobreRecibidasEnRegion() {
 		// TODO
-	}
-
-	final int max() throws SQLException {
-		int max = 0;
-		Collection<Collection<Object>> data = AgenteBD.getAgente()
-				.select("SELECT coalesce(max(id), 0) FROM vacunacion");
-		for (Collection<Object> collection : data) {
-			ArrayList<Object> rowData = (ArrayList<Object>) collection;
-			max = Integer.parseInt(rowData.get(0).toString());
-		}
-		return max;
 	}
 
 }
