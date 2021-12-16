@@ -24,7 +24,7 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT = "SELECT * FROM lote_vacunas WHERE id = '%s'";
+	private static final String SELECT = "SELECT * FROM lote_vacunas WHERE id = %s";
 
 	/**
 	 * Formato sentencia select.
@@ -34,17 +34,17 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	/**
 	 * Formato sentencia insert.
 	 */
-	private static final String INSERT = "INSERT INTO lote_vacunas VALUES('%s', '%s', '%s', %s, '%s')";
+	private static final String INSERT = "INSERT INTO lote_vacunas VALUES(%s, '%s', '%s', %s, '%s')";
 
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE lote_vacunas SET id = '%s', fecha = '%s', tipo = '%s', cantidad = %s, farmaceutica = '%s' WHERE id = '%s'";
+	private static final String UPDATE = "UPDATE lote_vacunas SET id = %s, fecha = '%s', tipo = '%s', cantidad = %s, farmaceutica = '%s' WHERE id = %s";
 
 	/**
 	 * Formato sentencia delete.
 	 */
-	private static final String DELETE = "DELETE FROM lote_vacunas WHERE id = '%s'";
+	private static final String DELETE = "DELETE FROM lote_vacunas WHERE id = %s";
 
 	/**
 	 * Realiza una consulta a la base de datos.
@@ -60,7 +60,7 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 		Iterator<Collection<Object>> it = data.iterator();
 		if (it.hasNext()) {
 			ArrayList<Object> rowData = (ArrayList<Object>) it.next();
-			return new LoteVacunas(String.valueOf(rowData.get(0)), (Date) rowData.get(1),
+			return new LoteVacunas(Integer.parseInt(String.valueOf(rowData.get(0))), (Date) rowData.get(1),
 					String.valueOf(rowData.get(2)), (int) rowData.get(3), String.valueOf(rowData.get(4)));
 		}
 		return null;
@@ -79,12 +79,21 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	@Override
 	public Collection<LoteVacunas> getAll(String criteria, String value) throws SQLException {
 		Collection<LoteVacunas> list = new ArrayList<>();
-		String sql = criteria == null ? SELECT_CRITERIA
-				: String.format(SELECT_CRITERIA + " WHERE %s = '%s'", criteria, value);
+		String sql = "";
+		if (criteria == null) {
+			sql = SELECT_CRITERIA;
+		} else {
+			try {
+				Integer.parseInt(value);
+				sql = String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
+			} catch (NumberFormatException nfe) {
+				sql = String.format(SELECT_CRITERIA + " WHERE %s = '%s'", criteria, value);
+			}
+		}
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
-			LoteVacunas lv = new LoteVacunas(String.valueOf(rowData.get(0)), (Date) rowData.get(1),
+			LoteVacunas lv = new LoteVacunas(Integer.parseInt(String.valueOf(rowData.get(0))), (Date) rowData.get(1),
 					String.valueOf(rowData.get(2)), (int) rowData.get(3), String.valueOf(rowData.get(4)));
 			list.add(lv);
 		}
@@ -143,10 +152,10 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	public int maxId() throws SQLException {
 		int max = 0;
 		Collection<Collection<Object>> data = AgenteBD.getAgente()
-				.select("SELECT coalesce(max(id), '0') FROM lote_vacunas");
+				.select("SELECT coalesce(max(id), 0) FROM lote_vacunas");
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
-			max = Integer.parseInt(rowData.get(0).toString());
+			max = Integer.parseInt(String.valueOf(rowData.get(0)));
 		}
 		return max;
 	}

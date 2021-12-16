@@ -139,7 +139,7 @@ public class PantallaAltaNuevoLote extends PanelBase {
 		if (validar()) {
 			try {
 				boolean correcto = frame.getGestorGSNS().getGestorRepartoVacunas().altaNuevoLoteVacunas(
-						lblIdLote.getText(), txtFechaAlta.getText(), Integer.parseInt(txtCantidad.getText()),
+						Integer.parseInt(lblIdLote.getText()), txtFechaAlta.getText(), Integer.parseInt(txtCantidad.getText()),
 						txtNombreVacuna.getText(), txtFarmaceutica.getText(), txtFechaAprobacion.getText());
 				if (correcto) {
 					JOptionPane.showMessageDialog(frame, "El nuevo lote se ha registrado correctamente.", Main.INFO,

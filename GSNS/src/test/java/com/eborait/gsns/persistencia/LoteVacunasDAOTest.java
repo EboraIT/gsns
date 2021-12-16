@@ -40,7 +40,7 @@ class LoteVacunasDAOTest {
 	protected void setUp() throws Exception {
 		fecha = Util.parseFecha("2/12/2021");
 		tipo = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
-		lote = new LoteVacunas("1", fecha, tipo, 4500, "Moderna");
+		lote = new LoteVacunas(1, fecha, tipo, 4500, "Moderna");
 	}
 
 	@AfterEach
@@ -53,7 +53,7 @@ class LoteVacunasDAOTest {
 			lotevacunasDAO.insert(lote);
 			LoteVacunas loteDevuelta = lotevacunasDAO.get("1");
 			assertEquals(lote, loteDevuelta);
-			assertNull(lotevacunasDAO.get("id_falso"));
+			assertNull(lotevacunasDAO.get("3223048"));
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
@@ -66,7 +66,7 @@ class LoteVacunasDAOTest {
 		LoteVacunas lote2 = null;
 		try {
 			lotevacunasDAO.insert(lote);
-			lote2 = new LoteVacunas("2", fecha, tipo, 4500, "Moderna");
+			lote2 = new LoteVacunas(2, fecha, tipo, 4500, "Moderna");
 			lotevacunasDAO.insert(lote2);
 			Collection<LoteVacunas> lotes = lotevacunasDAO.getAll(null, null);
 			Iterator<LoteVacunas> it = lotes.iterator();
@@ -134,7 +134,7 @@ class LoteVacunasDAOTest {
 		LoteVacunas lote2 = null;
 		try {
 			lotevacunasDAO.insert(lote);
-			lote2 = new LoteVacunas("2", fecha, tipo, 7000, "Moderna");
+			lote2 = new LoteVacunas(2, fecha, tipo, 7000, "Moderna");
 			lotevacunasDAO.insert(lote2);
 			assertEquals(2, lotevacunasDAO.maxId());
 		} catch (SQLException sqle) {

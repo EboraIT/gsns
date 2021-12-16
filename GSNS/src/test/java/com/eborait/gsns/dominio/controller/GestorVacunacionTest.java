@@ -40,7 +40,7 @@ class GestorVacunacionTest {
 	protected static void setUpBeforeClass() throws Exception {
 		gestorVacunacion = new GestorVacunacion(new GestorGSNS());
 		TipoVacuna tipoVacuna = new TipoVacuna("Pfizer-Moderna-23/11/2021");
-		entrega = new EntregaVacunas("loteVacuna001", "Lote1", Util.parseFecha("2/12/2021"), 2333, 1, tipoVacuna, 6);
+		entrega = new EntregaVacunas("loteVacuna001", 1, Util.parseFecha("2/12/2021"), 2333, 1, tipoVacuna, 6);
 		vacunacion = new Vacunacion(0, tipoVacuna, paciente, Util.parseFecha("03/01/2022"), false);
 		paciente = new Paciente("01915362H", 6, 7, "Jorge", "Fernandez Escolano", false);
 		entregavacunasDAO = DAOFactory.getEntregaDAO();

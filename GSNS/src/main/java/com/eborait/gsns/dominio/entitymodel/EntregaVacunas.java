@@ -54,7 +54,7 @@ public class EntregaVacunas {
 	 * @throws GSNSException Si se produce una excepción en el grupo de prioridad o
 	 *                       la región.
 	 */
-	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, TipoVacuna tipo, int region)
+	public EntregaVacunas(String id, int lote, Date fecha, int cantidad, int prioridad, TipoVacuna tipo, int region)
 			throws GSNSException {
 		this.id = id;
 		this.fecha = fecha;
@@ -80,7 +80,7 @@ public class EntregaVacunas {
 	 * @param tipo      El tipo de vacuna.
 	 * @param region    La región.
 	 */
-	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, String tipo, int region) {
+	public EntregaVacunas(String id, int lote, Date fecha, int cantidad, int prioridad, String tipo, int region) {
 		this.id = id;
 		this.fecha = fecha;
 		this.cantidad = cantidad;

@@ -42,7 +42,7 @@ class EntregaDAOTest {
 	protected void setUp() throws Exception {
 		fecha = Util.parseFecha("2/12/2021");
 		vacuna = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
-		entrega = new EntregaVacunas("loteVacuna001", "Lote1", fecha, 2333, 1, vacuna, 6);
+		entrega = new EntregaVacunas("loteVacuna001", 1, fecha, 2333, 1, vacuna, 6);
 	}
 
 	@AfterEach
@@ -67,7 +67,7 @@ class EntregaDAOTest {
 		EntregaVacunas entrega2 = null;
 		try {
 			entregaDAO.insert(entrega);
-			entrega2 = new EntregaVacunas("loteVacuna002", "Lote1", fecha, 2333, 1, vacuna, 6);
+			entrega2 = new EntregaVacunas("loteVacuna002", 1, fecha, 2333, 1, vacuna, 6);
 			entregaDAO.insert(entrega2);
 			Collection<EntregaVacunas> entregas = entregaDAO.getAll(null, null);
 			Iterator<EntregaVacunas> it = entregas.iterator();

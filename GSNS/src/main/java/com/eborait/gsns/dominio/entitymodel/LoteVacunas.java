@@ -21,7 +21,7 @@ public class LoteVacunas {
 	private TipoVacuna tipo;
 
 	/** El id. */
-	private String id;
+	private int id;
 
 	/** La fecha. */
 	private Date fecha;
@@ -41,7 +41,7 @@ public class LoteVacunas {
 	 * @param cantidad     La cantidad.
 	 * @param farmaceutica La farmacéutica.
 	 */
-	public LoteVacunas(String id, Date fecha, String tipo, int cantidad, String farmaceutica) {
+	public LoteVacunas(int id, Date fecha, String tipo, int cantidad, String farmaceutica) {
 		this(id, fecha, new TipoVacuna(tipo), cantidad, farmaceutica);
 	}
 
@@ -54,7 +54,7 @@ public class LoteVacunas {
 	 * @param cantidad     La cantidad.
 	 * @param farmaceutica La farmacéutica.
 	 */
-	public LoteVacunas(String id, Date fecha, TipoVacuna tipo, int cantidad, String farmaceutica) {
+	public LoteVacunas(int id, Date fecha, TipoVacuna tipo, int cantidad, String farmaceutica) {
 		this.id = id;
 		this.fecha = fecha;
 		this.tipo = tipo;
@@ -104,7 +104,7 @@ public class LoteVacunas {
 	 *
 	 * @return El id.
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -113,7 +113,7 @@ public class LoteVacunas {
 	 *
 	 * @param id El nuevo id.
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -175,7 +175,7 @@ public class LoteVacunas {
 	public boolean equals(Object obj) {
 		LoteVacunas lv = (LoteVacunas) obj;
 		if (lv != null) {
-			return entregas.size() == lv.getEntregas().size() && tipo.equals(lv.getTipo()) && id.equals(lv.getId())
+			return entregas.size() == lv.getEntregas().size() && tipo.equals(lv.getTipo()) && id == lv.getId()
 					&& cantidad == lv.getCantidad() && farmaceutica.equals(lv.getFarmaceutica());
 		} else {
 			return false;

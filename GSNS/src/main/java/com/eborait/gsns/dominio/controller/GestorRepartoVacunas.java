@@ -50,7 +50,7 @@ public class GestorRepartoVacunas {
 	 *         contrario.
 	 * @throws GSNSException Si se produce una excepción al insertar.
 	 */
-	public boolean altaNuevoLoteVacunas(String id, String fecha, int cantidad, String nombreVacuna, String farmaceutica,
+	public boolean altaNuevoLoteVacunas(int id, String fecha, int cantidad, String nombreVacuna, String farmaceutica,
 			String fechaAprobacion) throws GSNSException {
 		TipoVacuna tipo = new TipoVacuna(nombreVacuna, farmaceutica, fechaAprobacion);
 		LoteVacunas lote = new LoteVacunas(id, Util.parseFecha(fecha), tipo, cantidad, farmaceutica);

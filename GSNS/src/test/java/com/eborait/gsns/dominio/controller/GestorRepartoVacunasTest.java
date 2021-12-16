@@ -44,16 +44,15 @@ class GestorRepartoVacunasTest {
 	protected static void setUpBeforeClass() throws Exception {
 		fecha = Util.parseFecha("2/12/2021");
 		tipovacuna = new TipoVacuna("Pfizer", "Moderna", "23/11/2021");
-		lote = new LoteVacunas("loteVacuna001", fecha, tipovacuna, 4500, "Moderna");
-		lote2 = new LoteVacunas("1", fecha, tipovacuna, 4500, "Moderna");
-		entrega = new EntregaVacunas("loteVacuna001", "Lote1", fecha, 2333, 1, tipovacuna, 6);
+		lote = new LoteVacunas(1, fecha, tipovacuna, 4500, "Moderna");
+		lote2 = new LoteVacunas(2, fecha, tipovacuna, 4500, "Moderna");
+		entrega = new EntregaVacunas("loteVacuna001", 1, fecha, 2333, 1, tipovacuna, 6);
 		region2 = entrega.getRegion().getId();
 		lotevacunasDAO = DAOFactory.getLoteVacunasDAO();
 		gestorRepartoVacunas = new GestorRepartoVacunas(new GestorGSNS());
 		entregavacunasDAO = DAOFactory.getEntregaDAO();
-		FarmaceuticaMal="XgQkciifDEULnBvrkiiHjVbbPavxjKZVSCAxxhVnFjBkLjMFjLnNDcKMmeckTyLQdxPYrUnRQpqRMpqnYFqNyiFNbczuWywbZDMTqEvWEScMJAKnkxNnCcgEzGikWcGNaQwBcKLBfrvSzHuXDtvrwUTbPQgXJpfJeJWkbNQJvWxrAPPbYKReBUSzuZTgpBhpvUGRXHhtLyvUgCTDrKSGHUTifGvHTfBzjLttGgZkFiJtdiwBBQhzqiUaQLcxLbVX";
-		
-		
+		FarmaceuticaMal = "XgQkciifDEULnBvrkiiHjVbbPavxjKZVSCAxxhVnFjBkLjMFjLnNDcKMmeckTyLQdxPYrUnRQpqRMpqnYFqNyiFNbczuWywbZDMTqEvWEScMJAKnkxNnCcgEzGikWcGNaQwBcKLBfrvSzHuXDtvrwUTbPQgXJpfJeJWkbNQJvWxrAPPbYKReBUSzuZTgpBhpvUGRXHhtLyvUgCTDrKSGHUTifGvHTfBzjLttGgZkFiJtdiwBBQhzqiUaQLcxLbVX";
+
 	}
 
 	@AfterAll
@@ -87,11 +86,12 @@ class GestorRepartoVacunasTest {
 		}
 
 	}
-	
+
 	@Test
 	void testAltaNuevoLoteVacunasFallo() throws GSNSException, SQLException {
 		try {
-			assertTrue(gestorRepartoVacunas.altaNuevoLoteVacunas(lote.getId(), "2/12/2021", lote.getCantidad()," ", lote.getFarmaceutica(), "23/11-2021"));
+			assertTrue(gestorRepartoVacunas.altaNuevoLoteVacunas(lote.getId(), "2/12/2021", lote.getCantidad(), " ",
+					lote.getFarmaceutica(), "23/11-2021"));
 		} catch (GSNSException e) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
@@ -99,7 +99,7 @@ class GestorRepartoVacunasTest {
 		}
 
 	}
-	
+
 	@Test
 	final void testCalcularEntregasRegion() throws SQLException {
 		try {
@@ -119,10 +119,10 @@ class GestorRepartoVacunasTest {
 	final void testGetTipoVacunas() throws SQLException, GSNSException {
 		try {
 			lotevacunasDAO.insert(lote);
-			String [] lotes= {"Pfizer-Moderna-23/11/2021"};
-			String [] lotesMal= {"Pfizer-Pfizer-23/11/2021"};
-			assertArrayEquals(lotes,gestorRepartoVacunas.getTipoVacunas());
-			assertFalse(Arrays.equals(lotesMal,gestorRepartoVacunas.getTipoVacunas()));
+			String[] lotes = { "Pfizer-Moderna-23/11/2021" };
+			String[] lotesMal = { "Pfizer-Pfizer-23/11/2021" };
+			assertArrayEquals(lotes, gestorRepartoVacunas.getTipoVacunas());
+			assertFalse(Arrays.equals(lotesMal, gestorRepartoVacunas.getTipoVacunas()));
 		} catch (GSNSException e) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
@@ -134,9 +134,9 @@ class GestorRepartoVacunasTest {
 	final void testGenerarIdLote() throws GSNSException, SQLException {
 		try {
 			lotevacunasDAO.insert(lote2);
-			int id=Integer.parseInt(lote2.getId())+1;
-			assertEquals(id,gestorRepartoVacunas.generarIdLote());
-			assertNotEquals(id-1,gestorRepartoVacunas.generarIdLote());
+			int id = lote2.getId() + 1;
+			assertEquals(id, gestorRepartoVacunas.generarIdLote());
+			assertNotEquals(id - 1, gestorRepartoVacunas.generarIdLote());
 		} catch (GSNSException e) {
 			fail("Excepción SQLException no esperada.");
 		} finally {

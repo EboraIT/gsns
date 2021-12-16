@@ -60,7 +60,7 @@ public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 		Iterator<Collection<Object>> it = data.iterator();
 		if (it.hasNext()) {
 			ArrayList<Object> rowData = (ArrayList<Object>) it.next();
-			return new EntregaVacunas(String.valueOf(rowData.get(0)), String.valueOf(rowData.get(1)),
+			return new EntregaVacunas(String.valueOf(rowData.get(0)), Integer.parseInt(String.valueOf(rowData.get(1))),
 					(Date) rowData.get(2), (int) rowData.get(3), (int) rowData.get(4), String.valueOf(rowData.get(5)),
 					(int) rowData.get(6));
 		}
@@ -94,9 +94,9 @@ public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
-			EntregaVacunas ev = new EntregaVacunas(String.valueOf(rowData.get(0)), String.valueOf(rowData.get(1)),
-					(Date) rowData.get(2), (int) rowData.get(3), (int) rowData.get(4), String.valueOf(rowData.get(5)),
-					(int) rowData.get(6));
+			EntregaVacunas ev = new EntregaVacunas(String.valueOf(rowData.get(0)),
+					Integer.parseInt(String.valueOf(rowData.get(1))), (Date) rowData.get(2), (int) rowData.get(3),
+					(int) rowData.get(4), String.valueOf(rowData.get(5)), (int) rowData.get(6));
 			list.add(ev);
 		}
 		return list;
@@ -115,7 +115,7 @@ public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 		return AgenteBD.getAgente()
 				.insert(String.format(INSERT, entregaVacunas.getId(), entregaVacunas.getLote().getId(),
 						new java.sql.Date(entregaVacunas.getFecha().getTime()), entregaVacunas.getCantidad(),
-						entregaVacunas.getGrupoPrioridad().getPrioridad(), entregaVacunas.getTipo().toString(),
+						entregaVacunas.getGrupoPrioridad().getPrioridad(), String.valueOf(entregaVacunas.getTipo()),
 						entregaVacunas.getRegion().getId()));
 	}
 
@@ -132,7 +132,7 @@ public class EntregaDAO implements AbstractEntityDAO<EntregaVacunas> {
 		return AgenteBD.getAgente()
 				.update(String.format(UPDATE, entregaVacunas.getId(), entregaVacunas.getLote().getId(),
 						new java.sql.Date(entregaVacunas.getFecha().getTime()), entregaVacunas.getCantidad(),
-						entregaVacunas.getGrupoPrioridad().getPrioridad(), entregaVacunas.getTipo().toString(),
+						entregaVacunas.getGrupoPrioridad().getPrioridad(), String.valueOf(entregaVacunas.getTipo()),
 						entregaVacunas.getRegion().getId(), entregaVacunas.getId()));
 	}
 

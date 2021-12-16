@@ -148,7 +148,7 @@ public class PantallaAltaEntregaVacunas extends PanelBase {
 		if (validar()) {
 			try {
 				boolean correcto = frame.getGestorGSNS().getGestorVacunacion().altaEntregaVacunas(
-						txtIdEntrega.getText(), txtLote.getText(), txtFecha.getText(),
+						txtIdEntrega.getText(), Integer.parseInt(txtLote.getText()), txtFecha.getText(),
 						Integer.parseInt(txtCantidad.getText()), comboGrupoPrioridad.getSelectedIndex() + 1,
 						comboTipoVacuna.getSelectedItem().toString(), comboRegion.getSelectedIndex() + 1);
 				if (correcto) {
