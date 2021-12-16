@@ -63,10 +63,7 @@ class GestorEstadisticasTest {
 			vacunacionDAO.insert(vacunacion);
 			vacunacion.setSegundaDosis(false);
 			assertEquals(1, gestorEstadisticas.consultarTotalVacunados(true));
- 
-			// TODO forzar SQLException para GSNSException
-
-		} catch (GSNSException sqle) {
+		} catch (GSNSException gsnse) {
 			fail("Excepción GSNSException no esperada.");
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
@@ -93,10 +90,7 @@ class GestorEstadisticasTest {
 			vacunacion.setSegundaDosis(false);
 			assertEquals(1, gestorEstadisticas.consultarTotalVacunadosPorRegion(region, true));
 			assertEquals(0, gestorEstadisticas.consultarTotalVacunadosPorRegion(897, true));
-
-			// TODO forzar SQLException para GSNSException
-
-		} catch (GSNSException sqle) {
+		} catch (GSNSException gsnse) {
 			fail("Excepción GSNSException no esperada.");
 		} catch (SQLException sqle) {
 			fail("Excepción SQLException no esperada.");
