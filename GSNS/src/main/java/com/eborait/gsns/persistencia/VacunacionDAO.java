@@ -79,17 +79,7 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	@Override
 	public Collection<Vacunacion> getAll(String criteria, String value) throws SQLException {
 		Collection<Vacunacion> list = new ArrayList<>();
-		String sql = "";
-		if (criteria == null) {
-			sql = SELECT_CRITERIA;
-		} else {
-			try {
-				Integer.parseInt(value);
-				sql = String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
-			} catch (NumberFormatException nfe) {
-				sql = String.format(SELECT_CRITERIA + " WHERE %s = '%s'", criteria, value);
-			}
-		}
+		String sql = Util.getSQLCriteria(SELECT_CRITERIA, criteria, value);
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;

@@ -78,8 +78,7 @@ public class PacienteDAO implements AbstractEntityDAO<Paciente> {
 	@Override
 	public Collection<Paciente> getAll(String criteria, String value) throws SQLException {
 		Collection<Paciente> list = new ArrayList<>();
-		String sql = criteria == null ? SELECT_CRITERIA
-				: String.format(SELECT_CRITERIA + " WHERE %s = '%s'", criteria, value);
+		String sql = Util.getSQLCriteria(SELECT_CRITERIA, criteria, value);
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
