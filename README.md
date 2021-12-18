@@ -17,7 +17,7 @@ También hacemos referencia al [POM](./GSNS/pom.xml), en el cual hemos declarado
 
 Por último también hacemos referencia al [Diagrama de clases de diseño](./Diagrama%20de%20clases%20de%20diseño.png)  en UML.
 
-## Planificación y Gestión 📆
+## Planificación y Gestión 🔨
 
 Para desarrollar dicho problema hemos ido desarrollando una metodología ágil, también con ayuda de projects de Github hemos podido ir creando tickets con tareas las cuales hemos ido resolviendo, el tipo de projects utilizado es Kanban. Teniamos 3 columnas las cuales eran:
 * **To do** , aquí situamos las tareas o progresos que teniamos plantado hacer.
@@ -33,6 +33,8 @@ Se fueron realizando reuniones durante el Sprint Backlog para conocer el estado 
 
 Durante el periodo de gestionar la calidad también tuvimos una primera reunión el Miércoles 10/11/2021 para planificar nuestro Sprint Backlog el cúal quedaría definido y repartido en arreglar bugs, code smells , security hostpots y código duplicado.
 
+Una vez que teniamos todo los errores que nos salieron en el sonarcloud , empezamos a crear las pruebas unitarias para nuestras clases y paquetes desarrollados en Java. Empezamos a desarrollar primero los test de la capa de persistencia, y una vez que tengamos los test realizados en estas clases empezaremos a realizar los test de los Gestores los cuales desarrollaremos en un Excel para determinar el tipo de casos de pruebas que realizaremos con sus datos...etc.
+
 ## Gestión de Calidad 🔨
 
 Para la Gestión de Calidad hemos utilizado el SonarCloud, en el cúal nuestro proyecto actual le tuvimos que incorporar a una organización de github para poder trabajar de mejor forma en SonarCloud. Una vez realizado esto ya solo tuvimos que analizar nuestro proyecto en este software para comprobar nuestra calidad del código.
@@ -42,8 +44,6 @@ Al principio utilizamos la forma de analizar manualmente , lo que haciamos era u
 	mvn verify sonar:sonar
 	
 En el primer análisis nos salió que teniamos:
-
-<img src="10_SonarCloud.JPG">
 
 	- 5 Bugs
 	- 68 Code Smells
@@ -99,9 +99,7 @@ Destacar la última línea la cual hace la llamada a mvn verify sonar:sonar pero
 
 Al realizar la Integración continua ahora lo tenemos configurado para que una vez realizemos un push en la rama Develop , esta ejecutará a su vez un actions del proyecto que llamará al archivo anteriormente descrito para realizar el analisis del proyecto.
 
-En el día 14/11/2021 tenemos la calidad de nuestro código:
-
-<img src="https://github.com/EboraIT/gsns/blob/Development/14_SonarCloud_2.JPG">
+Wn el  día 14/11/2021 tenemos la calidad de nuestro código:
 
 	- 0 Bugs
 	- 10 Code Smells
@@ -110,17 +108,31 @@ En el día 14/11/2021 tenemos la calidad de nuestro código:
 	- 1,9 K Lines of Code
 	- 1,3 % Duplications
 
-Actualmente a día 16/11/2021 la calidad de nuestro código estaría casi acaba a falta de definir el porcentaje (Quality Gate):
+Después de realizar los test de la capa de persistencia y algunos en la capa de los gestores la calidad de nuestro código de vio afectada:
 
-<img src="https://github.com/EboraIT/gsns/blob/Development/16_SonarCloud_2.JPG">
-
-	- 0 Bugs
-	- 3 Code Smells
-	- 0 Security Hotspots
+	- 10 Bugs
+	- 6 Code Smells
+	- 1 Security Smells
 	- 0 Vulnerabilities
-	- 1,9 K Lines of Code
-	- 1,2 % Duplications
+	- 2,1 K Lines of Code
+	- 1,2% Duplications
 
+## Pruebas Unitarias / Test 🔨
+
+Respecto a las pruebas unitarias las tenemos almacenadas en el directorio [test](https://github.com/EboraIT/gsns/tree/master/GSNS/src/test/java/com/eborait/gsns). Como se ve en dicho directorio tenemos pruebas de la capa de persistencia y dominio.controller.
+
+En la capa de persistencia hicimos test de toda la base de datos y sus clases DAO. Y en el dominio.controller estuvimos realizando test de las clases de los gestores que como comentamos anteriormente hemos creado un excel en el cual tenemos documentado los casos de pruebas.
+
+También destacar que hemos implementado en nuestro código la dependencia de Surefire para que nos genere un _informe_ sobre los test realizados. Todas estas pruebas siguen vinculadas al sonarcloud y su actualización de estado.
+
+## Mantenimiento 🔨
+
+Una vez realizado los test llevaremos a cabo nuestro plan de mantenimiento. El cual se detallará a continuación.
+
+	1. Realizaremos una rama _maintenance_
+	2. Desde el primer día de despliegue en la rama master los fallos, correciones, bugs ...etc se resolverán en la rama anterior.
+	3. Cada fallo que se detecte se resolverá en dicha rama y después se hará un merge a la capa _development_ para mas tarde que este resuelto en la siguiente version.
+	
 
 ## Autores ✒️
 
