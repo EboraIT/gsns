@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PanelMain.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.presentacion</a> &gt; <span class="el_source">PanelMain.java</span></div><h1>PanelMain.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.presentacion;
+
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+/**
+ * Panel principal de la aplicación.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class PanelMain extends JPanel {
+
+	/** El serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/** Tipo de letra */
+	private static final String LETRA = &quot;Tahoma&quot;;
+
+	/**
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
+<span class="nc" id="L36">	public PanelMain(final Main frame) {</span>
+<span class="nc" id="L37">		setLayout(null);</span>
+
+<span class="nc" id="L39">		JLabel lblMensajeBienvenida = new JLabel(&quot;¡Bienvenido!&quot;);</span>
+<span class="nc" id="L40">		lblMensajeBienvenida.setFont(new Font(LETRA, Font.PLAIN, 16));</span>
+<span class="nc" id="L41">		lblMensajeBienvenida.setHorizontalAlignment(SwingConstants.CENTER);</span>
+<span class="nc" id="L42">		lblMensajeBienvenida.setBounds(215, 23, 470, 30);</span>
+<span class="nc" id="L43">		add(lblMensajeBienvenida);</span>
+
+<span class="nc" id="L45">		JLabel lblMensajeDescripcion = new JLabel(</span>
+				&quot;Este es el programa de gestión de vacunación COVID-19 del Sistema Nacional de Salud.&quot;);
+<span class="nc" id="L47">		lblMensajeDescripcion.setFont(new Font(LETRA, Font.PLAIN, 16));</span>
+<span class="nc" id="L48">		lblMensajeDescripcion.setHorizontalAlignment(SwingConstants.CENTER);</span>
+<span class="nc" id="L49">		lblMensajeDescripcion.setBounds(103, 60, 693, 30);</span>
+<span class="nc" id="L50">		add(lblMensajeDescripcion);</span>
+
+<span class="nc" id="L52">		JLabel lblMensajeMenu = new JLabel(&quot;Selecciona una opción:&quot;);</span>
+<span class="nc" id="L53">		lblMensajeMenu.setFont(new Font(LETRA, Font.PLAIN, 16));</span>
+<span class="nc" id="L54">		lblMensajeMenu.setHorizontalAlignment(SwingConstants.CENTER);</span>
+<span class="nc" id="L55">		lblMensajeMenu.setBounds(215, 115, 470, 30);</span>
+<span class="nc" id="L56">		add(lblMensajeMenu);</span>
+
+<span class="nc" id="L58">		JButton btnConsultarEstadisticas = new JButton(&quot;Consultar estadísticas&quot;);</span>
+<span class="nc" id="L59">		btnConsultarEstadisticas.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L61">				frame.cambiarPanel(new PantallaConsultaEstadisticas(frame));</span>
+<span class="nc" id="L62">			}</span>
+		});
+<span class="nc" id="L64">		btnConsultarEstadisticas.setBounds(68, 211, 209, 38);</span>
+<span class="nc" id="L65">		btnConsultarEstadisticas.setAlignmentX(Component.CENTER_ALIGNMENT);</span>
+<span class="nc" id="L66">		add(btnConsultarEstadisticas);</span>
+
+<span class="nc" id="L68">		JButton btnGestionSNS = new JButton(&quot;Gestión Sistema Nacional de Salud&quot;);</span>
+<span class="nc" id="L69">		btnGestionSNS.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L71">				frame.cambiarPanel(new PantallaGestionSistemaNacionalSalud(frame));</span>
+<span class="nc" id="L72">			}</span>
+		});
+<span class="nc" id="L74">		btnGestionSNS.setBounds(345, 211, 209, 38);</span>
+<span class="nc" id="L75">		btnGestionSNS.setAlignmentX(Component.CENTER_ALIGNMENT);</span>
+<span class="nc" id="L76">		add(btnGestionSNS);</span>
+
+<span class="nc" id="L78">		JButton btnGestionSRS = new JButton(&quot;Gestión Sistema Regional de Salud&quot;);</span>
+<span class="nc" id="L79">		btnGestionSRS.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L81">				frame.cambiarPanel(new PantallaGestionSistemaRegionalSalud(frame));</span>
+<span class="nc" id="L82">			}</span>
+		});
+<span class="nc" id="L84">		btnGestionSRS.setBounds(622, 211, 209, 38);</span>
+<span class="nc" id="L85">		btnGestionSRS.setAlignmentX(Component.CENTER_ALIGNMENT);</span>
+<span class="nc" id="L86">		add(btnGestionSRS);</span>
+
+<span class="nc" id="L88">		JLabel imgMinisterio = new JLabel(&quot;&quot;);</span>
+<span class="nc" id="L89">		Image img = new ImageIcon(this.getClass().getResource(&quot;/logoMS.png&quot;)).getImage();</span>
+<span class="nc" id="L90">		imgMinisterio.setIcon(new ImageIcon(img));</span>
+<span class="nc" id="L91">		imgMinisterio.setBounds(261, 299, 378, 98);</span>
+<span class="nc" id="L92">		add(imgMinisterio);</span>
+<span class="nc" id="L93">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaRegistrarVacunacion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.presentacion</a> &gt; <span class="el_source">PantallaRegistrarVacunacion.java</span></div><h1>PantallaRegistrarVacunacion.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.presentacion;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
+/**
+ * Pantalla de registro de vacunación.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class PantallaRegistrarVacunacion extends PanelBase {
+
+	/** El serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/** El campo de texto de nombre. */
+	private final JTextField txtNombre;
+
+	/** El campo de texto de apellidos. */
+	private final JTextField txtApellidos;
+
+	/** El campo de texto de dni. */
+	private final JTextField txtDni;
+
+	/** El campo de texto de fecha. */
+	private final JTextField txtFecha;
+
+	/** El desplegable de tipo vacuna. */
+	private JComboBox&lt;String&gt; comboTipoVacuna;
+
+	/** El desplegable de de region. */
+	private final JComboBox&lt;String&gt; comboRegion;
+
+	/** El desplegable de grupo prioridad. */
+	private final JComboBox&lt;String&gt; comboGrupoPrioridad;
+
+	/** The checkbox de segunda dosis. */
+	private final JCheckBox chkSegundaDosis;
+
+	/**
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
+	public PantallaRegistrarVacunacion(final Main frame) {
+<span class="nc" id="L58">		super(frame, &quot;Gestión Sistema Regional de Salud/Registro de vacunación&quot;);</span>
+
+<span class="nc" id="L60">		JLabel lblNombre = new JLabel(&quot;Nombre:&quot;);</span>
+<span class="nc" id="L61">		lblNombre.setBounds(10, 36, 201, 14);</span>
+<span class="nc" id="L62">		midPanel.add(lblNombre);</span>
+
+<span class="nc" id="L64">		txtNombre = new JTextField();</span>
+<span class="nc" id="L65">		txtNombre.setBounds(242, 36, 181, 20);</span>
+<span class="nc" id="L66">		midPanel.add(txtNombre);</span>
+<span class="nc" id="L67">		txtNombre.setColumns(10);</span>
+
+<span class="nc" id="L69">		JLabel lblApellidos = new JLabel(&quot;Apellidos:&quot;);</span>
+<span class="nc" id="L70">		lblApellidos.setBounds(444, 36, 201, 14);</span>
+<span class="nc" id="L71">		midPanel.add(lblApellidos);</span>
+
+<span class="nc" id="L73">		txtApellidos = new JTextField();</span>
+<span class="nc" id="L74">		txtApellidos.setBounds(676, 36, 181, 20);</span>
+<span class="nc" id="L75">		midPanel.add(txtApellidos);</span>
+<span class="nc" id="L76">		txtApellidos.setColumns(10);</span>
+
+<span class="nc" id="L78">		JLabel lblDni = new JLabel(&quot;DNI:&quot;);</span>
+<span class="nc" id="L79">		lblDni.setBounds(10, 61, 201, 14);</span>
+<span class="nc" id="L80">		midPanel.add(lblDni);</span>
+
+<span class="nc" id="L82">		txtDni = new JTextField();</span>
+<span class="nc" id="L83">		txtDni.setBounds(242, 61, 181, 20);</span>
+<span class="nc" id="L84">		midPanel.add(txtDni);</span>
+<span class="nc" id="L85">		txtDni.setColumns(10);</span>
+
+<span class="nc" id="L87">		JLabel lblVacuna = new JLabel(&quot;Tipo Vacuna:&quot;);</span>
+<span class="nc" id="L88">		lblVacuna.setBounds(10, 86, 201, 14);</span>
+<span class="nc" id="L89">		midPanel.add(lblVacuna);</span>
+
+<span class="nc" id="L91">		JLabel lblFecha = new JLabel(&quot;Fecha:&quot;);</span>
+<span class="nc" id="L92">		lblFecha.setBounds(444, 61, 201, 14);</span>
+<span class="nc" id="L93">		midPanel.add(lblFecha);</span>
+
+<span class="nc" id="L95">		txtFecha = new JTextField();</span>
+<span class="nc" id="L96">		txtFecha.setBounds(676, 61, 181, 20);</span>
+<span class="nc" id="L97">		midPanel.add(txtFecha);</span>
+<span class="nc" id="L98">		txtFecha.setColumns(10);</span>
+
+<span class="nc" id="L100">		JButton btnRegistrarVacunacion = new JButton(&quot;Registrar Vacunacion&quot;);</span>
+<span class="nc" id="L101">		btnRegistrarVacunacion.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L103">				registrarVacunacion(frame);</span>
+<span class="nc" id="L104">			}</span>
+		});
+<span class="nc" id="L106">		btnRegistrarVacunacion.setBounds(10, 141, 847, 23);</span>
+<span class="nc" id="L107">		midPanel.add(btnRegistrarVacunacion);</span>
+		try {
+<span class="nc" id="L109">			comboTipoVacuna = new JComboBox&lt;&gt;(frame.getGestorGSNS().getGestorRepartoVacunas().getTipoVacunas());</span>
+<span class="nc" id="L110">			comboTipoVacuna.setBounds(242, 86, 181, 20);</span>
+<span class="nc" id="L111">			midPanel.add(comboTipoVacuna);</span>
+<span class="nc" id="L112">		} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L113">			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L114">			frame.cambiarPanel(frame.getPanelMain());</span>
+<span class="nc" id="L115">		}</span>
+<span class="nc" id="L116">		comboGrupoPrioridad = new JComboBox&lt;&gt;(frame.getGestorGSNS().getNombresGrupoPrioridad());</span>
+<span class="nc" id="L117">		comboGrupoPrioridad.setBounds(676, 86, 181, 20);</span>
+<span class="nc" id="L118">		midPanel.add(comboGrupoPrioridad);</span>
+
+<span class="nc" id="L120">		JLabel lblGrupoPrioridad = new JLabel(&quot;Grupo de prioridad:&quot;);</span>
+<span class="nc" id="L121">		lblGrupoPrioridad.setBounds(444, 86, 201, 14);</span>
+<span class="nc" id="L122">		midPanel.add(lblGrupoPrioridad);</span>
+
+<span class="nc" id="L124">		comboRegion = new JComboBox&lt;&gt;(frame.getGestorGSNS().getNombresRegion());</span>
+<span class="nc" id="L125">		comboRegion.setBounds(242, 111, 181, 20);</span>
+<span class="nc" id="L126">		midPanel.add(comboRegion);</span>
+
+<span class="nc" id="L128">		JLabel lblRegion = new JLabel(&quot;Región:&quot;);</span>
+<span class="nc" id="L129">		lblRegion.setBounds(10, 111, 201, 14);</span>
+<span class="nc" id="L130">		midPanel.add(lblRegion);</span>
+
+<span class="nc" id="L132">		JLabel lblSegundaDosis = new JLabel(&quot;¿Es la segunda dosis?&quot;);</span>
+<span class="nc" id="L133">		lblSegundaDosis.setBounds(444, 116, 201, 14);</span>
+<span class="nc" id="L134">		midPanel.add(lblSegundaDosis);</span>
+
+<span class="nc" id="L136">		chkSegundaDosis = new JCheckBox(&quot;Segunda dosis&quot;);</span>
+<span class="nc" id="L137">		chkSegundaDosis.setBounds(676, 111, 97, 23);</span>
+<span class="nc" id="L138">		midPanel.add(chkSegundaDosis);</span>
+<span class="nc" id="L139">	}</span>
+
+	/**
+	 * Invoca al gestor para registrar la vacunación.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
+	private void registrarVacunacion(Main frame) {
+<span class="nc bnc" id="L147" title="All 2 branches missed.">		if (validar()) {</span>
+			try {
+<span class="nc" id="L149">				boolean correcto = frame.getGestorGSNS().getGestorVacunacion().registrarVacunacion(txtFecha.getText(),</span>
+<span class="nc" id="L150">						txtNombre.getText(), txtApellidos.getText(), txtDni.getText(),</span>
+<span class="nc" id="L151">						comboTipoVacuna.getSelectedItem().toString(), comboGrupoPrioridad.getSelectedIndex() + 1,</span>
+<span class="nc" id="L152">						comboRegion.getSelectedIndex() + 1, chkSegundaDosis.isSelected());</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">				if (correcto) {</span>
+<span class="nc" id="L154">					JOptionPane.showMessageDialog(frame, &quot;La vacunación se ha registrado correctamente.&quot;, Main.INFO,</span>
+							JOptionPane.INFORMATION_MESSAGE);
+<span class="nc" id="L156">					frame.cambiarPanel(frame.getPanelMain());</span>
+				}
+<span class="nc" id="L158">			} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L159">				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L160">			}</span>
+		} else {
+<span class="nc" id="L162">			JOptionPane.showMessageDialog(frame, &quot;Rellena todos los campos.&quot;, Main.WARNING,</span>
+					JOptionPane.WARNING_MESSAGE);
+		}
+<span class="nc" id="L165">	}</span>
+
+	/**
+	 * Valida los campos de texto y desplegables.
+	 * 
+	 * @return true si la validación es correcta, false de lo contrario.
+	 */
+	private boolean validar() {
+<span class="nc" id="L173">		JTextField[] textFields = { txtNombre, txtApellidos, txtFecha, txtDni };</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">		for (JTextField jTextField : textFields) {</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">			if (jTextField.getText().length() == 0)</span>
+<span class="nc" id="L176">				return false;</span>
+		}
+<span class="nc bnc" id="L178" title="All 4 branches missed.">		return !(comboGrupoPrioridad.getSelectedIndex() == -1 || comboRegion.getSelectedIndex() == -1</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">				|| comboTipoVacuna.getSelectedItem() == null);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

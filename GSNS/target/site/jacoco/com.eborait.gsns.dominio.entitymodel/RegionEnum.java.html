@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RegionEnum.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.dominio.entitymodel</a> &gt; <span class="el_source">RegionEnum.java</span></div><h1>RegionEnum.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.dominio.entitymodel;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
+/**
+ * Define la información relativa a regiones.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+<span class="fc" id="L16">public enum RegionEnum {</span>
+
+	/** Andalucía. */
+<span class="fc" id="L19">	AND(1, &quot;Andalucia&quot;, 8501450),</span>
+	/** Aragón. */
+<span class="fc" id="L21">	AR(2, &quot;Aragón&quot;, 1331280),</span>
+	/** Asturias. */
+<span class="fc" id="L23">	AST(3, &quot;Asturias&quot;, 1013018),</span>
+	/** Ceuta. */
+<span class="fc" id="L25">	CEU(4, &quot;Ceuta&quot;, 83502),</span>
+	/** Cantabria. */
+<span class="fc" id="L27">	CAN(5, &quot;Cantabria&quot;, 583904),</span>
+	/** Castilla-La Mancha. */
+<span class="fc" id="L29">	CLM(6, &quot;Castilla-La Mancha&quot;, 2049455),</span>
+	/** Castilla y León. */
+<span class="fc" id="L31">	CYL(7, &quot;Castilla y León&quot;, 2387370),</span>
+	/** Cataluña. */
+<span class="fc" id="L33">	CAT(8, &quot;Cataluña&quot;, 7669999),</span>
+	/** Comunidad de Madrid. */
+<span class="fc" id="L35">	MAD(9, &quot;Comunidad de Madrid&quot;, 6752763),</span>
+	/** Comunidad Valenciana. */
+<span class="fc" id="L37">	VAL(10, &quot;Comunidad Valenciana&quot;, 5045885),</span>
+	/** País Vasco. */
+<span class="fc" id="L39">	VAS(11, &quot;País Vasco&quot;, 2185605),</span>
+	/** Extremadura. */
+<span class="fc" id="L41">	EXT(12, &quot;Extremadura&quot;, 1057999),</span>
+	/** Galicia. */
+<span class="fc" id="L43">	GAL(13, &quot;Galicia&quot;, 2696995),</span>
+	/** Islas Baleares. */
+<span class="fc" id="L45">	BAL(14, &quot;Islas Baleares&quot;, 1219423),</span>
+	/** Islas Canarias. */
+<span class="fc" id="L47">	ICA(15, &quot;Islas Canarias&quot;, 2244423),</span>
+	/** La Rioja. */
+<span class="fc" id="L49">	RIO(16, &quot;La Rioja&quot;, 316197),</span>
+	/** Melilla. */
+<span class="fc" id="L51">	MEL(17, &quot;Melilla&quot;, 84019),</span>
+	/** Navarra. */
+<span class="fc" id="L53">	NAV(18, &quot;Navarra&quot;, 657776),</span>
+	/** Región de Murcia. */
+<span class="fc" id="L55">	MUR(19, &quot;Región de Murcia&quot;, 1513161);</span>
+
+	/** Las entregas. */
+	private final Collection&lt;EntregaVacunas&gt; entregas;
+
+	/** El id. */
+	private final int id;
+
+	/** El nombre. */
+	private final String nombre;
+
+	/** La población. */
+	private final int poblacion;
+
+	/**
+	 * Instancia una nueva región.
+	 *
+	 * @param id        El id.
+	 * @param nombre    El nombre.
+	 * @param poblacion La población.
+	 */
+<span class="fc" id="L76">	RegionEnum(int id, String nombre, int poblacion) {</span>
+<span class="fc" id="L77">		this.id = id;</span>
+<span class="fc" id="L78">		this.nombre = nombre;</span>
+<span class="fc" id="L79">		this.poblacion = poblacion;</span>
+<span class="fc" id="L80">		this.entregas = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L81">	}</span>
+
+	/**
+	 * Se obtienen las entregas.
+	 *
+	 * @return Las entregas.
+	 */
+	public Collection&lt;EntregaVacunas&gt; getEntregas() {
+<span class="fc" id="L89">		return entregas;</span>
+	}
+
+	/**
+	 * Se obtiene el id.
+	 *
+	 * @return El id.
+	 */
+	public int getId() {
+<span class="fc" id="L98">		return id;</span>
+	}
+
+	/**
+	 * Se obtiene el nombre.
+	 *
+	 * @return El nombre.
+	 */
+	public String getNombre() {
+<span class="nc" id="L107">		return nombre;</span>
+	}
+
+	/**
+	 * Se obtiene la población.
+	 *
+	 * @return La población.
+	 */
+	public int getPoblacion() {
+<span class="fc" id="L116">		return poblacion;</span>
+	}
+
+	/**
+	 * Se obtiene la región mediante su identificador.
+	 *
+	 * @param id El id.
+	 * @return La región.
+	 * @throws GSNSException Si la región no existe.
+	 */
+	public static RegionEnum valueOf(int id) throws GSNSException {
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">		for (RegionEnum re : values()) {</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">			if (re.getId() == id) {</span>
+<span class="fc" id="L129">				return re;</span>
+			}
+		}
+<span class="nc" id="L132">		throw new GSNSException(&quot;La región no existe.&quot;);</span>
+	}
+
+	/**
+	 * Se obtienen los nombres de las regiones en un array de tipo String.
+	 *
+	 * @return Los nombres de las regiones.
+	 */
+	public static String[] getNombres() {
+<span class="nc" id="L141">		String[] nombres = new String[values().length];</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">		for (int i = 0; i &lt; nombres.length; i++) {</span>
+<span class="nc" id="L143">			nombres[i] = values()[i].getNombre();</span>
+		}
+<span class="nc" id="L145">		return nombres;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

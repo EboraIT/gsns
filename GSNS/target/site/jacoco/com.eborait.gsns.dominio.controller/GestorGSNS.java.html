@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorGSNS.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.dominio.controller</a> &gt; <span class="el_source">GestorGSNS.java</span></div><h1>GestorGSNS.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.dominio.controller;
+
+import com.eborait.gsns.dominio.entitymodel.GrupoPrioridad;
+import com.eborait.gsns.dominio.entitymodel.RegionEnum;
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+import com.eborait.gsns.persistencia.DAOFactory;
+import com.eborait.gsns.persistencia.EntregaDAO;
+import com.eborait.gsns.persistencia.LoteVacunasDAO;
+import com.eborait.gsns.persistencia.PacienteDAO;
+import com.eborait.gsns.persistencia.VacunacionDAO;
+
+/**
+ * Gestor principal de la aplicación.
+ * 
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @since 1.0
+ * @version 1.0
+ *
+ */
+public class GestorGSNS {
+
+	/** El gestor de estadisticas. */
+	private final GestorEstadisticas gestorEstadisticas;
+
+	/** El gestor del reparto de vacunas. */
+	private final GestorRepartoVacunas gestorRepartoVacunas;
+
+	/** El gestor de vacunaciones. */
+	private final GestorVacunacion gestorVacunacion;
+
+	/**
+	 * Instancia un nuevo GestorGSNS.
+	 */
+<span class="fc" id="L35">	public GestorGSNS() {</span>
+<span class="fc" id="L36">		this.gestorEstadisticas = new GestorEstadisticas(this);</span>
+<span class="fc" id="L37">		this.gestorRepartoVacunas = new GestorRepartoVacunas(this);</span>
+<span class="fc" id="L38">		this.gestorVacunacion = new GestorVacunacion(this);</span>
+<span class="fc" id="L39">	}</span>
+
+	/**
+	 *
+	 * @return El gestor de estadísticas.
+	 */
+	public GestorEstadisticas getGestorEstadisticas() {
+<span class="nc" id="L46">		return gestorEstadisticas;</span>
+	}
+
+	/**
+	 *
+	 * @return El gestor del reparto de vacunas.
+	 */
+	public GestorRepartoVacunas getGestorRepartoVacunas() {
+<span class="nc" id="L54">		return gestorRepartoVacunas;</span>
+	}
+
+	/**
+	 * 
+	 * @return El gestor de vacunaciones.
+	 */
+	public GestorVacunacion getGestorVacunacion() {
+<span class="nc" id="L62">		return gestorVacunacion;</span>
+	}
+
+	/**
+	 * Se obtiene la región mediante su identificador.
+	 *
+	 * @param region El identificador de la región.
+	 * @return La región.
+	 * @throws GSNSException Si la región no existe.
+	 */
+	public RegionEnum getRegionPorId(int region) throws GSNSException {
+<span class="fc" id="L73">		return RegionEnum.valueOf(region);</span>
+	}
+
+	/**
+	 * Se obtienen los nombres de las regiones en un array de tipo String.
+	 *
+	 * @return Los nombres de las regiones.
+	 */
+	public String[] getNombresRegion() {
+<span class="nc" id="L82">		return RegionEnum.getNombres();</span>
+	}
+
+	/**
+	 * Se obtienen los nombres de los grupos de prioridad.
+	 *
+	 * @return Los nombres de los grupos de prioridad.
+	 */
+	public String[] getNombresGrupoPrioridad() {
+<span class="nc" id="L91">		return GrupoPrioridad.getNombres();</span>
+	}
+
+	/**
+	 * Devuelve una instancia de EntregaDAO.
+	 * 
+	 * @return Objeto EntregaDAO.
+	 * @see EntregaDAO
+	 */
+	public EntregaDAO getEntregaDAO() {
+<span class="fc" id="L101">		return DAOFactory.getEntregaDAO();</span>
+	}
+
+	/**
+	 * Devuelve una instancia de LoteVacunasDAO.
+	 * 
+	 * @return Objeto LoteVacunasDAO.
+	 * @see LoteVacunasDAO
+	 */
+	public LoteVacunasDAO getLoteVacunasDAO() {
+<span class="fc" id="L111">		return DAOFactory.getLoteVacunasDAO();</span>
+	}
+
+	/**
+	 * Devuelve una instancia de VacunacionDAO.
+	 *
+	 * @return Objeto VacunacionDAO.
+	 * @see VacunacionDAO
+	 */
+	public VacunacionDAO getVacunacionDAO() {
+<span class="fc" id="L121">		return DAOFactory.getVacunacionDAO();</span>
+	}
+
+	/**
+	 * Devuelve una instancia de PacienteDAO.
+	 *
+	 * @return Objeto PacienteDAO.
+	 * @see PacienteDAO
+	 */
+	public PacienteDAO getPacienteDAO() {
+<span class="fc" id="L131">		return DAOFactory.getPacienteDAO();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

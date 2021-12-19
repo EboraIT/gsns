@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorVacunacion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.dominio.controller</a> &gt; <span class="el_source">GestorVacunacion.java</span></div><h1>GestorVacunacion.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.dominio.controller;
+
+import java.sql.SQLException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+import com.eborait.gsns.dominio.entitymodel.EntregaVacunas;
+import com.eborait.gsns.dominio.entitymodel.Paciente;
+import com.eborait.gsns.dominio.entitymodel.TipoVacuna;
+import com.eborait.gsns.dominio.entitymodel.Vacunacion;
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
+/**
+ * Realiza la gestión de vacunación.
+ * 
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @since 1.0
+ * @version 1.0
+ *
+ */
+public class GestorVacunacion {
+
+	/** El gestor de la aplicación. */
+	private final GestorGSNS gestorGSNS;
+
+	/** Objeto Logger. */
+<span class="fc" id="L28">	private static final Logger LOG = Logger.getLogger(GestorVacunacion.class.getName());</span>
+
+	/**
+	 * Instancia un nuevo GestorVacunacion.
+	 * 
+	 * @param gestorGSNS El gestor de la aplicación.
+	 */
+<span class="fc" id="L35">	public GestorVacunacion(GestorGSNS gestorGSNS) {</span>
+<span class="fc" id="L36">		this.gestorGSNS = gestorGSNS;</span>
+<span class="fc" id="L37">	}</span>
+
+	/**
+	 * Da de alta una nueva entrega de vacunas.
+	 * 
+	 * @param id        Identificador de la entrega.
+	 * @param lote      Lote de vacunación.
+	 * @param fecha     Fecha de alta.
+	 * @param cantidad  Cantidad.
+	 * @param prioridad Prioridad.
+	 * @param vacuna    Tipo de vacuna.
+	 * @param region    Región de la entrega.
+	 * @return Devuelve true si se ha registrado correctamente, false de lo
+	 *         contrario.
+	 * @throws GSNSException Si se produce una excepción al insertar.
+	 */
+	public boolean altaEntregaVacunas(String id, int lote, String fecha, int cantidad, int prioridad, String vacuna,
+			int region) throws GSNSException {
+<span class="fc" id="L55">		TipoVacuna tipoVacuna = new TipoVacuna(vacuna);</span>
+		try {
+<span class="fc" id="L57">			EntregaVacunas entregaVac = new EntregaVacunas(id, lote, Util.parseFecha(fecha), cantidad, prioridad,</span>
+					tipoVacuna, region);
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">			return gestorGSNS.getEntregaDAO().insert(entregaVac) == 1;</span>
+<span class="fc" id="L60">		} catch (SQLException sqle) {</span>
+<span class="fc" id="L61">			LOG.log(Level.SEVERE, &quot;{0}&quot;, &quot;Excepción insertando entrega: &quot; + sqle.getMessage());</span>
+<span class="fc" id="L62">			LOG.log(Level.SEVERE, &quot;&quot;, sqle);</span>
+<span class="fc" id="L63">			throw new GSNSException(&quot;Se ha producido un error al dar de alta la entrega de vacunas.&quot;);</span>
+		}
+	}
+
+	/**
+	 * Registra la vacunación de un paciente.
+	 * 
+	 * @param fecha        Fecha de vacunación.
+	 * @param nombre       Nombre de la persona vacunada.
+	 * @param apellidos    Apellidos de la persona vacunada.
+	 * @param nif          NIF de la persona vacunada.
+	 * @param tipo         Tipo de vacuna administrada.
+	 * @param prioridad    Grupo de prioridad de la persona vacunada.
+	 * @param region       Región a la que pertenece la persona vacunada.
+	 * @param segundaDosis Si es primera o segunda dósis.
+	 * @return Devuelve true si se ha registrado correctamente, false de lo
+	 *         contrario.
+	 * @throws GSNSException Si se produce una excepción al insertar.
+	 */
+	public boolean registrarVacunacion(String fecha, String nombre, String apellidos, String nif, String tipo,
+			int prioridad, int region, boolean segundaDosis) throws GSNSException {
+		try {
+<span class="fc" id="L85">			Paciente paciente = new Paciente(nif, nombre, apellidos, prioridad, region, segundaDosis);</span>
+<span class="fc" id="L86">			Vacunacion vacunacion = new Vacunacion(0, new TipoVacuna(tipo), paciente, Util.parseFecha(fecha),</span>
+					segundaDosis);
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">			return gestorGSNS.getVacunacionDAO().insert(vacunacion) == 1</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">					&amp;&amp; gestorGSNS.getPacienteDAO().insert(paciente) == 1;</span>
+<span class="fc" id="L90">		} catch (SQLException sqle) {</span>
+<span class="fc" id="L91">			LOG.log(Level.SEVERE, &quot;{0}&quot;, &quot;Excepción insertando vacunación: &quot; + sqle.getMessage());</span>
+<span class="fc" id="L92">			LOG.log(Level.SEVERE, &quot;&quot;, sqle);</span>
+<span class="fc" id="L93">			throw new GSNSException(&quot;Se ha producido un error al registrar la vacunación.&quot;);</span>
+		}
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

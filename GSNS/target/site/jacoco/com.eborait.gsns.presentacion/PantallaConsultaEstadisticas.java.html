@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaConsultaEstadisticas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.presentacion</a> &gt; <span class="el_source">PantallaConsultaEstadisticas.java</span></div><h1>PantallaConsultaEstadisticas.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.presentacion;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
+/**
+ * Pantalla de consulta de estadísticas.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class PantallaConsultaEstadisticas extends PanelBase {
+
+	/** El serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/** El desplegable de total region. */
+	private final JComboBox&lt;String&gt; comboTotalRegion;
+
+	/** El desplegable de porcentaje region. */
+	private final JComboBox&lt;String&gt; comboPorcentajeRegion;
+
+	/**
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
+	public PantallaConsultaEstadisticas(final Main frame) {
+<span class="nc" id="L39">		super(frame, &quot;Consultar estadísticas&quot;);</span>
+
+<span class="nc" id="L41">		final JLabel lblTotalVacPrimeraDosis = new JLabel(&quot;Total vacunados (primera dosis):&quot;);</span>
+<span class="nc" id="L42">		lblTotalVacPrimeraDosis.setBounds(211, 50, 377, 14);</span>
+<span class="nc" id="L43">		midPanel.add(lblTotalVacPrimeraDosis);</span>
+
+<span class="nc" id="L45">		final JLabel lblTotalVacSegundaDosis = new JLabel(&quot;Total vacunados (segunda dosis):&quot;);</span>
+<span class="nc" id="L46">		lblTotalVacSegundaDosis.setBounds(211, 75, 377, 14);</span>
+<span class="nc" id="L47">		midPanel.add(lblTotalVacSegundaDosis);</span>
+
+<span class="nc" id="L49">		final JLabel lblTotalDosisAdministradas = new JLabel(&quot;Total dosis administradas:&quot;);</span>
+<span class="nc" id="L50">		lblTotalDosisAdministradas.setBounds(211, 100, 377, 14);</span>
+<span class="nc" id="L51">		midPanel.add(lblTotalDosisAdministradas);</span>
+
+<span class="nc" id="L53">		JButton btnTotalVacunados = new JButton(&quot;Total vacunados&quot;);</span>
+<span class="nc" id="L54">		btnTotalVacunados.setBounds(10, 50, 191, 64);</span>
+<span class="nc" id="L55">		btnTotalVacunados.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try {
+<span class="nc" id="L58">					int totalPrimera = frame.getGestorGSNS().getGestorEstadisticas().consultarTotalVacunados(false);</span>
+<span class="nc" id="L59">					int totalSegunda = frame.getGestorGSNS().getGestorEstadisticas().consultarTotalVacunados(true);</span>
+<span class="nc" id="L60">					int total = totalPrimera + totalSegunda;</span>
+<span class="nc" id="L61">					lblTotalVacPrimeraDosis.setText(&quot;Total vacunados (primera dosis): &quot; + totalPrimera);</span>
+<span class="nc" id="L62">					lblTotalVacSegundaDosis.setText(&quot;Total vacunados (segunda dosis): &quot; + totalSegunda);</span>
+<span class="nc" id="L63">					lblTotalDosisAdministradas.setText(&quot;Total dosis administradas: &quot; + total);</span>
+<span class="nc" id="L64">				} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L65">					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L66">				}</span>
+<span class="nc" id="L67">			}</span>
+		});
+<span class="nc" id="L69">		midPanel.setLayout(null);</span>
+<span class="nc" id="L70">		midPanel.add(btnTotalVacunados);</span>
+
+<span class="nc" id="L72">		final JLabel lblTotalVacunadosRegionPrimera = new JLabel(&quot;Total vacunados por región (primera dosis):&quot;);</span>
+<span class="nc" id="L73">		lblTotalVacunadosRegionPrimera.setBounds(211, 200, 377, 14);</span>
+<span class="nc" id="L74">		midPanel.add(lblTotalVacunadosRegionPrimera);</span>
+
+<span class="nc" id="L76">		final JLabel lblTotalVacunadosRegionSegunda = new JLabel(&quot;Total vacunados por región (segunda dosis):&quot;);</span>
+<span class="nc" id="L77">		lblTotalVacunadosRegionSegunda.setBounds(211, 225, 377, 14);</span>
+<span class="nc" id="L78">		midPanel.add(lblTotalVacunadosRegionSegunda);</span>
+
+<span class="nc" id="L80">		final JLabel lblTotalDosisAdministradasRegion = new JLabel(&quot;Total dosis administradas por región:&quot;);</span>
+<span class="nc" id="L81">		lblTotalDosisAdministradasRegion.setBounds(211, 250, 377, 14);</span>
+<span class="nc" id="L82">		midPanel.add(lblTotalDosisAdministradasRegion);</span>
+
+<span class="nc" id="L84">		JButton btnVacunadosPorRegion = new JButton(&quot;Total vacunados por región&quot;);</span>
+<span class="nc" id="L85">		btnVacunadosPorRegion.setBounds(10, 232, 191, 32);</span>
+<span class="nc" id="L86">		btnVacunadosPorRegion.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try {
+<span class="nc" id="L89">					int totalPrimera = frame.getGestorGSNS().getGestorEstadisticas()</span>
+<span class="nc" id="L90">							.consultarTotalVacunadosPorRegion(comboTotalRegion.getSelectedIndex() + 1, false);</span>
+<span class="nc" id="L91">					int totalSegunda = frame.getGestorGSNS().getGestorEstadisticas()</span>
+<span class="nc" id="L92">							.consultarTotalVacunadosPorRegion(comboTotalRegion.getSelectedIndex() + 1, true);</span>
+<span class="nc" id="L93">					int total = totalPrimera + totalSegunda;</span>
+<span class="nc" id="L94">					lblTotalVacunadosRegionPrimera</span>
+<span class="nc" id="L95">							.setText(&quot;Total vacunados por región (primera dosis): &quot; + totalPrimera);</span>
+<span class="nc" id="L96">					lblTotalVacunadosRegionSegunda</span>
+<span class="nc" id="L97">							.setText(&quot;Total vacunados por región (segunda dosis): &quot; + totalSegunda);</span>
+<span class="nc" id="L98">					lblTotalDosisAdministradasRegion.setText(&quot;Total dosis administradas por región: &quot; + total);</span>
+<span class="nc" id="L99">				} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L100">					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L101">				}</span>
+<span class="nc" id="L102">			}</span>
+		});
+<span class="nc" id="L104">		midPanel.add(btnVacunadosPorRegion);</span>
+
+<span class="nc" id="L106">		final JLabel lblPorcentajePrimera = new JLabel(&quot;Porcentaje vacunados (primera dosis):&quot;);</span>
+<span class="nc" id="L107">		lblPorcentajePrimera.setBounds(211, 129, 377, 14);</span>
+<span class="nc" id="L108">		midPanel.add(lblPorcentajePrimera);</span>
+
+<span class="nc" id="L110">		final JLabel lblPorcentajeCompletamente = new JLabel(&quot;Porcentaje vacunados (pauta completa):&quot;);</span>
+<span class="nc" id="L111">		lblPorcentajeCompletamente.setBounds(211, 175, 377, 14);</span>
+<span class="nc" id="L112">		midPanel.add(lblPorcentajeCompletamente);</span>
+
+<span class="nc" id="L114">		JButton btnPorcentaje = new JButton(&quot;Porcentaje vacunados&quot;);</span>
+<span class="nc" id="L115">		btnPorcentaje.setBounds(10, 125, 191, 64);</span>
+<span class="nc" id="L116">		btnPorcentaje.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try {
+<span class="nc" id="L119">					double porcentajePrimera = frame.getGestorGSNS().getGestorEstadisticas()</span>
+<span class="nc" id="L120">							.consultarPorcentajeVacunadosSobreRecibidas(false);</span>
+<span class="nc" id="L121">					double porcentajeSegunda = frame.getGestorGSNS().getGestorEstadisticas()</span>
+<span class="nc" id="L122">							.consultarPorcentajeVacunadosSobreRecibidas(true);</span>
+<span class="nc" id="L123">					lblPorcentajePrimera.setText(&quot;Porcentaje vacunados (primera dosis): &quot; + porcentajePrimera + &quot;%&quot;);</span>
+<span class="nc" id="L124">					lblPorcentajeCompletamente</span>
+<span class="nc" id="L125">							.setText(&quot;Porcentaje vacunados (pauta completa): &quot; + porcentajeSegunda + &quot;%&quot;);</span>
+<span class="nc" id="L126">				} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L127">					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L128">				}</span>
+<span class="nc" id="L129">			}</span>
+		});
+<span class="nc" id="L131">		midPanel.add(btnPorcentaje);</span>
+
+<span class="nc" id="L133">		final JLabel lblPorcentaje1Dosisregion = new JLabel(&quot;Porcentaje vacunados por región (primera dosis):&quot;);</span>
+<span class="nc" id="L134">		lblPorcentaje1Dosisregion.setBounds(211, 294, 377, 14);</span>
+<span class="nc" id="L135">		midPanel.add(lblPorcentaje1Dosisregion);</span>
+
+<span class="nc" id="L137">		final JLabel lblPorcentajeDosisRegionCompleta = new JLabel(&quot;Porcentaje vacunados por región (pauta completa):&quot;);</span>
+<span class="nc" id="L138">		lblPorcentajeDosisRegionCompleta.setBounds(211, 340, 377, 14);</span>
+<span class="nc" id="L139">		midPanel.add(lblPorcentajeDosisRegionCompleta);</span>
+
+<span class="nc" id="L141">		JButton btnPorcentajeRegion = new JButton(&quot;Porcentaje vacunados por región&quot;);</span>
+<span class="nc" id="L142">		btnPorcentajeRegion.setBounds(10, 322, 191, 32);</span>
+<span class="nc" id="L143">		btnPorcentajeRegion.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try {
+<span class="nc" id="L146">					double porcentajePrimera = frame.getGestorGSNS().getGestorEstadisticas()</span>
+<span class="nc" id="L147">							.consultarPorcentajeVacunadosSobreRecibidasEnRegion(</span>
+<span class="nc" id="L148">									comboPorcentajeRegion.getSelectedIndex() + 1, false);</span>
+<span class="nc" id="L149">					double porcentajeSegunda = frame.getGestorGSNS().getGestorEstadisticas()</span>
+<span class="nc" id="L150">							.consultarPorcentajeVacunadosSobreRecibidasEnRegion(</span>
+<span class="nc" id="L151">									comboPorcentajeRegion.getSelectedIndex() + 1, true);</span>
+
+<span class="nc" id="L153">					lblPorcentaje1Dosisregion</span>
+<span class="nc" id="L154">							.setText(&quot;Porcentaje vacunados por región (primera dosis): &quot; + porcentajePrimera + &quot;%&quot;);</span>
+<span class="nc" id="L155">					lblPorcentajeDosisRegionCompleta</span>
+<span class="nc" id="L156">							.setText(&quot;Porcentaje vacunados por región (pauta completa): &quot; + porcentajeSegunda + &quot;%&quot;);</span>
+<span class="nc" id="L157">				} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L158">					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L159">				}</span>
+<span class="nc" id="L160">			}</span>
+		});
+<span class="nc" id="L162">		btnPorcentajeRegion.setHorizontalAlignment(SwingConstants.RIGHT);</span>
+<span class="nc" id="L163">		midPanel.add(btnPorcentajeRegion);</span>
+
+<span class="nc" id="L165">		comboTotalRegion = new JComboBox&lt;&gt;(frame.getGestorGSNS().getNombresRegion());</span>
+<span class="nc" id="L166">		comboTotalRegion.setBounds(10, 200, 191, 21);</span>
+<span class="nc" id="L167">		midPanel.add(comboTotalRegion);</span>
+
+<span class="nc" id="L169">		comboPorcentajeRegion = new JComboBox&lt;&gt;(frame.getGestorGSNS().getNombresRegion());</span>
+<span class="nc" id="L170">		comboPorcentajeRegion.setBounds(10, 290, 191, 21);</span>
+<span class="nc" id="L171">		midPanel.add(comboPorcentajeRegion);</span>
+<span class="nc" id="L172">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

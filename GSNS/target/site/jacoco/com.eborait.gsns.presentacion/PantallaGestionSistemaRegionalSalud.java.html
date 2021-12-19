@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaGestionSistemaRegionalSalud.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.presentacion</a> &gt; <span class="el_source">PantallaGestionSistemaRegionalSalud.java</span></div><h1>PantallaGestionSistemaRegionalSalud.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.presentacion;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+/**
+ * Pantalla de gestión del Sistema Regional de Salud.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class PantallaGestionSistemaRegionalSalud extends PanelBase {
+
+	/** El serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
+	public PantallaGestionSistemaRegionalSalud(final Main frame) {
+<span class="nc" id="L27">		super(frame, &quot;Gestión Sistema Regional de Salud&quot;);</span>
+
+<span class="nc" id="L29">		JButton btnAltaEntregas = new JButton(&quot;Alta entrega vacunas&quot;);</span>
+<span class="nc" id="L30">		btnAltaEntregas.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L32">				frame.cambiarPanel(new PantallaAltaEntregaVacunas(frame));</span>
+<span class="nc" id="L33">			}</span>
+		});
+<span class="nc" id="L35">		btnAltaEntregas.setBounds(546, 167, 158, 47);</span>
+
+<span class="nc" id="L37">		JButton btnRegistrarVacunacion = new JButton(&quot;Registrar vacunación&quot;);</span>
+<span class="nc" id="L38">		btnRegistrarVacunacion.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L40">				frame.cambiarPanel(new PantallaRegistrarVacunacion(frame));</span>
+<span class="nc" id="L41">			}</span>
+		});
+<span class="nc" id="L43">		btnRegistrarVacunacion.setBounds(185, 167, 176, 47);</span>
+<span class="nc" id="L44">		midPanel.setLayout(null);</span>
+<span class="nc" id="L45">		midPanel.add(btnAltaEntregas);</span>
+<span class="nc" id="L46">		midPanel.add(btnRegistrarVacunacion);</span>
+<span class="nc" id="L47">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PacienteDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.persistencia</a> &gt; <span class="el_source">PacienteDAO.java</span></div><h1>PacienteDAO.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.persistencia;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+import com.eborait.gsns.dominio.entitymodel.Paciente;
+
+/**
+ * Realiza la gestión de Paciente con la base de datos.
+ * 
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @since 1.0
+ * @version 1.0
+ * 
+ * @see Paciente
+ *
+ */
+<span class="fc" id="L21">public class PacienteDAO implements AbstractEntityDAO&lt;Paciente&gt; {</span>
+
+	/**
+	 * Formato sentencia select.
+	 */
+	private static final String SELECT = &quot;SELECT * FROM pacientes WHERE dni = '%s'&quot;;
+
+	/**
+	 * Formato sentencia select.
+	 */
+	private static final String SELECT_CRITERIA = &quot;SELECT * FROM pacientes&quot;;
+
+	/**
+	 * Formato sentencia insert.
+	 */
+	private static final String INSERT = &quot;INSERT INTO pacientes VALUES('%s', %s, %s, '%s', '%s', '%s')&quot;;
+
+	/**
+	 * Formato sentencia update.
+	 */
+	private static final String UPDATE = &quot;UPDATE pacientes SET dni = '%s', grupo = %s, region = %s, nombre = '%s', apellidos = '%s', segunda_dosis = %s WHERE dni = '%s'&quot;;
+
+	/**
+	 * Formato sentencia delete.
+	 */
+	private static final String DELETE = &quot;DELETE FROM pacientes WHERE dni = '%s'&quot;;
+
+	/**
+	 * Realiza una consulta a la base de datos.
+	 * 
+	 * @param id Identificador de Paciente que se busca.
+	 * @return Un objeto Paciente.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
+	 * @see Paciente
+	 */
+	@Override
+	public Paciente get(String id) throws SQLException {
+<span class="fc" id="L58">		Collection&lt;Collection&lt;Object&gt;&gt; data = AgenteBD.getAgente().select(String.format(SELECT, id));</span>
+<span class="fc" id="L59">		Iterator&lt;Collection&lt;Object&gt;&gt; it = data.iterator();</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">		if (it.hasNext()) {</span>
+<span class="fc" id="L61">			ArrayList&lt;Object&gt; rowData = (ArrayList&lt;Object&gt;) it.next();</span>
+<span class="fc" id="L62">			return new Paciente(String.valueOf(rowData.get(0)), (int) rowData.get(1), (int) rowData.get(2),</span>
+<span class="fc" id="L63">					String.valueOf(rowData.get(3)), String.valueOf(rowData.get(4)), (boolean) rowData.get(5));</span>
+		}
+<span class="fc" id="L65">		return null;</span>
+	}
+
+	/**
+	 * Realiza una consulta a la base de datos. Si el argumento criteria es null
+	 * devuelve todos los registros.
+	 * 
+	 * @param criteria Columna por la que se filtra
+	 * @param value    Valor por el que se filtra.
+	 * @return Una colección con los objetos Paciente encontrados.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
+	 * @see Paciente
+	 */
+	@Override
+	public Collection&lt;Paciente&gt; getAll(String criteria, String value) throws SQLException {
+<span class="fc" id="L80">		Collection&lt;Paciente&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L81">		String sql = Util.getSQLCriteria(SELECT_CRITERIA, criteria, value);</span>
+<span class="fc" id="L82">		Collection&lt;Collection&lt;Object&gt;&gt; data = AgenteBD.getAgente().select(sql);</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		for (Collection&lt;Object&gt; collection : data) {</span>
+<span class="fc" id="L84">			ArrayList&lt;Object&gt; rowData = (ArrayList&lt;Object&gt;) collection;</span>
+<span class="fc" id="L85">			Paciente p = new Paciente(String.valueOf(rowData.get(0)), (int) rowData.get(1), (int) rowData.get(2),</span>
+<span class="fc" id="L86">					String.valueOf(rowData.get(3)), String.valueOf(rowData.get(4)), (boolean) rowData.get(5));</span>
+<span class="fc" id="L87">			list.add(p);</span>
+<span class="fc" id="L88">		}</span>
+<span class="fc" id="L89">		return list;</span>
+	}
+
+	/**
+	 * Realiza una inserción en la base de datos.
+	 * 
+	 * @param paciente Objeto Paciente a insertar.
+	 * @return El número de filas insertadas.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
+	 * @see Paciente
+	 */
+	@Override
+	public int insert(Paciente paciente) throws SQLException {
+<span class="fc" id="L102">		return AgenteBD.getAgente()</span>
+<span class="fc" id="L103">				.insert(String.format(INSERT, paciente.getDni(), paciente.getGrupo().getPrioridad(),</span>
+<span class="fc" id="L104">						paciente.getRegion().getId(), paciente.getNombre(), paciente.getApellidos(),</span>
+<span class="fc" id="L105">						paciente.isSegundaDosis()));</span>
+	}
+
+	/**
+	 * Realiza una actualización en la base de datos.
+	 * 
+	 * @param paciente Objeto Paciente a actualizar.
+	 * @return El número de filas actualizadas.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
+	 * @see Paciente
+	 */
+	@Override
+	public int update(Paciente paciente) throws SQLException {
+<span class="fc" id="L118">		return AgenteBD.getAgente()</span>
+<span class="fc" id="L119">				.update(String.format(UPDATE, paciente.getDni(), paciente.getGrupo().getPrioridad(),</span>
+<span class="fc" id="L120">						paciente.getRegion().getId(), paciente.getNombre(), paciente.getApellidos(),</span>
+<span class="fc" id="L121">						paciente.isSegundaDosis(), paciente.getDni()));</span>
+	}
+
+	/**
+	 * Realiza un borrado en la base de datos.
+	 * 
+	 * @param paciente Objeto Paciente a eliminar.
+	 * @return El número de filas eliminadas.
+	 * @throws SQLException Si se produce una excepción en la sentencia SQL.
+	 * @see Paciente
+	 */
+	@Override
+	public int delete(Paciente paciente) throws SQLException {
+<span class="fc" id="L134">		return AgenteBD.getAgente().delete(String.format(DELETE, paciente.getDni()));</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

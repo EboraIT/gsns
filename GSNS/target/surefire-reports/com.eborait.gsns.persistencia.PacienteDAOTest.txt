@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.eborait.gsns.persistencia.PacienteDAOTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.132 s - in com.eborait.gsns.persistencia.PacienteDAOTest
