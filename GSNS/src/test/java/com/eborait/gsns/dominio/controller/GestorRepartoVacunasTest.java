@@ -36,9 +36,7 @@ class GestorRepartoVacunasTest {
 	private static LoteVacunas lote2;
 	private static Date fecha;
 	private static int region2;
-	private static int ia;
 	private static EntregaVacunas entrega;
-	private static String FarmaceuticaMal;
 
 	@BeforeAll
 	protected static void setUpBeforeClass() throws Exception {
@@ -51,8 +49,6 @@ class GestorRepartoVacunasTest {
 		lotevacunasDAO = DAOFactory.getLoteVacunasDAO();
 		gestorRepartoVacunas = new GestorRepartoVacunas(new GestorGSNS());
 		entregavacunasDAO = DAOFactory.getEntregaDAO();
-		FarmaceuticaMal = "XgQkciifDEULnBvrkiiHjVbbPavxjKZVSCAxxhVnFjBkLjMFjLnNDcKMmeckTyLQdxPYrUnRQpqRMpqnYFqNyiFNbczuWywbZDMTqEvWEScMJAKnkxNnCcgEzGikWcGNaQwBcKLBfrvSzHuXDtvrwUTbPQgXJpfJeJWkbNQJvWxrAPPbYKReBUSzuZTgpBhpvUGRXHhtLyvUgCTDrKSGHUTifGvHTfBzjLttGgZkFiJtdiwBBQhzqiUaQLcxLbVX";
-
 	}
 
 	@AfterAll
