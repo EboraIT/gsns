@@ -102,13 +102,55 @@ class GestorEstadisticasTest {
 	}
 
 	@Test
-	final void testConsultarPorcentajeVacunadosSobreRecibidas() {
-		// TODO
+	final void testConsultarPorcentajeVacunadosSobreRecibidas() throws SQLException {
+		try {
+			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidas(false));
+			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidas(true));
+			pacienteDAO.insert(vacunacion.getPaciente());
+			vacunacionDAO.insert(vacunacion);
+			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidas(false));
+			vacunacion.setId(Utilidades.max());
+			vacunacionDAO.delete(vacunacion);
+			vacunacion.setSegundaDosis(true);
+			vacunacionDAO.insert(vacunacion);
+			vacunacion.setSegundaDosis(false);
+			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidas(true));
+		} catch (GSNSException gsnse) {
+			fail("Excepción GSNSException no esperada.");
+		} catch (SQLException sqle) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			vacunacion.setId(Utilidades.max());
+			vacunacionDAO.delete(vacunacion);
+			pacienteDAO.delete(vacunacion.getPaciente());
+		}
 	}
 
 	@Test
-	final void testConsultarPorcentajeVacunadosSobreRecibidasEnRegion() {
-		// TODO
+	final void testConsultarPorcentajeVacunadosSobreRecibidasEnRegion() throws SQLException {
+		try {
+			int region = vacunacion.getPaciente().getRegion().getId();
+			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion(region, false));
+			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion(region, true));
+			pacienteDAO.insert(vacunacion.getPaciente());
+			vacunacionDAO.insert(vacunacion);
+			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion(region, false));
+			vacunacion.setId(Utilidades.max());
+			vacunacionDAO.delete(vacunacion);
+			vacunacion.setSegundaDosis(true);
+			vacunacionDAO.insert(vacunacion);
+			vacunacion.setSegundaDosis(false);
+			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion(region, true));
+			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion(897, true));
+		} catch (GSNSException gsnse) {
+			fail("Excepción GSNSException no esperada.");
+		} catch (SQLException sqle) {
+			fail("Excepción SQLException no esperada.");
+		} finally {
+			vacunacion.setId(Utilidades.max());
+			vacunacionDAO.delete(vacunacion);
+			pacienteDAO.delete(vacunacion.getPaciente());
+		}
 	}
 
 }
