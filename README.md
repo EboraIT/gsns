@@ -37,7 +37,7 @@ Se fueron realizando reuniones durante el Sprint Backlog para conocer el estado 
 
 Durante el periodo de gestionar la calidad también tuvimos una primera reunión el Miércoles 10/11/2021 para planificar nuestro Sprint Backlog el cúal quedaría definido y repartido en arreglar bugs, code smells , security hostpots y código duplicado.
 
-Una vez que teniamos todo los errores que nos salieron en el sonarcloud , empezamos a crear las pruebas unitarias para nuestras clases y paquetes desarrollados en Java. Empezamos a desarrollar primero los test de la capa de persistencia, y una vez que tengamos los test realizados en estas clases empezaremos a realizar los test de los Gestores los cuales desarrollaremos en un Excel para determinar el tipo de casos de pruebas que realizaremos con sus datos...etc.
+Una vez que teniamos todo los errores que nos salieron en el sonarcloud , empezamos a crear las pruebas unitarias para nuestras clases y paquetes desarrollados en Java. Empezamos a desarrollar primero los test de la capa de persistencia, y una vez que tengamos los test realizados en estas clases empezaremos a realizar los test de los Gestores los cuales desarrollaremos en un [Excel](https://github.com/EboraIT/gsns/blob/Development/EboraIT-%20Pruebas.xlsx) para determinar el tipo de casos de pruebas que realizaremos con sus datos...etc.
 
 ## Gestión de Calidad 🔨
 
