@@ -112,7 +112,7 @@ El  día 14/11/2021 tenemos la calidad de nuestro código:
 	- 1,9 K Lines of Code
 	- 1,3 % Duplications
 
-Después de realizar los test de la capa de persistencia y algunos en la capa de los gestores la calidad de nuestro código de vio afectada:
+Después de realizar los test de la capa de persistencia y algunos en la capa de los gestores la calidad de nuestro código se vio afectada:
 
 	- 10 Bugs
 	- 6 Code Smells
