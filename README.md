@@ -1,6 +1,10 @@
 # EboraIT
 Laboratorio Ingeniería del Software II
 
+Enlace del repositorio: https://github.com/EboraIT/gsns
+
+Enlace de SonarCloud: https://sonarcloud.io/project/overview?id=com.eborait%3Agsns
+
 ## Descripción del problema 🔨
 Las tarea práctica consiste en la realización de un proyecto (durante todo el cuatrimestre) de desarrollo software siguiendo los métodos y técnicas de ingeniería del software vistas en teoría así como aplicando las herramientas que se irán presentando en algunas sesiones de prácticas.
 
