@@ -150,6 +150,11 @@ En la capa de persistencia hicimos test de toda la base de datos y sus clases DA
 
 También destacar que hemos implementado en nuestro código la dependencia de Surefire para que nos genere un _informe_ sobre los test realizados. Todas estas pruebas siguen vinculadas al sonarcloud y su actualización de estado.
 
+Para crear los informes y subirlos a GitHub hemos utilizado la sentencia de maven:
+
+	- clean jacoco:prepare-agent install jacoco:report site:site
+	
+
 ## Mantenimiento 🔨
 
 Una vez realizado los test llevaremos a cabo nuestro plan de mantenimiento. El cual se detallará a continuación.
