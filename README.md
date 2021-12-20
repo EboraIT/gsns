@@ -103,7 +103,7 @@ Destacar la última línea la cual hace la llamada a mvn verify sonar:sonar pero
 
 Al realizar la Integración continua ahora lo tenemos configurado para que una vez realizemos un push en la rama Develop , esta ejecutará a su vez un actions del proyecto que llamará al archivo anteriormente descrito para realizar el analisis del proyecto.
 
-Wn el  día 14/11/2021 tenemos la calidad de nuestro código:
+El  día 14/11/2021 tenemos la calidad de nuestro código:
 
 	- 0 Bugs
 	- 10 Code Smells
@@ -120,6 +120,27 @@ Después de realizar los test de la capa de persistencia y algunos en la capa de
 	- 0 Vulnerabilities
 	- 2,1 K Lines of Code
 	- 1,2% Duplications
+
+Al observar los Bugs que nos daba vimos que erar reglas que no eran de mucha importancia por ello decidimos crear un perfil en SonarCloud el cual hemos ido desactivando reglas o activando para que las detectasen o no en nuestro código y así depurarlo mejor. 
+
+Nuestro perfil le implementamos en el lenguaje JAVA: llamado EboraIT Profile
+
+![image](https://user-images.githubusercontent.com/45260992/146818966-e038d395-195a-4325-88e1-24fe63c5e831.png)
+
+Las reglas que desactivamos fueron las siguientes:
+
+![image](https://user-images.githubusercontent.com/45260992/146819194-1d6af86f-f9a1-460d-9c71-98f14488690a.png)
+
+También por último hemos configurado nuestro Quality Gate cuyas condiciones han sido asignadas de la siguiente forma:
+
+| Metric | Operator | Value |
+| ------------- 		| -------------   |-------|
+| Coverage  			| is less than    | 50.0% |
+| Duplicated Lines (%) 		| is greater than | 3.0%  |
+| Security Hotspots Reviewed    | is less than    | 100.0%|
+| Security Rating  		| is worse than   | A 	  |
+
+
 
 ## Pruebas Unitarias / Test 🔨
 
