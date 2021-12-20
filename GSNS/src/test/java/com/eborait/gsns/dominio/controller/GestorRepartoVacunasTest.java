@@ -103,6 +103,7 @@ class GestorRepartoVacunasTest {
 			gestorRepartoVacunas.altaNuevoLoteVacunas(lote.getId(), "2/12/2021", lote.getCantidad(),
 					lote.getTipo().getNombre(), lote.getFarmaceutica(), "23/11/2021");
 			assertEquals(1229676, gestorRepartoVacunas.calcularEntregasRegion(region2, 240));
+			assertEquals(1230606, gestorRepartoVacunas.calcularEntregasRegion(region2, 0));
 		} catch (GSNSException e) {
 			fail("Excepción SQLException no esperada.");
 		} finally {
