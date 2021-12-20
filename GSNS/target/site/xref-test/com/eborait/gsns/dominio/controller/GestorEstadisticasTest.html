@@ -112,16 +112,58 @@
 <a name="102" href="#102">102</a> 	}
 <a name="103" href="#103">103</a> 
 <a name="104" href="#104">104</a> 	@Test
-<a name="105" href="#105">105</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">void</strong> testConsultarPorcentajeVacunadosSobreRecibidas() {
-<a name="106" href="#106">106</a> 		<em class="jxr_comment">// TODO</em>
-<a name="107" href="#107">107</a> 	}
-<a name="108" href="#108">108</a> 
-<a name="109" href="#109">109</a> 	@Test
-<a name="110" href="#110">110</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">void</strong> testConsultarPorcentajeVacunadosSobreRecibidasEnRegion() {
-<a name="111" href="#111">111</a> 		<em class="jxr_comment">// TODO</em>
-<a name="112" href="#112">112</a> 	}
-<a name="113" href="#113">113</a> 
-<a name="114" href="#114">114</a> }
+<a name="105" href="#105">105</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">void</strong> testConsultarPorcentajeVacunadosSobreRecibidas() <strong class="jxr_keyword">throws</strong> SQLException {
+<a name="106" href="#106">106</a> 		<strong class="jxr_keyword">try</strong> {
+<a name="107" href="#107">107</a> 			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidas(false));
+<a name="108" href="#108">108</a> 			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidas(<strong class="jxr_keyword">true</strong>));
+<a name="109" href="#109">109</a> 			pacienteDAO.insert(vacunacion.getPaciente());
+<a name="110" href="#110">110</a> 			vacunacionDAO.insert(vacunacion);
+<a name="111" href="#111">111</a> 			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidas(false));
+<a name="112" href="#112">112</a> 			vacunacion.setId(Utilidades.max());
+<a name="113" href="#113">113</a> 			vacunacionDAO.delete(vacunacion);
+<a name="114" href="#114">114</a> 			vacunacion.setSegundaDosis(<strong class="jxr_keyword">true</strong>);
+<a name="115" href="#115">115</a> 			vacunacionDAO.insert(vacunacion);
+<a name="116" href="#116">116</a> 			vacunacion.setSegundaDosis(false);
+<a name="117" href="#117">117</a> 			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidas(<strong class="jxr_keyword">true</strong>));
+<a name="118" href="#118">118</a> 		} <strong class="jxr_keyword">catch</strong> (GSNSException gsnse) {
+<a name="119" href="#119">119</a> 			fail(<span class="jxr_string">"Excepción GSNSException no esperada."</span>);
+<a name="120" href="#120">120</a> 		} <strong class="jxr_keyword">catch</strong> (SQLException sqle) {
+<a name="121" href="#121">121</a> 			fail(<span class="jxr_string">"Excepción SQLException no esperada."</span>);
+<a name="122" href="#122">122</a> 		} <strong class="jxr_keyword">finally</strong> {
+<a name="123" href="#123">123</a> 			vacunacion.setId(Utilidades.max());
+<a name="124" href="#124">124</a> 			vacunacionDAO.delete(vacunacion);
+<a name="125" href="#125">125</a> 			pacienteDAO.delete(vacunacion.getPaciente());
+<a name="126" href="#126">126</a> 		}
+<a name="127" href="#127">127</a> 	}
+<a name="128" href="#128">128</a> 
+<a name="129" href="#129">129</a> 	@Test
+<a name="130" href="#130">130</a> 	<strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">void</strong> testConsultarPorcentajeVacunadosSobreRecibidasEnRegion() <strong class="jxr_keyword">throws</strong> SQLException {
+<a name="131" href="#131">131</a> 		<strong class="jxr_keyword">try</strong> {
+<a name="132" href="#132">132</a> 			<strong class="jxr_keyword">int</strong> region = vacunacion.getPaciente().getRegion().getId();
+<a name="133" href="#133">133</a> 			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion(region, false));
+<a name="134" href="#134">134</a> 			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion(region, <strong class="jxr_keyword">true</strong>));
+<a name="135" href="#135">135</a> 			pacienteDAO.insert(vacunacion.getPaciente());
+<a name="136" href="#136">136</a> 			vacunacionDAO.insert(vacunacion);
+<a name="137" href="#137">137</a> 			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion(region, false));
+<a name="138" href="#138">138</a> 			vacunacion.setId(Utilidades.max());
+<a name="139" href="#139">139</a> 			vacunacionDAO.delete(vacunacion);
+<a name="140" href="#140">140</a> 			vacunacion.setSegundaDosis(<strong class="jxr_keyword">true</strong>);
+<a name="141" href="#141">141</a> 			vacunacionDAO.insert(vacunacion);
+<a name="142" href="#142">142</a> 			vacunacion.setSegundaDosis(false);
+<a name="143" href="#143">143</a> 			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion(region, <strong class="jxr_keyword">true</strong>));
+<a name="144" href="#144">144</a> 			assertEquals(0, gestorEstadisticas.consultarPorcentajeVacunadosSobreRecibidasEnRegion(897, <strong class="jxr_keyword">true</strong>));
+<a name="145" href="#145">145</a> 		} <strong class="jxr_keyword">catch</strong> (GSNSException gsnse) {
+<a name="146" href="#146">146</a> 			fail(<span class="jxr_string">"Excepción GSNSException no esperada."</span>);
+<a name="147" href="#147">147</a> 		} <strong class="jxr_keyword">catch</strong> (SQLException sqle) {
+<a name="148" href="#148">148</a> 			fail(<span class="jxr_string">"Excepción SQLException no esperada."</span>);
+<a name="149" href="#149">149</a> 		} <strong class="jxr_keyword">finally</strong> {
+<a name="150" href="#150">150</a> 			vacunacion.setId(Utilidades.max());
+<a name="151" href="#151">151</a> 			vacunacionDAO.delete(vacunacion);
+<a name="152" href="#152">152</a> 			pacienteDAO.delete(vacunacion.getPaciente());
+<a name="153" href="#153">153</a> 		}
+<a name="154" href="#154">154</a> 	}
+<a name="155" href="#155">155</a> 
+<a name="156" href="#156">156</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

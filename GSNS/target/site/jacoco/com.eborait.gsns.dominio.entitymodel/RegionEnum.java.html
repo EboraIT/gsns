@@ -124,12 +124,12 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 	 * @throws GSNSException Si la región no existe.
 	 */
 	public static RegionEnum valueOf(int id) throws GSNSException {
-<span class="pc bpc" id="L127" title="1 of 2 branches missed.">		for (RegionEnum re : values()) {</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">		for (RegionEnum re : values()) {</span>
 <span class="fc bfc" id="L128" title="All 2 branches covered.">			if (re.getId() == id) {</span>
 <span class="fc" id="L129">				return re;</span>
 			}
 		}
-<span class="nc" id="L132">		throw new GSNSException(&quot;La región no existe.&quot;);</span>
+<span class="fc" id="L132">		throw new GSNSException(&quot;La región no existe.&quot;);</span>
 	}
 
 	/**

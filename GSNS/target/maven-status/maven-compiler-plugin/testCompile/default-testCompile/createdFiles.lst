@@ -1,9 +1,11 @@
 com\eborait\gsns\persistencia\LoteVacunasDAOTest$1.class
 com\eborait\gsns\persistencia\AgenteBDTest$5.class
+com\eborait\gsns\dominio\controller\GestorVacunacionTest$3.class
 com\eborait\gsns\dominio\controller\UtilTest.class
 com\eborait\gsns\persistencia\EntregaDAOTest$1.class
 com\eborait\gsns\persistencia\PacienteDAOTest$2.class
 com\eborait\gsns\persistencia\DAOFactoryTest.class
+com\eborait\gsns\dominio\controller\GestorRepartoVacunasTest$2.class
 com\eborait\gsns\dominio\controller\UtilTest$1.class
 com\eborait\gsns\dominio\controller\GestorVacunacionTest$1.class
 com\eborait\gsns\persistencia\AgenteBDTest$2.class
