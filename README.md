@@ -60,18 +60,18 @@ La forma en la que realizamos la correción de estas carencias de calidad fué a
 
 Ademaás destacar que decidimos que los cambios para corregir Bugs y Security Hotspots los realizamos en la rama Hotfix, la cúal la ibamos haciendo un merge con Develop, y en los cambios para Code Smells los ibamos realizando en la branch Develop.
 
-Una vez comprobado que funcionaba la forma manualmente ejecutando la sentencia maven, decidimos implementar la Integración Continua que es posible realizar entre sonarcloud y Github, para realizar esto tuvimos que añadir una variable Secret junto a su token en nuestro proyecto de Github, y después tuvimos que crear el archivo localizado en .github/workflows/ llamado [build.yml](/https://github.com/EboraIT/gsns/blob/master/.github/workflows/build.yml)
+Una vez comprobado que funcionaba la forma manualmente ejecutando la sentencia maven, decidimos implementar la Integración Continua que es posible realizar entre sonarcloud y Github, para realizar esto tuvimos que añadir una variable Secret junto a su token en nuestro proyecto de Github, y después tuvimos que crear el archivo localizado en .github/workflows/ llamado [build.yml](https://github.com/EboraIT/gsns/blob/master/.github/workflows/build.yml)
 
 	name: Build
 	on:
 	  push:
- 	   branches:
-      - Development
-	  pull_request:
-	    types: [opened, synchronize, reopened]
+  	  branches:
+      - master
+ 	 pull_request:
+    types: [opened, synchronize, reopened]
 	jobs:
- 	 build:
- 	   name: Build
+  	build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -97,7 +97,8 @@ Una vez comprobado que funcionaba la forma manualmente ejecutando la sentencia m
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B -f /home/runner/work/gsns/gsns/GSNS/pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=eborait -Dsonar.projectKey=com.eborait:gsns
+        run: mvn clean jacoco:prepare-agent install jacoco:report site:site -B -f /home/runner/work/gsns/gsns/GSNS/pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=eborait -Dsonar.projectKey=com.eborait:gsns
+
 
 Destacar la última línea la cual hace la llamada a mvn verify sonar:sonar pero en este caso le tenemos que pasar la ruta de nuestro pom, la url de sonar, y el nombre de nuestra organización de sonar entre otras cosas.
 
@@ -148,7 +149,7 @@ Respecto a las pruebas unitarias las tenemos almacenadas en el directorio [test]
 
 En la capa de persistencia hicimos test de toda la base de datos y sus clases DAO. Y en el dominio.controller estuvimos realizando test de las clases de los gestores que como comentamos anteriormente hemos creado un excel en el cual tenemos documentado los casos de pruebas.
 
-También destacar que hemos implementado en nuestro código la dependencia de Surefire para que nos genere un _informe_ sobre los test realizados. Todas estas pruebas siguen vinculadas al sonarcloud y su actualización de estado.
+También destacar que hemos implementado en nuestro código la dependencia de Surefire para que nos genere un [informe](https://github.com/EboraIT/gsns/tree/master/GSNS/target/site) sobre los test realizados. Todas estas pruebas siguen vinculadas al sonarcloud y su actualización de estado.
 
 Para crear los informes y subirlos a GitHub hemos utilizado la sentencia de maven:
 
@@ -159,9 +160,9 @@ Para crear los informes y subirlos a GitHub hemos utilizado la sentencia de mave
 
 Una vez realizado los test llevaremos a cabo nuestro plan de mantenimiento. El cual se detallará a continuación.
 
-	1. Realizaremos una rama _maintenance_
+	1. Realizaremos una rama maintenance
 	2. Desde el primer día de despliegue en la rama master los fallos, correciones, bugs ...etc se resolverán en la rama anterior.
-	3. Cada fallo que se detecte se resolverá en dicha rama y después se hará un merge a la capa _development_ para mas tarde que este resuelto en la siguiente version.
+	3. Cada fallo que se detecte se resolverá en dicha rama y después se hará un merge a la capa development para mas tarde que este resuelto en la siguiente version.
 	
 
 ## Autores ✒️
