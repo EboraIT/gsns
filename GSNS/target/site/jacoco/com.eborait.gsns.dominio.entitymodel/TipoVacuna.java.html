@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TipoVacuna.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.dominio.entitymodel</a> &gt; <span class="el_source">TipoVacuna.java</span></div><h1>TipoVacuna.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.dominio.entitymodel;
+
+/**
+ * Define la información relativa a una entrega de vacunas.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class TipoVacuna {
+
+	/** El nombre. */
+	private String nombre;
+
+	/** La farmacéutica. */
+	private String farmaceutica;
+
+	/** La fecha de aprobación. */
+	private String fechaAprobacion;
+
+	/**
+	 * Instancia un nuevo tipo de vacuna.
+	 *
+	 * @param nombre          El nombre.
+	 * @param farmaceutica    La farmacéutica.
+	 * @param fechaAprobacion La fecha de aprobación.
+	 */
+<span class="fc" id="L29">	public TipoVacuna(String nombre, String farmaceutica, String fechaAprobacion) {</span>
+<span class="fc" id="L30">		this.nombre = nombre;</span>
+<span class="fc" id="L31">		this.farmaceutica = farmaceutica;</span>
+<span class="fc" id="L32">		this.fechaAprobacion = fechaAprobacion;</span>
+<span class="fc" id="L33">	}</span>
+
+	/**
+	 * Instancia un nuevo tipo de vacuna.
+	 *
+	 * @param tipo El tipo de vacuna.
+	 */
+<span class="fc" id="L40">	public TipoVacuna(String tipo) {</span>
+<span class="fc" id="L41">		this.nombre = tipo.substring(0, tipo.indexOf(&quot;-&quot;));</span>
+<span class="fc" id="L42">		this.farmaceutica = tipo.substring(tipo.indexOf(&quot;-&quot;) + 1, tipo.lastIndexOf(&quot;-&quot;));</span>
+<span class="fc" id="L43">		this.fechaAprobacion = tipo.substring(tipo.lastIndexOf(&quot;-&quot;) + 1);</span>
+<span class="fc" id="L44">	}</span>
+
+	/**
+	 * Se obtiene el nombre.
+	 *
+	 * @return El nombre.
+	 */
+	public String getNombre() {
+<span class="fc" id="L52">		return nombre;</span>
+	}
+
+	/**
+	 * Establece el nombre.
+	 *
+	 * @param nombre El nuevo nombre.
+	 */
+	public void setNombre(String nombre) {
+<span class="nc" id="L61">		this.nombre = nombre;</span>
+<span class="nc" id="L62">	}</span>
+
+	/**
+	 * Se obtiene la farmacéutica.
+	 *
+	 * @return La farmacéutica
+	 */
+	public String getFarmaceutica() {
+<span class="fc" id="L70">		return farmaceutica;</span>
+	}
+
+	/**
+	 * Establece la farmacéutica.
+	 *
+	 * @param farmaceutica La nueva farmacéutica.
+	 */
+	public void setFarmaceutica(String farmaceutica) {
+<span class="nc" id="L79">		this.farmaceutica = farmaceutica;</span>
+<span class="nc" id="L80">	}</span>
+
+	/**
+	 * Se obtiene la fecha de aprobación.
+	 *
+	 * @return La fecha de aprobación
+	 */
+	public String getFechaAprobacion() {
+<span class="fc" id="L88">		return fechaAprobacion;</span>
+	}
+
+	/**
+	 * Establece la fecha de aprobación.
+	 *
+	 * @param fechaAprobacion La nueva fecha de aprobación.
+	 */
+	public void setFechaAprobacion(String fechaAprobacion) {
+<span class="nc" id="L97">		this.fechaAprobacion = fechaAprobacion;</span>
+<span class="nc" id="L98">	}</span>
+
+	/**
+	 * Transforma la clase TipoVacuna a String.
+	 *
+	 * @return La clase TipoVacuna como String.
+	 */
+	@Override
+	public String toString() {
+<span class="fc" id="L107">		return nombre + &quot;-&quot; + farmaceutica + &quot;-&quot; + fechaAprobacion;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="fc" id="L112">		TipoVacuna tv = (TipoVacuna) obj;</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">		if (tv != null) {</span>
+<span class="pc bpc" id="L114" title="2 of 4 branches missed.">			return nombre.equals(tv.getNombre()) &amp;&amp; farmaceutica.equals(tv.getFarmaceutica())</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">					&amp;&amp; fechaAprobacion.equals(tv.getFechaAprobacion());</span>
+		} else {
+<span class="nc" id="L117">			return false;</span>
+		}
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

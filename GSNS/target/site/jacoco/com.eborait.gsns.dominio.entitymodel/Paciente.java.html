@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Paciente.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.dominio.entitymodel</a> &gt; <span class="el_source">Paciente.java</span></div><h1>Paciente.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.dominio.entitymodel;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+/**
+ * Define la información relativa a un paciente.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class Paciente {
+
+	/** Objeto Logger. */
+<span class="fc" id="L18">	private static final Logger LOG = Logger.getLogger(Paciente.class.getName());</span>
+
+	/** La region. */
+	private RegionEnum region;
+
+	/** El grupo. */
+	private GrupoPrioridad grupo;
+
+	/** El dni. */
+	private String dni;
+
+	/** El nombre. */
+	private String nombre;
+
+	/** Los apellidos. */
+	private String apellidos;
+
+	/** La segunda dosis. */
+	private boolean segundaDosis;
+
+	/**
+	 * Instancia un nuevo paciente.
+	 *
+	 * @param dni          El dni.
+	 * @param nombre       El nombre.
+	 * @param apellidos    Los apellidos.
+	 * @param grupo        El grupo.
+	 * @param region       La region.
+	 * @param segundaDosis La segunda dosis.
+	 * @throws GSNSException Si se produce una excepción en el grupo de prioridad o
+	 *                       la región.
+	 */
+	public Paciente(String dni, String nombre, String apellidos, int grupo, int region, boolean segundaDosis)
+<span class="fc" id="L51">			throws GSNSException {</span>
+<span class="fc" id="L52">		this.dni = dni;</span>
+<span class="fc" id="L53">		this.nombre = nombre;</span>
+<span class="fc" id="L54">		this.apellidos = apellidos;</span>
+<span class="fc" id="L55">		this.grupo = GrupoPrioridad.valueOf(grupo);</span>
+<span class="fc" id="L56">		this.region = RegionEnum.valueOf(region);</span>
+<span class="fc" id="L57">		this.segundaDosis = segundaDosis;</span>
+
+<span class="fc" id="L59">		this.grupo.getPacientes().add(this);</span>
+<span class="fc" id="L60">	}</span>
+
+	/**
+	 * Instancia un nuevo paciente.
+	 *
+	 * @param dni          El dni.
+	 * @param grupo        El grupo.
+	 * @param region       La region.
+	 * @param nombre       El nombre.
+	 * @param apellidos    Los apellidos.
+	 * @param segundaDosis La segunda dosis.
+	 */
+<span class="fc" id="L72">	public Paciente(String dni, int grupo, int region, String nombre, String apellidos, boolean segundaDosis) {</span>
+<span class="fc" id="L73">		this.dni = dni;</span>
+<span class="fc" id="L74">		this.nombre = nombre;</span>
+<span class="fc" id="L75">		this.apellidos = apellidos;</span>
+<span class="fc" id="L76">		this.segundaDosis = segundaDosis;</span>
+		try {
+<span class="fc" id="L78">			this.grupo = GrupoPrioridad.valueOf(grupo);</span>
+<span class="fc" id="L79">			this.region = RegionEnum.valueOf(region);</span>
+
+<span class="fc" id="L81">			this.grupo.getPacientes().add(this);</span>
+<span class="nc" id="L82">		} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L83">			LOG.log(Level.SEVERE, &quot;{0}&quot;, &quot;&quot; + gsnse.getMessage());</span>
+<span class="nc" id="L84">			LOG.log(Level.SEVERE, &quot;&quot;, gsnse);</span>
+<span class="fc" id="L85">		}</span>
+<span class="fc" id="L86">	}</span>
+
+	/**
+	 * Se obtiene la región.
+	 *
+	 * @return La región.
+	 */
+	public RegionEnum getRegion() {
+<span class="fc" id="L94">		return region;</span>
+	}
+
+	/**
+	 * Establece la región.
+	 *
+	 * @param region La nueva región.
+	 */
+	public void setRegion(RegionEnum region) {
+<span class="nc" id="L103">		this.region = region;</span>
+<span class="nc" id="L104">	}</span>
+
+	/**
+	 * Se obtiene el grupo de prioridad.
+	 *
+	 * @return El grupo de prioridad.
+	 */
+	public GrupoPrioridad getGrupo() {
+<span class="fc" id="L112">		return grupo;</span>
+	}
+
+	/**
+	 * Establece el grupo de prioridad.
+	 *
+	 * @param grupo El nuevo grupo de prioridad.
+	 */
+	public void setGrupo(GrupoPrioridad grupo) {
+<span class="nc" id="L121">		this.grupo = grupo;</span>
+<span class="nc" id="L122">	}</span>
+
+	/**
+	 * Se obtiene el dni.
+	 *
+	 * @return El dni.
+	 */
+	public String getDni() {
+<span class="fc" id="L130">		return dni;</span>
+	}
+
+	/**
+	 * Establece el dni.
+	 *
+	 * @param dni El nuevo dni.
+	 */
+	public void setDni(String dni) {
+<span class="nc" id="L139">		this.dni = dni;</span>
+<span class="nc" id="L140">	}</span>
+
+	/**
+	 * Se obtiene el nombre.
+	 *
+	 * @return El nombre.
+	 */
+	public String getNombre() {
+<span class="fc" id="L148">		return nombre;</span>
+	}
+
+	/**
+	 * Establece el nombre.
+	 *
+	 * @param nombre El nuevo nombre.
+	 */
+	public void setNombre(String nombre) {
+<span class="fc" id="L157">		this.nombre = nombre;</span>
+<span class="fc" id="L158">	}</span>
+
+	/**
+	 * Se obtienen los apellidos.
+	 *
+	 * @return Los apellidos.
+	 */
+	public String getApellidos() {
+<span class="fc" id="L166">		return apellidos;</span>
+	}
+
+	/**
+	 * Establece los apellidos.
+	 *
+	 * @param apellidos Los nuevos apellidos.
+	 */
+	public void setApellidos(String apellidos) {
+<span class="nc" id="L175">		this.apellidos = apellidos;</span>
+<span class="nc" id="L176">	}</span>
+
+	/**
+	 * Comprueba si es la segunda dosis.
+	 *
+	 * @return Verdadero, si es la segunda dosis.
+	 */
+	public boolean isSegundaDosis() {
+<span class="fc" id="L184">		return segundaDosis;</span>
+	}
+
+	/**
+	 * Establece si es segunda dosis.
+	 *
+	 * @param segundaDosis Si es la segunda dosis.
+	 */
+	public void setSegundaDosis(boolean segundaDosis) {
+<span class="nc" id="L193">		this.segundaDosis = segundaDosis;</span>
+<span class="nc" id="L194">	}</span>
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="fc" id="L198">		Paciente p = (Paciente) obj;</span>
+<span class="pc bpc" id="L199" title="1 of 2 branches missed.">		if (p != null) {</span>
+<span class="pc bpc" id="L200" title="3 of 6 branches missed.">			return dni.equals(p.getDni()) &amp;&amp; nombre.equals(p.getNombre()) &amp;&amp; region.equals(p.getRegion())</span>
+<span class="pc bpc" id="L201" title="2 of 4 branches missed.">					&amp;&amp; grupo.equals(p.getGrupo()) &amp;&amp; apellidos.equals(p.getApellidos())</span>
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">					&amp;&amp; segundaDosis == p.isSegundaDosis();</span>
+		} else {
+<span class="nc" id="L204">			return false;</span>
+		}
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

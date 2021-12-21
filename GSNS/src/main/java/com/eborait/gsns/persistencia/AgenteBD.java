@@ -1,5 +1,6 @@
 package com.eborait.gsns.persistencia;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -10,8 +11,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Properties;
 
 import org.apache.derby.jdbc.EmbeddedDriver;
+import org.jasypt.properties.EncryptableProperties;
+import org.jasypt.util.text.BasicTextEncryptor;
 
 /**
  * La clase AgenteBD realiza las operaciones contra la base de datos.
@@ -22,19 +26,22 @@ import org.apache.derby.jdbc.EmbeddedDriver;
  * @version 1.0
  *
  */
-public class AgenteBD implements BDConstantes{
+public class AgenteBD {
+
 	/**
 	 * Instancia del agente.
 	 */
 	private static AgenteBD agente;
+
 	/**
 	 * Conexión con la base de datos.
 	 */
 	private static Connection conexion;
+
 	/**
 	 * Identificador ODBC de la base de datos.
 	 */
-	private static final String URL = CONNECTION_STRING + ";create=false";
+	private static final String URL = BDConstantes.CONNECTION_STRING + ";create=false";
 
 	/**
 	 * 
@@ -53,7 +60,29 @@ public class AgenteBD implements BDConstantes{
 	 * 
 	 */
 	public static AgenteBD getAgente() throws SQLException {
-		return agente == null ? new AgenteBD() : agente;
+		agente = agente == null ? new AgenteBD() : agente;
+		return agente;
+	}
+
+	/**
+	 * Obtiene la contraseña de la base de datos de un fichero de configuración.
+	 * 
+	 * @return La contraseña de la base de datos.
+	 * @throws SQLException Si se produce algún error al leer el fichero.
+	 */
+	private static String getEncryptedPass() throws SQLException {
+		BasicTextEncryptor encryptor = new BasicTextEncryptor();
+		encryptor.setPassword("jasypt");
+
+		Properties props = new EncryptableProperties(encryptor);
+		try {
+			props.load(AgenteBD.class.getClassLoader().getResourceAsStream("datasource.properties"));
+			return props.getProperty("datasource.password");
+		} catch (IOException ioe) {
+			throw new SQLException(
+					"Error leyendo la contraseña de la base de datos del fichero de configuración: " + ioe.getMessage(),
+					ioe);
+		}
 	}
 
 	/**
@@ -62,14 +91,13 @@ public class AgenteBD implements BDConstantes{
 	 * @throws SQLException Si se produce algún error al conectar con la base de
 	 *                      datos.
 	 */
-	public void conectarBD() throws SQLException {
+	public static void conectarBD() throws SQLException {
 		try {
 			Driver derbyEmbeddedDriver = new EmbeddedDriver();
 			DriverManager.registerDriver(derbyEmbeddedDriver);
-			conexion = DriverManager.getConnection(URL, DBUSER, DBPASS);
+			conexion = DriverManager.getConnection(URL, BDConstantes.DBUSER, getEncryptedPass());
 		} catch (SQLException sqle) {
-			System.out.println("Error conectando con la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error conectando con la base de datos: " + sqle.getMessage(), sqle);
 		}
 	}
 
@@ -83,8 +111,7 @@ public class AgenteBD implements BDConstantes{
 		try {
 			conexion.close();
 		} catch (SQLException sqle) {
-			System.out.println("Error cerrando la conexión con la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error cerrando la conexión con la base de datos: " + sqle.getMessage(), sqle);
 		}
 	}
 
@@ -97,25 +124,25 @@ public class AgenteBD implements BDConstantes{
 	 *                      datos.
 	 */
 	public Collection<Collection<Object>> select(String sql) throws SQLException {
+		Collection<Collection<Object>> data;
 		try {
 			conectarBD();
-			Statement stmt = conexion.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-			ResultSetMetaData rsmd = rs.getMetaData();
-			Collection<Collection<Object>> data = new ArrayList<>();
-			while (rs.next()) {
-				Collection<Object> rowData = new ArrayList<>();
-				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-					rowData.add(rs.getObject(i));
+			try (Statement stmt = conexion.createStatement()) {
+				ResultSet rs = stmt.executeQuery(sql);
+				ResultSetMetaData rsmd = rs.getMetaData();
+				data = new ArrayList<>();
+				while (rs.next()) {
+					Collection<Object> rowData = new ArrayList<>();
+					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+						rowData.add(rs.getObject(i));
+					}
+					data.add(rowData);
 				}
-				data.add(rowData);
 			}
-			stmt.close();
 			desconectarBD();
 			return data;
 		} catch (SQLException sqle) {
-			System.out.println("Error consultando a la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error consultando a la base de datos: " + sqle.getMessage(), sqle);
 		}
 	}
 
@@ -129,15 +156,9 @@ public class AgenteBD implements BDConstantes{
 	 */
 	public int insert(String sql) throws SQLException {
 		try {
-			conectarBD();
-			PreparedStatement stmt = conexion.prepareStatement(sql);
-			int res = stmt.executeUpdate();
-			stmt.close();
-			desconectarBD();
-			return res;
+			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
-			System.out.println("Error insertando en la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error insertando en la base de datos: " + sqle.getMessage(), sqle);
 		}
 	}
 
@@ -151,15 +172,9 @@ public class AgenteBD implements BDConstantes{
 	 */
 	public int update(String sql) throws SQLException {
 		try {
-			conectarBD();
-			PreparedStatement stmt = conexion.prepareStatement(sql);
-			int res = stmt.executeUpdate();
-			stmt.close();
-			desconectarBD();
-			return res;
+			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
-			System.out.println("Error actualizando en la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error actualizando en la base de datos: " + sqle.getMessage(), sqle);
 		}
 	}
 
@@ -172,16 +187,20 @@ public class AgenteBD implements BDConstantes{
 	 */
 	public int delete(String sql) throws SQLException {
 		try {
-			conectarBD();
-			PreparedStatement stmt = conexion.prepareStatement(sql);
-			int res = stmt.executeUpdate();
-			stmt.close();
-			desconectarBD();
-			return res;
+			return prepareAndExecuteStatement(sql);
 		} catch (SQLException sqle) {
-			System.out.println("Error borrando en la base de datos:\n\n" + sqle.getMessage());
-			throw sqle;
+			throw new SQLException("Error borrando en la base de datos: " + sqle.getMessage(), sqle);
 		}
+	}
+
+	private int prepareAndExecuteStatement(String sql) throws SQLException {
+		conectarBD();
+		int res;
+		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+			res = stmt.executeUpdate();
+		}
+		desconectarBD();
+		return res;
 	}
 
 }

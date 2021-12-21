@@ -1,9 +1,10 @@
 package com.eborait.gsns.persistencia;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.sql.Date;
+import java.util.Iterator;
 
 import com.eborait.gsns.dominio.entitymodel.Vacunacion;
 
@@ -19,22 +20,27 @@ import com.eborait.gsns.dominio.entitymodel.Vacunacion;
  *
  */
 public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
+
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT = "SELECT * FROM vacunacion WHERE id = %s";
+
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT_CRITERIA = "SELECT * FROM vacunacion";
+
 	/**
 	 * Formato sentencia insert.
 	 */
-	private static final String INSERT = "INSERT INTO vacunacion VALUES(%s, '%s', '%s', '%s', '%s')";
+	private static final String INSERT = "INSERT INTO vacunacion(tipo, paciente, fecha, segunda_dosis) VALUES('%s', '%s', '%s', '%s')";
+
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE vacunacion SET id = %s, tipo = '%s', paciente = '%s', fecha = '%s', segunda_dosis = %s WHERE id = %s";
+	private static final String UPDATE = "UPDATE vacunacion SET tipo = '%s', paciente = '%s', fecha = '%s', segunda_dosis = %s WHERE id = %s";
+
 	/**
 	 * Formato sentencia delete.
 	 */
@@ -51,9 +57,13 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	@Override
 	public Vacunacion get(String id) throws SQLException {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
-		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
-		return new Vacunacion((int) rowData.get(0), String.valueOf(rowData.get(1)), String.valueOf(rowData.get(2)),
-				(Date) rowData.get(3), (boolean) rowData.get(4));
+		Iterator<Collection<Object>> it = data.iterator();
+		if (it.hasNext()) {
+			ArrayList<Object> rowData = (ArrayList<Object>) it.next();
+			return new Vacunacion((int) rowData.get(0), String.valueOf(rowData.get(1)), String.valueOf(rowData.get(2)),
+					(Date) rowData.get(3), (boolean) rowData.get(4));
+		}
+		return null;
 	}
 
 	/**
@@ -69,8 +79,7 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	@Override
 	public Collection<Vacunacion> getAll(String criteria, String value) throws SQLException {
 		Collection<Vacunacion> list = new ArrayList<>();
-		String sql = criteria == null ? SELECT_CRITERIA
-				: String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
+		String sql = Util.getSQLCriteria(SELECT_CRITERIA, criteria, value);
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
@@ -92,9 +101,8 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	@Override
 	public int insert(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente()
-				.insert(String.format(INSERT, vacunacion.getId(), vacunacion.getVacuna().toString(),
-						vacunacion.getPaciente().getDni(), new java.sql.Date(vacunacion.getFecha().getTime()),
-						vacunacion.isSegundaDosis()));
+				.insert(String.format(INSERT, String.valueOf(vacunacion.getVacuna()), vacunacion.getPaciente().getDni(),
+						new java.sql.Date(vacunacion.getFecha().getTime()), vacunacion.isSegundaDosis()));
 	}
 
 	/**
@@ -108,9 +116,9 @@ public class VacunacionDAO implements AbstractEntityDAO<Vacunacion> {
 	@Override
 	public int update(Vacunacion vacunacion) throws SQLException {
 		return AgenteBD.getAgente()
-				.update(String.format(UPDATE, vacunacion.getId(), vacunacion.getVacuna().toString(),
-						vacunacion.getPaciente().getDni(), new java.sql.Date(vacunacion.getFecha().getTime()),
-						vacunacion.isSegundaDosis(), vacunacion.getId()));
+				.update(String.format(UPDATE, String.valueOf(vacunacion.getVacuna()), vacunacion.getPaciente().getDni(),
+						new java.sql.Date(vacunacion.getFecha().getTime()), vacunacion.isSegundaDosis(),
+						vacunacion.getId()));
 	}
 
 	/**

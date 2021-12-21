@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Util.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.dominio.controller</a> &gt; <span class="el_source">Util.java</span></div><h1>Util.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.dominio.controller;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
+/**
+ * Clase de utilidades.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class Util {
+
+	/** Objeto Logger. */
+<span class="fc" id="L22">	private static final Logger LOG = Logger.getLogger(Util.class.getName());</span>
+
+	/**
+	 * Constructor privado.
+	 */
+	private Util() {
+
+	}
+
+	/**
+	 * Transforma una fecha de String a Date.
+	 * 
+	 * @param fecha La fecha con formato dd/MM/yyyy.
+	 * 
+	 * @return Objeto Date.
+	 * @throws GSNSException Si se produce una excepción al transformar la fecha.
+	 * 
+	 * @see Date
+	 * @see SimpleDateFormat
+	 */
+	public static Date parseFecha(String fecha) throws GSNSException {
+<span class="fc" id="L43">		SimpleDateFormat formato = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+		Date fechaDate;
+		try {
+<span class="fc" id="L46">			fechaDate = formato.parse(fecha);</span>
+<span class="fc" id="L47">		} catch (ParseException pe) {</span>
+<span class="fc" id="L48">			LOG.log(Level.SEVERE, &quot;{0}&quot;, &quot;Excepción parseando fecha: &quot; + pe.getMessage());</span>
+<span class="fc" id="L49">			LOG.log(Level.SEVERE, &quot;&quot;, pe);</span>
+<span class="fc" id="L50">			throw new GSNSException(&quot;El formato de la fecha no es correcto. El formato adecuado es dd/mm/yyyy.&quot;);</span>
+<span class="fc" id="L51">		}</span>
+<span class="fc" id="L52">		return fechaDate;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

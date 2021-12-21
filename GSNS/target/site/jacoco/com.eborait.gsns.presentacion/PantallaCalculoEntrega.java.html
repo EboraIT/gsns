@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaCalculoEntrega.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.presentacion</a> &gt; <span class="el_source">PantallaCalculoEntrega.java</span></div><h1>PantallaCalculoEntrega.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.presentacion;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
+/**
+ * Pantalla cálculo de entrega de vacunas.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class PantallaCalculoEntrega extends PanelBase {
+
+	/** El serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
+	public PantallaCalculoEntrega(final Main frame) {
+<span class="nc" id="L34">		super(frame, &quot;Gestión Sistema Nacional de Salud/Cálculo de Reparto de Vacunas&quot;);</span>
+
+<span class="nc" id="L36">		JLabel lblSeleccionarRegion = new JLabel(&quot;Seleccione una región:&quot;);</span>
+<span class="nc" id="L37">		lblSeleccionarRegion.setBounds(10, 36, 201, 14);</span>
+<span class="nc" id="L38">		midPanel.add(lblSeleccionarRegion);</span>
+
+<span class="nc" id="L40">		final JLabel lblPoblacion = new JLabel();</span>
+<span class="nc" id="L41">		lblPoblacion.setBounds(242, 64, 181, 20);</span>
+<span class="nc" id="L42">		midPanel.add(lblPoblacion);</span>
+
+<span class="nc" id="L44">		final JComboBox&lt;String&gt; comboRegion = new JComboBox&lt;&gt;(frame.getGestorGSNS().getNombresRegion());</span>
+<span class="nc" id="L45">		comboRegion.setBounds(242, 36, 181, 20);</span>
+<span class="nc" id="L46">		comboRegion.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				try {
+<span class="nc" id="L49">					lblPoblacion.setText(formatearPoblacion(</span>
+<span class="nc" id="L50">							frame.getGestorGSNS().getRegionPorId(comboRegion.getSelectedIndex() + 1).getPoblacion()));</span>
+<span class="nc" id="L51">				} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L52">					JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L53">					frame.cambiarPanel(frame.getPanelMain());</span>
+<span class="nc" id="L54">				}</span>
+<span class="nc" id="L55">			}</span>
+		});
+<span class="nc" id="L57">		midPanel.add(comboRegion);</span>
+
+<span class="nc" id="L59">		JLabel lblPoblacionTitulo = new JLabel(&quot;Población:&quot;);</span>
+<span class="nc" id="L60">		lblPoblacionTitulo.setBounds(10, 64, 201, 14);</span>
+<span class="nc" id="L61">		midPanel.add(lblPoblacionTitulo);</span>
+
+<span class="nc" id="L63">		JLabel lblIA = new JLabel(&quot;Introduzca la IA:&quot;);</span>
+<span class="nc" id="L64">		lblIA.setBounds(10, 92, 201, 14);</span>
+<span class="nc" id="L65">		midPanel.add(lblIA);</span>
+
+<span class="nc" id="L67">		final JTextField txtIA = new JTextField();</span>
+<span class="nc" id="L68">		txtIA.setColumns(10);</span>
+<span class="nc" id="L69">		txtIA.setBounds(242, 92, 181, 20);</span>
+<span class="nc" id="L70">		midPanel.add(txtIA);</span>
+
+<span class="nc" id="L72">		final JLabel lblReparto = new JLabel(&quot;Vacunas a repartir:&quot;);</span>
+<span class="nc" id="L73">		lblReparto.setBounds(444, 36, 413, 14);</span>
+<span class="nc" id="L74">		midPanel.add(lblReparto);</span>
+
+<span class="nc" id="L76">		JButton btnCalcularReparto = new JButton(&quot;Calcular&quot;);</span>
+<span class="nc" id="L77">		btnCalcularReparto.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L79" title="All 2 branches missed.">				if (txtIA.getText().length() != 0) {</span>
+					try {
+<span class="nc" id="L81">						int reparto = frame.getGestorGSNS().getGestorRepartoVacunas().calcularEntregasRegion(</span>
+<span class="nc" id="L82">								comboRegion.getSelectedIndex() + 1, Integer.parseInt(txtIA.getText()));</span>
+<span class="nc" id="L83">						lblReparto.setText(&quot;Vacunas a repartir: &quot; + formatearPoblacion(reparto));</span>
+
+<span class="nc" id="L85">					} catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L86">						JOptionPane.showMessageDialog(frame,</span>
+								&quot;Se ha producido un error al realizar el cálculo: La IA no es correcta. Introduce un número entero.&quot;,
+								Main.ERROR, JOptionPane.ERROR_MESSAGE);
+<span class="nc" id="L89">					} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L90">						JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L91">					}</span>
+				} else {
+<span class="nc" id="L93">					JOptionPane.showMessageDialog(frame, &quot;Rellena todos los campos.&quot;, Main.WARNING,</span>
+							JOptionPane.WARNING_MESSAGE);
+				}
+<span class="nc" id="L96">			}</span>
+
+		});
+<span class="nc" id="L99">		btnCalcularReparto.setBounds(10, 131, 847, 23);</span>
+<span class="nc" id="L100">		midPanel.add(btnCalcularReparto);</span>
+
+<span class="nc" id="L102">		comboRegion.setSelectedIndex(0);</span>
+<span class="nc" id="L103">	}</span>
+
+	/**
+	 * Añade el separador de miles a un número entero.
+	 * 
+	 * @param poblacion Población de la región.
+	 * @return Una cadena con la población formateada.
+	 * 
+	 * @see DecimalFormat
+	 */
+	private String formatearPoblacion(int poblacion) {
+<span class="nc" id="L114">		return new DecimalFormat(&quot;###,###.##&quot;).format(poblacion);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

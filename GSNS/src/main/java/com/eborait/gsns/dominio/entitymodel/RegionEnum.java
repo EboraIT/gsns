@@ -55,7 +55,7 @@ public enum RegionEnum {
 	MUR(19, "Región de Murcia", 1513161);
 
 	/** Las entregas. */
-	private Collection<EntregaVacunas> entregas;
+	private final Collection<EntregaVacunas> entregas;
 
 	/** El id. */
 	private final int id;
@@ -73,7 +73,7 @@ public enum RegionEnum {
 	 * @param nombre    El nombre.
 	 * @param poblacion La población.
 	 */
-	private RegionEnum(int id, String nombre, int poblacion) {
+	RegionEnum(int id, String nombre, int poblacion) {
 		this.id = id;
 		this.nombre = nombre;
 		this.poblacion = poblacion;
@@ -87,15 +87,6 @@ public enum RegionEnum {
 	 */
 	public Collection<EntregaVacunas> getEntregas() {
 		return entregas;
-	}
-
-	/**
-	 * Establece las entregas.
-	 *
-	 * @param entregas Las nuevas entregas.
-	 */
-	public void setEntregas(Collection<EntregaVacunas> entregas) {
-		this.entregas = entregas;
 	}
 
 	/**

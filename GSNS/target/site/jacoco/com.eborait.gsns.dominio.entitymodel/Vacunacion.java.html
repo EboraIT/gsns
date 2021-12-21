@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Vacunacion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.dominio.entitymodel</a> &gt; <span class="el_source">Vacunacion.java</span></div><h1>Vacunacion.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.dominio.entitymodel;
+
+import java.sql.SQLException;
+import java.util.Date;
+
+import com.eborait.gsns.persistencia.DAOFactory;
+
+/**
+ * Define la información relativa a una entrega de vacunas.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class Vacunacion {
+
+	/** El id. */
+	private int id;
+
+	/** El tipo de vacuna. */
+	private TipoVacuna vacuna;
+
+	/** El paciente. */
+	private Paciente paciente;
+
+	/** La fecha. */
+	private Date fecha;
+
+	/** La segunda dosis. */
+	private boolean segundaDosis;
+
+	/**
+	 * Instancia una nueva vacunación.
+	 *
+	 * @param id           El id.
+	 * @param vacuna       El tipo de vacuna.
+	 * @param paciente     El paciente.
+	 * @param fecha        La fecha.
+	 * @param segundaDosis La segunda dosis.
+	 */
+<span class="fc" id="L42">	public Vacunacion(int id, TipoVacuna vacuna, Paciente paciente, Date fecha, boolean segundaDosis) {</span>
+<span class="fc" id="L43">		this.id = id;</span>
+<span class="fc" id="L44">		this.vacuna = vacuna;</span>
+<span class="fc" id="L45">		this.paciente = paciente;</span>
+<span class="fc" id="L46">		this.fecha = fecha;</span>
+<span class="fc" id="L47">		this.segundaDosis = segundaDosis;</span>
+<span class="fc" id="L48">	}</span>
+
+	/**
+	 * Instancia una nueva vacunación.
+	 *
+	 * @param id           El id.
+	 * @param vacuna       El tipo de vacuna.
+	 * @param paciente     El paciente.
+	 * @param fecha        La fecha.
+	 * @param segundaDosis La segunda dosis.
+	 * @throws SQLException Si se produce algún al buscar el paciente en la base de
+	 *                      datos.
+	 */
+	public Vacunacion(int id, String vacuna, String paciente, Date fecha, boolean segundaDosis) throws SQLException {
+<span class="fc" id="L62">		this(id, new TipoVacuna(vacuna), DAOFactory.getPacienteDAO().get(paciente), fecha, segundaDosis);</span>
+<span class="fc" id="L63">	}</span>
+
+	/**
+	 * Se obtiene el id.
+	 *
+	 * @return El id.
+	 */
+	public int getId() {
+<span class="fc" id="L71">		return id;</span>
+	}
+
+	/**
+	 * Establece el id.
+	 *
+	 * @param id El nuevo id.
+	 */
+	public void setId(int id) {
+<span class="fc" id="L80">		this.id = id;</span>
+<span class="fc" id="L81">	}</span>
+
+	/**
+	 * Se obtiene el tipo de vacuna.
+	 *
+	 * @return El tipo de vacuna.
+	 */
+	public TipoVacuna getVacuna() {
+<span class="fc" id="L89">		return vacuna;</span>
+	}
+
+	/**
+	 * Establece el tipo de vacuna.
+	 *
+	 * @param vacuna El nuevo tipo de vacuna.
+	 */
+	public void setVacuna(TipoVacuna vacuna) {
+<span class="nc" id="L98">		this.vacuna = vacuna;</span>
+<span class="nc" id="L99">	}</span>
+
+	/**
+	 * Se obtiene el paciente.
+	 *
+	 * @return El paciente.
+	 */
+	public Paciente getPaciente() {
+<span class="fc" id="L107">		return paciente;</span>
+	}
+
+	/**
+	 * Establece el paciente.
+	 *
+	 * @param paciente El nuevo paciente.
+	 */
+	public void setPaciente(Paciente paciente) {
+<span class="nc" id="L116">		this.paciente = paciente;</span>
+<span class="nc" id="L117">	}</span>
+
+	/**
+	 * Se obtiene la fecha.
+	 *
+	 * @return La fecha.
+	 */
+	public Date getFecha() {
+<span class="fc" id="L125">		return fecha;</span>
+	}
+
+	/**
+	 * Establece la fecha.
+	 *
+	 * @param fecha La nueva fecha.
+	 */
+	public void setFecha(Date fecha) {
+<span class="nc" id="L134">		this.fecha = fecha;</span>
+<span class="nc" id="L135">	}</span>
+
+	/**
+	 * Comprueba si es la segunda dosis.
+	 *
+	 * @return Verdadero, si es la segunda dosis.
+	 */
+	public boolean isSegundaDosis() {
+<span class="fc" id="L143">		return segundaDosis;</span>
+	}
+
+	/**
+	 * Establece si es segunda dosis.
+	 *
+	 * @param segundaDosis Si es la segunda dosis.
+	 */
+	public void setSegundaDosis(boolean segundaDosis) {
+<span class="fc" id="L152">		this.segundaDosis = segundaDosis;</span>
+<span class="fc" id="L153">	}</span>
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="fc" id="L157">		Vacunacion v = (Vacunacion) obj;</span>
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">		if (v != null) {</span>
+<span class="pc bpc" id="L159" title="2 of 4 branches missed.">			return vacuna.equals(v.getVacuna()) &amp;&amp; paciente.equals(v.getPaciente())</span>
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">					&amp;&amp; segundaDosis == v.isSegundaDosis();</span>
+		} else {
+<span class="nc" id="L162">			return false;</span>
+		}
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -4,6 +4,9 @@ import java.util.Date;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 /**
  * Define la información relativa a una entrega de vacunas.
  *
@@ -35,6 +38,9 @@ public class EntregaVacunas {
 	/** La cantidad. */
 	private int cantidad;
 
+	/** Objeto Logger. */
+	private static final Logger LOG = Logger.getLogger(EntregaVacunas.class.getName());
+
 	/**
 	 * Instancia un objeto EntregaVacunas.
 	 *
@@ -48,7 +54,7 @@ public class EntregaVacunas {
 	 * @throws GSNSException Si se produce una excepción en el grupo de prioridad o
 	 *                       la región.
 	 */
-	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, TipoVacuna tipo, int region)
+	public EntregaVacunas(String id, int lote, Date fecha, int cantidad, int prioridad, TipoVacuna tipo, int region)
 			throws GSNSException {
 		this.id = id;
 		this.fecha = fecha;
@@ -74,7 +80,7 @@ public class EntregaVacunas {
 	 * @param tipo      El tipo de vacuna.
 	 * @param region    La región.
 	 */
-	public EntregaVacunas(String id, String lote, Date fecha, int cantidad, int prioridad, String tipo, int region) {
+	public EntregaVacunas(String id, int lote, Date fecha, int cantidad, int prioridad, String tipo, int region) {
 		this.id = id;
 		this.fecha = fecha;
 		this.cantidad = cantidad;
@@ -87,8 +93,8 @@ public class EntregaVacunas {
 			this.region.getEntregas().add(this);
 			this.grupoPrioridad.getEntregas().add(this);
 		} catch (GSNSException gsnse) {
-			System.out.println(gsnse.getMessage());
-			gsnse.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}", "" + gsnse.getMessage());
+			LOG.log(Level.SEVERE, "", gsnse);
 		}
 		this.lote.getEntregas().add(this);
 	}
@@ -217,6 +223,18 @@ public class EntregaVacunas {
 	 */
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		EntregaVacunas ev = (EntregaVacunas) obj;
+		if (ev != null) {
+			return id.equals(ev.getId()) && tipo.equals(ev.getTipo()) && region.equals(ev.getRegion())
+					&& grupoPrioridad.equals(ev.getGrupoPrioridad()) && lote.equals(ev.getLote())
+					&& cantidad == ev.getCantidad();
+		} else {
+			return false;
+		}
 	}
 
 }

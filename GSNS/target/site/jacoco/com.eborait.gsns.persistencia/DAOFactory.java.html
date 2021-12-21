@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DAOFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.persistencia</a> &gt; <span class="el_source">DAOFactory.java</span></div><h1>DAOFactory.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.persistencia;
+
+/**
+ * Crea (si es necesario) y devuelve los objetos DAO siguiendo el patrón
+ * Singleton.
+ * 
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @since 1.0
+ * @version 1.0
+ *
+ */
+public class DAOFactory {
+
+	/**
+	 * Objeto EntregaDAO.
+	 */
+	private static EntregaDAO entregaDao;
+
+	/**
+	 * Objeto LoteVacunasDAO.
+	 */
+	private static LoteVacunasDAO loteVacunasDao;
+
+	/**
+	 * Objeto VacunacionDAO.
+	 */
+	private static VacunacionDAO vacunacionDao;
+
+	/**
+	 * Objeto VacunacionDAO.
+	 */
+	private static PacienteDAO pacienteDAO;
+
+	/*
+	 * Constructor privado.
+	 */
+	private DAOFactory() {
+
+	}
+
+	/**
+	 * Instancia si es necesario el objeto EntregaDAO y lo devuelve.
+	 * 
+	 * @return Objeto EntregaDAO.
+	 * @see EntregaDAO
+	 */
+	public static EntregaDAO getEntregaDAO() {
+<span class="fc bfc" id="L49" title="All 2 branches covered.">		if (entregaDao == null) {</span>
+<span class="fc" id="L50">			entregaDao = new EntregaDAO();</span>
+		}
+<span class="fc" id="L52">		return entregaDao;</span>
+	}
+
+	/**
+	 * Instancia si es necesario el objeto LoteVacunasDAO y lo devuelve.
+	 * 
+	 * @return Objeto LoteVacunasDAO.
+	 * @see LoteVacunasDAO
+	 */
+	public static LoteVacunasDAO getLoteVacunasDAO() {
+<span class="fc bfc" id="L62" title="All 2 branches covered.">		if (loteVacunasDao == null) {</span>
+<span class="fc" id="L63">			loteVacunasDao = new LoteVacunasDAO();</span>
+		}
+<span class="fc" id="L65">		return loteVacunasDao;</span>
+	}
+
+	/**
+	 * Instancia si es necesario el objeto VacunacionDAO y lo devuelve.
+	 *
+	 * @return Objeto VacunacionDAO.
+	 * @see VacunacionDAO
+	 */
+	public static VacunacionDAO getVacunacionDAO() {
+<span class="fc bfc" id="L75" title="All 2 branches covered.">		if (vacunacionDao == null) {</span>
+<span class="fc" id="L76">			vacunacionDao = new VacunacionDAO();</span>
+		}
+<span class="fc" id="L78">		return vacunacionDao;</span>
+	}
+
+	/**
+	 * Instancia si es necesario el objeto PacienteDAO y lo devuelve.
+	 *
+	 * @return Objeto PacienteDAO.
+	 * @see PacienteDAO
+	 */
+	public static PacienteDAO getPacienteDAO() {
+<span class="fc bfc" id="L88" title="All 2 branches covered.">		if (pacienteDAO == null) {</span>
+<span class="fc" id="L89">			pacienteDAO = new PacienteDAO();</span>
+		}
+<span class="fc" id="L91">		return pacienteDAO;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

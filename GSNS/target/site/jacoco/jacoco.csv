@@ -1,0 +1,49 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+gsns,com.eborait.gsns.dominio.entitymodel.excepciones,GSNSException,0,4,0,0,0,2,0,1,0,1
+gsns,com.eborait.gsns.persistencia,Util,0,48,0,2,0,9,0,2,0,1
+gsns,com.eborait.gsns.persistencia,LoteVacunasDAO,0,234,0,6,0,33,0,10,0,7
+gsns,com.eborait.gsns.persistencia,PacienteDAO,0,222,0,4,0,27,0,8,0,6
+gsns,com.eborait.gsns.persistencia,VacunacionDAO,0,198,0,4,0,26,0,8,0,6
+gsns,com.eborait.gsns.persistencia,DAOFactory,0,32,0,8,0,12,0,8,0,4
+gsns,com.eborait.gsns.persistencia,EntregaDAO,0,256,0,4,0,31,0,8,0,6
+gsns,com.eborait.gsns.persistencia,AgenteBD,45,182,0,6,7,47,0,13,0,10
+gsns,com.eborait.gsns.presentacion,PanelMain,189,0,0,0,38,0,1,0,1,0
+gsns,com.eborait.gsns.presentacion,PanelBase.new ActionListener() {...},16,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaCalculoEntrega.new ActionListener() {...},47,0,0,0,8,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaCalculoEntrega.new ActionListener() {...},77,0,2,0,12,0,3,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaGestionSistemaNacionalSalud.new ActionListener() {...},18,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaGestionSistemaNacionalSalud.new ActionListener() {...},18,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,Main,104,0,0,0,25,0,6,0,6,0
+gsns,com.eborait.gsns.presentacion,PantallaAltaEntregaVacunas,484,0,14,0,85,0,10,0,3,0
+gsns,com.eborait.gsns.presentacion,PantallaGestionSistemaRegionalSalud.new ActionListener() {...},18,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaGestionSistemaRegionalSalud.new ActionListener() {...},18,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaConsultaEstadisticas,316,0,0,0,56,0,1,0,1,0
+gsns,com.eborait.gsns.presentacion,PantallaRegistrarVacunacion,465,0,14,0,81,0,10,0,3,0
+gsns,com.eborait.gsns.presentacion,PantallaRegistrarVacunacion.new ActionListener() {...},15,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaCalculoEntrega,166,0,0,0,31,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaAltaNuevoLote,433,0,8,0,79,0,7,0,3,0
+gsns,com.eborait.gsns.presentacion,PantallaConsultaEstadisticas.new ActionListener() {...},77,0,0,0,15,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaGestionSistemaNacionalSalud,51,0,0,0,10,0,1,0,1,0
+gsns,com.eborait.gsns.presentacion,PanelBase,82,0,0,0,16,0,1,0,1,0
+gsns,com.eborait.gsns.presentacion,PanelMain.new ActionListener() {...},18,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PanelMain.new ActionListener() {...},18,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PanelMain.new ActionListener() {...},18,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaConsultaEstadisticas.new ActionListener() {...},79,0,0,0,11,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaConsultaEstadisticas.new ActionListener() {...},65,0,0,0,12,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaConsultaEstadisticas.new ActionListener() {...},91,0,0,0,15,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaAltaEntregaVacunas.new ActionListener() {...},15,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaAltaNuevoLote.new ActionListener() {...},15,0,0,0,3,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,Main.new Runnable() {...},20,0,0,0,8,0,2,0,2,0
+gsns,com.eborait.gsns.presentacion,PantallaGestionSistemaRegionalSalud,55,0,0,0,11,0,1,0,1,0
+gsns,com.eborait.gsns.dominio.entitymodel,Vacunacion,15,79,4,4,7,22,7,10,3,10
+gsns,com.eborait.gsns.dominio.entitymodel,EntregaVacunas,46,182,7,7,16,40,13,12,6,12
+gsns,com.eborait.gsns.dominio.entitymodel,RegionEnum,24,229,2,4,5,33,3,8,2,6
+gsns,com.eborait.gsns.dominio.entitymodel,Paciente,42,129,7,7,14,33,12,11,5,11
+gsns,com.eborait.gsns.dominio.entitymodel,TipoVacuna,15,97,4,4,7,18,7,7,3,7
+gsns,com.eborait.gsns.dominio.entitymodel,GrupoPrioridad,29,111,3,3,6,20,4,7,2,6
+gsns,com.eborait.gsns.dominio.entitymodel,LoteVacunas,23,93,6,6,11,22,11,10,5,10
+gsns,com.eborait.gsns.dominio.controller,GestorGSNS,13,32,0,0,5,10,5,6,5,6
+gsns,com.eborait.gsns.dominio.controller,Util,0,41,0,0,0,9,0,2,0,2
+gsns,com.eborait.gsns.dominio.controller,GestorRepartoVacunas,73,161,1,7,12,27,1,9,0,6
+gsns,com.eborait.gsns.dominio.controller,GestorVacunacion,2,126,3,3,0,19,3,4,0,4
+gsns,com.eborait.gsns.dominio.controller,GestorEstadisticas,142,97,6,8,23,25,5,8,0,6

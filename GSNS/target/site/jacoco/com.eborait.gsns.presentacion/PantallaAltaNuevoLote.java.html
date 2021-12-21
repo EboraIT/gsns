@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaAltaNuevoLote.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.presentacion</a> &gt; <span class="el_source">PantallaAltaNuevoLote.java</span></div><h1>PantallaAltaNuevoLote.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.presentacion;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
+/**
+ * Pantalla alta de nuevo lote de vacunas.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class PantallaAltaNuevoLote extends PanelBase {
+
+	/** El serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/** El label de id de lote. */
+	private final JLabel lblIdLote;
+
+	/** El campo de texto de fecha de alta. */
+	private final JTextField txtFechaAlta;
+
+	/** El campo de texto de cantidad. */
+	private final JTextField txtCantidad;
+
+	/** El campo de texto de nombre de la vacuna. */
+	private final JTextField txtNombreVacuna;
+
+	/** El campo de texto de farmacéutica. */
+	private final JTextField txtFarmaceutica;
+
+	/** El campo de texto de fecha de aprobación. */
+	private final JTextField txtFechaAprobacion;
+
+	/**
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
+	public PantallaAltaNuevoLote(final Main frame) {
+<span class="nc" id="L51">		super(frame, &quot;Gestión Sistema Nacional de Salud/Alta nuevo lote de vacunas&quot;);</span>
+
+<span class="nc" id="L53">		JLabel lblIdLoteTitulo = new JLabel(&quot;Identificador del lote:&quot;);</span>
+<span class="nc" id="L54">		lblIdLoteTitulo.setBounds(10, 36, 201, 14);</span>
+<span class="nc" id="L55">		midPanel.add(lblIdLoteTitulo);</span>
+
+<span class="nc" id="L57">		lblIdLote = new JLabel();</span>
+<span class="nc" id="L58">		lblIdLote.setBounds(242, 36, 181, 20);</span>
+<span class="nc" id="L59">		midPanel.add(lblIdLote);</span>
+
+		try {
+<span class="nc" id="L62">			lblIdLote.setText(String.valueOf(frame.getGestorGSNS().getGestorRepartoVacunas().generarIdLote()));</span>
+<span class="nc" id="L63">		} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L64">			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L65">			frame.cambiarPanel(frame.getPanelMain());</span>
+<span class="nc" id="L66">		}</span>
+<span class="nc" id="L67">		JLabel lblFechaAlta = new JLabel(&quot;Fecha alta:&quot;);</span>
+<span class="nc" id="L68">		lblFechaAlta.setBounds(10, 64, 201, 14);</span>
+<span class="nc" id="L69">		midPanel.add(lblFechaAlta);</span>
+
+<span class="nc" id="L71">		txtFechaAlta = new JTextField();</span>
+<span class="nc" id="L72">		txtFechaAlta.setColumns(10);</span>
+<span class="nc" id="L73">		txtFechaAlta.setBounds(242, 64, 181, 20);</span>
+<span class="nc" id="L74">		midPanel.add(txtFechaAlta);</span>
+
+<span class="nc" id="L76">		JLabel lblCantidad = new JLabel(&quot;Cantidad de vacunas:&quot;);</span>
+<span class="nc" id="L77">		lblCantidad.setBounds(10, 92, 201, 14);</span>
+<span class="nc" id="L78">		midPanel.add(lblCantidad);</span>
+
+<span class="nc" id="L80">		txtCantidad = new JTextField();</span>
+<span class="nc" id="L81">		txtCantidad.setBounds(242, 92, 181, 20);</span>
+<span class="nc" id="L82">		midPanel.add(txtCantidad);</span>
+<span class="nc" id="L83">		txtCantidad.setColumns(10);</span>
+
+<span class="nc" id="L85">		JLabel lblNombreVacuna = new JLabel(&quot;Nombre de vacuna:&quot;);</span>
+<span class="nc" id="L86">		lblNombreVacuna.setBounds(444, 36, 201, 14);</span>
+<span class="nc" id="L87">		midPanel.add(lblNombreVacuna);</span>
+
+<span class="nc" id="L89">		txtNombreVacuna = new JTextField();</span>
+<span class="nc" id="L90">		txtNombreVacuna.setBounds(676, 36, 181, 20);</span>
+<span class="nc" id="L91">		midPanel.add(txtNombreVacuna);</span>
+<span class="nc" id="L92">		txtNombreVacuna.setColumns(10);</span>
+
+<span class="nc" id="L94">		JLabel lblFarmaceutica = new JLabel(&quot;Farmacéutica:&quot;);</span>
+<span class="nc" id="L95">		lblFarmaceutica.setBounds(444, 64, 201, 14);</span>
+<span class="nc" id="L96">		midPanel.add(lblFarmaceutica);</span>
+
+<span class="nc" id="L98">		txtFarmaceutica = new JTextField();</span>
+<span class="nc" id="L99">		txtFarmaceutica.setBounds(676, 64, 181, 20);</span>
+<span class="nc" id="L100">		midPanel.add(txtFarmaceutica);</span>
+<span class="nc" id="L101">		txtFarmaceutica.setColumns(10);</span>
+
+<span class="nc" id="L103">		JLabel lblFechaAprobacion = new JLabel(&quot;Fecha de aprobación:&quot;);</span>
+<span class="nc" id="L104">		lblFechaAprobacion.setBounds(444, 92, 181, 14);</span>
+<span class="nc" id="L105">		midPanel.add(lblFechaAprobacion);</span>
+
+<span class="nc" id="L107">		txtFechaAprobacion = new JTextField();</span>
+<span class="nc" id="L108">		txtFechaAprobacion.setBounds(676, 92, 181, 20);</span>
+<span class="nc" id="L109">		midPanel.add(txtFechaAprobacion);</span>
+<span class="nc" id="L110">		txtFechaAprobacion.setColumns(10);</span>
+
+<span class="nc" id="L112">		JLabel lblLote = new JLabel(&quot;Lote&quot;);</span>
+<span class="nc" id="L113">		lblLote.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 12));</span>
+<span class="nc" id="L114">		lblLote.setBounds(10, 11, 413, 14);</span>
+<span class="nc" id="L115">		midPanel.add(lblLote);</span>
+
+<span class="nc" id="L117">		JLabel lblVacuna = new JLabel(&quot;Vacuna&quot;);</span>
+<span class="nc" id="L118">		lblVacuna.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 12));</span>
+<span class="nc" id="L119">		lblVacuna.setBounds(444, 11, 413, 14);</span>
+<span class="nc" id="L120">		midPanel.add(lblVacuna);</span>
+
+<span class="nc" id="L122">		JButton btnRegistrarAlta = new JButton(&quot;Registrar alta&quot;);</span>
+<span class="nc" id="L123">		btnRegistrarAlta.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L125">				registrarLote(frame);</span>
+<span class="nc" id="L126">			}</span>
+		});
+<span class="nc" id="L128">		btnRegistrarAlta.setBounds(10, 131, 847, 23);</span>
+<span class="nc" id="L129">		midPanel.add(btnRegistrarAlta);</span>
+
+<span class="nc" id="L131">	}</span>
+
+	/**
+	 * Invoca al gestor para realizar el alta del lote de vacunas.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
+	private void registrarLote(Main frame) {
+<span class="nc bnc" id="L139" title="All 2 branches missed.">		if (validar()) {</span>
+			try {
+<span class="nc" id="L141">				boolean correcto = frame.getGestorGSNS().getGestorRepartoVacunas().altaNuevoLoteVacunas(</span>
+<span class="nc" id="L142">						Integer.parseInt(lblIdLote.getText()), txtFechaAlta.getText(), Integer.parseInt(txtCantidad.getText()),</span>
+<span class="nc" id="L143">						txtNombreVacuna.getText(), txtFarmaceutica.getText(), txtFechaAprobacion.getText());</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">				if (correcto) {</span>
+<span class="nc" id="L145">					JOptionPane.showMessageDialog(frame, &quot;El nuevo lote se ha registrado correctamente.&quot;, Main.INFO,</span>
+							JOptionPane.INFORMATION_MESSAGE);
+<span class="nc" id="L147">					frame.cambiarPanel(frame.getPanelMain());</span>
+				}
+<span class="nc" id="L149">			} catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L150">				JOptionPane.showMessageDialog(frame,</span>
+						&quot;Se ha producido un error al registrar el alta del nuevo lote: La cantidad no es correcta. Introduce un número entero.&quot;,
+						Main.ERROR, JOptionPane.ERROR_MESSAGE);
+<span class="nc" id="L153">			} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L154">				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L155">			}</span>
+		} else {
+<span class="nc" id="L157">			JOptionPane.showMessageDialog(frame, &quot;Rellena todos los campos.&quot;, Main.WARNING,</span>
+					JOptionPane.WARNING_MESSAGE);
+		}
+<span class="nc" id="L160">	}</span>
+
+	/**
+	 * Valida los campos de texto.
+	 * 
+	 * @return true si la validación es correcta, false de lo contrario.
+	 */
+	private boolean validar() {
+<span class="nc" id="L168">		JTextField[] textFields = { txtFechaAlta, txtCantidad, txtNombreVacuna, txtFarmaceutica, txtFechaAprobacion };</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">		for (JTextField jTextField : textFields) {</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">			if (jTextField.getText().length() == 0)</span>
+<span class="nc" id="L171">				return false;</span>
+		}
+<span class="nc" id="L173">		return true;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

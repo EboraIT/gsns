@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PantallaAltaEntregaVacunas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.presentacion</a> &gt; <span class="el_source">PantallaAltaEntregaVacunas.java</span></div><h1>PantallaAltaEntregaVacunas.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.presentacion;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
+
+/**
+ * Pantalla alta entrega de vacunas.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.0
+ */
+public class PantallaAltaEntregaVacunas extends PanelBase {
+
+	/** El serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/** El campo de texto del id de entrega. */
+	private final JTextField txtIdEntrega;
+
+	/** El campo de texto de lote. */
+	private final JTextField txtLote;
+
+	/** El campo de texto de fecha. */
+	private final JTextField txtFecha;
+
+	/** El campo de texto de cantidad. */
+	private final JTextField txtCantidad;
+
+	/** El desplegable de grupo de prioridad. */
+	private final JComboBox&lt;String&gt; comboGrupoPrioridad;
+
+	/** El desplegable de regione. */
+	private final JComboBox&lt;String&gt; comboRegion;
+
+	/** El desplegable de tipo de vacuna. */
+	private JComboBox&lt;String&gt; comboTipoVacuna;
+
+	/**
+	 * Crea el panel.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
+	public PantallaAltaEntregaVacunas(final Main frame) {
+<span class="nc" id="L55">		super(frame, &quot;Gestión Sistema Regional de Salud/Alta entrega de vacunas&quot;);</span>
+
+<span class="nc" id="L57">		JLabel lblIdEntrega = new JLabel(&quot;Identificador de la entrega:&quot;);</span>
+<span class="nc" id="L58">		lblIdEntrega.setBounds(10, 36, 201, 14);</span>
+<span class="nc" id="L59">		midPanel.add(lblIdEntrega);</span>
+
+<span class="nc" id="L61">		txtIdEntrega = new JTextField();</span>
+<span class="nc" id="L62">		txtIdEntrega.setBounds(242, 36, 181, 20);</span>
+<span class="nc" id="L63">		midPanel.add(txtIdEntrega);</span>
+<span class="nc" id="L64">		txtIdEntrega.setColumns(10);</span>
+
+<span class="nc" id="L66">		JLabel lblLote = new JLabel(&quot;Lote de vacunación:&quot;);</span>
+<span class="nc" id="L67">		lblLote.setBounds(10, 64, 201, 14);</span>
+<span class="nc" id="L68">		midPanel.add(lblLote);</span>
+
+<span class="nc" id="L70">		txtLote = new JTextField();</span>
+<span class="nc" id="L71">		txtLote.setColumns(10);</span>
+<span class="nc" id="L72">		txtLote.setBounds(242, 64, 181, 20);</span>
+<span class="nc" id="L73">		midPanel.add(txtLote);</span>
+
+<span class="nc" id="L75">		JLabel lblFecha = new JLabel(&quot;Fecha de alta:&quot;);</span>
+<span class="nc" id="L76">		lblFecha.setBounds(10, 92, 201, 14);</span>
+<span class="nc" id="L77">		midPanel.add(lblFecha);</span>
+
+<span class="nc" id="L79">		txtFecha = new JTextField();</span>
+<span class="nc" id="L80">		txtFecha.setColumns(10);</span>
+<span class="nc" id="L81">		txtFecha.setBounds(242, 92, 181, 20);</span>
+<span class="nc" id="L82">		midPanel.add(txtFecha);</span>
+
+<span class="nc" id="L84">		JLabel lblCantidad = new JLabel(&quot;Cantidad:&quot;);</span>
+<span class="nc" id="L85">		lblCantidad.setBounds(10, 120, 201, 14);</span>
+<span class="nc" id="L86">		midPanel.add(lblCantidad);</span>
+
+<span class="nc" id="L88">		txtCantidad = new JTextField();</span>
+<span class="nc" id="L89">		txtCantidad.setColumns(10);</span>
+<span class="nc" id="L90">		txtCantidad.setBounds(242, 120, 181, 20);</span>
+<span class="nc" id="L91">		midPanel.add(txtCantidad);</span>
+
+<span class="nc" id="L93">		JLabel lblPrioridad = new JLabel(&quot;Grupo de prioridad:&quot;);</span>
+<span class="nc" id="L94">		lblPrioridad.setBounds(10, 148, 201, 14);</span>
+<span class="nc" id="L95">		midPanel.add(lblPrioridad);</span>
+
+<span class="nc" id="L97">		JLabel lblTipoVacuna = new JLabel(&quot;Tipo de vacuna:&quot;);</span>
+<span class="nc" id="L98">		lblTipoVacuna.setBounds(444, 36, 201, 14);</span>
+<span class="nc" id="L99">		midPanel.add(lblTipoVacuna);</span>
+
+<span class="nc" id="L101">		JLabel lblRegion = new JLabel(&quot;Región de la entrega:&quot;);</span>
+<span class="nc" id="L102">		lblRegion.setBounds(10, 176, 201, 14);</span>
+<span class="nc" id="L103">		midPanel.add(lblRegion);</span>
+
+<span class="nc" id="L105">		JLabel lblEntrega = new JLabel(&quot;Entrega&quot;);</span>
+<span class="nc" id="L106">		lblEntrega.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 12));</span>
+<span class="nc" id="L107">		lblEntrega.setBounds(10, 11, 413, 14);</span>
+<span class="nc" id="L108">		midPanel.add(lblEntrega);</span>
+
+<span class="nc" id="L110">		JLabel lblVacuna = new JLabel(&quot;Vacuna&quot;);</span>
+<span class="nc" id="L111">		lblVacuna.setFont(new Font(&quot;Tahoma&quot;, Font.BOLD, 12));</span>
+<span class="nc" id="L112">		lblVacuna.setBounds(444, 11, 413, 14);</span>
+<span class="nc" id="L113">		midPanel.add(lblVacuna);</span>
+
+<span class="nc" id="L115">		JButton btnNewButton = new JButton(&quot;Registrar alta&quot;);</span>
+<span class="nc" id="L116">		btnNewButton.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L118">				registrarAlta(frame);</span>
+<span class="nc" id="L119">			}</span>
+		});
+<span class="nc" id="L121">		btnNewButton.setBounds(10, 215, 847, 23);</span>
+<span class="nc" id="L122">		midPanel.add(btnNewButton);</span>
+
+<span class="nc" id="L124">		comboGrupoPrioridad = new JComboBox&lt;&gt;(frame.getGestorGSNS().getNombresGrupoPrioridad());</span>
+<span class="nc" id="L125">		comboGrupoPrioridad.setBounds(242, 148, 181, 20);</span>
+<span class="nc" id="L126">		midPanel.add(comboGrupoPrioridad);</span>
+
+<span class="nc" id="L128">		comboRegion = new JComboBox&lt;&gt;(frame.getGestorGSNS().getNombresRegion());</span>
+<span class="nc" id="L129">		comboRegion.setBounds(242, 176, 181, 20);</span>
+<span class="nc" id="L130">		midPanel.add(comboRegion);</span>
+
+		try {
+<span class="nc" id="L133">			comboTipoVacuna = new JComboBox&lt;&gt;(frame.getGestorGSNS().getGestorRepartoVacunas().getTipoVacunas());</span>
+<span class="nc" id="L134">			comboTipoVacuna.setBounds(676, 36, 181, 20);</span>
+<span class="nc" id="L135">			midPanel.add(comboTipoVacuna);</span>
+<span class="nc" id="L136">		} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L137">			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L138">			frame.cambiarPanel(frame.getPanelMain());</span>
+<span class="nc" id="L139">		}</span>
+<span class="nc" id="L140">	}</span>
+
+	/**
+	 * Invoca al gestor para realizar el alta de entrega de vacunas.
+	 * 
+	 * @param frame JFrame de la aplicación.
+	 */
+	private void registrarAlta(Main frame) {
+<span class="nc bnc" id="L148" title="All 2 branches missed.">		if (validar()) {</span>
+			try {
+<span class="nc" id="L150">				boolean correcto = frame.getGestorGSNS().getGestorVacunacion().altaEntregaVacunas(</span>
+<span class="nc" id="L151">						txtIdEntrega.getText(), Integer.parseInt(txtLote.getText()), txtFecha.getText(),</span>
+<span class="nc" id="L152">						Integer.parseInt(txtCantidad.getText()), comboGrupoPrioridad.getSelectedIndex() + 1,</span>
+<span class="nc" id="L153">						comboTipoVacuna.getSelectedItem().toString(), comboRegion.getSelectedIndex() + 1);</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">				if (correcto) {</span>
+<span class="nc" id="L155">					JOptionPane.showMessageDialog(frame, &quot;La entrega se ha registrado correctamente.&quot;, Main.INFO,</span>
+							JOptionPane.INFORMATION_MESSAGE);
+<span class="nc" id="L157">					frame.cambiarPanel(frame.getPanelMain());</span>
+				}
+<span class="nc" id="L159">			} catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L160">				JOptionPane.showMessageDialog(frame,</span>
+						&quot;Se ha producido un error al registrar el alta de la entrega de vacunas: La cantidad no es correcta. Introduce un número entero.&quot;,
+						Main.ERROR, JOptionPane.ERROR_MESSAGE);
+<span class="nc" id="L163">			} catch (GSNSException gsnse) {</span>
+<span class="nc" id="L164">				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L165">			}</span>
+		} else {
+<span class="nc" id="L167">			JOptionPane.showMessageDialog(frame, &quot;Rellena todos los campos.&quot;, Main.WARNING,</span>
+					JOptionPane.WARNING_MESSAGE);
+		}
+<span class="nc" id="L170">	}</span>
+
+	/**
+	 * Valida los campos de texto y desplegables.
+	 * 
+	 * @return true si la validación es correcta, false de lo contrario.
+	 */
+	private boolean validar() {
+<span class="nc" id="L178">		JTextField[] textFields = { txtIdEntrega, txtLote, txtFecha, txtCantidad };</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">		for (JTextField jTextField : textFields) {</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">			if (jTextField.getText().length() == 0)</span>
+<span class="nc" id="L181">				return false;</span>
+		}
+<span class="nc bnc" id="L183" title="All 4 branches missed.">		return !(comboGrupoPrioridad.getSelectedIndex() == -1 || comboRegion.getSelectedIndex() == -1</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">				|| comboTipoVacuna.getSelectedItem() == null);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

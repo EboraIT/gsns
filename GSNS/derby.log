@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Fri Oct 29 00:11:47 CEST 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017c-c8f5-8ae8-00000b9f2038 
-on database directory C:\Users\Roberto\git\eborait\GSNS\gsns_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
-Loaded from file:/C:/Users/Roberto/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+Sun Dec 19 17:36:42 CET 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017d-d38d-733a-00000b3df640 
+on database directory C:\Users\Jorge\git\gsns\GSNS\gsns_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2e5c649 
+Loaded from file:/C:/Users/Jorge/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
-java.runtime.version=15.0.1+9-18
-user.dir=C:\Users\Roberto\git\eborait\GSNS
+java.runtime.version=16.0.2+7-67
+user.dir=C:\Users\Jorge\git\gsns\GSNS
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

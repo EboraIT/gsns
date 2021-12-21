@@ -3,6 +3,7 @@ package com.eborait.gsns.persistencia;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.sql.Date;
 
 import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
@@ -19,26 +20,31 @@ import com.eborait.gsns.dominio.entitymodel.LoteVacunas;
  *
  */
 public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
+
 	/**
 	 * Formato sentencia select.
 	 */
-	private static final String SELECT = "SELECT * FROM lote_vacunas WHERE id = '%s'";
+	private static final String SELECT = "SELECT * FROM lote_vacunas WHERE id = %s";
+
 	/**
 	 * Formato sentencia select.
 	 */
 	private static final String SELECT_CRITERIA = "SELECT * FROM lote_vacunas";
+
 	/**
 	 * Formato sentencia insert.
 	 */
-	private static final String INSERT = "INSERT INTO lote_vacunas VALUES('%s', '%s', '%s', %s, '%s')";
+	private static final String INSERT = "INSERT INTO lote_vacunas VALUES(%s, '%s', '%s', %s, '%s')";
+
 	/**
 	 * Formato sentencia update.
 	 */
-	private static final String UPDATE = "UPDATE lote_vacunas SET id = '%s', fecha = '%s', tipo = '%s', cantidad = %s, farmaceutica = '%s' WHERE id = '%s'";
+	private static final String UPDATE = "UPDATE lote_vacunas SET id = %s, fecha = '%s', tipo = '%s', cantidad = %s, farmaceutica = '%s' WHERE id = %s";
+
 	/**
 	 * Formato sentencia delete.
 	 */
-	private static final String DELETE = "DELETE FROM lote_vacunas WHERE id = '%s'";
+	private static final String DELETE = "DELETE FROM lote_vacunas WHERE id = %s";
 
 	/**
 	 * Realiza una consulta a la base de datos.
@@ -51,9 +57,13 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	@Override
 	public LoteVacunas get(String id) throws SQLException {
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(String.format(SELECT, id));
-		ArrayList<Object> rowData = (ArrayList<Object>) data.iterator().next();
-		return new LoteVacunas(String.valueOf(rowData.get(1)), (Date) rowData.get(2),
-				String.valueOf(rowData.get(3)), (int) rowData.get(4), String.valueOf(rowData.get(5)));
+		Iterator<Collection<Object>> it = data.iterator();
+		if (it.hasNext()) {
+			ArrayList<Object> rowData = (ArrayList<Object>) it.next();
+			return new LoteVacunas(Integer.parseInt(String.valueOf(rowData.get(0))), (Date) rowData.get(1),
+					String.valueOf(rowData.get(2)), (int) rowData.get(3), String.valueOf(rowData.get(4)));
+		}
+		return null;
 	}
 
 	/**
@@ -69,12 +79,11 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	@Override
 	public Collection<LoteVacunas> getAll(String criteria, String value) throws SQLException {
 		Collection<LoteVacunas> list = new ArrayList<>();
-		String sql = criteria == null ? SELECT_CRITERIA
-				: String.format(SELECT_CRITERIA + " WHERE %s = %s", criteria, value);
+		String sql = Util.getSQLCriteria(SELECT_CRITERIA, criteria, value);
 		Collection<Collection<Object>> data = AgenteBD.getAgente().select(sql);
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
-			LoteVacunas lv = new LoteVacunas(String.valueOf(rowData.get(0)), (Date) rowData.get(1),
+			LoteVacunas lv = new LoteVacunas(Integer.parseInt(String.valueOf(rowData.get(0))), (Date) rowData.get(1),
 					String.valueOf(rowData.get(2)), (int) rowData.get(3), String.valueOf(rowData.get(4)));
 			list.add(lv);
 		}
@@ -106,8 +115,9 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	 */
 	@Override
 	public int update(LoteVacunas lote) throws SQLException {
-		return AgenteBD.getAgente().insert(String.format(UPDATE, lote.getId(), new java.sql.Date(lote.getFecha().getTime()), lote.getTipo(),
-				lote.getCantidad(), lote.getFarmaceutica(), lote.getId()));
+		return AgenteBD.getAgente()
+				.insert(String.format(UPDATE, lote.getId(), new java.sql.Date(lote.getFecha().getTime()),
+						lote.getTipo(), lote.getCantidad(), lote.getFarmaceutica(), lote.getId()));
 	}
 
 	/**
@@ -124,19 +134,18 @@ public class LoteVacunasDAO implements AbstractEntityDAO<LoteVacunas> {
 	}
 
 	/**
-	 * Consulta el valor máximo de una columna.
+	 * Consulta el valor máximo del id.
 	 * 
-	 * @param criteria Columna para filtrar.
 	 * @return El valor máximo de la columna por la que se filtra la consulta.
 	 * @throws SQLException Si se produce una excepción en la setencia SQL.
 	 */
-	public int max(String criteria) throws SQLException {
+	public int maxId() throws SQLException {
 		int max = 0;
 		Collection<Collection<Object>> data = AgenteBD.getAgente()
-				.select(String.format("SELECT coalesce(max(%s),'0') FROM lote_vacunas", criteria));
+				.select("SELECT coalesce(max(id), 0) FROM lote_vacunas");
 		for (Collection<Object> collection : data) {
 			ArrayList<Object> rowData = (ArrayList<Object>) collection;
-			max = Integer.parseInt(rowData.get(0).toString());
+			max = Integer.parseInt(String.valueOf(rowData.get(0)));
 		}
 		return max;
 	}

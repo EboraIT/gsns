@@ -107,4 +107,15 @@ public class TipoVacuna {
 		return nombre + "-" + farmaceutica + "-" + fechaAprobacion;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		TipoVacuna tv = (TipoVacuna) obj;
+		if (tv != null) {
+			return nombre.equals(tv.getNombre()) && farmaceutica.equals(tv.getFarmaceutica())
+					&& fechaAprobacion.equals(tv.getFechaAprobacion());
+		} else {
+			return false;
+		}
+	}
+
 }

@@ -1,7 +1,5 @@
 package com.eborait.gsns.presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,9 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
@@ -23,28 +19,28 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
  * @version 1.0
  * @since 1.0
  */
-public class PantallaAltaNuevoLote extends JPanel {
+public class PantallaAltaNuevoLote extends PanelBase {
 
 	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** El label de id de lote. */
-	private JLabel lblIdLote;
+	private final JLabel lblIdLote;
 
 	/** El campo de texto de fecha de alta. */
-	private JTextField txtFechaAlta;
+	private final JTextField txtFechaAlta;
 
 	/** El campo de texto de cantidad. */
-	private JTextField txtCantidad;
+	private final JTextField txtCantidad;
 
 	/** El campo de texto de nombre de la vacuna. */
-	private JTextField txtNombreVacuna;
+	private final JTextField txtNombreVacuna;
 
 	/** El campo de texto de farmacéutica. */
-	private JTextField txtFarmaceutica;
+	private final JTextField txtFarmaceutica;
 
 	/** El campo de texto de fecha de aprobación. */
-	private JTextField txtFechaAprobacion;
+	private final JTextField txtFechaAprobacion;
 
 	/**
 	 * Crea el panel.
@@ -52,28 +48,7 @@ public class PantallaAltaNuevoLote extends JPanel {
 	 * @param frame JFrame de la aplicación.
 	 */
 	public PantallaAltaNuevoLote(final Main frame) {
-		setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLayout(new BorderLayout(0, 0));
-
-		JPanel topPanel = new JPanel();
-		add(topPanel, BorderLayout.NORTH);
-		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
-
-		JPanel midPanel = new JPanel();
-		add(midPanel, BorderLayout.CENTER);
-
-		JButton btnVolver = new JButton("Volver al menú principal");
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(frame.getPanelMain());
-			}
-		});
-		topPanel.add(btnVolver);
-
-		JLabel lblTitulo = new JLabel("Gestión Sistema Nacional de Salud/Alta nuevo lote de vacunas");
-		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		topPanel.add(lblTitulo);
-		midPanel.setLayout(null);
+		super(frame, "Gestión Sistema Nacional de Salud/Alta nuevo lote de vacunas");
 
 		JLabel lblIdLoteTitulo = new JLabel("Identificador del lote:");
 		lblIdLoteTitulo.setBounds(10, 36, 201, 14);
@@ -86,7 +61,7 @@ public class PantallaAltaNuevoLote extends JPanel {
 		try {
 			lblIdLote.setText(String.valueOf(frame.getGestorGSNS().getGestorRepartoVacunas().generarIdLote()));
 		} catch (GSNSException gsnse) {
-			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			frame.cambiarPanel(frame.getPanelMain());
 		}
 		JLabel lblFechaAlta = new JLabel("Fecha alta:");
@@ -163,23 +138,23 @@ public class PantallaAltaNuevoLote extends JPanel {
 	private void registrarLote(Main frame) {
 		if (validar()) {
 			try {
-				boolean correcto = frame.getGestorGSNS().getGestorRepartoVacunas().altaNuevoLoteVacunas(lblIdLote.getText(),
-						txtFechaAlta.getText(), Integer.parseInt(txtCantidad.getText()), txtNombreVacuna.getText(),
-						txtFarmaceutica.getText(), txtFechaAprobacion.getText());
+				boolean correcto = frame.getGestorGSNS().getGestorRepartoVacunas().altaNuevoLoteVacunas(
+						Integer.parseInt(lblIdLote.getText()), txtFechaAlta.getText(), Integer.parseInt(txtCantidad.getText()),
+						txtNombreVacuna.getText(), txtFarmaceutica.getText(), txtFechaAprobacion.getText());
 				if (correcto) {
-					JOptionPane.showMessageDialog(frame, "La entrega se ha registrado correctamente.", "Información",
+					JOptionPane.showMessageDialog(frame, "El nuevo lote se ha registrado correctamente.", Main.INFO,
 							JOptionPane.INFORMATION_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
 				}
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
-						"Se ha producido un error al registrar el alta: La cantidad no es correcta. Introduce un número entero.",
-						"Error", JOptionPane.ERROR_MESSAGE);
+						"Se ha producido un error al registrar el alta del nuevo lote: La cantidad no es correcta. Introduce un número entero.",
+						Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			} catch (GSNSException gsnse) {
-				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
+			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", Main.WARNING,
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}

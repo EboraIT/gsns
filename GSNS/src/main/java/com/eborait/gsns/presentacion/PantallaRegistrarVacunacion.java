@@ -1,8 +1,5 @@
 package com.eborait.gsns.presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,9 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
@@ -25,34 +20,34 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
  * @version 1.0
  * @since 1.0
  */
-public class PantallaRegistrarVacunacion extends JPanel {
+public class PantallaRegistrarVacunacion extends PanelBase {
 
 	/** El serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** El campo de texto de nombre. */
-	private JTextField txtNombre;
+	private final JTextField txtNombre;
 
 	/** El campo de texto de apellidos. */
-	private JTextField txtApellidos;
+	private final JTextField txtApellidos;
 
 	/** El campo de texto de dni. */
-	private JTextField txtDni;
+	private final JTextField txtDni;
 
 	/** El campo de texto de fecha. */
-	private JTextField txtFecha;
+	private final JTextField txtFecha;
 
 	/** El desplegable de tipo vacuna. */
 	private JComboBox<String> comboTipoVacuna;
 
 	/** El desplegable de de region. */
-	private JComboBox<String> comboRegion;
+	private final JComboBox<String> comboRegion;
 
 	/** El desplegable de grupo prioridad. */
-	private JComboBox<String> comboGrupoPrioridad;
+	private final JComboBox<String> comboGrupoPrioridad;
 
 	/** The checkbox de segunda dosis. */
-	private JCheckBox chkSegundaDosis;
+	private final JCheckBox chkSegundaDosis;
 
 	/**
 	 * Crea el panel.
@@ -60,28 +55,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 	 * @param frame JFrame de la aplicación.
 	 */
 	public PantallaRegistrarVacunacion(final Main frame) {
-		setBorder(new EmptyBorder(5, 5, 5, 5));
-		setLayout(new BorderLayout(0, 0));
-
-		JPanel topPanel = new JPanel();
-		add(topPanel, BorderLayout.NORTH);
-		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
-
-		JPanel midPanel = new JPanel();
-		add(midPanel, BorderLayout.CENTER);
-
-		JButton btnVolver = new JButton("Volver al menú principal");
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.cambiarPanel(frame.getPanelMain());
-			}
-		});
-		topPanel.add(btnVolver);
-
-		JLabel lblTitulo = new JLabel("Gestión Sistema Regional de Salud/Registro de vacunación");
-		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		topPanel.add(lblTitulo);
-		midPanel.setLayout(null);
+		super(frame, "Gestión Sistema Regional de Salud/Registro de vacunación");
 
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(10, 36, 201, 14);
@@ -136,10 +110,10 @@ public class PantallaRegistrarVacunacion extends JPanel {
 			comboTipoVacuna.setBounds(242, 86, 181, 20);
 			midPanel.add(comboTipoVacuna);
 		} catch (GSNSException gsnse) {
-			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			frame.cambiarPanel(frame.getPanelMain());
 		}
-		comboGrupoPrioridad = new JComboBox<String>(frame.getGestorGSNS().getNombresGrupoPrioridad());
+		comboGrupoPrioridad = new JComboBox<>(frame.getGestorGSNS().getNombresGrupoPrioridad());
 		comboGrupoPrioridad.setBounds(676, 86, 181, 20);
 		midPanel.add(comboGrupoPrioridad);
 
@@ -147,7 +121,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 		lblGrupoPrioridad.setBounds(444, 86, 201, 14);
 		midPanel.add(lblGrupoPrioridad);
 
-		comboRegion = new JComboBox<String>(frame.getGestorGSNS().getNombresRegion());
+		comboRegion = new JComboBox<>(frame.getGestorGSNS().getNombresRegion());
 		comboRegion.setBounds(242, 111, 181, 20);
 		midPanel.add(comboRegion);
 
@@ -177,15 +151,15 @@ public class PantallaRegistrarVacunacion extends JPanel {
 						comboTipoVacuna.getSelectedItem().toString(), comboGrupoPrioridad.getSelectedIndex() + 1,
 						comboRegion.getSelectedIndex() + 1, chkSegundaDosis.isSelected());
 				if (correcto) {
-					JOptionPane.showMessageDialog(frame, "La vacunación se ha registrado correctamente.", "Información",
+					JOptionPane.showMessageDialog(frame, "La vacunación se ha registrado correctamente.", Main.INFO,
 							JOptionPane.INFORMATION_MESSAGE);
 					frame.cambiarPanel(frame.getPanelMain());
 				}
 			} catch (GSNSException gsnse) {
-				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", "Advertencia",
+			JOptionPane.showMessageDialog(frame, "Rellena todos los campos.", Main.WARNING,
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}
@@ -201,10 +175,7 @@ public class PantallaRegistrarVacunacion extends JPanel {
 			if (jTextField.getText().length() == 0)
 				return false;
 		}
-		if (comboGrupoPrioridad.getSelectedIndex() == -1 || comboRegion.getSelectedIndex() == -1
-				|| comboTipoVacuna.getSelectedItem() == null) {
-			return false;
-		}
-		return true;
+		return !(comboGrupoPrioridad.getSelectedIndex() == -1 || comboRegion.getSelectedIndex() == -1
+				|| comboTipoVacuna.getSelectedItem() == null);
 	}
 }

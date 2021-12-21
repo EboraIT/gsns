@@ -3,6 +3,8 @@ package com.eborait.gsns.dominio.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
 
@@ -15,6 +17,16 @@ import com.eborait.gsns.dominio.entitymodel.excepciones.GSNSException;
  * @since 1.0
  */
 public class Util {
+
+	/** Objeto Logger. */
+	private static final Logger LOG = Logger.getLogger(Util.class.getName());
+
+	/**
+	 * Constructor privado.
+	 */
+	private Util() {
+
+	}
 
 	/**
 	 * Transforma una fecha de String a Date.
@@ -33,8 +45,8 @@ public class Util {
 		try {
 			fechaDate = formato.parse(fecha);
 		} catch (ParseException pe) {
-			System.out.println("Excepción parseando fecha:\n\n" + pe.getMessage());
-			pe.printStackTrace();
+			LOG.log(Level.SEVERE, "{0}", "Excepción parseando fecha: " + pe.getMessage());
+			LOG.log(Level.SEVERE, "", pe);
 			throw new GSNSException("El formato de la fecha no es correcto. El formato adecuado es dd/mm/yyyy.");
 		}
 		return fechaDate;

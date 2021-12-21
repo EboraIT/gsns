@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PanelBase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gsns</a> &gt; <a href="index.source.html" class="el_package">com.eborait.gsns.presentacion</a> &gt; <span class="el_source">PanelBase.java</span></div><h1>PanelBase.java</h1><pre class="source lang-java linenums">package com.eborait.gsns.presentacion;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+/**
+ * Panel base de la aplicación. Muestra la barra de navegación y título.
+ *
+ * @author Jorge Fernández Escolano
+ * @author Roberto Esteban Olivares
+ * @version 1.0
+ * @since 1.1
+ */
+public class PanelBase extends JPanel {
+
+	/** El serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/** Panel para mostrar el contenido. */
+	JPanel midPanel;
+
+	/**
+	 * Crea el panel.
+	 * 
+	 * @param frame  JFrame de la aplicación.
+	 * @param titulo Título de la pantalla.
+	 */
+<span class="nc" id="L36">	public PanelBase(final Main frame, String titulo) {</span>
+<span class="nc" id="L37">		setBorder(new EmptyBorder(5, 5, 5, 5));</span>
+<span class="nc" id="L38">		setLayout(new BorderLayout(0, 0));</span>
+
+<span class="nc" id="L40">		JPanel topPanel = new JPanel();</span>
+<span class="nc" id="L41">		add(topPanel, BorderLayout.NORTH);</span>
+<span class="nc" id="L42">		topPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));</span>
+
+<span class="nc" id="L44">		midPanel = new JPanel();</span>
+<span class="nc" id="L45">		add(midPanel, BorderLayout.CENTER);</span>
+
+<span class="nc" id="L47">		JButton btnVolver = new JButton(&quot;Volver al menú principal&quot;);</span>
+<span class="nc" id="L48">		btnVolver.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L50">				frame.cambiarPanel(frame.getPanelMain());</span>
+<span class="nc" id="L51">			}</span>
+		});
+<span class="nc" id="L53">		topPanel.add(btnVolver);</span>
+
+<span class="nc" id="L55">		JLabel lblTitulo = new JLabel(titulo);</span>
+<span class="nc" id="L56">		lblTitulo.setFont(new Font(&quot;Tahoma&quot;, Font.PLAIN, 16));</span>
+<span class="nc" id="L57">		topPanel.add(lblTitulo);</span>
+<span class="nc" id="L58">		midPanel.setLayout(null);</span>
+<span class="nc" id="L59">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

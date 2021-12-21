@@ -31,10 +31,10 @@ public enum GrupoPrioridad {
 	NINO(7, "Niños");
 
 	/** Los pacientes. */
-	private Collection<Paciente> pacientes;
+	private final Collection<Paciente> pacientes;
 
 	/** Las entregas. */
-	private Collection<EntregaVacunas> entregas;
+	private final Collection<EntregaVacunas> entregas;
 
 	/** La prioridad. */
 	private final int prioridad;
@@ -48,7 +48,7 @@ public enum GrupoPrioridad {
 	 * @param prioridad La prioridad.
 	 * @param nombre    El nombre.
 	 */
-	private GrupoPrioridad(int prioridad, String nombre) {
+	GrupoPrioridad(int prioridad, String nombre) {
 		this.prioridad = prioridad;
 		this.nombre = nombre;
 		this.entregas = new ArrayList<>();
@@ -65,30 +65,12 @@ public enum GrupoPrioridad {
 	}
 
 	/**
-	 * Establece los pacientes.
-	 *
-	 * @param pacientes Los nuevos pacientes.
-	 */
-	public void setPacientes(Collection<Paciente> pacientes) {
-		this.pacientes = pacientes;
-	}
-
-	/**
 	 * Se obtienen las entregas.
 	 *
 	 * @return Las entregas.
 	 */
 	public Collection<EntregaVacunas> getEntregas() {
 		return entregas;
-	}
-
-	/**
-	 * Establece las entregas.
-	 *
-	 * @param entregas Las nuevas entregas.
-	 */
-	public void setEntregas(Collection<EntregaVacunas> entregas) {
-		this.entregas = entregas;
 	}
 
 	/**

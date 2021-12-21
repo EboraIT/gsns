@@ -6,7 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import com.eborait.gsns.dominio.controller.GestorGSNS;
 
@@ -24,16 +27,34 @@ public class Main extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** El content pane. */
-	private JPanel contentPane;
+	private final JPanel contentPane;
 
 	/** El panel actual. */
 	private JPanel panelActual;
 
 	/** El panel principal. */
-	private PanelMain panelMain;
+	private final PanelMain panelMain;
 
 	/** El gestor de la aplicación. */
-	private GestorGSNS gestorGSNS;
+	private final transient GestorGSNS gestorGSNS;
+
+	/**
+	 * Constante Error.
+	 */
+	public static final String ERROR = "Error";
+
+	/**
+	 * Constante Información.
+	 */
+	public static final String INFO = "Información";
+
+	/**
+	 * Constante Advertencia.
+	 */
+	public static final String WARNING = "Advertencia";
+
+	/** Objeto Logger. */
+	private static final Logger LOG = Logger.getLogger(Main.class.getName());
 
 	/**
 	 * Lanza la aplicación.
@@ -48,7 +69,7 @@ public class Main extends JFrame {
 					Main frame = new Main();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					LOG.log(Level.SEVERE, "", e);
 				}
 			}
 		});
@@ -58,7 +79,7 @@ public class Main extends JFrame {
 	 * Crea el JFrame.
 	 */
 	public Main() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(0, 0, 900, 500);
 		setTitle("Gestión Sistema Nacional de Salud");
