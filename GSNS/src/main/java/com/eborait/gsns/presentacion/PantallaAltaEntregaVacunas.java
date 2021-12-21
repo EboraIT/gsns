@@ -158,7 +158,7 @@ public class PantallaAltaEntregaVacunas extends PanelBase {
 				}
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(frame,
-						"Se ha producido un error al registrar el alta de la entrega de vacunas: La cantidad no es correcta. Introduce un número entero.",
+						"Se ha producido un error al registrar el alta de la entrega de vacunas: La cantidad o el identificador del lote no es correcta. Introduce un número entero.",
 						Main.ERROR, JOptionPane.ERROR_MESSAGE);
 			} catch (GSNSException gsnse) {
 				JOptionPane.showMessageDialog(frame, gsnse.getMessage(), Main.ERROR, JOptionPane.ERROR_MESSAGE);
